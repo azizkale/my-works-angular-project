@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'register',
@@ -9,7 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  constructor(private authservice: AuthenticationService, public fb: FormBuilder,) {
+  constructor(
+    private authservice: AuthenticationService,
+    public fb: FormBuilder,
+    private router: Router) {
     this.createForm();
   }
 
@@ -27,9 +31,9 @@ export class RegisterComponent implements OnInit {
     this.authservice.register(email, password)
       .subscribe({
         next: async (response) => {
-          console.log(response)
           if (response.status === 200) {
-            await this.authservice.signin(email, password);
+            await localStorage.setItem('token', response.token);
+            this.router.navigate(['me']);
           } else if (response.status === 409) {
             // document.getElementById('id_alert_signin').innerHTML = 'This email is already in use!';
             // document.getElementById('id_alert_signin').style.display = 'block';

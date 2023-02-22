@@ -37,8 +37,7 @@ export class SigninComponent implements OnInit {
           if (response.status === 200) {
             // If the response status is 200 OK, extract the token from the response
             await localStorage.setItem('token', response.token);
-            // await window.location.replace(path);
-            // this.router.navigate(['accountpage']);
+            this.router.navigate(['me']);
           }
         },
         error: (err) => {
