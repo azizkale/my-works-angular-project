@@ -33,14 +33,7 @@
             required
           />
 
-          <button
-            type="submit"
-            (click)="
-              register(email.value, password.value);
-              email.value = '';
-              password.value = ''
-            "
-          >
+          <button type="submit" (click)="register(email.value, password.value)">
             Register
           </button>
         </div>

@@ -40,11 +40,7 @@
             <div class="form-group">
               <button
                 type="submit"
-                (click)="
-                  signin(email.value, password.value);
-                  email.value = '';
-                  password.value = ''
-                "
+                (click)="signin(email.value, password.value)"
               >
                 Sign In
               </button>
