@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate() {
-        console.log(localStorage.getItem('token'))
         if (localStorage.getItem('token') !== null) {
             this.isAuthenticated = true;
         } else {

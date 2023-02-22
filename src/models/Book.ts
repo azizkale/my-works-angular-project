@@ -9,13 +9,21 @@ export class Book {
     author: string | undefined;
     bookType: BookType;
 
-    constructor(name: string, totalpage: number, startdate: Date, booktype: BookType, enddate?: Date, readpage?: number, author?: string) {
+    constructor(
+        name: string,
+        totalpage: number,
+        startdate: Date,
+        booktype: BookType,
+        enddate?: Date,
+        readpage?: number,
+        author?: string) {
         this.name = name
         this.totalPage = totalpage
-        this.readPage = readpage;
-        this.startDate = startdate
+        this.startDate = startdate;
+        this.bookType = booktype;
         this.endDate = enddate
+        this.readPage = readpage;
         this.author = author
-        this.bookType = booktype
+
     }
 };

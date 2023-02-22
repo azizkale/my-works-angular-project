@@ -213,6 +213,9 @@
           name="authorname"
         />
         <button
+          (click)="
+            createBook(bookname.value, numberofpages.value, authorname.value)
+          "
           class="w3-button w3-block w3-green w3-section w3-padding"
           type="submit"
         >
