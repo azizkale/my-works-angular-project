@@ -25,9 +25,9 @@ export class MeComponent implements OnInit {
 
   createBookForm() {
     this.bookForm = this.fb.group({
-      name: ['', Validators.required],
-      numberofpage: ['', Validators.required],
-      author: ['', Validators.required],
+      bookname: ['', Validators.required],
+      numberofpages: ['', Validators.required],
+      authorname: ['', Validators.required],
     });
   }
 

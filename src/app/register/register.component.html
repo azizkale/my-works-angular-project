@@ -3,40 +3,52 @@
         <div class="col-sm-6 col-md-6">
             <h2>Register Form</h2>
             <div>
-                <form [formGroup]="registerForm" novalidate></form>
-                <div class="imgcontainer">
-                    <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar" />
-                </div>
-                <div class="alert" id="id_alert_signin" style="display: none">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span
-          >
-          <!-- error message -->
-        </div>
-        <div class="container">
-          <label for="email"><b>E-mail</b></label>
-          <input
-            #email
-            type="text"
-            placeholder="Enter E-mail"
-            name="email"
-            id="email"
-            required
-          />
+                <form [formGroup]="registerForm" novalidate>
+                    <div class="imgcontainer">
+                        <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar" />
+                    </div>
+                    <div class="alert" id="id_alert_signin" style="display: none">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span
+            >
+            <!-- error message -->
+          </div>
+          <div class="container">
+            <label for="email"><b>E-mail</b></label>
+            <input
+              #email
+              type="text"
+              placeholder="Enter E-mail"
+              name="email"
+              id="email"
+              formControlName="email"
+              [(ngModel)]="emailpatterncontrol"
+              pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
+              email="true"
+              required
+            />
+            <label for="psw"><b>Password</b></label>
+            <input
+              #password
+              type="password"
+              placeholder="Enter Password"
+              name="psw"
+              id="psw"
+              formControlName="password"
+              [(ngModel)]="passwordPatternControl"
+              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+              required
+            />
 
-          <label for="psw"><b>Password</b></label>
-          <input
-            #password
-            type="password"
-            placeholder="Enter Password"
-            name="psw"
-            id="psw"
-            required
-          />
-
-          <button type="submit" (click)="register(email.value, password.value)">
-            Register
-          </button>
-        </div>
+            <button
+              class="w3-button w3-block w3-green w3-section w3-padding"
+              type="submit"
+              (click)="register(email.value, password.value); createForm()"
+              [disabled]="email.ontouchend"
+            >
+              Register
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

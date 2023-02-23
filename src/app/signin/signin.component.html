@@ -20,7 +20,9 @@
               placeholder="Enter E-mail"
               name="email"
               id="email"
-              required
+              formControlName="email"
+              ngModel
+              email="true"
             />
 
             <label for="psw"><b>Password</b></label>
@@ -30,7 +32,7 @@
               placeholder="Enter Password"
               name="psw"
               id="psw"
-              required
+              formControlName="password"
             />
 
             <label>
@@ -39,6 +41,8 @@
             </label>
             <div class="form-group">
               <button
+                class="w3-button w3-block w3-green w3-section w3-padding"
+                [disabled]="signInForm.pristine || signInForm.invalid"
                 type="submit"
                 (click)="signin(email.value, password.value)"
               >
