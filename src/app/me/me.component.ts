@@ -33,9 +33,17 @@ export class MeComponent implements OnInit {
 
   createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
     const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
-    this.bookservice.createBook(book).subscribe((res) => {
-      console.log(res)
-    });
+    this.bookservice.createBook(book).subscribe({
+      next: (res) => {
+        console.log(res)
+      },
+      error: async (err) => {
+        //unvalid token
+        if (err.status === 401) {
+          await this.deleteToken();
+        }
+      }
+    })
   }
 
 
