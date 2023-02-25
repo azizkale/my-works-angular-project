@@ -12,15 +12,16 @@ import { BookService } from '../services/book.service';
 })
 export class MeComponent implements OnInit {
   bookForm: FormGroup;
+  books: [Book]
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private bookservice: BookService
-  ) {
-    this.createBookForm()
+    private bookservice: BookService) {
+    this.createBookForm();
   }
 
   ngOnInit(): void {
+
   }
 
   createBookForm() {
@@ -35,6 +36,7 @@ export class MeComponent implements OnInit {
     const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
     this.bookservice.createBook(book).subscribe({
       next: (res) => {
+        this.books = res;
         console.log(res)
       },
       error: async (err) => {
@@ -46,7 +48,11 @@ export class MeComponent implements OnInit {
     })
   }
 
-
+  retrieveBooks() {
+    this.bookservice.retrieveBooks().subscribe((response) => {
+      console.log(response)
+    })
+  }
   // Toggle between showing and hiding the sidebar, and add overlay effect
   w3_open(mySidebar: any, myOverlay: any) {
     if (mySidebar.style.display === "block") {
