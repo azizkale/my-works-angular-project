@@ -74,192 +74,43 @@
           <!-- Right Column -->
           <div class="w3-twothird">
             <div class="w3-container w3-card w3-white w3-margin-bottom">
-              <h2 class="w3-text-grey w3-padding-16">
-                <i
-                  class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"
-                ></i
-                >My Books
-              </h2>
               <button
-                onclick="document.getElementById('id_add_book').style.display='block'"
+                (click)="func()"
                 class="w3-button w3-green w3-large"
                 style="float: right"
               >
                 Add New Book
               </button>
-              <button
-                (click)="retrieveBooks()"
-                class="w3-button w3-green w3-large"
-                style="float: right"
-              >
-                Get Books
-              </button>
 
               <!-- ============================= -->
-              <div class="w3-row-padding">
-                <div class="w3-col m12">
-                  <div class="w3-card w3-round w3-white">
-                    <div class="w3-container w3-padding">
-                      <h6 class="w3-opacity">
-                        Social Media template by w3.css
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p>Adobe Photoshop</p>
-              <div class="w3-light-grey w3-round-xlarge w3-small">
-                <div
-                  class="w3-container w3-center w3-round-xlarge w3-teal"
-                  style="width: 10%"
-                >
-                  90%
-                </div>
-              </div>
-              <!-- ============================= -->
-              <div class="w3-container">
-                <h5 class="w3-opacity">
-                  <b>Book-1</b>
-                </h5>
-                <h6 class="w3-text-teal">
-                  <i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 -
-                  <span class="w3-tag w3-teal w3-round">Current</span>
-                </h6>
-                <p>
-                  Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel
-                  in deserunt aspernatur est reprehenderit sunt hic. Nulla
-                  tempora soluta ea et odio, unde doloremque repellendus iure,
-                  iste.
-                </p>
-                <hr />
-              </div>
-              <div class="w3-container">
-                <h5 class="w3-opacity">
-                  <b>Web Developer / something.com</b>
-                </h5>
-                <h6 class="w3-text-teal">
-                  <i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 -
-                  Dec 2014
-                </h6>
-                <p>
-                  Consectetur adipisicing elit. Praesentium magnam consectetur
-                  vel in deserunt aspernatur est reprehenderit sunt hic. Nulla
-                  tempora soluta ea et odio, unde doloremque repellendus iure,
-                  iste.
-                </p>
-                <hr />
-              </div>
-              <div class="w3-container">
-                <h5 class="w3-opacity">
-                  <b>Graphic Designer / designsomething.com</b>
-                </h5>
-                <h6 class="w3-text-teal">
-                  <i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 -
-                  Mar 2012
-                </h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <br />
-              </div>
+              <app-booktable></app-booktable>
             </div>
 
-            <!-- End Right Column -->
+            <!-- End Grid -->
           </div>
 
-          <!-- End Grid -->
+          <!-- End Page Container -->
+        </div>
+      </div>
+
+      <footer id="myFooter">
+        <div class="w3-container w3-theme-l2 w3-padding-32">
+          <h4>Footer</h4>
         </div>
 
-        <!-- End Page Container -->
-      </div>
-    </div>
+        <div class="w3-container w3-theme-l1">
+          <p>
+            Powered by
+            <a
+              href="https://www.w3schools.com/w3css/default.asp"
+              target="_blank"
+              >w3.css</a
+            >
+          </p>
+        </div>
+      </footer>
 
-    <footer id="myFooter">
-      <div class="w3-container w3-theme-l2 w3-padding-32">
-        <h4>Footer</h4>
-      </div>
-
-      <div class="w3-container w3-theme-l1">
-        <p>
-          Powered by
-          <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"
-            >w3.css</a
-          >
-        </p>
-      </div>
-    </footer>
-
-    <!-- END MAIN -->
-  </div>
-</div>
-<!-- ========== Add New Book(MODAL) ========== -->
-<div id="id_add_book" class="w3-modal" #id_add_book>
-  <div
-    class="w3-modal-content w3-card-4 w3-animate-zoom"
-    style="max-width: 600px"
-  >
-    <div class="w3-center">
-      <br />
-      <span
-        onclick="document.getElementById('id_add_book').style.display='none'"
-        class="w3-button w3-xlarge w3-transparent w3-display-topright"
-        title="Close Modal"
-        >×</span
-      >
-    </div>
-
-    <form class="w3-container" [formGroup]="bookForm">
-      <div class="w3-section">
-        <label><b>Book Name</b></label>
-        <input
-          #bookname
-          class="w3-input w3-border w3-margin-bottom"
-          type="text"
-          placeholder="Enter book name"
-          name="bookname"
-          formControlName="bookname"
-        />
-        <label><b>Number Of Pages</b></label>
-        <input
-          #numberofpages
-          class="w3-input w3-border"
-          type="number"
-          placeholder="Enter Number Of Pages"
-          name="numberofpages"
-          formControlName="numberofpages"
-          required
-        />
-        <label><b>Author</b></label>
-        <input
-          #authorname
-          class="w3-input w3-border"
-          type="text"
-          placeholder="Enter Author Name (optional)"
-          name="authorname"
-          formControlName="authorname"
-        />
-        <button
-          (click)="
-            createBook(bookname.value, numberofpages.value, authorname.value);
-            bookname.value = numberofpages.value = authorname.value = '';
-            id_add_book.style.display = 'none';
-            createBookForm()
-          "
-          class="w3-button w3-block w3-green w3-section w3-padding"
-          type="submit"
-          [disabled]="bookForm.pristine || bookForm.invalid"
-        >
-          Add
-        </button>
-      </div>
-    </form>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <!-- <button
-        onclick="document.getElementById('id_add_book').style.display='none'"
-        type="button"
-        class="w3-button w3-red"
-      >
-        Cancel
-      </button> -->
+      <!-- END MAIN -->
     </div>
   </div>
 </div>

@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Book } from 'src/models/Book';
-import { BookType } from 'src/models/BookTypes';
-import { BookService } from '../services/book.service';
+import { BooktableComponent } from './booktable/booktable.component';
 
 @Component({
   selector: 'me',
@@ -11,48 +8,19 @@ import { BookService } from '../services/book.service';
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
-  bookForm: FormGroup;
-  books: [Book]
-  constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private bookservice: BookService) {
-    this.createBookForm();
+  @ViewChild(BooktableComponent) bookTable: BooktableComponent;
+
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-
   }
 
-  createBookForm() {
-    this.bookForm = this.fb.group({
-      bookname: ['', Validators.required],
-      numberofpages: ['', Validators.required],
-      authorname: ['', Validators.required],
-    });
+  func() {
+    this.bookTable.retrieveBooks();
   }
 
-  createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
-    const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
-    this.bookservice.createBook(book).subscribe({
-      next: (res) => {
-        this.books = res;
-        console.log(res)
-      },
-      error: async (err) => {
-        //unvalid token
-        if (err.status === 401) {
-          await this.deleteToken();
-        }
-      }
-    })
-  }
 
-  retrieveBooks() {
-    this.bookservice.retrieveBooks().subscribe((response) => {
-      console.log(response)
-    })
-  }
   // Toggle between showing and hiding the sidebar, and add overlay effect
   w3_open(mySidebar: any, myOverlay: any) {
     if (mySidebar.style.display === "block") {

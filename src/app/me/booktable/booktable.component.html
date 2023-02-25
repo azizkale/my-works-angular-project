@@ -1,0 +1,91 @@
+<div class="w3-container">
+    <hr />
+    <div class="w3-center">
+        <h2>My Books</h2>
+    </div>
+    <div class="w3-responsive w3-card-4">
+        <table class="w3-table w3-striped w3-bordered">
+            <thead>
+                <tr class="w3-theme">
+                    <th style="width: 90%">Book Name</th>
+                    <th style="width: 10%">Pages</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td>
+                        <p>{{ book[1].name }}</p>
+                        <p>{{ book[1].name }}</p>
+                    </td>
+                    <td>Smith</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- ========== Add New Book(MODAL) ========== -->
+    <div id="id_add_book" class="w3-modal" #id_add_book>
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width: 600px">
+            <div class="w3-center">
+                <br />
+                <span onclick="document.getElementById('id_add_book').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span
+        >
+      </div>
+
+      <form class="w3-container" [formGroup]="bookForm">
+        <div class="w3-section">
+          <label><b>Book Name</b></label>
+          <input
+            #bookname
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            placeholder="Enter book name"
+            name="bookname"
+            formControlName="bookname"
+          />
+          <label><b>Number Of Pages</b></label>
+          <input
+            #numberofpages
+            class="w3-input w3-border"
+            type="number"
+            placeholder="Enter Number Of Pages"
+            name="numberofpages"
+            formControlName="numberofpages"
+            required
+          />
+          <label><b>Author</b></label>
+          <input
+            #authorname
+            class="w3-input w3-border"
+            type="text"
+            placeholder="Enter Author Name (optional)"
+            name="authorname"
+            formControlName="authorname"
+          />
+          <button
+            (click)="
+              createBook(bookname.value, numberofpages.value, authorname.value);
+              bookname.value = numberofpages.value = authorname.value = '';
+              id_add_book.style.display = 'none';
+              createBookForm()
+            "
+            class="w3-button w3-block w3-green w3-section w3-padding"
+            type="submit"
+            [disabled]="bookForm.pristine || bookForm.invalid"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <!-- <button
+          onclick="document.getElementById('id_add_book').style.display='none'"
+          type="button"
+          class="w3-button w3-red"
+        >
+          Cancel
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
