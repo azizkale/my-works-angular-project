@@ -5,18 +5,13 @@ import { Router } from "@angular/router";
 import { BookService } from "src/app/services/book.service";
 import { Book } from "src/models/Book";
 import { BookType } from "src/models/BookTypes";
-
 @Component({
   selector: 'app-booktable',
   templateUrl: './booktable.component.html',
   styleUrls: ['./booktable.component.css']
 })
+
 export class BooktableComponent implements OnInit {
-  dataSource = [
-    { id: 1, name: "Angular", price: "45.00" },
-    { id: 2, name: "React Js", price: "30.00" },
-    { id: 3, name: "Vue Js", price: "20.00" }
-  ];
   bookForm: FormGroup;
   books: any
   constructor(
@@ -27,7 +22,6 @@ export class BooktableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.retrieveBooks()
   }
   createBookForm() {
     this.bookForm = this.fb.group({
@@ -66,7 +60,5 @@ export class BooktableComponent implements OnInit {
     this.router.navigate(['signin']);
 
   }
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.dataSource, event.previousIndex, event.currentIndex);
-  }
+
 }
