@@ -6,7 +6,7 @@ import { BookService } from "src/app/services/book.service";
 import { Book } from "src/models/Book";
 import { BookType } from "src/models/BookTypes";
 @Component({
-  selector: 'app-booktable',
+  selector: 'booktable',
   templateUrl: './booktable.component.html',
   styleUrls: ['./booktable.component.css']
 })
