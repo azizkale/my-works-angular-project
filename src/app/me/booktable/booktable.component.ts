@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { BookService } from "src/app/services/book.service";
+import { Router } from '@angular/router';
+import { BookService } from 'src/app/services/book.service';
 @Component({
   selector: 'booktable',
   templateUrl: './booktable.component.html',
@@ -8,29 +8,30 @@ import { BookService } from "src/app/services/book.service";
 })
 
 export class BooktableComponent implements OnInit {
-
-  books: any
-  constructor(
-    private router: Router,
-    private bookservice: BookService) {
-  }
+  books: any[]
+  constructor(private bookservice: BookService, private router: Router) { }
 
   ngOnInit(): void {
+    this.retrieveBooks();
   }
 
 
   retrieveBooks() {
     this.bookservice.retrieveBooks().subscribe({
-      next: (response) => {
-        this.books = Object.entries(response);
-        console.log(this.books)
+      next: async (response) => {
+        this.books = await Object.entries(response);
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.deleteToken();
+        }
       }
     })
   }
+
   deleteToken() {
     localStorage.removeItem('token');
     this.router.navigate(['signin']);
 
   }
-
 }

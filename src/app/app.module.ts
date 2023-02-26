@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 import { AuthGuard } from './Auth.Guard';
 
 // ================Angular material modules
@@ -25,9 +26,9 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
     AppComponent,
     SigninComponent,
     RegisterComponent,
-    BooktableComponent,
+    BooklistComponent, BooktableComponent,
     MeComponent,
-    BooklistComponent
+
 
   ],
   imports: [
@@ -41,7 +42,7 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
     MatTableModule,
     MatInputModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

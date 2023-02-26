@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { BooktableComponent } from './booktable/booktable.component';
+import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'me',
@@ -8,18 +8,14 @@ import { BooktableComponent } from './booktable/booktable.component';
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
-  @ViewChild(BooktableComponent) bookTable: BooktableComponent;
-
-  constructor(private router: Router) {
+  books: any
+  constructor(private router: Router, private bookservice: BookService) {
   }
 
   ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-    this.bookTable.retrieveBooks();
 
-  }
 
   // Toggle between showing and hiding the sidebar, and add overlay effect
   w3_open(mySidebar: any, myOverlay: any) {
@@ -42,4 +38,5 @@ export class MeComponent implements OnInit {
     this.router.navigate(['signin']);
 
   }
+
 }
