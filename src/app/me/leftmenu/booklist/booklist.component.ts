@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { BookService } from 'src/app/services/book.service';
+import { Book } from 'src/models/Book';
+import { BookType } from 'src/models/BookTypes';
 
 export interface PeriodicElement {
   name: string;
@@ -27,13 +32,47 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 export class BooklistComponent implements OnInit {
-
+  bookForm: FormGroup; // add book form
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  constructor(
+    private fb: FormBuilder,
+    private bookservice: BookService,
+    private router: Router
+  ) {
+    this.createBookForm();
+
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  //================Creating book
+  createBookForm() {
+    this.bookForm = this.fb.group({
+      bookname: ['', Validators.required],
+      numberofpages: ['', Validators.required],
+      authorname: ['', Validators.required],
+    });
+  }
+
+  createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
+    const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
+    this.bookservice.createBook(book).subscribe({
+      next: (res) => {
+        console.log(res)
+      },
+      error: async (err) => {
+        //unvalid token
+        if (err.status === 401) {
+          localStorage.removeItem('token');
+          this.router.navigate(['signin']);
+        }
+      }
+    })
   }
   ngOnInit(): void {
 
