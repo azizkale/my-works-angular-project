@@ -3,11 +3,20 @@
 </div>
 
 <div class="w3-responsive w3-card-4">
-  <table class="table table-bordered">
+  <div class="m-2">
+    <button
+      onclick="document.getElementById('id_add_book').style.display='block'"
+      class="w3-button w3-green w3-large"
+      style="float: right"
+    >
+      Add New Book
+    </button>
+  </div>
+  <table class="table table-bordered" style="min-height: 325px">
     <thead>
       <tr>
         <td colspan="2">
-          <div class="row m-2" style="width: 100%">
+          <div class="row mx-2">
             <div class="tbl-elem-1 col-sm-1">No</div>
             <div class="tbl-elem-2 col-sm-9">Name</div>
             <div class="tbl-elem-3 col-sm-2">Pages</div>
@@ -17,9 +26,9 @@
     </thead>
     <tbody>
       <tr>
-        <td colspan="2">
+        <td>
           <div *ngFor="let book of books; let i = index">
-            <div class="row m-2">
+            <div class="row mx-2">
               <div style="width: 15%; float: none" class="col-sm-1"></div>
               <div style="width: 65%; float: none" class="col-sm-9">
                 {{ book[1].name }}
@@ -28,12 +37,12 @@
                 {{ book[1].totalPage }}
               </div>
             </div>
-            <div class="row m-2">
-              <div style="width: 15%; float: none" class="col-sm-1">
+            <div class="row mx-2">
+              <div style="width: 5%; float: none" class="col-sm-1">
                 {{ i + 1 }}
               </div>
               <div
-                style="width: 85%; float: none"
+                style="width: 90%; float: none"
                 class="col-sm-11 text-center"
               >
                 <div class="w3-light-grey w3-round">

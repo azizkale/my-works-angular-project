@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
             if (response.status === 200) {
               this.router.navigate(['signin']);
             } else if (response.status === 409) {
+              alert('this email is already in use!')
               // document.getElementById('id_alert_signin').innerHTML = 'This email is already in use!';
               // document.getElementById('id_alert_signin').style.display = 'block';
             }
