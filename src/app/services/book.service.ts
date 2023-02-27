@@ -49,7 +49,7 @@ export class BookService {
       // User is authenticated, return the data
       const body = { bookId: bookId, token: localStorage.getItem('token') };
 
-      return this.http.delete(environment.url + '/book/deletebook', { body })
+      return this.http.delete(environment.url + '/book/delete', { body })
 
     } else {
       // User is not authenticated, navigate to the login page

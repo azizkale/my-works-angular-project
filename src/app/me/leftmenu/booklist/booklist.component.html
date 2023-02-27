@@ -29,7 +29,7 @@
         mat-cell
         *matCellDef="let element; let i = index"
         (click)="
-          deleteBook(element); update_delete_book.style.display = 'block'
+          getTheBook(element); update_delete_book.style.display = 'block'
         "
       >
         {{ i + 1 }}
@@ -170,6 +170,7 @@
     <form class="w3-container" [formGroup]="bookManipulateForm">
       <div class="w3-section">
         <label><b>Book Name</b></label>
+        <label name="bookId" for="it gets just bookId"></label>
         <input
           #bookname
           id="bookname"
@@ -216,26 +217,18 @@
           name="finishdate"
           formControlName="finishdate"
         />
-        <button
-          (click)="
-            createBook(bookname.value, numberofpages.value, authorname.value);
-            bookname.value = numberofpages.value = authorname.value = '';
-            id_add_book.style.display = 'none';
-            createBookForm()
-          "
-          class="w3-button w3-block w3-green w3-section w3-padding"
-          type="submit"
-          [disabled]="bookForm.pristine || bookForm.invalid"
-        >
-          Add
-        </button>
+        <div class="w3-container w3-border-top w3-padding w3-light-grey">
+          <button
+            (click)="deleteBook(bookManipulateForm)"
+            type="button"
+            class="w3-button w3-red"
+          >
+            Delete
+          </button>
+          <button type="button" class="w3-button w3-green">Update</button>
+        </div>
       </div>
     </form>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <button type="button" class="w3-button w3-red">Delete</button>
-      <button type="button" class="w3-button w3-green">Update</button>
-    </div>
   </div>
 </div>
 <!-- ===============angular material symbols===================== -->
