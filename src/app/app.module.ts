@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon'
-
+import { MatGridListModule } from '@angular/material/grid-list'
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
@@ -42,7 +42,7 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
     MatFormFieldModule,
     MatTableModule,
     MatInputModule,
-    MatIconModule,
+    MatIconModule, MatGridListModule
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

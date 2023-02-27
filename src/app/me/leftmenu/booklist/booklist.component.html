@@ -1,14 +1,22 @@
 <mat-form-field>
-  <span style="display: block" class="material-symbols-outlined">
-    content_paste_search
-  </span>
-  <mat-icon
-    onclick="document.getElementById('id_add_book').style.display='block'"
-    style="font-size: x-large; float: right"
-    >add_box</mat-icon
-  >
-
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
+  <mat-grid-list cols="2" rowHeight="20px">
+    <mat-grid-tile>
+      <span class="material-symbols-outlined"> content_paste_search </span>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="search something"
+        #input
+      />
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-icon
+        onclick="document.getElementById('id_add_book').style.display='block'"
+        style="font-size: x-large; margin-left: auto"
+        >add_box</mat-icon
+      >
+    </mat-grid-tile>
+  </mat-grid-list>
 </mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
