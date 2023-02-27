@@ -1,13 +1,13 @@
 <mat-form-field>
-  <mat-label style="color: black">
-    <span
-      class="material-symbols-outlined float-right"
-      onclick="document.getElementById('id_add_book').style.display='block'"
-    >
-      add
-    </span>
-    <span class="material-symbols-outlined"> content_paste_search </span>
-  </mat-label>
+  <span style="display: block" class="material-symbols-outlined">
+    content_paste_search
+  </span>
+  <mat-icon
+    onclick="document.getElementById('id_add_book').style.display='block'"
+    style="font-size: x-large; float: right"
+    >add_box</mat-icon
+  >
+
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
 </mat-form-field>
 

@@ -11,6 +11,7 @@ import { AuthGuard } from './Auth.Guard';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon'
 
 
 import { AppComponent } from './app.component';
@@ -40,7 +41,8 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]
