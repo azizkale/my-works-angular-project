@@ -28,7 +28,7 @@ export class MeComponent implements OnInit {
     }
   }
   // Close the sidebar with the close button
-  w3_close(mySidebar: any, myOverlay: any) {
+  w3_close(mySidebar: HTMLElement, myOverlay: HTMLElement) {
     mySidebar.style.display = "none";
     myOverlay.style.display = "none";
   }
