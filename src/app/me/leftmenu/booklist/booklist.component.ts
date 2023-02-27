@@ -3,19 +3,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
-import { Book } from 'src/models/Book';
 import { BookType } from 'src/models/BookTypes';
 import { DatePipe } from '@angular/common';
+import { Book } from 'src/models/Book';
 
-export interface PeriodicElement {
-  bookId: any;
-  position: number;
-  name: string;
-  start: Date | any;
-  finish: Date | any;
-  page: number;
-  author: string
-}
+// export interface Book {
+//   bookId: any;
+//   position: number;
+//   name: string;
+//   start: Date | any;
+//   finish: Date | any;
+//   page: number;
+//   author: string
+// }
 
 @Component({
   selector: 'booklist',
@@ -27,8 +27,8 @@ export class BooklistComponent implements OnInit {
   bookForm: FormGroup; // add book form
   bookManipulateForm: FormGroup; // update/dde book form
   displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Author'];
-  dataSource: MatTableDataSource<PeriodicElement>;
-  books: any = [];
+  dataSource: MatTableDataSource<Book>;
+  books: Book | any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -89,18 +89,17 @@ export class BooklistComponent implements OnInit {
     this.bookservice.retrieveBooks().subscribe({
       next: async (response) => {
         Object.entries(response).map((book: any, index) => {
-          let obj: PeriodicElement = {
+          let obj: Book | any = {
             'bookId': book[0],
-            'position': index + 1,
             'name': book[1].name,
-            'start': this.datePipe.transform(book[1].startDate, 'yyyy-MM-dd'),
-            'finish': this.datePipe.transform(book[1].finisDate, 'yyyy-MM-dd'),
-            'page': book[1].totalPage,
+            'startDate': this.datePipe.transform(book[1].startDate, 'yyyy-MM-dd'),
+            'endDate': this.datePipe.transform(book[1].finisDate, 'yyyy-MM-dd'),
+            'totalPage': book[1].totalPage,
             'author': book[1].author,
 
           }
           this.books.push(obj)
-          this.dataSource = new MatTableDataSource<PeriodicElement>(this.books);
+          this.dataSource = new MatTableDataSource<Book>(this.books);
         })
       },
       error: (err) => {
@@ -119,10 +118,10 @@ export class BooklistComponent implements OnInit {
 
     this.bookManipulateForm = this.fb.group({
       bookname: [book.name, Validators.required],
-      numberofpages: [book.page, Validators.required],
+      numberofpages: [book.totalPage, Validators.required],
       authorname: [book.author, Validators.required],
-      startdate: [book.start, Validators.required],
-      finishdate: [book.finis, Validators.required],
+      startdate: [book.startDate, Validators.required],
+      finishdate: [book.endDate, Validators.required],
     });
   }
 

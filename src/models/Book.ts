@@ -1,12 +1,13 @@
 import { BookType } from "./BookTypes";
 
 export class Book {
-    name: string;
+    bookId: any;
+    name: string | any;
     totalPage: number;
-    readPage: number | undefined;
-    startDate: Date | undefined;
-    endDate: Date | undefined;
-    author: string | undefined;
+    readPage: number | any;
+    startDate: Date | any;
+    endDate: Date | any;
+    author: string | any;
     bookType: BookType;
 
     constructor(
