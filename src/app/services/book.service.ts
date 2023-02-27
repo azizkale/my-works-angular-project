@@ -31,17 +31,30 @@ export class BookService {
 
   }
   retrieveBooks(): Observable<any> {
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(environment.url + '/book/retrieve', { headers })
-    // if (this.authGuard.canActivate()) {
-    //   // User is authenticated, return the data
-    //   const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
-    //   return this.http.get(environment.url + '/book/retrieve', { headers })
-    // } else {
-    //   // User is not authenticated, navigate to the login page
-    //   this.router.navigate(['signin']);
-    //   return EMPTY;
-    // }
 
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
+      return this.http.get(environment.url + '/book/retrieve', { headers })
+    } else {
+      // User is not authenticated, navigate to the login page
+      this.router.navigate(['signin']);
+      return EMPTY;
+    }
+
+  }
+
+  deleteBook(bookId: string): Observable<any> {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const body = { bookId: bookId, token: localStorage.getItem('token') };
+
+      return this.http.delete(environment.url + '/book/deletebook', { body })
+
+    } else {
+      // User is not authenticated, navigate to the login page
+      this.router.navigate(['signin']);
+      return EMPTY;
+    }
   }
 }

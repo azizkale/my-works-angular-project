@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -8,12 +8,13 @@ import { BookType } from 'src/models/BookTypes';
 import { DatePipe } from '@angular/common';
 
 export interface PeriodicElement {
+  bookId: any;
   position: number;
-  Name: string;
-  Start: Date | any;
-  Finish: Date | any;
-  Page: number;
-  Author: string
+  name: string;
+  start: Date | any;
+  finish: Date | any;
+  page: number;
+  author: string
 }
 
 @Component({
@@ -24,6 +25,7 @@ export interface PeriodicElement {
 
 export class BooklistComponent implements OnInit {
   bookForm: FormGroup; // add book form
+  bookManipulateForm: FormGroup; // update/dde book form
   displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Author'];
   dataSource: MatTableDataSource<PeriodicElement>;
   books: any = [];
@@ -32,9 +34,11 @@ export class BooklistComponent implements OnInit {
     private fb: FormBuilder,
     private bookservice: BookService,
     private router: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private el: ElementRef
   ) {
     this.createBookForm();
+    this.createBookManipulateForm();
 
   }
   ngOnInit(): void { this.retrieveBooks() }
@@ -52,6 +56,17 @@ export class BooklistComponent implements OnInit {
       authorname: ['', Validators.required],
     });
   }
+  //================update/delete book
+  createBookManipulateForm() {
+    this.bookManipulateForm = this.fb.group({
+      bookname: ['', Validators.required],
+      numberofpages: ['', Validators.required],
+      authorname: ['', Validators.required],
+      startdate: ['', Validators.required],
+      finishdate: ['', Validators.required],
+    });
+  }
+
 
   createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
     const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
@@ -75,12 +90,13 @@ export class BooklistComponent implements OnInit {
       next: async (response) => {
         Object.entries(response).map((book: any, index) => {
           let obj: PeriodicElement = {
+            'bookId': book[0],
             'position': index + 1,
-            'Name': book[1].name,
-            'Start': this.datePipe.transform(book[1].startDate, 'yyyy-MM-dd'),
-            'Finish': this.datePipe.transform(book[1].finisDate, 'yyyy-MM-dd'),
-            'Page': book[1].totalPage,
-            'Author': book[1].author,
+            'name': book[1].name,
+            'start': this.datePipe.transform(book[1].startDate, 'yyyy-MM-dd'),
+            'finish': this.datePipe.transform(book[1].finisDate, 'yyyy-MM-dd'),
+            'page': book[1].totalPage,
+            'author': book[1].author,
 
           }
           this.books.push(obj)
@@ -97,6 +113,20 @@ export class BooklistComponent implements OnInit {
     })
 
   }
+
+  // ===============update book==============
+  deleteBook(book: any) {
+
+    this.bookManipulateForm = this.fb.group({
+      bookname: [book.name, Validators.required],
+      numberofpages: [book.page, Validators.required],
+      authorname: [book.author, Validators.required],
+      startdate: [book.start, Validators.required],
+      finishdate: [book.finis, Validators.required],
+    });
+  }
+
+
   deleteToken() {
     localStorage.removeItem('token');
     this.router.navigate(['signin']);
