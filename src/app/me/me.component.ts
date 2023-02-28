@@ -38,5 +38,7 @@ export class MeComponent implements OnInit {
     this.router.navigate(['signin']);
 
   }
-
+  reload() {
+    window.location.reload()
+  }
 }

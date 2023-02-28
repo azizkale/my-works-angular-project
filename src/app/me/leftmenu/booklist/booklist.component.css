@@ -1,15 +1,30 @@
-/* Structure */
-
-table {
-    width: 100%;
-}
-
-.mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-}
-
-mat-form-field {
-    width: 90%;
-    margin: 2%;
-}
+    /* Structure */
+    
+    table {
+        width: 100%;
+    }
+    
+    .mat-mdc-form-field {
+        font-size: 14px;
+        width: 100%;
+    }
+    
+    mat-form-field {
+        width: 90%;
+        margin: 2%;
+    }
+    
+    label {
+        float: left
+    }
+    
+    table td,
+    table th {
+        border-bottom-color: white;
+        margin-left: 0px;
+    }
+    
+    table td.button {
+        padding: 10px;
+        background-color: rgb(28, 210, 119) !important;
+    }
