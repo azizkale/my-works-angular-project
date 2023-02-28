@@ -124,6 +124,7 @@
           formControlName="authorname"
         />
         <button
+          onclick="document.getElementById('id_add_book').style.display='none'"
           (click)="
             createBook(bookname.value, numberofpages.value, authorname.value);
             bookname.value = numberofpages.value = authorname.value = '';
@@ -169,8 +170,9 @@
 
     <form class="w3-container" [formGroup]="bookManipulateForm">
       <div class="w3-section">
-        <label><b>Book Name</b></label>
         <label name="bookId" for="it gets just bookId"></label>
+
+        <label><b>Book Name</b></label>
         <input
           #bookname
           id="bookname"
@@ -210,22 +212,40 @@
         />
         <label><b>Finish Date</b></label>
         <input
-          #finishdate
+          #enddate
           class="w3-input w3-border"
           type="date"
           placeholder="Enter Finish Date (optional)"
-          name="finishdate"
-          formControlName="finishdate"
+          name="enddate"
+          formControlName="enddate"
         />
+        <label><b>Type</b></label>
+        <input
+          readonly
+          #booktype
+          type="text"
+          class="w3-input w3-border"
+          name="booktype"
+          formControlName="booktype"
+        />
+
         <div class="w3-container w3-border-top w3-padding w3-light-grey">
           <button
-            (click)="deleteBook(bookManipulateForm)"
+            onclick="document.getElementById('update_delete_book').style.display='none'"
+            (click)="deleteBook()"
             type="button"
             class="w3-button w3-red"
           >
             Delete
           </button>
-          <button type="button" class="w3-button w3-green">Update</button>
+          <button
+            onclick="document.getElementById('update_delete_book').style.display='none'"
+            (click)="updateBook()"
+            type="button"
+            class="w3-button w3-green"
+          >
+            Update
+          </button>
         </div>
       </div>
     </form>

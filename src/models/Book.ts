@@ -17,14 +17,15 @@ export class Book {
         booktype: BookType,
         enddate?: Date,
         readpage?: number,
-        author?: string) {
+        author?: string,
+        bookId?: any) {
         this.name = name
         this.totalPage = totalpage
         this.startDate = startdate;
         this.bookType = booktype;
         this.endDate = enddate
         this.readPage = readpage;
-        this.author = author
-
+        this.author = author;
+        this.bookId = bookId;
     }
 };

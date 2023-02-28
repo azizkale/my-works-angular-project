@@ -26,11 +26,15 @@ export class BooklistComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe,
   ) {
+
+
+  }
+  ngOnInit(): void {
+    this.retrieveBooks();
     this.createBookForm();
     this.createBookManipulateForm();
 
   }
-  ngOnInit(): void { this.retrieveBooks() }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -49,11 +53,12 @@ export class BooklistComponent implements OnInit {
   createBookManipulateForm() {
     this.bookManipulateForm = this.fb.group({
       bookId: [],
+      booktype: ['', Validators.required],
       bookname: ['', Validators.required],
       numberofpages: ['', Validators.required],
       authorname: ['', Validators.required],
       startdate: ['', Validators.required],
-      finishdate: ['', Validators.required],
+      enddate: ['', Validators.required],
     });
   }
 
@@ -62,14 +67,12 @@ export class BooklistComponent implements OnInit {
     const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
     this.bookservice.createBook(book).subscribe({
       next: (res) => {
-        console.log(res)
         this.retrieveBooks();
       },
       error: async (err) => {
         //unvalid token
         if (err.status === 401) {
-          localStorage.removeItem('token');
-          this.router.navigate(['signin']);
+          this.deleteToken();
         }
       }
     })
@@ -85,9 +88,10 @@ export class BooklistComponent implements OnInit {
             'bookId': book[0],
             'name': book[1].name,
             'startDate': this.datePipe.transform(book[1].startDate, 'yyyy-MM-dd'),
-            'endDate': this.datePipe.transform(book[1].finisDate, 'yyyy-MM-dd'),
+            'endDate': this.datePipe.transform(book[1].endDate, 'yyyy-MM-dd'),
             'totalPage': book[1].totalPage,
             'author': book[1].author,
+            'bookType': book[1].bookType
 
           }
           this.books.push(obj)
@@ -114,33 +118,43 @@ export class BooklistComponent implements OnInit {
       numberofpages: [book.totalPage, Validators.required],
       authorname: [book.author, Validators.required],
       startdate: [book.startDate, Validators.required],
-      finishdate: [book.endDate, Validators.required],
+      enddate: [book.endDate, Validators.required],
+      booktype: [book.bookType, Validators.required],
     });
 
   }
 
 
-  deleteBook(form: FormGroup) {
-
-    console.log(this.bookManipulateForm.get('bookId')?.value)
+  deleteBook() {
     this.bookservice.deleteBook(this.bookManipulateForm.get('bookId')?.value).subscribe({
       next: (response) => {
         this.retrieveBooks();
       },
       error: (err) => {
         console.log(err.message)
+        this.deleteToken();
       }
     })
   }
 
-  updateBook(book: Book) {
-    this.bookManipulateForm = this.fb.group({
-      bookname: [book.name, Validators.required],
-      numberofpages: [book.totalPage, Validators.required],
-      authorname: [book.author, Validators.required],
-      startdate: [book.startDate, Validators.required],
-      finishdate: [book.endDate, Validators.required],
-    });
+  async updateBook() {
+
+    const bookname = this.bookManipulateForm.get('bookname')?.value;
+    const pages = this.bookManipulateForm.get('numberofpages')?.value;
+    const startdate = this.bookManipulateForm.get('startdate')?.value;
+    const booktype = this.bookManipulateForm.get('booktype')?.value;
+    const enddate = this.bookManipulateForm.get('enddate')?.value;
+    const readpage = this.bookManipulateForm.get('readpage')?.value;
+    const author = this.bookManipulateForm.get('authorname')?.value;
+    const bookId = this.bookManipulateForm.get('bookId')?.value;
+
+    const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
+    await this.bookservice.updateBook(book).subscribe({
+      next: async (response) => {
+        await this.retrieveBooks();
+      },
+      error: (err) => { console.log(err.message); this.deleteToken() }
+    })
   }
 
   deleteToken() {
@@ -148,5 +162,4 @@ export class BooklistComponent implements OnInit {
     this.router.navigate(['signin']);
 
   }
-
 }
