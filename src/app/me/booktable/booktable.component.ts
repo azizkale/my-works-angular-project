@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from 'src/models/Book';
@@ -13,19 +12,15 @@ import { DatePipe } from '@angular/common';
 })
 
 export class BooktableComponent implements OnInit {
-  books: any[]
-  displayedColumns: string[] = ['No.', 'Book Name', 'Page Count', ' '];
-  dataSource: MatTableDataSource<Book>;
+  books: any[];
+  width: number; //dynamically book page progress width
   constructor(
     private bookservice: BookService,
     private router: Router,
     private datePipe: DatePipe
 
   ) { }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+
 
 
   ngOnInit(): void {
@@ -53,7 +48,6 @@ export class BooktableComponent implements OnInit {
             this.books.push(obj);
           }
         })
-        this.dataSource = new MatTableDataSource<Book>(this.books);
 
       },
       error: (err) => {
@@ -64,7 +58,7 @@ export class BooktableComponent implements OnInit {
     })
   }
 
-  persentageOfABook(book: Book): number {
+  percentageOfABook(book: Book): number {
     return Math.round((77 / book.totalPage) * 100)
   }
 
@@ -72,5 +66,9 @@ export class BooktableComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['signin']);
 
+  }
+
+  getThisBook(book: Book) {
+    console.log(book)
   }
 }
