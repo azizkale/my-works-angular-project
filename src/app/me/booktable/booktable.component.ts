@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
+import { Book } from 'src/models/Book';
 @Component({
   selector: 'booktable',
   templateUrl: './booktable.component.html',
@@ -17,9 +18,15 @@ export class BooktableComponent implements OnInit {
 
 
   retrieveBooks() {
+    this.books = [];
     this.bookservice.retrieveBooks().subscribe({
       next: async (response) => {
-        this.books = await Object.entries(response);
+        response.map((book: Book) => {
+          console.log(book)
+          if (!book.endDate) {
+            this.books.push(book);
+          }
+        })
       },
       error: (err) => {
         if (err.status === 401) {
@@ -27,6 +34,10 @@ export class BooktableComponent implements OnInit {
         }
       }
     })
+  }
+
+  persentageOfABook(book: Book): number {
+    return Math.round((77 / book.totalPage) * 100)
   }
 
   deleteToken() {

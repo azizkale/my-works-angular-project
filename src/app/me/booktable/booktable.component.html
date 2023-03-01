@@ -1,5 +1,5 @@
 <div class="w3-center">
-  <h2>My Books</h2>
+  <h2>My New Books</h2>
 </div>
 <div class="w3-responsive w3-card-4">
   <div class="m-2"></div>
@@ -22,10 +22,10 @@
             <div class="row mx-2">
               <div style="width: 15%; float: none" class="col-sm-1"></div>
               <div style="width: 65%; float: none" class="col-sm-9">
-                {{ book[1].name }}
+                {{ book.name }}
               </div>
               <div style="width: 20%; float: none" class="col-sm-2">
-                {{ book[1].totalPage }}
+                {{ book.totalPage }}
               </div>
             </div>
             <div class="row mx-2">
@@ -37,8 +37,11 @@
                 class="col-sm-11 text-center"
               >
                 <div class="w3-light-grey w3-round">
-                  <div class="w3-container w3-blue w3-round" style="width: 25%">
-                    25%
+                  <div
+                    class="w3-container w3-blue w3-round"
+                    [style.width]="persentageOfABook(book) + '%'"
+                  >
+                    {{ persentageOfABook(book) }}%
                   </div>
                 </div>
                 <br />

@@ -94,7 +94,9 @@ export class BooklistComponent implements OnInit {
             'bookType': book[1].bookType
 
           }
-          this.books.push(obj)
+          if (obj.endDate) {
+            this.books.push(obj);
+          }
           this.dataSource = new MatTableDataSource<Book>(this.books);
         })
       },
