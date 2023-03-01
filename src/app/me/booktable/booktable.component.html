@@ -1,8 +1,53 @@
 <div class="w3-center">
   <h2>My New Books</h2>
 </div>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8 w-100 text-left"
+>
+  <!-- Position Column -->
+  <ng-container matColumnDef="No.">
+    <button>
+      <th class="text-left" mat-header-cell *matHeaderCellDef>No.</th>
+      <td class="button" mat-cell *matCellDef="let element; let i = index">
+        {{ i + 1 }}
+      </td>
+    </button>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Book Name">
+    <th class="text-left" mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <!-- Page Count Column -->
+  <ng-container matColumnDef="Page Count">
+    <th class="text-left" mat-header-cell *matHeaderCellDef>Page</th>
+    <td mat-cell *matCellDef="let element">{{ element.totalPage }}</td>
+  </ng-container>
+
+  <!-- Button Column -->
+  <ng-container matColumnDef=" ">
+    <th class="float-right" mat-header-cell *matHeaderCellDef></th>
+    <td
+      style="float: right; padding-top: 12px"
+      mat-cell
+      *matCellDef="let element"
+    >
+      <span class="material-symbols-outlined mr-5"> remove </span>
+      <span class="material-symbols-outlined ml-5"> add </span>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
 <div class="w3-responsive w3-card-4">
   <div class="m-2"></div>
+
   <table class="table table-bordered" style="min-height: 325px">
     <thead>
       <tr>
