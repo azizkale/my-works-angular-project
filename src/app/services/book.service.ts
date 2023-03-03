@@ -6,7 +6,6 @@ import { Book } from 'src/models/Book';
 import { AuthGuard } from '../Auth.Guard'
 import { Router } from '@angular/router';
 
-
 @Injectable({
   providedIn: 'root'
 })

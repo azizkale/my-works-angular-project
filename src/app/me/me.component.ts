@@ -14,9 +14,6 @@ export class MeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
-
   // Toggle between showing and hiding the sidebar, and add overlay effect
   w3_open(mySidebar: any, myOverlay: any) {
     if (mySidebar.style.display === "block") {

@@ -19,9 +19,14 @@
     }
     
     table td,
-    table th {
-        border-bottom-color: white;
+    table th,
+    ng-container {
+        border-bottom-color: black;
         margin-left: 0px;
+    }
+    
+    table th {
+        font-weight: bolder;
     }
     
     table td.button {

@@ -16,7 +16,7 @@ import { Book } from 'src/models/Book';
 export class BooklistComponent implements OnInit {
   bookForm: FormGroup; // add book form
   bookManipulateForm: FormGroup; // update/dde book form
-  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Read Page', 'Page', 'Author'];
+  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Read', 'Page', 'Author'];
   dataSource: MatTableDataSource<Book>;
   books: Book | any = [];
 
