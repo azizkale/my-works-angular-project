@@ -33,8 +33,7 @@ export class BooktableComponent implements OnInit {
     this.bookservice.retrieveBooks().subscribe({
       next: async (response) => {
         response.map((book: Book) => {
-          console.log(book)
-          if (!book.endDate) {
+          if (book.totalPage !== book.readPage) {
             let obj: Book | any = {
               'bookId': book.bookId,
               'name': book.name,
@@ -42,7 +41,8 @@ export class BooktableComponent implements OnInit {
               'endDate': this.datePipe.transform(book.endDate, 'yyyy-MM-dd'),
               'totalPage': book.totalPage,
               'author': book.author,
-              'bookType': book.bookType
+              'bookType': book.bookType,
+              'readPage': book.readPage
 
             }
             this.books.push(obj);
@@ -59,16 +59,12 @@ export class BooktableComponent implements OnInit {
   }
 
   percentageOfABook(book: Book): number {
-    return Math.round((77 / book.totalPage) * 100)
+    return Math.round((book?.readPage / book.totalPage) * 100)
   }
 
   deleteToken() {
     localStorage.removeItem('token');
     this.router.navigate(['signin']);
 
-  }
-
-  getThisBook(book: Book) {
-    console.log(book)
   }
 }

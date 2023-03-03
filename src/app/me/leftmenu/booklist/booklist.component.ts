@@ -16,7 +16,7 @@ import { Book } from 'src/models/Book';
 export class BooklistComponent implements OnInit {
   bookForm: FormGroup; // add book form
   bookManipulateForm: FormGroup; // update/dde book form
-  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Author'];
+  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Read Page', 'Page', 'Author'];
   dataSource: MatTableDataSource<Book>;
   books: Book | any = [];
 
@@ -52,19 +52,20 @@ export class BooklistComponent implements OnInit {
   //================update/delete book
   createBookManipulateForm() {
     this.bookManipulateForm = this.fb.group({
-      bookId: [],
+      bookId: [''],
       booktype: ['', Validators.required],
       bookname: ['', Validators.required],
       numberofpages: ['', Validators.required],
       authorname: ['', Validators.required],
       startdate: ['', Validators.required],
       enddate: ['', Validators.required],
+      readpage: ['', Validators.required],
     });
   }
 
 
   createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
-    const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
+    const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, 0, authorname)
     this.bookservice.createBook(book).subscribe({
       next: (res) => {
         this.retrieveBooks();
@@ -85,18 +86,19 @@ export class BooklistComponent implements OnInit {
       next: async (response) => {
         Object.entries(response).map((book: any, index) => {
           let obj: Book | any = {
-            'bookId': book[0],
+            'bookId': book[1].bookId,
             'name': book[1].name,
             'startDate': this.datePipe.transform(book[1].startDate, 'yyyy-MM-dd'),
             'endDate': this.datePipe.transform(book[1].endDate, 'yyyy-MM-dd'),
             'totalPage': book[1].totalPage,
             'author': book[1].author,
-            'bookType': book[1].bookType
+            'bookType': book[1].bookType,
+            'readPage': book[1].readPage
 
           }
-          if (obj.endDate) {
-            this.books.push(obj);
-          }
+          // if (obj.endDate) {
+          this.books.push(obj);
+          // }
           this.dataSource = new MatTableDataSource<Book>(this.books);
         })
       },
@@ -122,6 +124,7 @@ export class BooklistComponent implements OnInit {
       startdate: [book.startDate, Validators.required],
       enddate: [book.endDate, Validators.required],
       booktype: [book.bookType, Validators.required],
+      readpage: [book.readPage, Validators.required],
     });
 
   }
@@ -151,6 +154,8 @@ export class BooklistComponent implements OnInit {
     const bookId = this.bookManipulateForm.get('bookId')?.value;
 
     const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
+
+    console.log(book)
     await this.bookservice.updateBook(book).subscribe({
       next: async (response) => {
         await this.retrieveBooks();

@@ -19,11 +19,7 @@
     <tbody>
       <tr>
         <td>
-          <div
-            *ngFor="let book of books; let i = index"
-            onclick="document.getElementById('manipulateBookPage').style.display='block'"
-            (click)="getThisBook(book)"
-          >
+          <div *ngFor="let book of books; let i = index">
             <div class="row mx-2">
               <div style="width: 15%; float: none" class="col-sm-1"></div>
               <div style="width: 65%; float: none" class="col-sm-9">
@@ -58,24 +54,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-<!-- book page mapnipulate maodal -->
-<div
-  id="manipulateBookPage"
-  class="w3-modal"
-  #list_books
-  style="background-color: aliceblue"
->
-  <div class="w3-modal-content w3-card-16 w3-animate-zoom">
-    <div class="w3-center">
-      <br />
-      <span
-        onclick="document.getElementById('manipulateBookPage').style.display='none'"
-        class="w3-button w3-xlarge w3-transparent w3-display-topright"
-        title="Close Modal"
-        >×</span
-      >
-      dasasda
-    </div>
-  </div>
 </div>

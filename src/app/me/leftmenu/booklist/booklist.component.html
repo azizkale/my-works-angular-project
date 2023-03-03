@@ -2,12 +2,7 @@
   <mat-grid-list cols="2" rowHeight="20px">
     <mat-grid-tile>
       <span class="material-symbols-outlined"> content_paste_search </span>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder="search something"
-        #input
-      />
+      <input matInput (keyup)="applyFilter($event)" #input />
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-icon
@@ -59,6 +54,11 @@
   <ng-container matColumnDef="Page">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Page</th>
     <td mat-cell *matCellDef="let element">{{ element.totalPage }}</td>
+  </ng-container>
+  <!-- Read Page Column -->
+  <ng-container matColumnDef="Read Page">
+    <th class="text-center" mat-header-cell *matHeaderCellDef>Read Page</th>
+    <td mat-cell *matCellDef="let element">{{ element.readPage }}</td>
   </ng-container>
 
   <!-- Author Column -->
@@ -139,16 +139,6 @@
         </button>
       </div>
     </form>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <!-- <button
-            onclick="document.getElementById('id_add_book').style.display='none'"
-            type="button"
-            class="w3-button w3-red"
-          >
-            Cancel
-          </button> -->
-    </div>
   </div>
 </div>
 
@@ -170,17 +160,32 @@
 
     <form class="w3-container" [formGroup]="bookManipulateForm">
       <div class="w3-section">
-        <label name="bookId" for="it gets just bookId"></label>
+        <input
+          #bookId
+          type="hidden"
+          formControlName="bookId"
+          name="bookId"
+          for="it gets just bookId"
+        />
 
         <label><b>Book Name</b></label>
         <input
           #bookname
-          id="bookname"
           class="w3-input w3-border w3-margin-bottom"
           type="text"
           placeholder="Enter book name"
           name="bookname"
           formControlName="bookname"
+        />
+        <label><b>Read Pages</b></label>
+        <input
+          #readpage
+          class="w3-input w3-border"
+          type="number"
+          placeholder="Enter Read Page"
+          name="readpage"
+          formControlName="readpage"
+          required
         />
         <label><b>Pages</b></label>
         <input
