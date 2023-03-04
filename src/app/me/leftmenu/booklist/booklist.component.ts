@@ -35,7 +35,6 @@ export class BooklistComponent implements OnInit {
     this.createBookManipulateForm();
 
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -49,20 +48,23 @@ export class BooklistComponent implements OnInit {
       authorname: ['', Validators.required],
     });
   }
-  //================update/delete book
+  //================update/delete book form
   createBookManipulateForm() {
     this.bookManipulateForm = this.fb.group({
       bookId: [''],
       booktype: ['', Validators.required],
       bookname: ['', Validators.required],
-      numberofpages: ['', Validators.required, Validators.min(1)],
+      numberofpages: ['', Validators.required],
       authorname: ['', Validators.required],
       startdate: ['', Validators.required],
       enddate: ['', Validators.required],
-      readpage: ['', Validators.required, Validators.min(1)],
+      readpage: ['', [Validators.required]],
     });
+
+
   }
 
+  // =============CRUD Operations==========================
   createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
     const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, 0, authorname)
     this.bookservice.createBook(book).subscribe({
@@ -112,7 +114,7 @@ export class BooklistComponent implements OnInit {
 
   }
 
-  // ===============delete - delete book==============  
+  // ===============DELETE / UPDATE book-form==============  
   getTheBook(book: any): FormGroup {
     //to fill the form
     return this.bookManipulateForm = this.fb.group({
@@ -123,9 +125,8 @@ export class BooklistComponent implements OnInit {
       startdate: [book.startDate, Validators.required],
       enddate: [book.endDate, Validators.required],
       booktype: [book.bookType, Validators.required],
-      readpage: [book.readPage, Validators.required],
+      readpage: [book.readpage, Validators.required]
     });
-
   }
 
 
@@ -152,15 +153,19 @@ export class BooklistComponent implements OnInit {
     const author = this.bookManipulateForm.get('authorname')?.value;
     const bookId = this.bookManipulateForm.get('bookId')?.value;
 
+
     const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
 
-    console.log(book)
-    await this.bookservice.updateBook(book).subscribe({
-      next: async (response) => {
-        await this.retrieveBooks();
-      },
-      error: (err) => { console.log(err.message); this.deleteToken() }
-    })
+
+    if (readpage < pages || enddate < startdate) {
+      await this.bookservice.updateBook(book).subscribe({
+        next: async (response) => {
+          await this.retrieveBooks();
+        },
+        error: (err) => { console.log(err.message); this.deleteToken() }
+      })
+    }
+    else alert('das geht nicht')
   }
 
   deleteToken() {
