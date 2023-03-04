@@ -16,7 +16,7 @@ import { Book } from 'src/models/Book';
 export class BooklistComponent implements OnInit {
   bookForm: FormGroup; // add book form
   bookManipulateForm: FormGroup; // update/dde book form
-  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Read', 'Page', 'Author'];
+  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Read', 'Author'];
   dataSource: MatTableDataSource<Book>;
   books: Book | any = [];
 
@@ -55,14 +55,13 @@ export class BooklistComponent implements OnInit {
       bookId: [''],
       booktype: ['', Validators.required],
       bookname: ['', Validators.required],
-      numberofpages: ['', Validators.required],
+      numberofpages: ['', Validators.required, Validators.min(1)],
       authorname: ['', Validators.required],
       startdate: ['', Validators.required],
       enddate: ['', Validators.required],
-      readpage: ['', Validators.required],
+      readpage: ['', Validators.required, Validators.min(1)],
     });
   }
-
 
   createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
     const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, 0, authorname)

@@ -33,3 +33,11 @@
         padding: 10px;
         background-color: rgb(28, 210, 119) !important;
     }
+    
+    @media screen and (max-width: 500px) {
+        .mat-column-Read,
+        .mat-column-Author,
+        .mat-column-start {
+            display: none;
+        }
+    }

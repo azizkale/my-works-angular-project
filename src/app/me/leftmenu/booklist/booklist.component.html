@@ -51,13 +51,20 @@
   </ng-container>
 
   <!-- Page Count Column -->
-  <ng-container matColumnDef="Page">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Page</th>
+  <ng-container matColumnDef="Read">
+    <th
+      class="text-center"
+      style="padding-left: 5px"
+      mat-header-cell
+      *matHeaderCellDef
+    >
+      Read
+    </th>
     <td mat-cell *matCellDef="let element">{{ element.totalPage }}</td>
   </ng-container>
   <!-- Read Page Column -->
-  <ng-container matColumnDef="Read">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Read</th>
+  <ng-container matColumnDef="Page">
+    <th class="text-center" mat-header-cell *matHeaderCellDef>Page</th>
     <td mat-cell *matCellDef="let element">{{ element.readPage }}</td>
   </ng-container>
 

@@ -8,7 +8,8 @@ import { BookService } from '../services/book.service';
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
-  books: any
+  books: any;
+  displayName: string | any = localStorage.getItem('displayName');
   constructor(private router: Router, private bookservice: BookService) {
   }
 
