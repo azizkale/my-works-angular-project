@@ -125,7 +125,7 @@ export class BooklistComponent implements OnInit {
       startdate: [book.startDate, Validators.required],
       enddate: [book.endDate, Validators.required],
       booktype: [book.bookType, Validators.required],
-      readpage: [book.readpage, Validators.required]
+      readpage: [book.readPage, Validators.required]
     });
   }
 
@@ -145,11 +145,11 @@ export class BooklistComponent implements OnInit {
   async updateBook() {
 
     const bookname = this.bookManipulateForm.get('bookname')?.value;
-    const pages = this.bookManipulateForm.get('numberofpages')?.value;
-    const startdate = this.bookManipulateForm.get('startdate')?.value;
+    const pages: number = this.bookManipulateForm.get('numberofpages')?.value;
+    const startdate: Date = this.bookManipulateForm.get('startdate')?.value;
     const booktype = this.bookManipulateForm.get('booktype')?.value;
-    const enddate = this.bookManipulateForm.get('enddate')?.value;
-    const readpage = this.bookManipulateForm.get('readpage')?.value;
+    const enddate: Date = this.bookManipulateForm.get('enddate')?.value;
+    const readpage: number = this.bookManipulateForm.get('readpage')?.value;
     const author = this.bookManipulateForm.get('authorname')?.value;
     const bookId = this.bookManipulateForm.get('bookId')?.value;
 
@@ -157,7 +157,10 @@ export class BooklistComponent implements OnInit {
     const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
 
 
-    if (readpage < pages || enddate < startdate) {
+    if (readpage > pages || enddate < startdate) {
+      alert('incorrect values')
+    }
+    else {
       await this.bookservice.updateBook(book).subscribe({
         next: async (response) => {
           await this.retrieveBooks();
@@ -165,7 +168,6 @@ export class BooklistComponent implements OnInit {
         error: (err) => { console.log(err.message); this.deleteToken() }
       })
     }
-    else alert('das geht nicht')
   }
 
   deleteToken() {

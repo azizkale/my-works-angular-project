@@ -113,6 +113,7 @@
         />
         <label><b>Number Of Pages</b></label>
         <input
+          min="1"
           #numberofpages
           class="w3-input w3-border"
           type="number"
@@ -186,7 +187,7 @@
         />
         <label><b>Pages</b></label>
         <input
-          min="0"
+          min="1"
           #numberofpages
           class="w3-input w3-border"
           type="number"
@@ -196,7 +197,8 @@
         />
         <label><b>Read Pages</b></label>
         <input
-          min="0"
+          min="1"
+          max="{{ bookManipulateForm.controls['numberofpages'].value }}"
           #readpage
           class="w3-input w3-border"
           type="number"
@@ -217,6 +219,7 @@
         <label><b>Start Date</b></label>
         <input
           #startdate
+          max="{{ bookManipulateForm.controls['enddate'].value }}"
           class="w3-input w3-border"
           type="date"
           placeholder="Enter Start Date (optional)"
@@ -226,6 +229,7 @@
         <label><b>Finish Date</b></label>
         <input
           #enddate
+          min="{{ bookManipulateForm.controls['startdate'].value }}"
           class="w3-input w3-border"
           type="date"
           placeholder="Enter Finish Date (optional)"
