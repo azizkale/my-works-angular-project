@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertsService } from '../services/alerts.service';
 
 @Component({
   selector: 'register',
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild('alertParent', { static: true }) alertParent: ElementRef
+
   registerForm: FormGroup;
   passwordPatternControl: string = ''
   emailpatterncontrol: string = ''
@@ -16,7 +19,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authservice: AuthenticationService,
     public fb: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private alertservice: AlertsService) {
     this.createForm();
   }
 
@@ -32,15 +36,15 @@ export class RegisterComponent implements OnInit {
 
   register(email: string, password: any) {
     if (!this.passwordPatternControl.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
-      alert(`Password must contain at least 
-      *one digit, 
-      *one lowercase letter, 
-      *one uppercase letter, 
-      and be at least 8 characters long.`);
-      return;
+      this.alertservice.alert(`<p class='text-start'>
+      Password must contain at least <br>
+      - one digit, <br>
+      - one lowercase letter, <br>
+      - one uppercase letter, <br>
+      and be at least 8 characters long</p>`, 'alert-danger', this.alertParent.nativeElement)
     }
     else if (!this.emailpatterncontrol.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)) {
-      alert(`Please try it again with new email adsress`);
+      this.alertservice.alert(`Please try it again with new email adsress`, 'alert-danger', this.alertParent.nativeElement)
     }
     else {
       this.authservice.register(email, password)
@@ -49,14 +53,11 @@ export class RegisterComponent implements OnInit {
             if (response.status === 200) {
               this.router.navigate(['signin']);
             } else if (response.status === 409) {
-              alert('this email is already in use!')
-              // document.getElementById('id_alert_signin').innerHTML = 'This email is already in use!';
-              // document.getElementById('id_alert_signin').style.display = 'block';
+              this.alertservice.alert(`this email is already in use!`, 'alert-danger', this.alertParent.nativeElement)
             }
           },
           error: (err) => {
-            // document.getElementById('id_alert_signin').innerHTML = 'oops! connection problem?';
-            //   document.getElementById('id_alert_signin').style.display = 'block';
+            this.alertservice.alert(`oops! connection problem?`, 'alert-danger', this.alertParent.nativeElement)
           },
           complete: () => { }
         })

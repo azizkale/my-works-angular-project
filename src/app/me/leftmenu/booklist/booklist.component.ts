@@ -160,11 +160,11 @@ export class BooklistComponent implements OnInit {
     const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
 
     if (readpage > pages || readpage <= 0) {
-      this.alertsservice.alert('Invalid value(s)!', ' alert-danger', this.alertParent.nativeElement);
+      this.alertsservice.alert('Invalid value(s)!', 'alert-danger', this.alertParent.nativeElement);
     }
     else if (enddate != null) {
       if (enddate < startdate) {
-        this.alertsservice.alert('Invalid value(s)!', ' alert-danger', this.alertParent.nativeElement);
+        this.alertsservice.alert('Invalid value(s)!', 'alert-danger', this.alertParent.nativeElement);
       }
     }
     else {
