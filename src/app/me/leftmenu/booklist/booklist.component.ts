@@ -19,6 +19,7 @@ export class BooklistComponent implements OnInit {
   displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Read', 'Author'];
   dataSource: MatTableDataSource<Book>;
   books: Book | any = [];
+  showAlert: boolean = false; // to close/show alert
 
   constructor(
     private fb: FormBuilder,
@@ -156,14 +157,21 @@ export class BooklistComponent implements OnInit {
 
     const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
 
-
-    if (readpage > pages || enddate < startdate) {
-      alert('incorrect values')
+    if (readpage > pages || readpage <= 0) {
+      this.showAlert = true;
+    }
+    else if (enddate != null) {
+      if (enddate < startdate) {
+        this.showAlert = true;
+      }
     }
     else {
       await this.bookservice.updateBook(book).subscribe({
         next: async (response) => {
+          const alertUpdate: Element | any = document.getElementById('update_delete_book');
+          alertUpdate.style.display = 'none';
           await this.retrieveBooks();
+
         },
         error: (err) => { console.log(err.message); this.deleteToken() }
       })
