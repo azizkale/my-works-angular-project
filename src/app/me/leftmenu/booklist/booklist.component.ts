@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { BookService } from 'src/app/services/book.service';
 import { BookType } from 'src/models/BookTypes';
 import { DatePipe } from '@angular/common';
 import { Book } from 'src/models/Book';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'booklist',
@@ -14,18 +15,19 @@ import { Book } from 'src/models/Book';
 })
 
 export class BooklistComponent implements OnInit {
+  @ViewChild('alertParent', { static: true }) alertParent: ElementRef
   bookForm: FormGroup; // add book form
   bookManipulateForm: FormGroup; // update/dde book form
   displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Read', 'Author'];
   dataSource: MatTableDataSource<Book>;
   books: Book | any = [];
-  showAlert: boolean = false; // to close/show alert
 
   constructor(
     private fb: FormBuilder,
     private bookservice: BookService,
     private router: Router,
     private datePipe: DatePipe,
+    private alertsservice: AlertsService
   ) {
 
 
@@ -158,11 +160,11 @@ export class BooklistComponent implements OnInit {
     const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
 
     if (readpage > pages || readpage <= 0) {
-      this.showAlert = true;
+      this.alertsservice.alert('Invalid value(s)!', ' alert-danger', this.alertParent.nativeElement);
     }
     else if (enddate != null) {
       if (enddate < startdate) {
-        this.showAlert = true;
+        this.alertsservice.alert('Invalid value(s)!', ' alert-danger', this.alertParent.nativeElement);
       }
     }
     else {

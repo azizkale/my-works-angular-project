@@ -164,19 +164,6 @@
         title="Close Modal"
         >×</span
       >
-      <div
-        *ngIf="showAlert"
-        class="alert alert-danger alert-dismissible fade show"
-        role="alert"
-      >
-        <strong>Invalid value(s)!</strong>
-        <span
-          aria-hidden="true"
-          (click)="showAlert = false"
-          class="dismiss-button"
-          >&times;</span
-        >
-      </div>
     </div>
 
     <form class="w3-container" [formGroup]="bookManipulateForm">
@@ -260,6 +247,8 @@
         />
 
         <div class="w3-container w3-border-top w3-padding w3-light-grey">
+          <div #alertParent></div>
+
           <button
             onclick="document.getElementById('update_delete_book').style.display='none'"
             (click)="deleteBook()"

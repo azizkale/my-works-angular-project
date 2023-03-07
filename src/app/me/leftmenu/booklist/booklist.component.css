@@ -41,15 +41,13 @@
             display: none;
         }
     }
-    
-    .alert {
+    /* .alert {
         position: absolute;
         bottom: 0;
         width: 100%;
         z-index: 9999;
-    }
-    
-    .dismiss-button {
+    } */
+    /* .dismiss-button {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
@@ -58,4 +56,14 @@
         color: #212529;
         opacity: 0.5;
         transition: opacity 0.2s ease-in-out;
+    }
+    */
+    
+    .alert {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 9999;
     }
