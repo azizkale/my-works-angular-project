@@ -134,17 +134,24 @@ export class BooklistComponent implements OnInit {
 
 
   deleteBook() {
-    this.bookservice.deleteBook(this.bookManipulateForm.get('bookId')?.value).subscribe({
-      next: (response) => {
-        this.retrieveBooks();
-      },
-      error: (err) => {
-        console.log(err.message)
-        this.deleteToken();
-      }
-    })
-  }
+    this.alertsservice.alert(`
+    <div class="card">
+    <div class="card-body">    
+   
+    <button class="btn btn-danger" onclick='this._delete()'>Delete</button>
+    </div>
+  </div>`, '', this.alertParent.nativeElement)
 
+    // this.bookservice.deleteBook(this.bookManipulateForm.get('bookId')?.value).subscribe({
+    //   next: (response) => {
+    //     this.retrieveBooks();
+    //   },
+    //   error: (err) => {
+    //     console.log(err.message)
+    //     this.deleteToken();
+    //   }
+    // })
+  }
   async updateBook() {
 
     const bookname = this.bookManipulateForm.get('bookname')?.value;
@@ -184,5 +191,9 @@ export class BooklistComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['signin']);
 
+  }
+
+  abc() {
+    console.log('ya sabr')
   }
 }
