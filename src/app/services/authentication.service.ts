@@ -10,9 +10,6 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  // Define your request parameters
-  // url = 'http://localhost:3000' || "http://192.168.0.17:3000";
-
   signin(email: string, password: any): Observable<any> {
     const body = { email: email, password: password };
     return this.http.post(environment.url + '/signin', body)

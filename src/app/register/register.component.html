@@ -1,14 +1,22 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-sm-6 col-md-6">
-            <h2>Register Form</h2>
-            <div>
-                <form [formGroup]="registerForm" novalidate>
-                    <div class="imgcontainer">
-                        <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar" />
-                    </div>
-                    <div class="alert" id="id_alert_signin" style="display: none">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span
+  <div class="row justify-content-center">
+    <div class="col-sm-6 col-md-6">
+      <h2>Register Form</h2>
+      <div>
+        <form [formGroup]="registerForm" novalidate>
+          <div class="imgcontainer">
+            <div #alertParent></div>
+            <img
+              src="https://www.w3schools.com/howto/img_avatar2.png"
+              alt="Avatar"
+              class="avatar"
+            />
+          </div>
+          <div class="alert" id="id_alert_signin" style="display: none">
+            <span
+              class="closebtn"
+              onclick="this.parentElement.style.display='none';"
+              >&times;</span
             >
             <!-- error message -->
           </div>
@@ -42,7 +50,7 @@
             <button
               class="w3-button w3-block w3-green w3-section w3-padding"
               type="submit"
-              (click)="register(email.value, password.value); createForm()"
+              (click)="register(email.value, password.value)"
               [disabled]="email.ontouchend"
             >
               Register

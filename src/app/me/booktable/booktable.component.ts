@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
+import { Book } from 'src/models/Book';
+import { DatePipe } from '@angular/common';
+
+
 @Component({
   selector: 'booktable',
   templateUrl: './booktable.component.html',
@@ -8,8 +12,16 @@ import { BookService } from 'src/app/services/book.service';
 })
 
 export class BooktableComponent implements OnInit {
-  books: any[]
-  constructor(private bookservice: BookService, private router: Router) { }
+  books: any[];
+  width: number; //dynamically book page progress width
+  constructor(
+    private bookservice: BookService,
+    private router: Router,
+    private datePipe: DatePipe
+
+  ) { }
+
+
 
   ngOnInit(): void {
     this.retrieveBooks();
@@ -17,9 +29,26 @@ export class BooktableComponent implements OnInit {
 
 
   retrieveBooks() {
+    this.books = [];
     this.bookservice.retrieveBooks().subscribe({
       next: async (response) => {
-        this.books = await Object.entries(response);
+        response.map((book: Book) => {
+          if (book.totalPage !== book.readPage) {
+            let obj: Book | any = {
+              'bookId': book.bookId,
+              'name': book.name,
+              'startDate': this.datePipe.transform(book.startDate, 'yyyy-MM-dd'),
+              'endDate': this.datePipe.transform(book.endDate, 'yyyy-MM-dd'),
+              'totalPage': book.totalPage,
+              'author': book.author,
+              'bookType': book.bookType,
+              'readPage': book.readPage
+
+            }
+            this.books.push(obj);
+          }
+        })
+
       },
       error: (err) => {
         if (err.status === 401) {
@@ -27,6 +56,10 @@ export class BooktableComponent implements OnInit {
         }
       }
     })
+  }
+
+  percentageOfABook(book: Book): number {
+    return Math.round((book?.readPage / book.totalPage) * 100)
   }
 
   deleteToken() {

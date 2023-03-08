@@ -19,12 +19,34 @@
     }
     
     table td,
-    table th {
-        border-bottom-color: white;
+    table th,
+    ng-container {
+        border-bottom-color: black;
         margin-left: 0px;
+    }
+    
+    table th {
+        font-weight: bolder;
     }
     
     table td.button {
         padding: 10px;
         background-color: rgb(28, 210, 119) !important;
+    }
+    
+    @media screen and (max-width: 500px) {
+        .mat-column-Read,
+        .mat-column-Author,
+        .mat-column-start {
+            display: none;
+        }
+    }
+    
+    .alert {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 9999;
     }

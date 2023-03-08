@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { BookService } from 'src/app/services/book.service';
 import { BookType } from 'src/models/BookTypes';
 import { DatePipe } from '@angular/common';
 import { Book } from 'src/models/Book';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'booklist',
@@ -14,9 +15,10 @@ import { Book } from 'src/models/Book';
 })
 
 export class BooklistComponent implements OnInit {
+  @ViewChild('alertParent', { static: true }) alertParent: ElementRef
   bookForm: FormGroup; // add book form
   bookManipulateForm: FormGroup; // update/dde book form
-  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Author'];
+  displayedColumns: string[] = ['position', 'Name', 'Start', 'Finish', 'Page', 'Read', 'Author'];
   dataSource: MatTableDataSource<Book>;
   books: Book | any = [];
 
@@ -25,6 +27,7 @@ export class BooklistComponent implements OnInit {
     private bookservice: BookService,
     private router: Router,
     private datePipe: DatePipe,
+    private alertsservice: AlertsService
   ) {
 
 
@@ -35,7 +38,6 @@ export class BooklistComponent implements OnInit {
     this.createBookManipulateForm();
 
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -49,22 +51,25 @@ export class BooklistComponent implements OnInit {
       authorname: ['', Validators.required],
     });
   }
-  //================update/delete book
+  //================update/delete book form
   createBookManipulateForm() {
     this.bookManipulateForm = this.fb.group({
-      bookId: [],
+      bookId: [''],
       booktype: ['', Validators.required],
       bookname: ['', Validators.required],
       numberofpages: ['', Validators.required],
       authorname: ['', Validators.required],
       startdate: ['', Validators.required],
       enddate: ['', Validators.required],
+      readpage: ['', [Validators.required]],
     });
+
+
   }
 
-
+  // =============CRUD Operations==========================
   createBook(bookname: string, numberofpage: any | number, authorname?: string | any) {
-    const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, undefined, authorname)
+    const book = new Book(bookname, numberofpage, new Date(), BookType.PERSONAL, undefined, 0, authorname)
     this.bookservice.createBook(book).subscribe({
       next: (res) => {
         this.retrieveBooks();
@@ -85,16 +90,19 @@ export class BooklistComponent implements OnInit {
       next: async (response) => {
         Object.entries(response).map((book: any, index) => {
           let obj: Book | any = {
-            'bookId': book[0],
+            'bookId': book[1].bookId,
             'name': book[1].name,
             'startDate': this.datePipe.transform(book[1].startDate, 'yyyy-MM-dd'),
             'endDate': this.datePipe.transform(book[1].endDate, 'yyyy-MM-dd'),
             'totalPage': book[1].totalPage,
             'author': book[1].author,
-            'bookType': book[1].bookType
+            'bookType': book[1].bookType,
+            'readPage': book[1].readPage
 
           }
-          this.books.push(obj)
+          // if (obj.endDate) {
+          this.books.push(obj);
+          // }
           this.dataSource = new MatTableDataSource<Book>(this.books);
         })
       },
@@ -109,7 +117,7 @@ export class BooklistComponent implements OnInit {
 
   }
 
-  // ===============delete - delete book==============  
+  // ===============DELETE / UPDATE book-form==============  
   getTheBook(book: any): FormGroup {
     //to fill the form
     return this.bookManipulateForm = this.fb.group({
@@ -120,8 +128,8 @@ export class BooklistComponent implements OnInit {
       startdate: [book.startDate, Validators.required],
       enddate: [book.endDate, Validators.required],
       booktype: [book.bookType, Validators.required],
+      readpage: [book.readPage, Validators.required]
     });
-
   }
 
 
@@ -140,21 +148,36 @@ export class BooklistComponent implements OnInit {
   async updateBook() {
 
     const bookname = this.bookManipulateForm.get('bookname')?.value;
-    const pages = this.bookManipulateForm.get('numberofpages')?.value;
-    const startdate = this.bookManipulateForm.get('startdate')?.value;
+    const pages: number = this.bookManipulateForm.get('numberofpages')?.value;
+    const startdate: Date = this.bookManipulateForm.get('startdate')?.value;
     const booktype = this.bookManipulateForm.get('booktype')?.value;
-    const enddate = this.bookManipulateForm.get('enddate')?.value;
-    const readpage = this.bookManipulateForm.get('readpage')?.value;
+    const enddate: Date = this.bookManipulateForm.get('enddate')?.value;
+    const readpage: number = this.bookManipulateForm.get('readpage')?.value;
     const author = this.bookManipulateForm.get('authorname')?.value;
     const bookId = this.bookManipulateForm.get('bookId')?.value;
 
+
     const book = await new Book(bookname, pages, startdate, booktype, enddate, readpage, author, bookId)
-    await this.bookservice.updateBook(book).subscribe({
-      next: async (response) => {
-        await this.retrieveBooks();
-      },
-      error: (err) => { console.log(err.message); this.deleteToken() }
-    })
+
+    if (readpage > pages || readpage <= 0) {
+      this.alertsservice.alert('Invalid value(s)!', 'alert-danger', this.alertParent.nativeElement);
+    }
+    else if (enddate != null && startdate > enddate) {
+      // if (enddate < startdate) {
+      this.alertsservice.alert('Invalid value(s)!', 'alert-danger', this.alertParent.nativeElement);
+      // }
+    }
+    else {
+      await this.bookservice.updateBook(book).subscribe({
+        next: async (response) => {
+          const alertUpdate: Element | any = document.getElementById('update_delete_book');
+          alertUpdate.style.display = 'none';
+          await this.retrieveBooks();
+
+        },
+        error: (err) => { console.log(err.message); this.deleteToken() }
+      })
+    }
   }
 
   deleteToken() {
