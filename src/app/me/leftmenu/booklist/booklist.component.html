@@ -250,16 +250,14 @@
           <div #alertParent></div>
           <button
             type="button"
-            class="btn btn-outline-secondary me-2"
+            class="w3-button w3-red"
             placement="top"
-            ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-            popoverTitle="Popover on top"
+            [ngbPopover]="popDeleteContent"
+            popoverTitle="Delete!"
           >
-            Popover on top
-          </button>
-          <button (click)="deleteBook()" type="button" class="w3-button w3-red">
             Delete
           </button>
+
           <button
             (click)="updateBook()"
             type="button"
@@ -278,4 +276,22 @@
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />
 
-<!-- ===============ALERTS================= -->
+<!-- ===============Popovers================= -->
+<ng-template #popDeleteContent>
+  <div class="text-center">
+    <h4>
+      Are you sure to delete {{ bookManipulateForm.controls["bookname"].value }}
+    </h4>
+    <button
+      onclick="document.getElementById('update_delete_book').style.display='none'"
+      (click)="deleteBook()"
+      type="button"
+      class="w3-button w3-red w3-margin-right"
+    >
+      Delete
+    </button>
+    <button type="button" class="w3-button w3-green w3-margin-left">
+      Cancel
+    </button>
+  </div>
+</ng-template>

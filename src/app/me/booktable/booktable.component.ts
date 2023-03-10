@@ -21,8 +21,6 @@ export class BooktableComponent implements OnInit {
 
   ) { }
 
-
-
   ngOnInit(): void {
     this.retrieveBooks();
   }
