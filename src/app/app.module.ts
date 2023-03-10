@@ -13,7 +13,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon'
 import { MatGridListModule } from '@angular/material/grid-list'
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
+//================Components=========
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
@@ -29,8 +31,6 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
     RegisterComponent,
     BooklistComponent, BooktableComponent,
     MeComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,9 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
     MatFormFieldModule,
     MatTableModule,
     MatInputModule,
-    MatIconModule, MatGridListModule
+    MatIconModule,
+    MatGridListModule,
+    NgbPopoverModule
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

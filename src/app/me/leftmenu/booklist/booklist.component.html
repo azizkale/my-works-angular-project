@@ -249,11 +249,15 @@
         <div class="w3-container w3-border-top w3-padding w3-light-grey">
           <div #alertParent></div>
           <button
-            [disabled]="bookname.value !== '' ? true : false"
-            (click)="deleteBook()"
             type="button"
-            class="w3-button w3-red"
+            class="btn btn-outline-secondary me-2"
+            placement="top"
+            ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+            popoverTitle="Popover on top"
           >
+            Popover on top
+          </button>
+          <button (click)="deleteBook()" type="button" class="w3-button w3-red">
             Delete
           </button>
           <button
