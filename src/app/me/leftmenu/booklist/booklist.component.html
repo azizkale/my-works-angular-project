@@ -250,19 +250,16 @@
           <div #alertParent></div>
           <button
             type="button"
-            class="w3-button w3-red"
+            class="btn btn-danger"
             placement="top"
             [ngbPopover]="popDeleteContent"
             popoverTitle="Delete!"
+            style="margin-right: 10px"
           >
             Delete
           </button>
 
-          <button
-            (click)="updateBook()"
-            type="button"
-            class="w3-button w3-green"
-          >
+          <button (click)="updateBook()" type="button" class="btn btn-info">
             Update
           </button>
         </div>
@@ -286,12 +283,11 @@
       onclick="document.getElementById('update_delete_book').style.display='none'"
       (click)="deleteBook()"
       type="button"
-      class="w3-button w3-red w3-margin-right"
+      class="btn btn-danger"
+      style="margin-right: 10px"
     >
       Delete
     </button>
-    <button type="button" class="w3-button w3-green w3-margin-left">
-      Cancel
-    </button>
+    <button type="button" class="btn btn-info">Cancel</button>
   </div>
 </ng-template>
