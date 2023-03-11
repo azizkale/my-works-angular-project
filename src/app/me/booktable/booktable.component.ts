@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 export class BooktableComponent implements OnInit {
   books: any[];
   width: number; //dynamically book page progress width
+  screenSize: number;
   constructor(
     private bookservice: BookService,
     private router: Router,
@@ -23,6 +24,7 @@ export class BooktableComponent implements OnInit {
 
   ngOnInit(): void {
     this.retrieveBooks();
+    this.screenSize = window.innerWidth;
   }
 
 

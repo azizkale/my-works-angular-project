@@ -50,3 +50,11 @@
         left: 0;
         z-index: 9999;
     }
+    
+    td {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-left: 5px !important;
+    }

@@ -17,7 +17,7 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="position">
-    <button>
+    <button class="btn btn-Info">
       <th class="text-center" mat-header-cell *matHeaderCellDef>No.</th>
       <td
         class="button"
@@ -41,7 +41,9 @@
   <!-- Start Date Column -->
   <ng-container matColumnDef="Start">
     <th class="text-center" mat-header-cell *matHeaderCellDef>Start</th>
-    <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.startDate }}
+    </td>
   </ng-container>
 
   <!-- Finish Date Column -->
@@ -110,6 +112,7 @@
           placeholder="Enter book name"
           name="bookname"
           formControlName="bookname"
+          maxlength="50"
         />
         <label><b>Number Of Pages</b></label>
         <input
@@ -120,7 +123,7 @@
           placeholder="Enter Number Of Pages"
           name="numberofpages"
           formControlName="numberofpages"
-          required
+          max="2000"
         />
         <label><b>Author</b></label>
         <input
@@ -130,6 +133,7 @@
           placeholder="Enter Author Name (optional)"
           name="authorname"
           formControlName="authorname"
+          maxlength="50"
         />
         <button
           onclick="document.getElementById('id_add_book').style.display='none'"
@@ -184,6 +188,7 @@
           placeholder="Enter book name"
           name="bookname"
           formControlName="bookname"
+          maxlength="50"
         />
         <label><b>Pages</b></label>
         <input
@@ -194,6 +199,7 @@
           placeholder="Enter Number Of Pages"
           name="numberofpages"
           formControlName="numberofpages"
+          max="2000"
         />
         <label><b>Read Pages</b></label>
         <input
@@ -215,6 +221,7 @@
           placeholder="Enter Author Name (optional)"
           name="authorname"
           formControlName="authorname"
+          maxlength="50"
         />
         <label><b>Start Date</b></label>
         <input
