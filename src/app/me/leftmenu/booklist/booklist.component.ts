@@ -135,16 +135,14 @@ export class BooklistComponent implements OnInit {
 
   deleteBook() {
     this.bookservice.deleteBook(this.bookManipulateForm.get('bookId')?.value).subscribe({
-      next: (response) => {
-        this.retrieveBooks();
-      },
+      next: (response) => { },
       error: (err) => {
         console.log(err.message)
         this.deleteToken();
-      }
+      },
+      complete: () => { this.retrieveBooks(); }
     })
   }
-
   async updateBook() {
 
     const bookname = this.bookManipulateForm.get('bookname')?.value;

@@ -21,7 +21,7 @@
             <div class="row mx-2">
               <div style="width: 15%; float: none" class="col-sm-1"></div>
               <div style="width: 65%; float: none" class="col-sm-9">
-                {{ book.name }}
+                {{ book.name | slice : 0 : (screenSize < 500 ? 20 : 30) }}
               </div>
               <div style="width: 20%; float: none" class="col-sm-2">
                 {{ book.totalPage }}
