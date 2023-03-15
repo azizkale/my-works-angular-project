@@ -1,23 +1,19 @@
 <mat-form-field>
-  <mat-grid-list cols="2" rowHeight="20px">
-    <mat-grid-tile>
-      <span class="material-symbols-outlined"> content_paste_search </span>
-      <input matInput (keyup)="applyFilter($event)" #input />
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-icon
-        onclick="document.getElementById('id_add_book').style.display='block'"
-        style="font-size: x-large; margin-left: auto"
-        >add_box</mat-icon
-      >
-    </mat-grid-tile>
-  </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="20px">
+        <mat-grid-tile>
+            <span class="material-symbols-outlined"> content_paste_search </span>
+            <input matInput (keyup)="applyFilter($event)" #input />
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-icon onclick="document.getElementById('id_add_book').style.display='block'" style="font-size: x-large; margin-left: auto">add_box</mat-icon>
+        </mat-grid-tile>
+    </mat-grid-list>
 </mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <button class="btn btn-Info">
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+        <button class="btn btn-Info">
       <th class="text-center" mat-header-cell *matHeaderCellDef>No.</th>
       <td
         class="button"
@@ -30,75 +26,63 @@
         {{ i + 1 }}
       </td>
     </button>
-  </ng-container>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="Name">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <!-- Start Date Column -->
-  <ng-container matColumnDef="Start">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Start</th>
-    <td mat-cell *matCellDef="let element">
-      {{ element.startDate }}
-    </td>
-  </ng-container>
+    <!-- Start Date Column -->
+    <ng-container matColumnDef="Start">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Start</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.startDate }}
+        </td>
+    </ng-container>
 
-  <!-- Finish Date Column -->
-  <ng-container matColumnDef="Finish">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Finish</th>
-    <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
-  </ng-container>
+    <!-- Finish Date Column -->
+    <ng-container matColumnDef="Finish">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Finish</th>
+        <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+    </ng-container>
 
-  <!-- Page Count Column -->
-  <ng-container matColumnDef="Read">
-    <th
-      class="text-center"
-      style="padding-left: 5px"
-      mat-header-cell
-      *matHeaderCellDef
-    >
-      Read
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.readPage }}</td>
-  </ng-container>
-  <!-- Read Page Column -->
-  <ng-container matColumnDef="Page">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Page</th>
-    <td mat-cell *matCellDef="let element">{{ element.totalPage }}</td>
-  </ng-container>
+    <!-- Page Count Column -->
+    <ng-container matColumnDef="Read">
+        <th class="text-center" style="padding-left: 5px" mat-header-cell *matHeaderCellDef>
+            Read
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.readPage }}</td>
+    </ng-container>
+    <!-- Read Page Column -->
+    <ng-container matColumnDef="Page">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Page</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalPage }}</td>
+    </ng-container>
 
-  <!-- Author Column -->
-  <ng-container matColumnDef="Author">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Author</th>
-    <td mat-cell *matCellDef="let element">{{ element.author }}</td>
-  </ng-container>
+    <!-- Author Column -->
+    <ng-container matColumnDef="Author">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>Author</th>
+        <td mat-cell *matCellDef="let element">{{ element.author }}</td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-  <!-- Row shown when there is no matching data. -->
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">
-      No data matching the filter "{{ input.value }}"
-    </td>
-  </tr>
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+            No data matching the filter "{{ input.value }}"
+        </td>
+    </tr>
 </table>
 <!-- ========== Add New Book(MODAL) ========== -->
 <div id="id_add_book" class="w3-modal" #id_add_book>
-  <div
-    class="w3-modal-content w3-card-4 w3-animate-zoom"
-    style="max-width: 800px"
-  >
-    <div class="w3-center">
-      <br />
-      <span
-        onclick="document.getElementById('id_add_book').style.display='none'"
-        class="w3-button w3-xlarge w3-transparent w3-display-topright"
-        title="Close Modal"
-        >×</span
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width: 800px">
+        <div class="w3-center">
+            <br />
+            <span onclick="document.getElementById('id_add_book').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span
       >
     </div>
 
