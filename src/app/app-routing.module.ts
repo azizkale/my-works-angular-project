@@ -12,10 +12,12 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [{ path: 'booktable', component: BooktableComponent }
+    path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [
+      { path: '', component: BooktableComponent },
+      { path: 'booktable', component: BooktableComponent },
+      { path: 'grouplist', component: GrouplistComponent },
     ]
   },
-  { path: 'grouplist', component: GrouplistComponent },
 
 ];
 
