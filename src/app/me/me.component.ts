@@ -1,15 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from '../services/book.service';
 
 @Component({
-  selector: 'me',
+  selector: 'app-me',
   templateUrl: './me.component.html',
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
+  @ViewChild('rightSide', { static: true }) rightSide: ElementRef
+
   books: any;
   displayName: string | any = localStorage.getItem('displayName');
+
   constructor(private router: Router, private bookservice: BookService) {
   }
 
@@ -38,5 +41,8 @@ export class MeComponent implements OnInit {
   }
   reload() {
     window.location.reload()
+  }
+  showGroupsComponentsTemplate() {
+    this.rightSide.nativeElement.innerHTML = `<app-grouplist></app-grouplist>`
   }
 }

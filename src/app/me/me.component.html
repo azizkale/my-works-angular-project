@@ -13,23 +13,17 @@
 
     <!-- Sidebar -->
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" #mySidebar>
-        <!-- <a
-      href="javascript:void(0)"
-      onclick="w3_close(mySidebar,myOverlay)"
-      class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large"
-      title="Close Menu"
-    >
-      <i class="fa fa-remove"></i>
-    </a> -->
-        <h4 class="w3-bar-item"><b>Menu</b></h4>
+        <!-- Book list manupulation table -->
         <a class="w3-bar-item w3-button w3-hover-black"><b
         onclick="document.getElementById('list_books').style.display='block'"
         class="w3-button"
         >My Books</b
       ></a
     >
+    <a routerLink="grouplist" class="w3-bar-item w3-button w3-hover-black"
+      >Link</a
+    >
     <a class="w3-bar-item w3-button w3-hover-black">Link</a>
-        <a class="w3-bar-item w3-button w3-hover-black">Link</a>
         <a class="w3-bar-item w3-button w3-hover-black">Link</a>
         <hr />
         <a class="w3-button" (click)="deleteToken()">Sign Out</a>
@@ -73,9 +67,12 @@
 
           <!-- Right Column -->
           <div class="w3-twothird my-3">
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div
+              #rightSide
+              class="w3-container w3-card w3-white w3-margin-bottom"
+            >
               <!-- ============================= -->
-              <booktable></booktable>
+              <router-outlet></router-outlet>
             </div>
 
             <!-- End Grid -->
@@ -89,7 +86,7 @@
   </div>
 </div>
 
-<!-- left menu Modal -->
+<!-- Book Manipulation Table Modal -->
 <div
   id="list_books"
   class="w3-modal"
