@@ -1,20 +1,19 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { BookService } from '../services/book.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-me',
+  selector: 'me',
   templateUrl: './me.component.html',
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
   displayName: string | any = localStorage.getItem('displayName');
-
-  constructor(private router: Router, private bookservice: BookService) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
-  // Toggle between showing and hiding the sidebar, and add overlay effect
 
+  reload() {
+    window.location.reload()
+  }
 }

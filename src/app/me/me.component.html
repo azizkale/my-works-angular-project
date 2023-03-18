@@ -1,5 +1,4 @@
 <app-sidebar></app-sidebar>
-
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left: 250px">
     <div class="w3-row w3-padding-16">
@@ -34,10 +33,7 @@
         </div>
         <!-- Right Column -->
         <div class="w3-twothird my-3">
-          <div
-            #rightSide
-            class="w3-container w3-card w3-white w3-margin-bottom"
-          >
+          <div class="w3-container w3-card w3-white w3-margin-bottom">
             <!-- ============================= -->
             <router-outlet></router-outlet>
           </div>
@@ -49,5 +45,25 @@
       </div>
     </div>
     <!-- END MAIN -->
+  </div>
+</div>
+<!-- left menu Modal -->
+<div
+  id="list_books"
+  class="w3-modal"
+  #list_books
+  style="background-color: aliceblue"
+>
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="width: 90%">
+    <div class="w3-center">
+      <br />
+      <span
+        (click)="reload()"
+        onclick="document.getElementById('list_books').style.display='none'"
+        class="w3-button w3-xlarge w3-transparent w3-display-topright"
+        title="Close Modal"
+        >×</span
+      ><booklist></booklist>
+    </div>
   </div>
 </div>
