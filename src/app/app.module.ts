@@ -26,6 +26,7 @@ import { BooktableComponent } from './me/booktable/booktable.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
 import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component'
     BooklistComponent, BooktableComponent,
     MeComponent,
     GrouplistComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

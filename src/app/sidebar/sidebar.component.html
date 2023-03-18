@@ -1,0 +1,32 @@
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" (click)="w3_open(mySidebar, myOverlay)"><i class="fa fa-bars"></i
+    ></a>
+        <!-- <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white"
+          >About</a>
+         -->
+    </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" #mySidebar>
+    <!-- Book list manupulation table -->
+    <a class="w3-bar-item w3-button w3-hover-black"><b
+      onclick="document.getElementById('list_books').style.display='block'"
+      class="w3-button"
+      >My Books</b
+    ></a
+  >
+  <a routerLink="grouplist" class="w3-bar-item w3-button w3-hover-black"
+    >Link</a
+  >
+  <a class="w3-bar-item w3-button w3-hover-black">Link</a>
+    <a class="w3-bar-item w3-button w3-hover-black">Link</a>
+    <hr />
+    <a class="w3-button" (click)="deleteToken()">Sign Out</a>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens-->
+<div class="w3-overlay w3-hide-large" (click)="w3_close(mySidebar, myOverlay)" style="cursor: pointer" title="close side menu" #myOverlay></div>
