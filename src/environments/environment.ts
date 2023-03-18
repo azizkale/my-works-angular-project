@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "https://busy-red-dolphin-wear.cyclic.app/"
+  url: "https://busy-red-dolphin-wear.cyclic.app"
   // url: "http://192.168.0.17:3000"
 };
 
