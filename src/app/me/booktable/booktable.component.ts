@@ -67,4 +67,8 @@ export class BooktableComponent implements OnInit {
     this.router.navigate(['signin']);
 
   }
+
+  reload() {
+    window.location.reload()
+  }
 }

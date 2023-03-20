@@ -13,7 +13,5 @@ export class MeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  reload() {
-    window.location.reload()
-  }
+
 }
