@@ -6,11 +6,13 @@ import { MeComponent } from './me/me.component';
 import { AuthGuard } from './Auth.Guard';
 import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component';
 import { BooktableComponent } from './me/booktable/booktable.component';
+import { HatimComponent } from './works/hatim/hatim.component';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'hatim', component: HatimComponent },
   {
     path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [
       { path: '', component: BooktableComponent },

@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
 import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HatimComponent } from './works/hatim/hatim.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MeComponent,
     GrouplistComponent,
     SidebarComponent,
+    HatimComponent,
   ],
   imports: [
     BrowserModule,

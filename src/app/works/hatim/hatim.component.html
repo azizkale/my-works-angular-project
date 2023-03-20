@@ -1,0 +1,76 @@
+<!-- <p id="label" [hidden]="false">:{{toplamCuz | async}}</p> -->
+<div class="container">
+  <div class="text-right">
+    <!-- <a href="" onclick="return false" (click)="Details()">detay</a> -->
+  </div>
+</div>
+
+<!-- <div class="container" *ngIf="showKuranDetails">
+  <div class="row">
+    <span class="badge mt-1">Şimdiye kadarki;</span>
+    <table class="table-primary text-white col-sm-12">
+      <tbody>
+        <tr>
+          <td class="col-sm-11">Bitirilen toplam cüz sayısı:</td>
+          <th class="col-sm-1 text-center">{{ toplamCuz }}</th>
+        </tr>
+        <tr>
+          <td class="col-sm-11">Bitirilen toplam hatim sayısı:</td>
+          <th class="col-sm-1 text-center">{{ toplamHatim }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <span class="badge mt-1">Mevcut Hatim Bilgileri</span>
+    <table class="table-primary text-white col-sm-12">
+      <tbody>
+        <tr>
+          <td class="col-sm-11">Boş cüz sayısı:</td>
+          <th class="col-sm-1 text-center">
+            {{ currentHatimInfos[0].bosCuzSayisi }}
+          </th>
+        </tr>
+        <tr>
+          <td class="col-sm-11">Alınan cüz sayısı:</td>
+          <th class="col-sm-1 text-center">
+            {{ currentHatimInfos[0].alinanCuzSayisi }}
+          </th>
+        </tr>
+        <tr>
+          <td class="col-sm-11">Biten cüz sayısı:</td>
+          <th class="col-sm-1 text-center">
+            {{ currentHatimInfos[0].bitenCuzSayisi }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<!-- <input type="button" value="button" (click)="fonk()"> -->
+<div *ngFor="let item of cuzs; let i = index">
+  <div class="col-sm-2 btn my-1 boxes" style="float: left" *ngIf="i < 30">
+    <div id="{{ i + 1 }}" class="card">
+      <img
+        class="card-img-top btn-link cuzler"
+        src="assets/imagesKuran/{{ i + 1 }}.jpg"
+      />
+      <div class="mt-1">
+        <span id="nameSpan" class="text-white">{{ cuzs[i].who }}</span>
+      </div>
+      <div class="text-center">
+        <label style="font-size: large"
+          >Bitti
+          <!-- <input
+            type="checkbox"
+            id="chbxBitti{{ i }}"
+            [checked]="cuzler[i][0] === true"
+            [disabled]="!(cuzler[i][2] === serviceCommonValues.currentUserName)"
+            (change)="Bitti(i + 1, $event)"
+          /> -->
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
