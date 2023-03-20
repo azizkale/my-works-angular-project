@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grouplist.component.css']
 })
 export class GrouplistComponent implements OnInit {
-
+  groups: any[];
+  screenSize: number;
   constructor() { }
 
   ngOnInit(): void {

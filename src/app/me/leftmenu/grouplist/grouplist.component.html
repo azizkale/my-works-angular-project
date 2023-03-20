@@ -1,1 +1,54 @@
-<p>grouplist works!</p>
+<div class="w3-center mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-11">
+        <h2>My Groups</h2>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+</div>
+<div class="w3-responsive w3-card-4">
+  <table class="table table-bordered mb-3" style="min-height: 325px">
+    <thead>
+      <tr>
+        <td colspan="2">
+          <div class="row mx-2">
+            <div class="tbl-elem-2 col-sm-10">Group Name</div>
+            <div class="tbl-elem-3 col-sm-2"></div>
+          </div>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div *ngFor="let group of groups; let i = index">
+            <div class="row mx-2">
+              <div style="width: 15%; float: none" class="col-sm-1"></div>
+              <div style="width: 65%; float: none" class="col-sm-9">
+                {{ group.name | slice : 0 : (screenSize < 500 ? 20 : 30) }}
+              </div>
+              <div style="width: 20%; float: none" class="col-sm-2">
+                {{ group.totalPage }}
+              </div>
+            </div>
+            <div class="row mx-2">
+              <div style="width: 5%; float: none" class="col-sm-1">
+                {{ i + 1 }}
+              </div>
+              <div
+                style="width: 90%; float: none"
+                class="col-sm-11 text-center"
+              >
+                <div class="w3-light-grey w3-round"></div>
+                <br />
+              </div>
+            </div>
+            <hr />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
