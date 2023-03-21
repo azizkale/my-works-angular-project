@@ -5,18 +5,18 @@
   </div>
 </div>
 
-<!-- <div class="container" *ngIf="showKuranDetails">
+<div class="container" *ngIf="">
   <div class="row">
     <span class="badge mt-1">Şimdiye kadarki;</span>
     <table class="table-primary text-white col-sm-12">
       <tbody>
         <tr>
           <td class="col-sm-11">Bitirilen toplam cüz sayısı:</td>
-          <th class="col-sm-1 text-center">{{ toplamCuz }}</th>
+          <th class="col-sm-1 text-center">{{ 0 }}</th>
         </tr>
         <tr>
           <td class="col-sm-11">Bitirilen toplam hatim sayısı:</td>
-          <th class="col-sm-1 text-center">{{ toplamHatim }}</th>
+          <th class="col-sm-1 text-center">{{ 0 }}</th>
         </tr>
       </tbody>
     </table>
@@ -28,36 +28,36 @@
         <tr>
           <td class="col-sm-11">Boş cüz sayısı:</td>
           <th class="col-sm-1 text-center">
-            {{ currentHatimInfos[0].bosCuzSayisi }}
+            <!-- {{ currentHatimInfos[0].bosCuzSayisi }} -->
           </th>
         </tr>
         <tr>
           <td class="col-sm-11">Alınan cüz sayısı:</td>
           <th class="col-sm-1 text-center">
-            {{ currentHatimInfos[0].alinanCuzSayisi }}
+            <!-- {{ currentHatimInfos[0].alinanCuzSayisi }} -->
           </th>
         </tr>
         <tr>
           <td class="col-sm-11">Biten cüz sayısı:</td>
           <th class="col-sm-1 text-center">
-            {{ currentHatimInfos[0].bitenCuzSayisi }}
+            <!-- {{ currentHatimInfos[0].bitenCuzSayisi }} -->
           </th>
         </tr>
       </tbody>
     </table>
   </div>
-</div> -->
+</div>
 
 <!-- <input type="button" value="button" (click)="fonk()"> -->
-<div *ngFor="let item of cuzs; let i = index">
-  <div class="col-sm-2 btn my-1 boxes" style="float: left" *ngIf="i < 30">
+<div *ngFor="let cuz of cuzs; let i = index">
+  <div class="col-sm-2 my-1" style="float: left">
     <div id="{{ i + 1 }}" class="card">
       <img
-        class="card-img-top btn-link cuzler"
+        class="card-img-top btn-link"
         src="assets/imagesKuran/{{ i + 1 }}.jpg"
       />
       <div class="mt-1">
-        <span id="nameSpan" class="text-white">{{ cuzs[i].who }}</span>
+        <span id="nameSpan"></span>
       </div>
       <div class="text-center">
         <label style="font-size: large"
