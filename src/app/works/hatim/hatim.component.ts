@@ -16,9 +16,7 @@ export class HatimComponent implements OnInit {
   ngOnInit(): void {
     this.hatimservice.retrieveHatim().subscribe({
       next: (response) => {
-        console.log(response)
         Object.values(response['cuzs']).map((cuz: any) => {
-          console.log(cuz)
           this.cuzs.push(cuz)
         })
       },

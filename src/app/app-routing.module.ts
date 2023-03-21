@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'hatim', component: HatimComponent },
+  { path: 'me/hatim', component: HatimComponent },
   {
     path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [
       { path: '', component: BooktableComponent },
