@@ -48,29 +48,20 @@
   </div>
 </div>
 
-<!-- <input type="button" value="button" (click)="fonk()"> -->
-<div *ngFor="let cuz of cuzs; let i = index">
-  <div class="col-sm-2 my-1" style="float: left">
+<div
+  *ngFor="let cuz of cuzs; let i = index"
+  style="position: relative"
+  class="container text-center"
+>
+  <div class="col-sm-2" style="float: left">
     <div id="{{ i + 1 }}" class="card">
       <img
         class="card-img-top btn-link"
         src="assets/imagesKuran/{{ i + 1 }}.jpg"
       />
-      <div class="mt-1">
-        <span id="nameSpan"></span>
-      </div>
-      <div class="text-center">
-        <label style="font-size: large"
-          >Bitti
-          <!-- <input
-            type="checkbox"
-            id="chbxBitti{{ i }}"
-            [checked]="cuzler[i][0] === true"
-            [disabled]="!(cuzler[i][2] === serviceCommonValues.currentUserName)"
-            (change)="Bitti(i + 1, $event)"
-          /> -->
-        </label>
-      </div>
+      <h2 style="position: absolute; top: 20%; left: 0; bottom: 0; right: 0">
+        {{ name | slice : 0 : 15 }}{{ name.length > 15 ? "..." : "" }}
+      </h2>
     </div>
   </div>
 </div>

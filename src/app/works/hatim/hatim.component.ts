@@ -9,7 +9,7 @@ import { cuz } from 'src/models/cuz';
 })
 export class HatimComponent implements OnInit {
   cuzs: cuz[] = [];
-
+  name: string | any = localStorage.getItem('displayName');
 
   constructor(private hatimservice: HatimService) { }
 
@@ -21,11 +21,6 @@ export class HatimComponent implements OnInit {
           console.log(cuz)
           this.cuzs.push(cuz)
         })
-
-        // response[0].map((elm: cuz) => { console.log(elm) })
-
-
-
       },
       error: (err) => {
 
