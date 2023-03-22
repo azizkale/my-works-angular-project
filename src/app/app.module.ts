@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon'
 import { MatGridListModule } from '@angular/material/grid-list'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 //================ng-bootstrap (https://ng-bootstrap.github.io/)
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,7 +35,8 @@ import { HatimComponent } from './works/hatim/hatim.component';
     AppComponent,
     SigninComponent,
     RegisterComponent,
-    BooklistComponent, BooktableComponent,
+    BooklistComponent,
+    BooktableComponent,
     MeComponent,
     GrouplistComponent,
     SidebarComponent,
@@ -52,7 +54,8 @@ import { HatimComponent } from './works/hatim/hatim.component';
     MatInputModule,
     MatIconModule,
     MatGridListModule,
-    NgbPopoverModule
+    NgbPopoverModule,
+    MatSnackBarModule
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

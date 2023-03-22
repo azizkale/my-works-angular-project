@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<div class="container" *ngIf="">
+<div class="container">
   <div class="row">
     <span class="badge mt-1">Şimdiye kadarki;</span>
     <table class="table-primary text-white col-sm-12">
@@ -53,15 +53,21 @@
   style="position: relative"
   class="container text-center"
 >
-  <div class="col-sm-2" style="float: left">
+  <div class="col-sm-2" style="float: left" (click)="selectCuz(cuz, i + 1)">
     <div id="{{ i + 1 }}" class="card">
-      <img
-        class="card-img-top btn-link"
-        src="assets/imagesKuran/{{ i + 1 }}.jpg"
-      />
+      <img src="assets/imagesKuran/{{ i + 1 }}.jpg" />
       <h2 style="position: absolute; top: 20%; left: 0; bottom: 0; right: 0">
-        {{ name | slice : 0 : 15 }}{{ name.length > 15 ? "..." : "" }}
+        {{ cuz?.reader | slice : 0 : 15
+        }}{{ (cuz?.reader)!.length > 15 ? "..." : "" }}
       </h2>
     </div>
   </div>
 </div>
+
+<!-- =============Delete popover====================== -->
+<ng-template>
+  <div class="text-center">
+    <h4>Are you sure to delete</h4>
+    <button type="button" class="btn btn-info">Cancel</button>
+  </div>
+</ng-template>
