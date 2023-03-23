@@ -1,73 +1,38 @@
-<!-- <p id="label" [hidden]="false">:{{toplamCuz | async}}</p> -->
-<div class="container">
-  <div class="text-right">
-    <!-- <a href="" onclick="return false" (click)="Details()">detay</a> -->
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <span class="badge mt-1">Şimdiye kadarki;</span>
-    <table class="table-primary text-white col-sm-12">
-      <tbody>
-        <tr>
-          <td class="col-sm-11">Bitirilen toplam cüz sayısı:</td>
-          <th class="col-sm-1 text-center">{{ 0 }}</th>
-        </tr>
-        <tr>
-          <td class="col-sm-11">Bitirilen toplam hatim sayısı:</td>
-          <th class="col-sm-1 text-center">{{ 0 }}</th>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row">
-    <span class="badge mt-1">Mevcut Hatim Bilgileri</span>
-    <table class="table-primary text-white col-sm-12">
-      <tbody>
-        <tr>
-          <td class="col-sm-11">Boş cüz sayısı:</td>
-          <th class="col-sm-1 text-center">
-            <!-- {{ currentHatimInfos[0].bosCuzSayisi }} -->
-          </th>
-        </tr>
-        <tr>
-          <td class="col-sm-11">Alınan cüz sayısı:</td>
-          <th class="col-sm-1 text-center">
-            <!-- {{ currentHatimInfos[0].alinanCuzSayisi }} -->
-          </th>
-        </tr>
-        <tr>
-          <td class="col-sm-11">Biten cüz sayısı:</td>
-          <th class="col-sm-1 text-center">
-            <!-- {{ currentHatimInfos[0].bitenCuzSayisi }} -->
-          </th>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
 <div
   *ngFor="let cuz of cuzs; let i = index"
   style="position: relative"
   class="container text-center"
 >
-  <div class="col-sm-2" style="float: left" (click)="selectCuz(cuz, i + 1)">
-    <div id="{{ i + 1 }}" class="card">
-      <img src="assets/imagesKuran/{{ i + 1 }}.jpg" />
-      <h2 style="position: absolute; top: 20%; left: 0; bottom: 0; right: 0">
-        {{ cuz?.reader | slice : 0 : 15
-        }}{{ (cuz?.reader)!.length > 15 ? "..." : "" }}
-      </h2>
+  <div
+    class="col-4 col-lg-2"
+    style="float: left"
+    (click)="selectCuz(cuz, i + 1)"
+    [ngbPopover]="cuz.reader === name ? popLeaveOrCompleteCuz : null"
+    popoverTitle="Delete!"
+  >
+    <div id="{{ i + 1 }}" class="card position-relative">
+      <h5
+        style="
+          position: absolute;
+          left: 50%;
+          margin-top: 1%;
+          transform: translateX(-50%);
+        "
+      >
+        {{ cuz?.reader | slice : 0 : 8
+        }}{{ (cuz?.reader)!.length > 8 ? "... " : " " }}
+      </h5>
+      <img src="assets/imagesKuran/{{ i + 1 }}.jpg " />
     </div>
   </div>
 </div>
-
-<!-- =============Delete popover====================== -->
-<ng-template>
+<!-- =============Leave or Complete cuz popover====================== -->
+<ng-template #popLeaveOrCompleteCuz>
   <div class="text-center">
     <h4>Are you sure to delete</h4>
-    <button type="button" class="btn btn-info">Cancel</button>
+    <button type="button " class="btn btn-danger" style="margin-right: 10px">
+      Delete
+    </button>
+    <button type="button " class="btn btn-info">Cancel</button>
   </div>
 </ng-template>

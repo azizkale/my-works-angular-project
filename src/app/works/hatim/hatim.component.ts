@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HatimService } from 'src/app/services/hatim.service';
 import { cuz } from 'src/models/cuz';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hatim',
@@ -12,18 +13,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class HatimComponent implements OnInit {
   cuzs: cuz[] = [];
   name: string | any = localStorage.getItem('displayName');
+  innerWidth = window.innerWidth;
 
   constructor(
     private hatimservice: HatimService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.getCuzs();
+    this.retrieveCuzs();
 
     // this.hatimservice.createHatim().subscribe({ next: () => { } })
   }
 
-  getCuzs() {
+  retrieveCuzs() {
     this.hatimservice.retrieveHatim().subscribe({
       next: (response) => {
         console.log(response)
@@ -33,6 +37,10 @@ export class HatimComponent implements OnInit {
         })
       },
       error: (err) => {
+        if (err.status === 401) {
+          localStorage.removeItem('token');
+          this.router.navigate(['signin']);
+        }
       },
       complete: () => {
       }
@@ -50,14 +58,18 @@ export class HatimComponent implements OnInit {
         }
       })
     }
+    //if the reader click his (being read) cuz clicks
+    if (cuz.reader === this.name) {
+
+    }
     else {
-      this.hatimAlert();
+      this.hatimAlert(cuz.reader);
     }
 
   }
-  hatimAlert() {
-    this._snackBar.open('Bu cüz alınmıştır!', '', {
-      duration: 200 * 1000,
+  hatimAlert(reader: string | any) {
+    this._snackBar.open(`Bu cüz ${reader} tarafindan alınmıştır!`, 'X', {
+      duration: 2 * 1000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: ['cuz']
