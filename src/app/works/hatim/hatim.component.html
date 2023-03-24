@@ -4,35 +4,30 @@
   class="container text-center"
 >
   <div
-    class="col-4 col-lg-2"
+    class="col-4 col-lg-2 my-1"
     style="float: left"
     (click)="selectCuz(cuz, i + 1)"
-    [ngbPopover]="cuz.reader === name ? popLeaveOrCompleteCuz : null"
-    popoverTitle="Delete!"
   >
     <div id="{{ i + 1 }}" class="card position-relative">
-      <h5
-        style="
-          position: absolute;
-          left: 50%;
-          margin-top: 1%;
-          transform: translateX(-50%);
-        "
+      <span
+        [ngbPopover]="cuz.reader === name ? popLeaveOrCompleteCuz : null"
+        class="material-symbols-outlined menu"
       >
+        more_vert
+      </span>
+      <img class="mb-3" src="assets/imagesKuran/{{ i + 1 }}.jpg " />
+      <p id="name">
         {{ cuz?.reader | slice : 0 : 8
         }}{{ (cuz?.reader)!.length > 8 ? "... " : " " }}
-      </h5>
-      <img src="assets/imagesKuran/{{ i + 1 }}.jpg " />
+      </p>
     </div>
   </div>
 </div>
 <!-- =============Leave or Complete cuz popover====================== -->
 <ng-template #popLeaveOrCompleteCuz>
-  <div class="text-center">
-    <h4>Are you sure to delete</h4>
-    <button type="button " class="btn btn-danger" style="margin-right: 10px">
-      Delete
-    </button>
-    <button type="button " class="btn btn-info">Cancel</button>
+  <div class="">
+    <button type="button" class="btn btn-warning my-1 w-100">cüzü birak</button>
+    <button type="button" class="btn btn-warning my-1 w-100">bitti</button>
+    <button type="button" class="btn btn-info w-100">Cancel</button>
   </div>
 </ng-template>

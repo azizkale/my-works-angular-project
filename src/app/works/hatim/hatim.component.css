@@ -4,3 +4,21 @@
     background: #e6913c !important;
     max-width: 50%;
 }
+
+.menu {
+    position: absolute;
+    right: 1px;
+    cursor: pointer;
+}
+
+img {
+    cursor: pointer;
+}
+
+#name {
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translateX(-50%);
+    font-weight: 500;
+}
