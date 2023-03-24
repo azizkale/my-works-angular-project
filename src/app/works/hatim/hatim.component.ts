@@ -11,9 +11,10 @@ import { Router } from '@angular/router';
 })
 
 export class HatimComponent implements OnInit {
-  cuzs: cuz[] = [];
+  cuzs: cuz[] | any = [];
   name: string | any = localStorage.getItem('displayName');
   innerWidth = window.innerWidth;
+  selectedCuz: cuz | any;
 
   constructor(
     private hatimservice: HatimService,
@@ -47,7 +48,7 @@ export class HatimComponent implements OnInit {
     })
   }
 
-  selectCuz(cuz: cuz, index: number) {
+  getCuz(cuz: cuz, index: number) {
     //if the cuz is not being read
     if (cuz.beingRead == false && cuz.complete == false) {
       cuz.reader = this.name;
@@ -74,5 +75,13 @@ export class HatimComponent implements OnInit {
       verticalPosition: 'top',
       panelClass: ['cuz']
     });
+  }
+
+  selectCuzToManupulate(index: number) {
+    this.selectedCuz = this.cuzs[index];
+  }
+
+  leaveCuz(cuz: cuz) {
+    console.log('left!')
   }
 }

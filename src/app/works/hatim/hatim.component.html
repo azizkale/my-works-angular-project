@@ -6,16 +6,18 @@
   <div
     class="col-4 col-lg-2 my-1"
     style="float: left"
-    (click)="selectCuz(cuz, i + 1)"
+    (click)="getCuz(cuz, i + 1)"
   >
-    <div id="{{ i + 1 }}" class="card position-relative">
-      <span
+    <div
+      (click)="selectCuzToManupulate(i)"
+      id="{{ i + 1 }}"
+      class="card position-relative"
+    >
+      <img
         [ngbPopover]="cuz.reader === name ? popLeaveOrCompleteCuz : null"
-        class="material-symbols-outlined menu"
-      >
-        more_vert
-      </span>
-      <img class="mb-3" src="assets/imagesKuran/{{ i + 1 }}.jpg " />
+        class="mb-3"
+        src="assets/imagesKuran/{{ i + 1 }}.jpg "
+      />
       <p id="name">
         {{ cuz?.reader | slice : 0 : 8
         }}{{ (cuz?.reader)!.length > 8 ? "... " : " " }}
@@ -25,9 +27,19 @@
 </div>
 <!-- =============Leave or Complete cuz popover====================== -->
 <ng-template #popLeaveOrCompleteCuz>
-  <div class="">
-    <button type="button" class="btn btn-warning my-1 w-100">cüzü birak</button>
-    <button type="button" class="btn btn-warning my-1 w-100">bitti</button>
-    <button type="button" class="btn btn-info w-100">Cancel</button>
-  </div>
+  <button
+    type="button"
+    (click)="selectedCuz.complete = true"
+    class="btn btn-warning my-1 w-100"
+  >
+    bitir
+  </button>
+  <button
+    type="button"
+    (click)="selectedCuz.beingRead = false; selectedCuz.complete = false"
+    class="btn btn-warning my-1 w-100"
+  >
+    bırak
+  </button>
+  <button type="button" class="btn btn-info my-1 w-100">iptal</button>
 </ng-template>
