@@ -13,6 +13,8 @@
         'background-color':
           cuz.beingRead === true && cuz.complete === true
             ? 'green'
+            : cuz.beingRead === true && cuz.complete === false
+            ? 'orange'
             : 'transparent'
       }"
       (click)="selectCuzToManupulate(i)"
@@ -35,7 +37,7 @@
 <ng-template #popLeaveOrCompleteCuz>
   <button
     type="button"
-    (click)="selectedCuz.complete = true"
+    (click)="completeCuz()"
     class="btn btn-warning my-1 w-100"
   >
     bitir

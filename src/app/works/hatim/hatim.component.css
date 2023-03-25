@@ -5,12 +5,6 @@
     max-width: 50%;
 }
 
-.menu {
-    position: absolute;
-    right: 1px;
-    cursor: pointer;
-}
-
 img {
     cursor: pointer;
 }
