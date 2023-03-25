@@ -32,6 +32,7 @@ export class HatimComponent implements OnInit {
     this.hatimservice.retrieveHatim().subscribe({
       next: (response) => {
         console.log(response)
+        //data comes from db with a null object (cuzs[0] = null)
         Object.values(response['cuzs']).map((cuz: any) => {
           if (cuz !== null)
             this.cuzs.push(cuz)
@@ -48,7 +49,7 @@ export class HatimComponent implements OnInit {
     })
   }
 
-  getCuz(cuz: cuz, index: number) {
+  getCuzToRead(cuz: cuz, index: number) {
     //if the cuz is not being read
     if (cuz.beingRead == false && cuz.complete == false) {
       cuz.reader = this.name;
@@ -77,11 +78,18 @@ export class HatimComponent implements OnInit {
     });
   }
 
-  selectCuzToManupulate(index: number) {
+  selectCuzToManupulate(index: number): cuz {
     this.selectedCuz = this.cuzs[index];
+    return this.selectedCuz;
   }
 
-  leaveCuz(cuz: cuz) {
-    console.log('left!')
+  leaveCuz() {
+    this.selectedCuz.beingRead = false;
+    this.selectedCuz.complete = false;
+    this.selectedCuz.reader = '';
+    const index = this.cuzs.indexOf(this.selectedCuz) + 1;//index in db
+    this.hatimservice.updateHatim(this.selectedCuz, index).subscribe({
+      next: (data) => { console.log(data) }
+    })
   }
 }

@@ -6,9 +6,15 @@
   <div
     class="col-4 col-lg-2 my-1"
     style="float: left"
-    (click)="getCuz(cuz, i + 1)"
+    (click)="getCuzToRead(cuz, i + 1)"
   >
     <div
+      [ngStyle]="{
+        'background-color':
+          cuz.beingRead === true && cuz.complete === true
+            ? 'green'
+            : 'transparent'
+      }"
       (click)="selectCuzToManupulate(i)"
       id="{{ i + 1 }}"
       class="card position-relative"
@@ -34,11 +40,7 @@
   >
     bitir
   </button>
-  <button
-    type="button"
-    (click)="selectedCuz.beingRead = false; selectedCuz.complete = false"
-    class="btn btn-warning my-1 w-100"
-  >
+  <button type="button" (click)="leaveCuz()" class="btn btn-warning my-1 w-100">
     bırak
   </button>
   <button type="button" class="btn btn-info my-1 w-100">iptal</button>
