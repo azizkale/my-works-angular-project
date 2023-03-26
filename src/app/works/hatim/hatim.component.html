@@ -1,3 +1,20 @@
+<div class="d-flex align-items-center my-2">
+  <hr />
+  <span class="material-symbols-outlined"> menu_book </span
+  ><span style="font-size: large; font-weight: 400; margin-left: 1%"
+    >Toplam Hatim :</span
+  >
+  <span style="font-size: large; font-weight: 400; margin-left: 10%">0</span>
+  <hr />
+  <button (click)="resetHatim()" class="btn btn-danger">Hatimi Sıfırla</button>
+</div>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col text-center">
+      <h2>Hatim</h2>
+    </div>
+  </div>
+</div>
 <div
   *ngFor="let cuz of cuzs; let i = index"
   style="position: relative"

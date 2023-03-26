@@ -24,12 +24,10 @@ export class HatimComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveCuzs();
 
-    // this.hatimservice.createHatim().subscribe({ next: () => { } })
   }
   retrieveCuzs() {
     this.hatimservice.retrieveHatim().subscribe({
       next: (response) => {
-        console.log(response)
         //data comes from db with a null object (cuzs[0] = null)
         Object.values(response['cuzs']).map((cuz: cuz | any) => {
           if (cuz !== null)
@@ -87,6 +85,11 @@ export class HatimComponent implements OnInit {
     this.hatimservice.updateHatim(cuz, index + 1).subscribe({
       next: (data) => { console.log(data) }
     })
+  }
+
+  resetHatim() {
+    // this.hatimservice.createHatim().subscribe({ next: () => { } })
+    console.log(localStorage.getItem('roles'))
   }
 }
 
