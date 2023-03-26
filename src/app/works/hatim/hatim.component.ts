@@ -68,21 +68,23 @@ export class HatimComponent implements OnInit {
     }
   }
 
-  async leaveCuz(cuz: cuz, index: number) {
-    cuz.beingRead = false;
-    cuz.complete = false;
-    cuz.reader = '';
+  leaveCuz(cuz: cuz, index: number) {
+    if (cuz.reader !== '' && cuz.reader === this.name) {
+      cuz.beingRead = false;
+      cuz.complete = false;
+      cuz.reader = '';
+      this.hatimservice.updateHatim(cuz, index + 1).subscribe({
+        next: (data) => { console.log(data) }
+      })
+    }
+    else this.hatimAlert(cuz.reader)
 
-    await this.hatimservice.updateHatim(cuz, index + 1).subscribe({
-      next: (data) => { console.log(data) }
-    })
   }
 
-  async completeCuz(cuz: cuz, index: number) {
+  completeCuz(cuz: cuz, index: number) {
     cuz.beingRead = true;
     cuz.complete = true;
-    // const index = this.cuzs.indexOf(this.selectedCuz) + 1;//index in db
-    await this.hatimservice.updateHatim(cuz, index + 1).subscribe({
+    this.hatimservice.updateHatim(cuz, index + 1).subscribe({
       next: (data) => { console.log(data) }
     })
   }

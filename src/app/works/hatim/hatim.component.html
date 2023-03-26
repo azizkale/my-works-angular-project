@@ -20,6 +20,7 @@
     >
       <div #menu id="menu">
         <button
+          [disabled]="cuz.reader !== ''"
           type="button"
           (click)="getCuz(cuz, i); menu.style.display = 'none'"
           class="btn btn-warning my-1 w-100"
@@ -27,6 +28,7 @@
           seç
         </button>
         <button
+          [disabled]="cuz.beingRead === false && cuz.reader === ''"
           type="button"
           (click)="completeCuz(cuz, i); menu.style.display = 'none'"
           class="btn btn-warning my-1 w-100"
@@ -34,6 +36,9 @@
           bitir
         </button>
         <button
+          [disabled]="
+            cuz.beingRead === false && cuz.reader === '' && cuz.reader !== name
+          "
           type="button"
           (click)="leaveCuz(cuz, i); menu.style.display = 'none'"
           class="btn btn-warning my-1 w-100"
@@ -51,7 +56,11 @@
       <img
         class="mb-3"
         src="assets/imagesKuran/{{ i + 1 }}.jpg"
-        (click)="menu.style.display = 'block'"
+        (click)="
+          cuz.reader === name || cuz.reader === ''
+            ? (menu.style.display = 'block')
+            : hatimAlert(cuz.reader)
+        "
       />
       <p id="name">
         {{ cuz?.reader | slice : 0 : 8
