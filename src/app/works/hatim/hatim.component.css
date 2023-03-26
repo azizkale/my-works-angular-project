@@ -16,3 +16,11 @@ img {
     transform: translateX(-50%);
     font-weight: 500;
 }
+
+#menu {
+    position: absolute;
+    top: 0;
+    background-color: white;
+    display: none;
+    z-index: 10;
+}

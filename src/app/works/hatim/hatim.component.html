@@ -3,11 +3,7 @@
   style="position: relative"
   class="container text-center"
 >
-  <div
-    class="col-4 col-lg-2 my-1"
-    style="float: left"
-    (click)="getCuzToRead(cuz, i + 1)"
-  >
+  <div class="col-4 col-lg-2 my-1" style="float: left">
     <div
       [ngStyle]="{
         'background-color':
@@ -15,16 +11,47 @@
             ? 'green'
             : cuz.beingRead === true && cuz.complete === false
             ? 'orange'
+            : cuz.beingRead === false && cuz.complete === false
+            ? 'white'
             : 'transparent'
       }"
-      (click)="selectCuzToManupulate(i)"
       id="{{ i + 1 }}"
       class="card position-relative"
     >
+      <div #menu id="menu">
+        <button
+          type="button"
+          (click)="getCuz(cuz, i); menu.style.display = 'none'"
+          class="btn btn-warning my-1 w-100"
+        >
+          seç
+        </button>
+        <button
+          type="button"
+          (click)="completeCuz(cuz, i); menu.style.display = 'none'"
+          class="btn btn-warning my-1 w-100"
+        >
+          bitir
+        </button>
+        <button
+          type="button"
+          (click)="leaveCuz(cuz, i); menu.style.display = 'none'"
+          class="btn btn-warning my-1 w-100"
+        >
+          bırak
+        </button>
+        <button
+          (click)="menu.style.display = 'none'"
+          type="button"
+          class="btn btn-info my-1 w-100"
+        >
+          iptal
+        </button>
+      </div>
       <img
-        [ngbPopover]="cuz.reader === name ? popLeaveOrCompleteCuz : null"
         class="mb-3"
-        src="assets/imagesKuran/{{ i + 1 }}.jpg "
+        src="assets/imagesKuran/{{ i + 1 }}.jpg"
+        (click)="menu.style.display = 'block'"
       />
       <p id="name">
         {{ cuz?.reader | slice : 0 : 8
@@ -33,17 +60,3 @@
     </div>
   </div>
 </div>
-<!-- =============Leave or Complete cuz popover====================== -->
-<ng-template #popLeaveOrCompleteCuz>
-  <button
-    type="button"
-    (click)="completeCuz()"
-    class="btn btn-warning my-1 w-100"
-  >
-    bitir
-  </button>
-  <button type="button" (click)="leaveCuz()" class="btn btn-warning my-1 w-100">
-    bırak
-  </button>
-  <button type="button" class="btn btn-info my-1 w-100">iptal</button>
-</ng-template>

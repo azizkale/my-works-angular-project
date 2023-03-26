@@ -14,7 +14,6 @@ export class HatimComponent implements OnInit {
   cuzs: cuz[] | any = [];
   name: string | any = localStorage.getItem('displayName');
   innerWidth = window.innerWidth;
-  selectedCuz: cuz | any;
 
   constructor(
     private hatimservice: HatimService,
@@ -27,13 +26,12 @@ export class HatimComponent implements OnInit {
 
     // this.hatimservice.createHatim().subscribe({ next: () => { } })
   }
-
   retrieveCuzs() {
     this.hatimservice.retrieveHatim().subscribe({
       next: (response) => {
         console.log(response)
         //data comes from db with a null object (cuzs[0] = null)
-        Object.values(response['cuzs']).map((cuz: any) => {
+        Object.values(response['cuzs']).map((cuz: cuz | any) => {
           if (cuz !== null)
             this.cuzs.push(cuz)
         })
@@ -49,26 +47,6 @@ export class HatimComponent implements OnInit {
     })
   }
 
-  getCuzToRead(cuz: cuz, index: number) {
-    //if the cuz is not being read
-    if (cuz.beingRead == false && cuz.complete == false) {
-      cuz.reader = this.name;
-      cuz.beingRead = true
-      this.hatimservice.updateHatim(cuz, +index).subscribe({
-        next: (response: cuz) => {
-          console.log(response)
-        }
-      })
-    }
-    //if the reader click his (being read) cuz clicks
-    if (cuz.reader === this.name) {
-
-    }
-    else {
-      this.hatimAlert(cuz.reader);
-    }
-
-  }
   hatimAlert(reader: string | any) {
     this._snackBar.open(`Bu cüz ${reader} tarafindan alınmıştır!`, 'X', {
       duration: 2 * 1000,
@@ -78,30 +56,35 @@ export class HatimComponent implements OnInit {
     });
   }
 
-  selectCuzToManupulate(index: number): cuz {
-    this.selectedCuz = this.cuzs[index];
-    return this.selectedCuz;
+  getCuz(cuz: cuz, index: number) {
+    if (cuz.reader === '' && cuz.beingRead === false && cuz.complete === false) {
+      cuz.reader = this.name;
+      cuz.beingRead = true
+      this.hatimservice.updateHatim(cuz, index + 1).subscribe({
+        next: (response: cuz) => {
+          console.log(response)
+        }
+      })
+    }
   }
 
-  async leaveCuz() {
-    this.selectedCuz.beingRead = false;
-    this.selectedCuz.complete = false;
-    this.selectedCuz.reader = '';
-    const index = this.cuzs.indexOf(this.selectedCuz) + 1;//index in db
-    await this.hatimservice.updateHatim(this.selectedCuz, index).subscribe({
+  async leaveCuz(cuz: cuz, index: number) {
+    cuz.beingRead = false;
+    cuz.complete = false;
+    cuz.reader = '';
+
+    await this.hatimservice.updateHatim(cuz, index + 1).subscribe({
       next: (data) => { console.log(data) }
     })
-    await this.retrieveCuzs();
   }
 
-  async completeCuz() {
-    this.selectedCuz.beingRead = true;
-    this.selectedCuz.complete = true;
-    const index = this.cuzs.indexOf(this.selectedCuz) + 1;//index in db
-    await this.hatimservice.updateHatim(this.selectedCuz, index).subscribe({
+  async completeCuz(cuz: cuz, index: number) {
+    cuz.beingRead = true;
+    cuz.complete = true;
+    // const index = this.cuzs.indexOf(this.selectedCuz) + 1;//index in db
+    await this.hatimservice.updateHatim(cuz, index + 1).subscribe({
       next: (data) => { console.log(data) }
     })
-    await this.retrieveCuzs();
   }
 }
 
