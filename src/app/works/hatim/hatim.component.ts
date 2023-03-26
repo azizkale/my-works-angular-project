@@ -3,6 +3,7 @@ import { HatimService } from 'src/app/services/hatim.service';
 import { cuz } from 'src/models/cuz';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-hatim',
@@ -14,16 +15,17 @@ export class HatimComponent implements OnInit {
   cuzs: cuz[] | any = [];
   name: string | any = localStorage.getItem('displayName');
   innerWidth = window.innerWidth;
-
+  roles: string[];
   constructor(
     private hatimservice: HatimService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private common: CommonService
   ) { }
 
   ngOnInit(): void {
     this.retrieveCuzs();
-
+    this.roles = this.common.getRoles();
   }
   retrieveCuzs() {
     this.hatimservice.retrieveHatim().subscribe({
@@ -89,7 +91,7 @@ export class HatimComponent implements OnInit {
 
   resetHatim() {
     // this.hatimservice.createHatim().subscribe({ next: () => { } })
-    console.log(localStorage.getItem('roles'))
+    console.log(this.common.getRoles())
   }
 }
 

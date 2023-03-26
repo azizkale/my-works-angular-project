@@ -6,7 +6,13 @@
   >
   <span style="font-size: large; font-weight: 400; margin-left: 10%">0</span>
   <hr />
-  <button (click)="resetHatim()" class="btn btn-danger">Hatimi Sıfırla</button>
+  <button
+    [disabled]="!roles.includes('mentor')"
+    (click)="resetHatim()"
+    class="btn btn-danger"
+  >
+    Hatimi Sıfırla
+  </button>
 </div>
 <div class="container mt-3">
   <div class="row">
