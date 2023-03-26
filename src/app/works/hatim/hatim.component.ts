@@ -13,6 +13,7 @@ import { CommonService } from 'src/app/services/common.service';
 
 export class HatimComponent implements OnInit {
   cuzs: cuz[] | any = [];
+  hatimCount: number;
   name: string | any = localStorage.getItem('displayName');
   innerWidth = window.innerWidth;
   roles: string[];
@@ -28,12 +29,16 @@ export class HatimComponent implements OnInit {
     this.roles = this.common.getRoles();
   }
   retrieveCuzs() {
+    this.cuzs = []
     this.hatimservice.retrieveHatim().subscribe({
       next: (response) => {
         //data comes from db with a null object (cuzs[0] = null)
         Object.values(response['cuzs']).map((cuz: cuz | any) => {
           if (cuz !== null)
             this.cuzs.push(cuz)
+        })
+        Object.values(response['totalHatim']).map((count: number | any) => {
+          this.hatimCount = count
         })
       },
       error: (err) => {
@@ -62,7 +67,6 @@ export class HatimComponent implements OnInit {
       cuz.beingRead = true
       this.hatimservice.updateHatim(cuz, index + 1).subscribe({
         next: (response: cuz) => {
-          console.log(response)
         }
       })
     }
@@ -90,8 +94,8 @@ export class HatimComponent implements OnInit {
   }
 
   resetHatim() {
-    // this.hatimservice.createHatim().subscribe({ next: () => { } })
-    console.log(this.common.getRoles())
+    this.hatimservice.createHatim().subscribe({ next: (res) => { console.log(res) } })
+    this.retrieveCuzs();
   }
 }
 
