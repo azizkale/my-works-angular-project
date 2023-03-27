@@ -62,17 +62,23 @@ export class HatimComponent implements OnInit {
     });
   }
 
-  getCuz(cuz: cuz, index: number) {
-    console.log(cuz)
-    if (cuz.reader === '' && cuz.beingRead === false && cuz.complete === false) {
-      cuz.reader = this.name;
-      cuz.beingRead = true
-      this.hatimservice.updateHatim(cuz, index + 1).subscribe({
-        next: (response: cuz) => {
-          this.getSingleCuz(cuz.cuzname)
+  async getCuz(cuz: cuz) {
+    this.hatimservice.getSingleCuz(cuz.cuzname).subscribe({
+      next: async (response: any) => {
+        let cuz_fromDB = response['cuz'];
+        if (cuz_fromDB.reader === '' && cuz_fromDB.beingRead === false && cuz_fromDB.complete === false) {
+          cuz.reader = this.name;
+          cuz.beingRead = true
+          this.hatimservice.updateHatim(cuz, cuz.cuzname).subscribe({
+            next: (response: cuz) => {
+            }
+          })
         }
-      })
-    }
+        else
+          this.hatimAlert(cuz_fromDB.reader)
+      }
+    })
+
   }
 
   leaveCuz(cuz: cuz, index: number) {
@@ -99,14 +105,6 @@ export class HatimComponent implements OnInit {
   resetHatim() {
     this.hatimservice.createHatim().subscribe({ next: (res) => { } })
     this.retrieveCuzs();
-  }
-
-  getSingleCuz(cuznumber: number) {
-    this.hatimservice.getSingleCuz(cuznumber).subscribe({
-      next: (response: any) => {
-        return response['cuz']
-      }
-    })
   }
 }
 
