@@ -16,6 +16,16 @@ export class HatimService {
     private router: Router
   ) { }
 
+  createHatim(): Observable<any> {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const body = { token: localStorage.getItem('token') };
+      return this.http.post(environment.url + '/hatim/create', body)
+    } else {
+      // User is not authenticated, navigate to the login page   
+      return EMPTY;
+    }
+  }
   retrieveHatim(): Observable<any> {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
@@ -46,14 +56,21 @@ export class HatimService {
       return EMPTY;
     }
   }
+  deleteHatim() {
 
-  createHatim(): Observable<any> {
+  }
+
+  getSingleCuz(cuzname: number) {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
-      const body = { token: localStorage.getItem('token') };
-      return this.http.post(environment.url + '/hatim/create', body)
-    } else {
-      // User is not authenticated, navigate to the login page   
+      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
+
+      // return this.http.get(environment.url + '/hatim/retrieve', { headers })
+      return this.http.get(environment.url + `/hatim/retrievesinglecuz?cuznumber=${cuzname}`, { headers })
+    }
+    else {
+      // User is not authenticated, navigate to the login page
+
       return EMPTY;
     }
   }

@@ -17,6 +17,7 @@ export class HatimComponent implements OnInit {
   name: string | any = localStorage.getItem('displayName');
   innerWidth = window.innerWidth;
   roles: string[];
+
   constructor(
     private hatimservice: HatimService,
     private _snackBar: MatSnackBar,
@@ -37,7 +38,7 @@ export class HatimComponent implements OnInit {
           if (cuz !== null)
             this.cuzs.push(cuz)
         })
-        Object.values(response['totalHatim']).map((count: number | any) => {
+        Object.values(response['totalhatim']).map((count: number | any) => {
           this.hatimCount = count
         })
       },
@@ -62,11 +63,13 @@ export class HatimComponent implements OnInit {
   }
 
   getCuz(cuz: cuz, index: number) {
+    console.log(cuz)
     if (cuz.reader === '' && cuz.beingRead === false && cuz.complete === false) {
       cuz.reader = this.name;
       cuz.beingRead = true
       this.hatimservice.updateHatim(cuz, index + 1).subscribe({
         next: (response: cuz) => {
+          this.getSingleCuz(cuz.cuzname)
         }
       })
     }
@@ -78,7 +81,7 @@ export class HatimComponent implements OnInit {
       cuz.complete = false;
       cuz.reader = '';
       this.hatimservice.updateHatim(cuz, index + 1).subscribe({
-        next: (data) => { console.log(data) }
+        next: (data) => { }
       })
     }
     else this.hatimAlert(cuz.reader)
@@ -89,13 +92,21 @@ export class HatimComponent implements OnInit {
     cuz.beingRead = true;
     cuz.complete = true;
     this.hatimservice.updateHatim(cuz, index + 1).subscribe({
-      next: (data) => { console.log(data) }
+      next: (data) => { }
     })
   }
 
   resetHatim() {
-    this.hatimservice.createHatim().subscribe({ next: (res) => { console.log(res) } })
+    this.hatimservice.createHatim().subscribe({ next: (res) => { } })
     this.retrieveCuzs();
+  }
+
+  getSingleCuz(cuznumber: number) {
+    this.hatimservice.getSingleCuz(cuznumber).subscribe({
+      next: (response: any) => {
+        return response['cuz']
+      }
+    })
   }
 }
 
