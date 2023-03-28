@@ -50,12 +50,12 @@
                 class="col-sm-11 text-center"
               >
                 <div class="w3-light-grey w3-round">
-                  <div
-                    class="w3-container w3-blue w3-round"
-                    [style.width]="percentageOfABook(book) + '%'"
+                  <mat-progress-bar
+                    style="height: 15px"
+                    mode="determinate"
+                    [value]="percentageOfABook(book)"
                   >
-                    {{ percentageOfABook(book) }}%
-                  </div>
+                  </mat-progress-bar>
                 </div>
                 <br />
               </div>
