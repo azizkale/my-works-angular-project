@@ -18,12 +18,12 @@ export class BooktableComponent implements OnInit {
     private bookservice: BookService,
     private router: Router,
     private datePipe: DatePipe
-
   ) { }
 
   ngOnInit(): void {
     this.retrieveBooks();
     this.screenSize = window.innerWidth;
+
   }
 
 
