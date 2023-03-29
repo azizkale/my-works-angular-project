@@ -7,18 +7,20 @@ import { AuthGuard } from './Auth.Guard';
 import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component';
 import { BooktableComponent } from './me/booktable/booktable.component';
 import { HatimComponent } from './works/hatim/hatim.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: 'me/hatim', component: HatimComponent, canActivate: [AuthGuard] },
   {
     path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [
       { path: 'hatim', component: HatimComponent, canActivate: [AuthGuard] },
       { path: '', component: BooktableComponent },
       { path: 'booktable', component: BooktableComponent },
       { path: 'grouplist', component: GrouplistComponent },
+      { path: 'settings', component: SettingsComponent }
+
     ]
   },
 

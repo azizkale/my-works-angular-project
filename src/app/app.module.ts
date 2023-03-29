@@ -30,6 +30,7 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
 import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HatimComponent } from './works/hatim/hatim.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { HatimComponent } from './works/hatim/hatim.component';
     GrouplistComponent,
     SidebarComponent,
     HatimComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
