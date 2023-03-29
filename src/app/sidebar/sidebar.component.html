@@ -16,7 +16,12 @@
   class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left"
   #mySidebar
 >
-  <a routerLink="booktable" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
+  <a routerLink="booktable" class="w3-bar-item w3-button w3-theme-l1">
+    <div class="w3-display-container text-center">
+      <img width="50%" height="auto" id="logo" src="assets/logo.png" alt="" />
+    </div>
+  </a>
+  <hr />
   <!-- Book list manupulation table -->
   <a routerLink="booktable" class="w3-bar-item w3-button w3-hover-black"
     >My Books</a
@@ -25,7 +30,7 @@
     >My Groups</a
   >
   <a routerLink="hatim" class="w3-bar-item w3-button w3-hover-black">Hatim</a>
-  <a class="w3-bar-item w3-button w3-hover-black">Link</a>
+  <!-- <a class="w3-bar-item w3-button w3-hover-black">Link</a> -->
   <hr />
   <a class="w3-button" (click)="deleteToken()">Sign Out</a>
 </nav>

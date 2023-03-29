@@ -16,3 +16,7 @@ h6 {
     bottom: 0;
     height: inherit;
 }
+
+#logo {
+    border-radius: 50%;
+}
