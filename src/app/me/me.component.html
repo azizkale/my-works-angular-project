@@ -1,137 +1,57 @@
-<div class="w3-light-grey">
-  <!-- Navbar -->
-  <div class="w3-top">
-    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-      <a
-        class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1"
-        href="javascript:void(0)"
-        (click)="w3_open(mySidebar, myOverlay)"
-        ><i class="fa fa-bars"></i
-      ></a>
-      <!-- <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white"
-          >About</a>
-         -->
-    </div>
-  </div>
-
-  <!-- Sidebar -->
-  <nav
-    class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left"
-    #mySidebar
-  >
-    <!-- <a
-      href="javascript:void(0)"
-      onclick="w3_close(mySidebar,myOverlay)"
-      class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large"
-      title="Close Menu"
-    >
-      <i class="fa fa-remove"></i>
-    </a> -->
-    <h4 class="w3-bar-item"><b>Menu</b></h4>
-    <a class="w3-bar-item w3-button w3-hover-black">Link</a>
-    <a class="w3-bar-item w3-button w3-hover-black">Link</a>
-    <a class="w3-bar-item w3-button w3-hover-black">Link</a>
-    <a class="w3-bar-item w3-button w3-hover-black">Link</a>
-    <hr />
-    <a class="w3-button" (click)="deleteToken()">Sign Out</a>
-  </nav>
-
-  <!-- Overlay effect when opening sidebar on small screens-->
-  <div
-    class="w3-overlay w3-hide-large"
-    (click)="w3_close(mySidebar, myOverlay)"
-    style="cursor: pointer"
-    title="close side menu"
-    #myOverlay
-  ></div>
-
-  <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-  <div class="w3-main" style="margin-left: 250px">
-    <div class="w3-row w3-padding-16">
-      <!-- Page Container -->
-      <div class="w3-content w3-margin-top">
-        <!-- The Grid -->
-        <div class="w3-row-padding">
-          <!-- Left Column -->
-          <div id="profile-left-col" class="w3-third">
-            <div class="w3-white w3-text-grey w3-card-4">
-              <div class="w3-display-container">
-                <img
-                  src="https://www.w3schools.com/w3css/img_avatar3.png"
-                  style="width: 100%"
-                  alt="Avatar"
-                />
-              </div>
-              <div class="w3-container">
-                <div class="w3-large text-center mt-2">
-                  <h1>{{ displayName }}</h1>
-                </div>
-                <hr />
-                <p class="w3-large">
-                  <b onclick="" class="w3-button" style="float: left"
-                    ><i
-                      class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"
-                    ></i
-                    >My Badges</b
-                  >
-                </p>
-                <br />
-                <hr />
-                <p class="w3-large">
-                  <b
-                    onclick="document.getElementById('list_books').style.display='block'"
-                    class="w3-button"
-                    style="float: left"
-                    ><i
-                      class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"
-                    ></i
-                    >My Books</b
-                  >
-                </p>
-                <br />
-                <hr />
-              </div>
+<app-sidebar></app-sidebar>
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left: 250px">
+  <div class="w3-row w3-padding-16">
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top">
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+        <!-- Left Column -->
+        <div id="profile-left-col" class="w3-third">
+          <div class="w3-white w3-text-grey w3-card-4">
+            <div class="w3-display-container">
+              <img
+                src="https://www.w3schools.com/w3css/img_avatar3.png"
+                style="width: 100%"
+                alt="Avatar"
+              />
             </div>
-
-            <!-- End Left Column -->
+            <div class="w3-container">
+              <div class="w3-large text-center mt-2">
+                <h1>
+                  {{ displayName | slice : 0 : 11
+                  }}{{ displayName!.length > 11 ? "... " : " " }}
+                </h1>
+              </div>
+              <hr />
+              <p class="w3-large">
+                <b onclick="" class="w3-button" style="float: left"
+                  ><i
+                    class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"
+                  ></i
+                  >My Badges</b
+                >
+              </p>
+              <br />
+              <hr />
+            </div>
           </div>
 
-          <!-- Right Column -->
-          <div class="w3-twothird my-3">
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
-              <!-- ============================= -->
-              <booktable></booktable>
-            </div>
-
-            <!-- End Grid -->
-          </div>
-
-          <!-- End Page Container -->
+          <!-- End Left Column -->
         </div>
-      </div>
-      <!-- END MAIN -->
-    </div>
-  </div>
-</div>
+        <!-- Right Column -->
+        <div class="w3-twothird my-3">
+          <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <!-- ============================= -->
+            <router-outlet></router-outlet>
+          </div>
 
-<!-- left menu Modal -->
-<div
-  id="list_books"
-  class="w3-modal"
-  #list_books
-  style="background-color: aliceblue"
->
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="width: 90%">
-    <div class="w3-center">
-      <br />
-      <span
-        (click)="reload()"
-        onclick="document.getElementById('list_books').style.display='none'"
-        class="w3-button w3-xlarge w3-transparent w3-display-topright"
-        title="Close Modal"
-        >×</span
-      ><booklist></booklist>
+          <!-- End Grid -->
+        </div>
+
+        <!-- End Page Container -->
+      </div>
     </div>
+    <!-- END MAIN -->
   </div>
 </div>

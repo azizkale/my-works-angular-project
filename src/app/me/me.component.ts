@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { BookService } from '../services/book.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'me',
@@ -8,35 +6,12 @@ import { BookService } from '../services/book.service';
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
-  books: any;
   displayName: string | any = localStorage.getItem('displayName');
-  constructor(private router: Router, private bookservice: BookService) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
-  // Toggle between showing and hiding the sidebar, and add overlay effect
-  w3_open(mySidebar: any, myOverlay: any) {
-    if (mySidebar.style.display === "block") {
-      mySidebar.style.display = "none";
-      myOverlay.style.display = "none";
-    } else {
-      mySidebar.style.display = "block";
-      myOverlay.style.display = "block";
-    }
-  }
-  // Close the sidebar with the close button
-  w3_close(mySidebar: HTMLElement, myOverlay: HTMLElement) {
-    mySidebar.style.display = "none";
-    myOverlay.style.display = "none";
-  }
 
-  deleteToken() {
-    localStorage.removeItem('token');
-    this.router.navigate(['signin']);
 
-  }
-  reload() {
-    window.location.reload()
-  }
 }

@@ -1,0 +1,112 @@
+<div class="d-flex align-items-center my-2">
+  <span class="material-symbols-outlined"> menu_book </span
+  ><span style="font-size: large; font-weight: 400; margin-left: 1%"
+    >Toplam Hatim :</span
+  >
+  <span style="font-size: large; font-weight: 400; margin-left: 10%">{{
+    hatimCount
+  }}</span>
+
+  <button
+    *ngIf="roles.includes('mentor')"
+    [ngbPopover]="popResetHatim"
+    popoverTitle="Reset!"
+    class="btn btn-danger mt-4"
+    style="position: absolute; right: 5%"
+  >
+    Hatimi Sıfırla
+  </button>
+</div>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col text-center">
+      <h2>Hatim</h2>
+    </div>
+  </div>
+</div>
+<div
+  *ngFor="let cuz of cuzs; let i = index"
+  style="position: relative"
+  class="container text-center"
+>
+  <div class="col-4 col-lg-2 my-1" style="float: left">
+    <div
+      [ngStyle]="{
+        'background-color':
+          cuz.beingRead === true && cuz.complete === true
+            ? 'green'
+            : cuz.beingRead === true && cuz.complete === false
+            ? 'orange'
+            : cuz.beingRead === false && cuz.complete === false
+            ? 'white'
+            : 'transparent'
+      }"
+      id="{{ i + 1 }}"
+      class="card position-relative"
+    >
+      <div #menu id="menu">
+        <button
+          [disabled]="cuz.reader !== ''"
+          type="button"
+          (click)="getCuz(cuz); menu.style.display = 'none'"
+          class="btn btn-warning my-1 w-100"
+        >
+          seç
+        </button>
+        <button
+          [disabled]="cuz.beingRead === false && cuz.reader === ''"
+          type="button"
+          (click)="completeCuz(cuz, i); menu.style.display = 'none'"
+          class="btn btn-warning my-1 w-100"
+        >
+          bitti
+        </button>
+        <button
+          [disabled]="
+            cuz.beingRead === false && cuz.reader === '' && cuz.reader !== name
+          "
+          type="button"
+          (click)="leaveCuz(cuz, i); menu.style.display = 'none'"
+          class="btn btn-warning my-1 w-100"
+        >
+          bırak
+        </button>
+        <button
+          (click)="menu.style.display = 'none'"
+          type="button"
+          class="btn btn-info my-1 w-100"
+        >
+          iptal
+        </button>
+      </div>
+      <img
+        class="mb-3"
+        src="assets/imagesKuran/{{ i + 1 }}.jpg"
+        (click)="
+          cuz.reader === name || cuz.reader === ''
+            ? (menu.style.display = 'block')
+            : hatimAlert(cuz.reader)
+        "
+      />
+      <p id="name">
+        {{ cuz?.reader | slice : 0 : 8
+        }}{{ (cuz?.reader)!.length > 8 ? "... " : " " }}
+      </p>
+    </div>
+  </div>
+</div>
+<!-- ===============Hatim-Reset================= -->
+<ng-template #popResetHatim>
+  <div class="text-center">
+    <h4>Are you sure to reset</h4>
+    <button
+      (click)="resetHatim()"
+      type="button"
+      class="btn btn-danger"
+      style="margin-right: 10px"
+    >
+      Delete
+    </button>
+    <button type="button" class="btn btn-info">Cancel</button>
+  </div>
+</ng-template>

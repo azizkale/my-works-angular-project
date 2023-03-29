@@ -35,26 +35,62 @@
               required
             />
             <label for="psw"><b>Password</b></label>
+            <div class="input-group">
+              <input
+                #password
+                [type]="passwordType"
+                placeholder="Enter Password"
+                name="psw"
+                id="psw"
+                formControlName="password"
+                [(ngModel)]="passwordPatternControl"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                required
+              />
+              <div
+                class="input-group-append"
+                (click)="
+                  showHideToggle =
+                    showHideToggle == 'visibility'
+                      ? (showHideToggle = 'visibility_off')
+                      : 'visibility';
+                  passwordType =
+                    passwordType == 'password' ? 'text' : 'password'
+                "
+              >
+                <span class="material-symbols-outlined">
+                  {{ showHideToggle }}
+                </span>
+              </div>
+            </div>
+
+            <label for="psw-repeat"><b>Repeat Password</b></label>
             <input
-              #password
+              #passwordrepeat
               type="password"
-              placeholder="Enter Password"
-              name="psw"
-              id="psw"
+              placeholder="Repeat Password"
+              name="psw-repeat"
+              id="psw-repeat"
               formControlName="password"
-              [(ngModel)]="passwordPatternControl"
-              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
               required
             />
-
             <button
               class="w3-button w3-block w3-green w3-section w3-padding"
               type="submit"
-              (click)="register(email.value, password.value)"
+              (click)="
+                register(email.value, password.value, passwordrepeat.value)
+              "
               [disabled]="email.ontouchend"
             >
               Register
             </button>
+          </div>
+          <div
+            class="container"
+            style="background-color: #f1f1f1; height: 50px"
+          >
+            <a style="float: left" routerLink="/signin">Signin</a>
+            <span style="float: right">Do you have already an account?</span>
           </div>
         </form>
       </div>

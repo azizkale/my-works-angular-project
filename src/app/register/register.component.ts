@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   passwordPatternControl: string = ''
   emailpatterncontrol: string = ''
-
+  showHideToggle: string = 'visibility';// according to google icons
+  passwordType: string = 'password'
   constructor(
     private authservice: AuthenticationService,
     public fb: FormBuilder,
@@ -31,10 +32,11 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
+      passwordrepeat: ['', Validators.required]
     });
   }
 
-  register(email: string, password: any) {
+  register(email: string, password: any, passwordrepeat: any) {
     if (!this.passwordPatternControl.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
       this.alertservice.alert(`<p class='text-start'>
       Password must contain at least <br>
@@ -45,6 +47,10 @@ export class RegisterComponent implements OnInit {
     }
     else if (!this.emailpatterncontrol.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)) {
       this.alertservice.alert(`Please try it again with new email adsress`, 'alert-danger', this.alertParent.nativeElement)
+    }
+    else if (password !== passwordrepeat) {
+
+      this.alertservice.alert(`Passwords do not match!`, 'alert-danger', this.alertParent.nativeElement)
     }
     else {
       this.authservice.register(email, password)

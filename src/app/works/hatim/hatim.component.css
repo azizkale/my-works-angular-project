@@ -1,0 +1,26 @@
+::ng-deep .cuz {
+    color: white;
+    font-size: xx-large;
+    background: #e6913c !important;
+    max-width: 50%;
+}
+
+img {
+    cursor: pointer;
+}
+
+#name {
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translateX(-50%);
+    font-weight: 500;
+}
+
+#menu {
+    position: absolute;
+    top: 0;
+    background-color: white;
+    display: none;
+    z-index: 10;
+}

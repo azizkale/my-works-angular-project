@@ -62,3 +62,9 @@ img.avatar {
         width: 100%;
     }
 }
+
+.input-group-append {
+    position: absolute;
+    top: 30%;
+    right: 4px
+}

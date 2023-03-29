@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   constructor(private http: HttpClient) { }
 
   signin(email: string, password: any): Observable<any> {

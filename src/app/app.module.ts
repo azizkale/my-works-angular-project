@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon'
 import { MatGridListModule } from '@angular/material/grid-list'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 //================ng-bootstrap (https://ng-bootstrap.github.io/)
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,14 +27,21 @@ import { MeComponent } from './me/me.component';
 import { BooktableComponent } from './me/booktable/booktable.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
+import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HatimComponent } from './works/hatim/hatim.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
     RegisterComponent,
-    BooklistComponent, BooktableComponent,
+    BooklistComponent,
+    BooktableComponent,
     MeComponent,
+    GrouplistComponent,
+    SidebarComponent,
+    HatimComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +55,9 @@ import { BooklistComponent } from './me/leftmenu/booklist/booklist.component';
     MatInputModule,
     MatIconModule,
     MatGridListModule,
-    NgbPopoverModule
+    NgbPopoverModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]
