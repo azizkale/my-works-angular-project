@@ -1,16 +1,61 @@
-<div class="container">
-  <div class="row email">
-    <div class="input-group mb-3">
-      <div class="input-group-append">
-        <span class="input-group-text" id="basic-addon2">@example.com</span>
+<div class="w3-center mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Ayarlar</h2>
       </div>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Recipient's username"
-        aria-label="Recipient's username"
-        aria-describedby="basic-addon2"
-      />
+    </div>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div>
+          <form [formGroup]="settingsForm" novalidate>
+            <div class="alert" id="id_alert_signin" style="display: none">
+              <span
+                class="closebtn"
+                onclick="this.parentElement.style.display='none';"
+                >&times;</span
+              >
+              <!-- error message -->
+            </div>
+            <div class="container">
+              <label for="email"><b>Email:</b></label>
+              <input
+                #email
+                type="text"
+                placeholder="Enter E-mail"
+                name="email"
+                id="email"
+                formControlName="email"
+                ngModel
+                email="true"
+              />
+              <label for="email"><b>Kullanıcı adı:</b></label>
+              <input
+                #username
+                type="text"
+                placeholder="Kullanıcı adı:"
+                name="username"
+                formControlName="username"
+                ngModel
+              />
+
+              <label for="psw"><b>Password:</b></label>
+              <input
+                #password
+                type="password"
+                placeholder="Enter Password"
+                name="psw"
+                id="psw"
+                formControlName="password"
+              />
+              <div class="form-group">
+                <div #alertParent></div>
+                <button (click)="retrieveUserInfo()">Kaydet</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

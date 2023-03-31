@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +8,13 @@ import { BookService } from '../services/book.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private router: Router, private bookservice: BookService) {
+  constructor(
+    private router: Router
+  ) {
   }
   ngOnInit(): void {
   }
+
   w3_open(mySidebar: any, myOverlay: any) {
     if (mySidebar.style.display === "block") {
       mySidebar.style.display = "none";
