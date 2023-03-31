@@ -10,6 +10,7 @@
   ><span style="font-size: large; font-weight: 400; margin-left: 1%"
     >Toplam Hatim :</span
   >
+
   <span style="font-size: large; font-weight: 400; margin-left: 10%">{{
     hatimCount
   }}</span>
@@ -23,6 +24,7 @@
   >
     Hatimi Sıfırla
   </button>
+  <mat-spinner *ngIf="cuzs.length == 0"></mat-spinner>
 </div>
 
 <div
@@ -96,7 +98,7 @@
     </div>
   </div>
 </div>
-<!-- ===============Hatim-Reset================= -->
+<!-- ===============Hatim-Reset-popover================= -->
 <ng-template #popResetHatim>
   <div class="text-center">
     <h4>Are you sure to reset</h4>
