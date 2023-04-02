@@ -29,28 +29,35 @@
                 ngModel
                 email="true"
               />
-              <label for="email"><b>Kullanıcı adı:</b></label>
+              <label for="displayName"><b>Kullanıcı adı:</b></label>
               <input
-                #username
+                #displayName
                 type="text"
                 placeholder="Kullanıcı adı:"
-                name="username"
-                formControlName="username"
+                name="displayName"
+                formControlName="displayName"
                 ngModel
               />
-
-              <label for="psw"><b>Password:</b></label>
+              <label for="photoURL"><b>Profile Photo:</b></label>
               <input
-                #password
-                type="password"
-                placeholder="Enter Password"
-                name="psw"
-                id="psw"
-                formControlName="password"
+                #photoURL
+                type="text"
+                placeholder="Profil Fotosu Linki"
+                name="photoURL"
+                formControlName="photoURL"
+                ngModel
+              />
+              <label for="newPassword"><b>New Password:</b></label>
+              <input
+                #newPassword
+                type="text"
+                placeholder="Enter New Password"
+                name="newPassword"
+                formControlName="newPassword"
               />
               <div class="form-group">
                 <div #alertParent></div>
-                <button (click)="retrieveUserInfo()">Kaydet</button>
+                <button (click)="updateUser(settingsForm)">Kaydet</button>
               </div>
             </div>
           </form>

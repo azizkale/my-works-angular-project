@@ -4,6 +4,7 @@ import { AuthGuard } from '../Auth.Guard';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { User } from 'src/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class SettingsService {
     private router: Router
   ) { }
 
-  updateUserName(): Observable<any> {
+  updateUser(updateObject: Object): Observable<any> {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
-      const body = { token: localStorage.getItem('token') };
+      const body = { updateObject: updateObject, token: localStorage.getItem('token') };
 
-      return this.http.patch(environment.url + '/settings/username', body)
+      return this.http.patch(environment.url + '/settings/updateuser', body)
 
     } else {
       // User is not authenticated, navigate to the login page
@@ -36,6 +37,20 @@ export class SettingsService {
       const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
 
       return this.http.get(environment.url + '/settings/getuserinfo', { headers })
+
+    } else {
+      // User is not authenticated, navigate to the login page
+      this.router.navigate(['signin']);
+      return EMPTY;
+    }
+  }
+
+  updateUserPassword(newPassword: any): Observable<any> {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const body = { newPassword: newPassword, token: localStorage.getItem('token') };
+
+      return this.http.patch(environment.url + '/settings/updateuserpassword', body)
 
     } else {
       // User is not authenticated, navigate to the login page

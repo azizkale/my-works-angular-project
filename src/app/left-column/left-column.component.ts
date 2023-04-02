@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftColumnComponent implements OnInit {
   displayName: string | any = localStorage.getItem('displayName');
-
-  constructor() { }
+  photoURL: string | any = localStorage.getItem('photoURL')
 
   ngOnInit(): void {
   }

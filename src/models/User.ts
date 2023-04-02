@@ -1,6 +1,6 @@
 import { Book } from "./Book";
 
-export class userSchema {
+export class User {
     userName: string;
     email: string;
     password: string;
