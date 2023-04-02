@@ -4,7 +4,7 @@ import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
 import { MeComponent } from './me/me.component';
 import { AuthGuard } from './Auth.Guard';
-import { GrouplistComponent } from './me/leftmenu/grouplist/grouplist.component';
+import { GrouplistComponent } from './me/grouplist/grouplist.component';
 import { BooktableComponent } from './me/booktable/booktable.component';
 import { HatimComponent } from './works/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [
+      { path: '', redirectTo: 'booktable', pathMatch: 'full' },
       { path: 'hatim', component: HatimComponent, canActivate: [AuthGuard] },
-      { path: '', component: BooktableComponent },
       { path: 'booktable', component: BooktableComponent },
       { path: 'grouplist', component: GrouplistComponent },
       { path: 'settings', component: SettingsComponent }
