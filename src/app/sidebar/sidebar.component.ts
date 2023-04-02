@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
   }
 
   deleteToken() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.router.navigate(['signin']);
 
   }
