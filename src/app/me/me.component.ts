@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./me.component.css']
 })
 export class MeComponent implements OnInit {
-  displayName: string | any = localStorage.getItem('displayName');
   constructor() {
   }
 

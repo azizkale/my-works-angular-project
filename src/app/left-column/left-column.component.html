@@ -1,0 +1,30 @@
+<div id="profile-left-col" class="w3-third">
+  <div class="w3-white w3-text-grey w3-card-4">
+    <div class="w3-display-container">
+      <img
+        src="https://www.w3schools.com/w3css/img_avatar3.png"
+        style="width: 100%"
+        alt="Avatar"
+      />
+    </div>
+    <div class="w3-container">
+      <div class="w3-large text-center mt-2">
+        <h1>
+          {{ displayName | slice : 0 : 11
+          }}{{ displayName!.length > 11 ? "... " : " " }}
+        </h1>
+      </div>
+      <hr />
+      <p class="w3-large">
+        <b onclick="" class="w3-button" style="float: left"
+          ><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>My
+          Badges</b
+        >
+      </p>
+      <br />
+      <hr />
+    </div>
+  </div>
+
+  <!-- End Left Column -->
+</div>

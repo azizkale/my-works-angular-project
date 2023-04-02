@@ -1,5 +1,4 @@
 <app-sidebar></app-sidebar>
-<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main">
   <div class="w3-row w3-padding-16">
     <!-- Page Container -->
@@ -7,51 +6,15 @@
       <!-- The Grid -->
       <div class="w3-row-padding">
         <!-- Left Column -->
-        <div id="profile-left-col" class="w3-third">
-          <div class="w3-white w3-text-grey w3-card-4">
-            <div class="w3-display-container">
-              <img
-                src="https://www.w3schools.com/w3css/img_avatar3.png"
-                style="width: 100%"
-                alt="Avatar"
-              />
-            </div>
-            <div class="w3-container">
-              <div class="w3-large text-center mt-2">
-                <h1>
-                  {{ displayName | slice : 0 : 11
-                  }}{{ displayName!.length > 11 ? "... " : " " }}
-                </h1>
-              </div>
-              <hr />
-              <p class="w3-large">
-                <b onclick="" class="w3-button" style="float: left"
-                  ><i
-                    class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"
-                  ></i
-                  >My Badges</b
-                >
-              </p>
-              <br />
-              <hr />
-            </div>
-          </div>
-
-          <!-- End Left Column -->
-        </div>
+        <left-column></left-column>
         <!-- Right Column -->
         <div class="w3-twothird my-3">
           <div class="w3-container w3-card w3-white w3-margin-bottom">
             <!-- ============================= -->
             <router-outlet></router-outlet>
           </div>
-
-          <!-- End Grid -->
         </div>
-
-        <!-- End Page Container -->
       </div>
     </div>
-    <!-- END MAIN -->
   </div>
 </div>
