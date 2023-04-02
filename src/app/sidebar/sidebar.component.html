@@ -13,7 +13,7 @@
 <!-- Sidebar -->
 <nav
   (click)="w3_close(mySidebar, myOverlay)"
-  class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left"
+  class="w3-sidebar w3-large w3-theme-l5 w3-animate-left"
   #mySidebar
 >
   <a routerLink="booktable" class="w3-bar-item w3-button w3-theme-l1">
@@ -25,11 +25,12 @@
   <!-- Book list manupulation table -->
   <a routerLink="booktable" class="w3-bar-item w3-button w3-hover-black"
     >My Books</a
-  >
+  ><br />
   <a routerLink="grouplist" class="w3-bar-item w3-button w3-hover-black"
     >My Groups</a
-  >
-  <a routerLink="hatim" class="w3-bar-item w3-button w3-hover-black">Hatim</a>
+  ><br />
+  <a routerLink="hatim" class="w3-bar-item w3-button w3-hover-black">Hatim</a
+  ><br />
   <a routerLink="settings" class="w3-bar-item w3-button w3-hover-black"
     >Ayarlar</a
   >
@@ -39,7 +40,7 @@
 
 <!-- Overlay effect when opening sidebar on small screens-->
 <div
-  class="w3-overlay w3-hide-large"
+  class="w3-overlay"
   (click)="w3_close(mySidebar, myOverlay)"
   style="cursor: pointer"
   title="close side menu"
