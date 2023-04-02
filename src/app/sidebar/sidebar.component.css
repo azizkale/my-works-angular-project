@@ -20,3 +20,12 @@ h6 {
 #logo {
     border-radius: 50%;
 }
+
+@media (min-width:993px) {
+    .w3-hide-large {
+        display: block
+    }
+    .w3-sidebar {
+        display: none
+    }
+}
