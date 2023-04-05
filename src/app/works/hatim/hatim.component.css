@@ -1,20 +1,15 @@
-::ng-deep .cuz {
-    color: white;
-    font-size: xx-large;
-    background: #e6913c !important;
-    max-width: 50%;
-}
-
 img {
     cursor: pointer;
+    padding: 5px;
 }
 
 #name {
     position: absolute;
     left: 50%;
-    top: 85%;
+    top: 10%;
     transform: translateX(-50%);
     font-weight: 500;
+    width: 100%;
 }
 
 #menu {
@@ -23,4 +18,10 @@ img {
     background-color: white;
     display: none;
     z-index: 10;
+}
+
+#hatimCount {
+    font-size: large;
+    font-weight: 400;
+    margin-left: 10%
 }

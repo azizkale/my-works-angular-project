@@ -11,9 +11,7 @@
     >Toplam Hatim :</span
   >
 
-  <span style="font-size: large; font-weight: 400; margin-left: 10%">{{
-    hatimCount
-  }}</span>
+  <span id="hatimCount">{{ hatimCount }}</span>
 
   <button
     *ngIf="roles.includes('mentor')"
@@ -27,26 +25,9 @@
   <mat-spinner *ngIf="cuzs.length == 0"></mat-spinner>
 </div>
 
-<div
-  *ngFor="let cuz of cuzs; let i = index"
-  style="position: relative"
-  class="container text-center"
->
-  <div class="col-4 col-lg-2 my-1" style="float: left">
-    <div
-      [ngStyle]="{
-        'background-color':
-          cuz.beingRead === true && cuz.complete === true
-            ? 'green'
-            : cuz.beingRead === true && cuz.complete === false
-            ? 'orange'
-            : cuz.beingRead === false && cuz.complete === false
-            ? 'white'
-            : 'transparent'
-      }"
-      id="{{ i + 1 }}"
-      class="card position-relative"
-    >
+<div *ngFor="let cuz of cuzs; let i = index" class="container text-center">
+  <div class="col-4 col-lg-2" style="float: left">
+    <div id="{{ i + 1 }}" class="card position-relative">
       <div #menu id="menu">
         <button
           [disabled]="cuz.reader !== ''"
@@ -83,7 +64,6 @@
         </button>
       </div>
       <img
-        class="mb-3"
         src="assets/imagesKuran/{{ i + 1 }}.jpg"
         (click)="
           cuz.reader === name || cuz.reader === ''
