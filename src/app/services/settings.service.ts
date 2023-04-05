@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { AuthGuard } from '../Auth.Guard';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 

@@ -45,17 +45,17 @@ export class SettingsComponent implements OnInit {
   }
 
   updateUser(form: FormGroup) {
-    // console.log(response.photoURL)
-    // console.log(response.displayName)
-    // console.log(response.email)
-    console.log(form.controls['email'].value)
     const updateObject = {
       'email': form.controls['email']?.value,
       'displayName': form.controls['displayName']?.value,
       'photoURL': form.controls['photoURL']?.value
     }
     this.settings.updateUser(updateObject).subscribe({
-      next: (response) => { console.log(response) }
+      next: async (response) => {
+        await localStorage.setItem('displayName', response.displayName);
+        await localStorage.setItem('photoURL', response.photoURL)
+        await window.location.reload();
+      }
     })
   }
 }
