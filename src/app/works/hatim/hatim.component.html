@@ -60,7 +60,7 @@
         </button>
         <button
           [disabled]="
-            cuz.beingRead === false && cuz.reader === '' && cuz.reader !== name
+            cuz.beingRead === false && cuz.reader === '' && cuz.reader !== uid
           "
           type="button"
           (click)="leaveCuz(cuz, i); menu.style.display = 'none'"
@@ -79,14 +79,14 @@
       <img
         src="assets/imagesKuran/{{ i + 1 }}.jpg"
         (click)="
-          cuz.reader === name || cuz.reader === ''
+          cuz.reader === uid || cuz.reader === ''
             ? (menu.style.display = 'block')
-            : hatimAlert(cuz.reader)
+            : hatimAlert()
         "
       />
       <p id="name">
-        {{ cuz?.reader | slice : 0 : 8
-        }}{{ (cuz?.reader)!.length > 8 ? "... " : " " }}
+        {{ cuz.reader === uid ? (name | slice : 0 : 8) : null
+        }}{{ cuz.reader === uid ? (name!.length > 8 ? "... " : " ") : null }}
       </p>
     </div>
   </div>

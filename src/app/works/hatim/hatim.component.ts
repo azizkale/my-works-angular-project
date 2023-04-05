@@ -14,8 +14,8 @@ import { CommonService } from 'src/app/services/common.service';
 export class HatimComponent implements OnInit {
   cuzs: cuz[] | any = [];
   hatimCount: number;
-  name: string | any = localStorage.getItem('displayName');
   uid: string | any = localStorage.getItem('uid');
+  name: string | any;
   innerWidth = window.innerWidth;
   roles: string[];
 
@@ -23,12 +23,13 @@ export class HatimComponent implements OnInit {
     private hatimservice: HatimService,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private common: CommonService
+    private common: CommonService,
   ) { }
 
   ngOnInit(): void {
     this.retrieveCuzs();
     this.roles = this.common.getRoles();
+    this.readerName();
   }
   retrieveCuzs() {
     this.cuzs = []
@@ -54,8 +55,8 @@ export class HatimComponent implements OnInit {
     })
   }
 
-  hatimAlert(reader: string | any) {
-    this._snackBar.open(`Bu cüz ${reader} tarafindan alınmıştır!`, 'X', {
+  hatimAlert() {
+    this._snackBar.open(`Bu cüz alınmıştır!`, 'X', {
       duration: 2 * 1000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -63,12 +64,21 @@ export class HatimComponent implements OnInit {
     });
   }
 
+  readerName(): string | any {
+    this.hatimservice.getReaderName().subscribe({
+      next: async (ress) => {
+        this.name = await ress.name
+      }
+    })
+    return this.name;
+  }
+
   async getCuz(cuz: cuz) {
     this.hatimservice.getSingleCuz(cuz.cuzname).subscribe({
       next: async (response: any) => {
         let cuz_fromDB = response['cuz'];
         if (cuz_fromDB.reader === '' && cuz_fromDB.beingRead === false && cuz_fromDB.complete === false) {
-          cuz.reader = this.name;
+          cuz.reader = this.uid;
           cuz.beingRead = true
           this.hatimservice.updateHatim(cuz, cuz.cuzname).subscribe({
             next: (response: cuz) => {
@@ -76,7 +86,7 @@ export class HatimComponent implements OnInit {
           })
         }
         else
-          this.hatimAlert(cuz_fromDB.reader)
+          this.hatimAlert()
       }
     })
 
@@ -91,7 +101,7 @@ export class HatimComponent implements OnInit {
         next: (data) => { }
       })
     }
-    else this.hatimAlert(cuz.reader)
+    else this.hatimAlert()
 
   }
 

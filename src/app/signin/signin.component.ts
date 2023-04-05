@@ -39,7 +39,6 @@ export class SigninComponent implements OnInit {
         next: async (response) => {
           if (response.status === 200) {
             // If the response status is 200 OK, extract the token from the response
-            console.log(response)
             await localStorage.setItem('token', response.token);
             await localStorage.setItem('displayName', response.displayName);
             await localStorage.setItem('uid', response.uid)

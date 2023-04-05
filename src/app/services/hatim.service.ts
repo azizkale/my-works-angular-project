@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthGuard } from '../Auth.Guard';
 import { EMPTY, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -56,9 +56,6 @@ export class HatimService {
       return EMPTY;
     }
   }
-  deleteHatim() {
-
-  }
 
   getSingleCuz(cuzname: number) {
     if (this.authGuard.canActivate()) {
@@ -67,6 +64,22 @@ export class HatimService {
 
       // return this.http.get(environment.url + '/hatim/retrieve', { headers })
       return this.http.get(environment.url + `/hatim/retrievesinglecuz?cuznumber=${cuzname}`, { headers })
+    }
+    else {
+      // User is not authenticated, navigate to the login page
+
+      return EMPTY;
+    }
+  }
+
+  getReaderName(): Observable<any> {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
+
+      // return this.http.get(environment.url + '/hatim/retrieve', { headers })
+      return this.http.get(environment.url + '/hatim/getReaderName', { headers })
+
     }
     else {
       // User is not authenticated, navigate to the login page
