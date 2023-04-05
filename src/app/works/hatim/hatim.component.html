@@ -27,7 +27,20 @@
 
 <div *ngFor="let cuz of cuzs; let i = index" class="container text-center">
   <div class="col-4 col-lg-2" style="float: left">
-    <div id="{{ i + 1 }}" class="card position-relative">
+    <div
+      id="{{ i + 1 }}"
+      class="card position-relative"
+      [ngStyle]="{
+        'background-color':
+          cuz.beingRead === true && cuz.complete === true
+            ? 'green'
+            : cuz.beingRead === true && cuz.complete === false
+            ? 'orange'
+            : cuz.beingRead === false && cuz.complete === false
+            ? 'white'
+            : 'transparent'
+      }"
+    >
       <div #menu id="menu">
         <button
           [disabled]="cuz.reader !== ''"

@@ -15,6 +15,7 @@ export class HatimComponent implements OnInit {
   cuzs: cuz[] | any = [];
   hatimCount: number;
   name: string | any = localStorage.getItem('displayName');
+  uid: string | any = localStorage.getItem('uid');
   innerWidth = window.innerWidth;
   roles: string[];
 
