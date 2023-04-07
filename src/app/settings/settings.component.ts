@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingsService } from '../services/settings.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +15,8 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private settings: SettingsService
+    private settings: SettingsService,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -52,9 +54,10 @@ export class SettingsComponent implements OnInit {
     }
     this.settings.updateUser(updateObject).subscribe({
       next: async (response) => {
-        await localStorage.setItem('displayName', response.displayName);
-        await localStorage.setItem('photoURL', response.photoURL)
-        await window.location.reload();
+        if (response.displayName !== localStorage.getItem('displayName')) {
+          localStorage.clear();
+          this.router.navigate(['signin']);
+        }
       }
     })
   }

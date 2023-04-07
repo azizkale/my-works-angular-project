@@ -10,21 +10,32 @@
   ><span style="font-size: large; font-weight: 400; margin-left: 1%"
     >Toplam Hatim :</span
   >
-
   <span id="hatimCount">{{ hatimCount }}</span>
-
-  <button
-    *ngIf="roles.includes('mentor')"
-    [ngbPopover]="popResetHatim"
-    popoverTitle="Reset!"
-    class="btn btn-danger mt-4"
-    style="position: absolute; right: 5%"
-  >
-    Hatimi Sıfırla
-  </button>
-  <mat-spinner *ngIf="cuzs.length == 0"></mat-spinner>
 </div>
-
+<div class="container mt-2">
+  <div class="row">
+    <div class="col spinner">
+      <mat-spinner
+        style="position: absolute"
+        *ngIf="cuzs.length == 0"
+      ></mat-spinner>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-end">
+      <div class="col">
+        <button
+          *ngIf="roles.includes('mentor')"
+          [ngbPopover]="popResetHatim"
+          popoverTitle="Reset!"
+          class="btn btn-danger my-2"
+        >
+          Hatimi Sıfırla
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <div *ngFor="let cuz of cuzs; let i = index" class="container text-center">
   <div class="col-4 col-lg-2" style="float: left">
     <div
@@ -91,6 +102,7 @@
     </div>
   </div>
 </div>
+
 <!-- ===============Hatim-Reset-popover================= -->
 <ng-template #popResetHatim>
   <div class="text-center">
@@ -101,7 +113,7 @@
       class="btn btn-danger"
       style="margin-right: 10px"
     >
-      Delete
+      Reset
     </button>
     <button type="button" class="btn btn-info">Cancel</button>
   </div>

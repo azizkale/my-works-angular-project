@@ -26,3 +26,10 @@ img {
     font-weight: 400;
     margin-left: 10%
 }
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
