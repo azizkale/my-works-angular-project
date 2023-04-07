@@ -14,7 +14,7 @@ export class UserService {
     private authGuard: AuthGuard,
   ) { }
 
-  getUserById(): Observable<any> {
+  getUserById(uid: any): Observable<any> {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
       const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));

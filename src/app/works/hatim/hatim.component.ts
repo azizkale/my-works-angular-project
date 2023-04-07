@@ -4,6 +4,7 @@ import { cuz } from 'src/models/cuz';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-hatim',
@@ -24,6 +25,7 @@ export class HatimComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
     private common: CommonService,
+    private userservice: UserService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class HatimComponent implements OnInit {
         Object.values(response['cuzs']).map((cuz: cuz | any) => {
           if (cuz !== null)
             this.cuzs.push(cuz)
+
         })
         Object.values(response['totalhatim']).map((count: number | any) => {
           this.hatimCount = count
@@ -73,7 +76,7 @@ export class HatimComponent implements OnInit {
     return this.name;
   }
 
-  async getCuz(cuz: cuz) {
+  getCuz(cuz: cuz) {
     this.hatimservice.getSingleCuz(cuz.cuzname).subscribe({
       next: async (response: any) => {
         let cuz_fromDB = response['cuz'];
@@ -124,6 +127,20 @@ export class HatimComponent implements OnInit {
               ? 'white'
               : 'transparent'
     }
+  }
+
+  //to show reader of cuz which another users got
+  getReaderName(cuz: cuz): string | any {
+    let readerName = ''
+    this.userservice.getUserById(cuz.reader).subscribe({
+      next: (ress) => {
+        readerName = ress
+        console.log(readerName)
+      }, error: () => { },
+      complete: () => {
+
+      }
+    })
   }
 
   resetHatim() {
