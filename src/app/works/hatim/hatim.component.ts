@@ -93,7 +93,7 @@ export class HatimComponent implements OnInit {
   }
 
   leaveCuz(cuz: cuz, index: number) {
-    if (cuz.reader !== '' && cuz.reader === this.name) {
+    if (cuz.reader !== '' && cuz.reader === this.uid) {
       cuz.beingRead = false;
       cuz.complete = false;
       cuz.reader = '';
@@ -111,6 +111,19 @@ export class HatimComponent implements OnInit {
     this.hatimservice.updateHatim(cuz, index + 1).subscribe({
       next: (data) => { }
     })
+  }
+
+  style_Cuz(cuz: cuz) {
+    return {
+      'background-color':
+        cuz.beingRead === true && cuz.complete === true
+          ? 'green'
+          : cuz.beingRead === true && cuz.complete === false
+            ? 'orange'
+            : cuz.beingRead === false && cuz.complete === false
+              ? 'white'
+              : 'transparent'
+    }
   }
 
   resetHatim() {

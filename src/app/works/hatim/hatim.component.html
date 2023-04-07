@@ -41,16 +41,7 @@
     <div
       id="{{ i + 1 }}"
       class="card position-relative"
-      [ngStyle]="{
-        'background-color':
-          cuz.beingRead === true && cuz.complete === true
-            ? 'green'
-            : cuz.beingRead === true && cuz.complete === false
-            ? 'orange'
-            : cuz.beingRead === false && cuz.complete === false
-            ? 'white'
-            : 'transparent'
-      }"
+      [ngStyle]="style_Cuz(cuz)"
     >
       <div #menu id="menu">
         <button
@@ -95,7 +86,13 @@
             : hatimAlert()
         "
       />
-      <p id="name">
+      <p
+        id="name"
+        [ngStyle]="style_Cuz(cuz)"
+        [style.color]="
+          cuz.beingRead === true && cuz.complete === true ? 'white' : 'black'
+        "
+      >
         {{ cuz.reader === uid ? (name | slice : 0 : 8) : null
         }}{{ cuz.reader === uid ? (name!.length > 8 ? "... " : " ") : null }}
       </p>
