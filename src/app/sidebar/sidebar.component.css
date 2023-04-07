@@ -21,6 +21,10 @@ h6 {
     border-radius: 50%;
 }
 
+.fa {
+    font-size: x-large;
+}
+
 @media (min-width:993px) {
     .w3-hide-large {
         display: block
