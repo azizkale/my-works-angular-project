@@ -20,7 +20,7 @@ export class UserService {
       const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
 
       // return this.http.get(environment.url + '/hatim/retrieve', { headers })
-      return this.http.get(environment.url + '/users/getUserById', { headers })
+      return this.http.get(environment.url + `/users/getUserById?uid=${uid}`, { headers })
 
     }
     else {

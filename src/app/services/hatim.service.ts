@@ -87,4 +87,19 @@ export class HatimService {
       return EMPTY;
     }
   }
+
+  getNameOfAntoherUsers(uid: any): Observable<any> {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
+
+      return this.http.get(environment.url + `/hatim/getAnotherReadersName?uid=${uid}`, { headers })
+
+    }
+    else {
+      // User is not authenticated, navigate to the login page
+
+      return EMPTY;
+    }
+  }
 }

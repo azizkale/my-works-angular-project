@@ -25,7 +25,6 @@ export class HatimComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
     private common: CommonService,
-    private userservice: UserService
   ) { }
 
   ngOnInit(): void {
@@ -39,9 +38,9 @@ export class HatimComponent implements OnInit {
       next: (response) => {
         //data comes from db with a null object (cuzs[0] = null)
         Object.values(response['cuzs']).map((cuz: cuz | any) => {
-          if (cuz !== null)
+          if (cuz !== null) {
             this.cuzs.push(cuz)
-
+          }
         })
         Object.values(response['totalhatim']).map((count: number | any) => {
           this.hatimCount = count
@@ -130,17 +129,15 @@ export class HatimComponent implements OnInit {
   }
 
   //to show reader of cuz which another users got
-  getReaderName(cuz: cuz): string | any {
+  getReaderName(uid: any): string | any {
     let readerName = ''
-    this.userservice.getUserById(cuz.reader).subscribe({
+    this.hatimservice.getNameOfAntoherUsers(uid).subscribe({
       next: (ress) => {
-        readerName = ress
-        console.log(readerName)
-      }, error: () => { },
-      complete: () => {
-
+        readerName = ress.readername
       }
-    })
+    }
+    )
+    return readerName
   }
 
   resetHatim() {
