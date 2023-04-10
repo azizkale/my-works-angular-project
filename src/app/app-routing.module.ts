@@ -20,11 +20,10 @@ const routes: Routes = [
       { path: 'hatim', component: HatimComponent, canActivate: [AuthGuard] },
       { path: 'booktable', component: BooktableComponent },
       { path: 'grouplist', component: GrouplistComponent },
-      { path: 'settings', component: SettingsComponent }
-
+      { path: 'settings', component: SettingsComponent },
+      { path: 'shb', component: ShbComponent }
     ]
   },
-  { path: 'shb', component: ShbComponent }
 ];
 
 @NgModule({

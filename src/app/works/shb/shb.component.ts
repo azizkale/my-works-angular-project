@@ -17,7 +17,7 @@ export class ShbComponent implements OnInit {
   ngOnInit(): void {
   }
   createShb() {
-    this.shbservice.createShb(new SHB('hz. ali', '', 212121, new Date(), [], [])).subscribe({
+    this.shbservice.createShb(new SHB('hz. ali', 212121, new Date(), [], [])).subscribe({
       next: (ress) => {
         console.log(ress)
       }

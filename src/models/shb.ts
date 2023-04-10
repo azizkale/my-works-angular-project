@@ -1,15 +1,13 @@
 export class SHB {
     shbId: any;
     shbName: string;
-    shbPhotoUrl: string;
     shbInfo: string[];
     shbHistory: string[];
     editorId: any; //userId
     createDate: Date;
 
-    constructor(shbName: string, shbPhotoUrl: string, editorId: any, createDate: Date, shbInfo: string[], shbHistory: string[]) {
+    constructor(shbName: string, editorId: any, createDate: Date, shbInfo: string[], shbHistory: string[]) {
         this.shbName = shbName,
-            this.shbPhotoUrl = shbPhotoUrl,
             this.shbInfo = shbInfo,
             this.shbHistory = shbHistory
         this.editorId = editorId,
