@@ -8,6 +8,7 @@ import { GrouplistComponent } from './me/grouplist/grouplist.component';
 import { BooktableComponent } from './me/booktable/booktable.component';
 import { HatimComponent } from './works/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ShbComponent } from './works/shb/shb.component';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
@@ -23,7 +24,7 @@ const routes: Routes = [
 
     ]
   },
-
+  { path: 'shb', component: ShbComponent }
 ];
 
 @NgModule({
