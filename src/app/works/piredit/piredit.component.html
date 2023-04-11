@@ -1,8 +1,13 @@
 <div class="w3-center mt-3">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
-        <h2>Ayarlar</h2>
+      <div class="col-sm-11 w-75">
+        <h2>Pırlanta Edit</h2>
+      </div>
+      <div class="col-sm-1 w-25">
+        <span (click)="addChapter()" class="material-symbols-outlined">
+          edit_note
+        </span>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -10,41 +15,30 @@
         <div>
           <form [formGroup]="pirEditForm" novalidate>
             <div class="container">
-              <label for="bookName"><b>Kitap Adı:</b></label>
+              <label for="pirName"><b>Kitap Adı:</b></label>
               <input
-                #bookName
+                #pirName
                 type="text"
                 placeholder="Kitap adı giriniz"
-                name="bookName"
-                formControlName="bookName"
+                formControlName="pirName"
                 ngModel
               />
-              <label for="displayName"><b>Kullanıcı adı:</b></label>
-              <input
-                #displayName
-                type="text"
-                placeholder="Kullanıcı adı:"
-                name="displayName"
-                formControlName="displayName"
-                ngModel
-              />
-              <label for="photoURL"><b>Profile Photo:</b></label>
-              <input
-                #photoURL
-                type="text"
-                placeholder="Profil Fotosu Linki"
-                name="photoURL"
-                formControlName="photoURL"
-                ngModel
-              />
-              <label for="newPassword"><b>New Password:</b></label>
-              <input
-                #newPassword
-                type="text"
-                placeholder="Enter New Password"
-                name="newPassword"
-                formControlName="newPassword"
-              />
+              <label for="chapters">Bölümler</label>
+              <div *ngFor="let chapter of chapters; let i = index">
+                <input
+                  type="text"
+                  [value]="chapter.chapterName"
+                  [formControlName]="'chapterName-' + i"
+                />
+                <textarea
+                  [(ngModel)]="chapter.chapterContent"
+                  rows="5"
+                  [value]="chapter.chapterName"
+                  [formControlName]="'chapterContent-' + i"
+                  class="w3-input w3-border'"
+                >
+                </textarea>
+              </div>
               <div class="form-group">
                 <div #alertParent></div>
                 <button>Kaydet</button>

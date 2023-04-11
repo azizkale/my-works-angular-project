@@ -16,6 +16,13 @@ input[type="password"] {
     box-sizing: border-box;
 }
 
+input[type="text"],
+textarea {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 100;
+    font-size: large;
+}
+
 button {
     background-color: #04aa6d;
     color: white;
