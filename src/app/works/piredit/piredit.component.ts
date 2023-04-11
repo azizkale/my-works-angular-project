@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
 import { Pir } from 'src/models/Pir';
@@ -9,6 +9,7 @@ import { Pir } from 'src/models/Pir';
   styleUrls: ['./piredit.component.css']
 })
 export class PireditComponent implements OnInit {
+
   pirEditForm: FormGroup
   chapters = [
     { chapterName: 'chapter-1', chapterContent: 'chapter-content1' },
@@ -40,6 +41,20 @@ export class PireditComponent implements OnInit {
 
 
   addChapter() {
-
+    const chapterElements = `
+<input
+type="text"
+[value]="chapter.chapterName"
+[formControlName]="'chapterName-' + i"
+/>
+<textarea
+[(ngModel)]="chapter.chapterContent"
+rows="5"
+[value]="chapter.chapterName"
+[formControlName]="'chapterContent-' + i"
+class="w3-input w3-border'"
+>
+</textarea>
+`
   }
 }
