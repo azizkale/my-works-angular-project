@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ShbService } from 'src/app/services/shb.service';
 import { SHB } from 'src/models/shb';
 
@@ -8,13 +9,29 @@ import { SHB } from 'src/models/shb';
   styleUrls: ['./shb.component.css']
 })
 export class ShbComponent implements OnInit {
-  shbName: string;
-  photoURL: string;
+  editForm: FormGroup;
+  infos = ['info-1', 'info-2', 'info-3']
+
   constructor(
-    private shbservice: ShbService
+    private shbservice: ShbService,
+    public fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.createForm();
+    this.setShbInfos();
+  }
+  createForm() {
+    this.editForm = this.fb.group({
+      shbName: ['', Validators.required],
+      shbInfo: this.fb.array([]),
+      shbHistory: [this.fb.control([]), Validators.required]
+    });
+  }
+  setShbInfos() {
+    this.infos.forEach((item, index) => {
+      this.editForm.addControl(`item-${index}`, new FormControl(item));
+    });
   }
   createShb() {
     this.shbservice.createShb(new SHB('hz. ali', 212121, new Date(), [], [])).subscribe({

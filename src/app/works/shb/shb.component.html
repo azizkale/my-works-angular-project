@@ -1,16 +1,49 @@
-<!-- Page Container -->
-<div class="w3-content w3-margin-top" style="max-width: 1400px">
-  <!-- Right Column -->
-  <div class="w3-container">
-    <h6 class="w3-text-teal">
-      <i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 -
-      <span class="w3-tag w3-teal w3-round">Current</span>
-    </h6>
-    <p>
-      Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt
-      aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio,
-      unde doloremque repellendus iure, iste.
-    </p>
-    <hr />
+<div class="w3-center mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Ayarlar</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <!-- sahabeler -->
+    </div>
+  </div>
+</div>
+
+<!-- EDIT FORM (MODAL) -->
+<div class="row justify-content-center">
+  <div class="col">
+    <div>
+      <form [formGroup]="editForm" novalidate>
+        <div class="alert" id="id_alert_shbedit" style="display: none">
+          <span
+            class="closebtn"
+            onclick="this.parentElement.style.display='none';"
+            >&times;</span
+          >
+          <!-- error message -->
+        </div>
+        <div class="container">
+          <label for="shbName"><b>İsim:</b></label>
+          <input
+            #name
+            type="text"
+            placeholder="Isim giriniz"
+            name="shbName"
+            formControlName="shbName"
+            ngModel
+          />
+          <label for="shbInfo"><b>Sahabe Bilgileri:</b></label>
+          <div *ngFor="let info of infos; let i = index">
+            <input type="text" [value]="info" [formControlName]="'item-' + i" />
+          </div>
+          <div class="form-group">
+            <div #alertParent></div>
+            <button>Kaydet</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

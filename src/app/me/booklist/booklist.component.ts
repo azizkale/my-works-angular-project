@@ -100,9 +100,7 @@ export class BooklistComponent implements OnInit {
             'readPage': book[1].readPage
 
           }
-          // if (obj.endDate) {
           this.books.push(obj);
-          // }
           this.dataSource = new MatTableDataSource<Book>(this.books);
         })
       },
