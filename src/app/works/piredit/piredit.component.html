@@ -1,0 +1,58 @@
+<div class="w3-center mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Ayarlar</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div>
+          <form [formGroup]="pirEditForm" novalidate>
+            <div class="container">
+              <label for="bookName"><b>Kitap Adı:</b></label>
+              <input
+                #bookName
+                type="text"
+                placeholder="Kitap adı giriniz"
+                name="bookName"
+                formControlName="bookName"
+                ngModel
+              />
+              <label for="displayName"><b>Kullanıcı adı:</b></label>
+              <input
+                #displayName
+                type="text"
+                placeholder="Kullanıcı adı:"
+                name="displayName"
+                formControlName="displayName"
+                ngModel
+              />
+              <label for="photoURL"><b>Profile Photo:</b></label>
+              <input
+                #photoURL
+                type="text"
+                placeholder="Profil Fotosu Linki"
+                name="photoURL"
+                formControlName="photoURL"
+                ngModel
+              />
+              <label for="newPassword"><b>New Password:</b></label>
+              <input
+                #newPassword
+                type="text"
+                placeholder="Enter New Password"
+                name="newPassword"
+                formControlName="newPassword"
+              />
+              <div class="form-group">
+                <div #alertParent></div>
+                <button>Kaydet</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

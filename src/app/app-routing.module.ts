@@ -9,6 +9,7 @@ import { BooktableComponent } from './me/booktable/booktable.component';
 import { HatimComponent } from './works/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ShbComponent } from './works/shb/shb.component';
+import { PireditComponent } from './works/piredit/piredit.component';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: 'booktable', component: BooktableComponent },
       { path: 'grouplist', component: GrouplistComponent },
       { path: 'settings', component: SettingsComponent },
-      { path: 'shb', component: ShbComponent }
+      { path: 'shb', component: ShbComponent },
+      { path: 'piredit', component: PireditComponent }
     ]
   },
 ];

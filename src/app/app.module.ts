@@ -34,6 +34,7 @@ import { HatimComponent } from './works/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
 import { ShbComponent } from './works/shb/shb.component';
+import { PireditComponent } from './works/piredit/piredit.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ShbComponent } from './works/shb/shb.component';
     SettingsComponent,
     LeftColumnComponent,
     ShbComponent,
+    PireditComponent,
   ],
   imports: [
     BrowserModule,
