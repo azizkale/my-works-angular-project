@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
 import { Pir } from 'src/models/Pir';
@@ -9,8 +9,8 @@ import { Pir } from 'src/models/Pir';
   styleUrls: ['./piredit.component.css']
 })
 export class PireditComponent implements OnInit {
-
   pirEditForm: FormGroup
+  addingChapterForm: FormGroup
   chapters = [
     { chapterName: 'chapter-1', chapterContent: 'chapter-content1' },
     { chapterName: 'chapter-2', chapterContent: 'chapter-content2' },
@@ -24,7 +24,9 @@ export class PireditComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.chapterForm();
   }
+
   createForm() {
     this.pirEditForm = this.fb.group({
       pirName: ['', Validators.required],
@@ -39,8 +41,14 @@ export class PireditComponent implements OnInit {
 
   }
 
+  chapterForm() {
+    this.addingChapterForm = this.fb.group({
+      chapterName: ['', Validators.required],
+      chapterContent: ['', Validators.required]
+    });
+  }
 
-  addChapter() {
+  addChapter(chapterName: string, chapterContent: string) {
     const chapterElements = `
 <input
 type="text"

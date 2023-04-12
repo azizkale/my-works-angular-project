@@ -57,6 +57,15 @@ img.avatar {
     padding: 16px;
 }
 
+.material-symbols-outlined {
+    font-size: xx-large;
+    cursor: pointer;
+}
+
+.addpir {
+    margin-left: 10px;
+}
+
 
 /* Change styles for span and cancel button on extra small screens */
 

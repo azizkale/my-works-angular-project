@@ -5,8 +5,17 @@
         <h2>Pırlanta Edit</h2>
       </div>
       <div class="col-sm-1 w-25">
-        <span (click)="addChapter()" class="material-symbols-outlined">
+        <span
+          onclick="document.getElementById('id_add_chapter').style.display='block'"
+          class="material-symbols-outlined"
+        >
           edit_note
+        </span>
+        <span
+          onclick="document.getElementById('id_add_chapter').style.display='block'"
+          class="material-symbols-outlined addpir"
+        >
+          add_circle
         </span>
       </div>
     </div>
@@ -48,5 +57,99 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<!-- ========== Add Chapter(MODAL) ========== -->
+<div id="id_add_chapter" class="w3-modal" #id_add_chapter>
+  <div
+    class="w3-modal-content w3-card-4 w3-animate-zoom"
+    style="max-width: 800px"
+  >
+    <div class="w3-center">
+      <br />
+      <span
+        onclick="document.getElementById('id_add_chapter').style.display='none'"
+        class="w3-button w3-xlarge w3-transparent w3-display-topright"
+        title="Close Modal"
+        >×</span
+      >
+    </div>
+
+    <form class="w3-container" [formGroup]="addingChapterForm">
+      <div class="w3-section">
+        <label><b>Bölüm adı</b></label>
+        <input
+          #chapterName
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          placeholder="Bölüm adını giriniz"
+          formControlName="chapterName"
+        />
+        <label><b>Bölüm içeriği</b></label>
+        <input
+          #chapterContent
+          class="w3-input w3-border"
+          type="text"
+          placeholder="Bölüm içeriği giriniz"
+          formControlName="chapterContent"
+        />
+        <button
+          onclick="document.getElementById('id_add_chapter').style.display='none'"
+          (click)="addChapter(chapterName.value, chapterContent.value)"
+          class="w3-button w3-block w3-green w3-section w3-padding"
+          type="submit"
+          [disabled]="addingChapterForm.pristine || addingChapterForm.invalid"
+        >
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- ========== Add New Pir(MODAL) ========== -->
+<div id="id_add_pir" class="w3-modal" #id_add_pir>
+  <div
+    class="w3-modal-content w3-card-4 w3-animate-zoom"
+    style="max-width: 800px"
+  >
+    <div class="w3-center">
+      <br />
+      <span
+        onclick="document.getElementById('id_add_pir').style.display='none'"
+        class="w3-button w3-xlarge w3-transparent w3-display-topright"
+        title="Close Modal"
+        >×</span
+      >
+    </div>
+
+    <form class="w3-container" [formGroup]="addingChapterForm">
+      <div class="w3-section">
+        <label><b>Bölüm adı</b></label>
+        <input
+          #chapterName
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          placeholder="Bölüm adını giriniz"
+          formControlName="chapterName"
+        />
+        <label><b>Bölüm içeriği</b></label>
+        <input
+          #chapterContent
+          class="w3-input w3-border"
+          type="text"
+          placeholder="Bölüm içeriği giriniz"
+          formControlName="chapterContent"
+        />
+        <button
+          onclick="document.getElementById('id_add_pir').style.display='none'"
+          (click)="addChapter(chapterName.value, chapterContent.value)"
+          class="w3-button w3-block w3-green w3-section w3-padding"
+          type="submit"
+          [disabled]="addingChapterForm.pristine || addingChapterForm.invalid"
+        >
+          Add
+        </button>
+      </div>
+    </form>
   </div>
 </div>
