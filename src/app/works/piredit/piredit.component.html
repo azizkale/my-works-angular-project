@@ -36,6 +36,19 @@
               </div>
             </div>
           </form>
+          <form [formGroup]="retrieveChapterForm" novalidate>
+            <div class="container">
+              <label for="chapters">Bölümler:</label>
+              <div *ngFor="let chapter of chapters; let i = index">
+                <input
+                  class="w3-button w-100"
+                  type="button"
+                  [value]="chapter.chapterName"
+                  [formControlName]="chapter.chapterName"
+                />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

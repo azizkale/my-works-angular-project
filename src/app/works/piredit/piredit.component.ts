@@ -74,12 +74,12 @@ export class PireditComponent implements OnInit {
   }
 
   createChapterRetrieveForm() {
-    // this.retrieveChapterForm = this.fb.group({
-    //   pirName: this.fb.array([]),
-    // });
-    // this.chapters.forEach((chapter, index) => {
-    //   this.retrievePirForm.addControl('chapterName-' + index, new FormControl(chapter.chapterName));
-    // });
+    this.retrieveChapterForm = this.fb.group({
+      pirName: this.fb.array([]),
+    });
+    this.chapters.forEach((chapter, index) => {
+      this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
+    });
   }
 
   createPirRetrieveForm() {
