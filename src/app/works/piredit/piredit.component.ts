@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
 import { Pir } from 'src/models/Pir';
+import { Roles } from 'src/models/Roles';
 
 @Component({
   selector: 'app-piredit',
@@ -9,8 +10,12 @@ import { Pir } from 'src/models/Pir';
   styleUrls: ['./piredit.component.css']
 })
 export class PireditComponent implements OnInit {
-  pirEditForm: FormGroup
-  addingChapterForm: FormGroup
+  pirEditForm: FormGroup;
+  addingChapterForm: FormGroup;
+  addNewPirForm: FormGroup;
+  roles = JSON.parse(localStorage.getItem('roles')!.toString())
+  //only admin can see it
+  displayAddNewPir: boolean = this.roles.includes(Roles[1])
   chapters = [
     { chapterName: 'chapter-1', chapterContent: 'chapter-content1' },
     { chapterName: 'chapter-2', chapterContent: 'chapter-content2' },
@@ -25,6 +30,7 @@ export class PireditComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.chapterForm();
+    this.newPirForm();
   }
 
   createForm() {
@@ -48,21 +54,15 @@ export class PireditComponent implements OnInit {
     });
   }
 
+  newPirForm() {
+    this.addNewPirForm = this.fb.group({
+      pirName: ['', Validators.required],
+      preface: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+
   addChapter(chapterName: string, chapterContent: string) {
-    const chapterElements = `
-<input
-type="text"
-[value]="chapter.chapterName"
-[formControlName]="'chapterName-' + i"
-/>
-<textarea
-[(ngModel)]="chapter.chapterContent"
-rows="5"
-[value]="chapter.chapterName"
-[formControlName]="'chapterContent-' + i"
-class="w3-input w3-border'"
->
-</textarea>
-`
+    console.log(this.roles)
   }
 }

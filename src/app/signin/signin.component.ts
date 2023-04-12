@@ -43,7 +43,7 @@ export class SigninComponent implements OnInit {
             await localStorage.setItem('displayName', response.displayName);
             await localStorage.setItem('uid', response.uid)
             await localStorage.setItem('photoURL', response.photoURL)
-            await localStorage.setItem('roles', response.roles)
+            await localStorage.setItem('roles', JSON.stringify(response.roles))
             this.router.navigate(['me']);
           }
           if (response.status === 404) {
