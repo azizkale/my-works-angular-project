@@ -25,13 +25,13 @@
         <div>
           <form [formGroup]="retrievePirForm" novalidate>
             <div class="container">
-              <label for="chapters">Bölümler:</label>
-              <div *ngFor="let chapter of chapters; let i = index">
+              <label for="chapters">Pırlantalar:</label>
+              <div *ngFor="let pir of pirs; let i = index">
                 <input
                   class="w3-button w-100"
                   type="button"
-                  [value]="chapter.chapterName"
-                  [formControlName]="'chapterName-' + i"
+                  [value]="pir.name"
+                  [formControlName]="pir.name"
                 />
               </div>
             </div>
@@ -77,7 +77,7 @@
         />
         <button
           onclick="document.getElementById('id_add_chapter').style.display='none'"
-          (click)="addChapter(chapterName.value, chapterContent.value)"
+          (click)="addChapter(chapterName.value, chapterContent.value, '')"
           class="w3-button w3-block w3-green w3-section w3-padding"
           type="submit"
           [disabled]="addingChapterForm.pristine || addingChapterForm.invalid"
