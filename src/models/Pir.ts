@@ -1,26 +1,23 @@
+import { Chapter } from "./Chapter";
+
 export class Pir {
     pirId: any;
     editorId: any;
     name: string | any;
     description: string;
-    chapters: {
-        chapterName: string;
-        chapterContent: string;
-    }[]
+    chapter: Chapter
 
     constructor(
         editorId: any,
         name: string | any,
         description: string,
-        chapters: [{
-            chapterName: string;
-            chapterContent: string;
-        }]
+        chapter: Chapter
     ) {
+        this.editorId = editorId
         this.name = name
         this.description = description
-        this.chapters = chapters
-        this.editorId = editorId
+        this.chapter = chapter
 
     }
+
 };

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
+import { Chapter } from 'src/models/Chapter';
 import { Pir } from 'src/models/Pir';
 import { Roles } from 'src/models/Roles';
 
@@ -66,14 +67,12 @@ export class PireditComponent implements OnInit {
     });
   }
   async addNewPir() {
+    const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value)
     const newPir = await new Pir(
       localStorage.getItem('uid'),
       this.addNewPirForm.get('pirName')?.value,
       this.addNewPirForm.get('description')?.value,
-      [{
-        chapterName: 'önsöz',
-        chapterContent: this.addNewPirForm.get('preface')?.value
-      }]
+      chapter
     )
     await this.pireditservice.createPir(newPir).subscribe({
       next: (ress) => {
