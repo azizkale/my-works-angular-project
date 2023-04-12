@@ -12,7 +12,7 @@
           edit_note
         </span>
         <span
-          *ngIf="displayAddNewPir"
+          *ngIf="allowedToAdmin"
           onclick="document.getElementById('id_add_pir').style.display='block'"
           class="material-symbols-outlined addpir"
         >
@@ -127,31 +127,33 @@
       <div class="w3-section">
         <label><b>Pırlanta adı:</b></label>
         <input
-          #pirName
           class="w3-input w3-border w3-margin-bottom"
           type="text"
           placeholder="Pırlanta adını giriniz"
           formControlName="pirName"
         />
         <label><b>Önsöz:</b></label>
-        <input
-          #preface
+        <textarea
+          rows="5"
           class="w3-input w3-border w3-margin-bottom"
           type="text"
           placeholder="Önsöz giriniz"
           formControlName="preface"
-        />
+        >
+        </textarea>
+
         <label><b>Arka Kapak:</b></label>
-        <input
-          #description
-          class="w3-input w3-border"
+        <textarea
+          rows="5"
+          class="w3-input w3-border w3-margin-bottom"
           type="text"
           placeholder="Arka kapak içeriğini giriniz"
           formControlName="description"
-        />
+        >
+        </textarea>
         <button
           onclick="document.getElementById('id_add_pir').style.display='none'"
-          (click)="addChapter(chapterName.value, chapterContent.value)"
+          (click)="addNewPir()"
           class="w3-button w3-block w3-green w3-section w3-padding"
           type="submit"
           [disabled]="addNewPirForm.pristine || addNewPirForm.invalid"

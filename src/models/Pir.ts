@@ -1,5 +1,6 @@
 export class Pir {
-    bookId: any;
+    pirId: any;
+    editorId: any;
     name: string | any;
     description: string;
     chapters: {
@@ -8,6 +9,7 @@ export class Pir {
     }[]
 
     constructor(
+        editorId: any,
         name: string | any,
         description: string,
         chapters: [{
@@ -18,6 +20,7 @@ export class Pir {
         this.name = name
         this.description = description
         this.chapters = chapters
+        this.editorId = editorId
 
     }
 };

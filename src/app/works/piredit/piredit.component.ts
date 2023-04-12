@@ -14,8 +14,8 @@ export class PireditComponent implements OnInit {
   addingChapterForm: FormGroup;
   addNewPirForm: FormGroup;
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
-  //only admin can see it
-  displayAddNewPir: boolean = this.roles.includes(Roles[1])
+  allowedToAdmin: boolean = this.roles.includes(Roles[1])
+
   chapters = [
     { chapterName: 'chapter-1', chapterContent: 'chapter-content1' },
     { chapterName: 'chapter-2', chapterContent: 'chapter-content2' },
@@ -54,6 +54,10 @@ export class PireditComponent implements OnInit {
     });
   }
 
+  addChapter(chapterName: string, chapterContent: string) {
+    console.log(this.roles)
+  }
+
   newPirForm() {
     this.addNewPirForm = this.fb.group({
       pirName: ['', Validators.required],
@@ -61,8 +65,22 @@ export class PireditComponent implements OnInit {
       description: ['', Validators.required]
     });
   }
-
-  addChapter(chapterName: string, chapterContent: string) {
-    console.log(this.roles)
+  async addNewPir() {
+    const newPir = await new Pir(
+      localStorage.getItem('uid'),
+      this.addNewPirForm.get('pirName')?.value,
+      this.addNewPirForm.get('description')?.value,
+      [{
+        chapterName: 'önsöz',
+        chapterContent: this.addNewPirForm.get('preface')?.value
+      }]
+    )
+    await this.pireditservice.createPir(newPir).subscribe({
+      next: (ress) => {
+        console.log(ress)
+      }
+    })
+    await this.newPirForm();
   }
+
 }
