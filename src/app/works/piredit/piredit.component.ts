@@ -14,6 +14,8 @@ export class PireditComponent implements OnInit {
   pirEditForm: FormGroup;
   addingChapterForm: FormGroup;
   addNewPirForm: FormGroup;
+  retrievePirForm: FormGroup;
+
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
 
@@ -29,12 +31,13 @@ export class PireditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createForm();
-    this.chapterForm();
-    this.newPirForm();
+    this.createPirEditForm();
+    this.createChapterForm();
+    this.createNewPirForm();
+    this.createPirRetrieveForm();
   }
 
-  createForm() {
+  createPirEditForm() {
     this.pirEditForm = this.fb.group({
       pirName: ['', Validators.required],
       bookChapterNames: this.fb.array([]),
@@ -48,10 +51,27 @@ export class PireditComponent implements OnInit {
 
   }
 
-  chapterForm() {
+  createChapterForm() {
     this.addingChapterForm = this.fb.group({
       chapterName: ['', Validators.required],
       chapterContent: ['', Validators.required]
+    });
+  }
+
+  createNewPirForm() {
+    this.addNewPirForm = this.fb.group({
+      pirName: ['', Validators.required],
+      preface: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+
+  createPirRetrieveForm() {
+    this.retrievePirForm = this.fb.group({
+      pirName: this.fb.array([]),
+    });
+    this.chapters.forEach((chapter, index) => {
+      this.retrievePirForm.addControl('chapterName-' + index, new FormControl(chapter.chapterName));
     });
   }
 
@@ -59,13 +79,8 @@ export class PireditComponent implements OnInit {
     console.log(this.roles)
   }
 
-  newPirForm() {
-    this.addNewPirForm = this.fb.group({
-      pirName: ['', Validators.required],
-      preface: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-  }
+
+
   async addNewPir() {
     const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value)
     const newPir = await new Pir(
@@ -79,7 +94,7 @@ export class PireditComponent implements OnInit {
         console.log(ress)
       }
     })
-    await this.newPirForm();
+    await this.createNewPirForm();
   }
 
 }
