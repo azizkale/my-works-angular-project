@@ -1,16 +1,10 @@
-<div class="w3-center mt-3">
+<div class="w3-center mt-3" *ngIf="!showChapterEditPage">
   <div class="container">
     <div class="row">
       <div class="col-sm-11 w-75">
         <h2>Pırlanta Edit</h2>
       </div>
       <div class="col-sm-1 w-25">
-        <span
-          onclick="document.getElementById('id_add_chapter').style.display='block'"
-          class="material-symbols-outlined"
-        >
-          edit_note
-        </span>
         <span
           *ngIf="allowedToAdmin"
           onclick="document.getElementById('id_add_pir').style.display='block'"
@@ -33,77 +27,18 @@
                   [value]="pir.name"
                   [formControlName]="pir.name"
                   [routerLink]="['chapter/' + i]"
+                  (click)="showChapterEditPage = true"
                 />
               </div>
             </div>
           </form>
-          <router-outlet></router-outlet>
-          <!-- <form [formGroup]="retrieveChapterForm" novalidate>
-            <div class="container">
-              <label for="chapters">Bölümler:</label>
-              <div *ngFor="let chapter of chapters; let i = index">
-                <input
-                  class="w3-button w-100"
-                  type="button"
-                  [value]="chapter.chapterName"
-                  [formControlName]="chapter.chapterName"
-                />
-              </div>
-            </div>
-          </form> -->
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- ========== Add Chapter(MODAL) ========== -->
-<div id="id_add_chapter" class="w3-modal" #id_add_chapter>
-  <div
-    class="w3-modal-content w3-card-4 w3-animate-zoom"
-    style="max-width: 800px"
-  >
-    <div class="w3-center">
-      <br />
-      <span
-        onclick="document.getElementById('id_add_chapter').style.display='none'"
-        class="w3-button w3-xlarge w3-transparent w3-display-topright"
-        title="Close Modal"
-        >×</span
-      >
-    </div>
-
-    <form class="w3-container" [formGroup]="addingChapterForm">
-      <div class="w3-section">
-        <label><b>Bölüm adı</b></label>
-        <input
-          #chapterName
-          class="w3-input w3-border w3-margin-bottom"
-          type="text"
-          placeholder="Bölüm adını giriniz"
-          formControlName="chapterName"
-        />
-        <label><b>Bölüm içeriği</b></label>
-        <input
-          #chapterContent
-          class="w3-input w3-border"
-          type="text"
-          placeholder="Bölüm içeriği giriniz"
-          formControlName="chapterContent"
-        />
-        <button
-          onclick="document.getElementById('id_add_chapter').style.display='none'"
-          (click)="
-            addChapter(chapterName.value, chapterContent.value, '', null, null)
-          "
-          class="w3-button w3-block w3-green w3-section w3-padding"
-          type="submit"
-          [disabled]="addingChapterForm.pristine || addingChapterForm.invalid"
-        >
-          Kaydet
-        </button>
-      </div>
-    </form>
-  </div>
+<div *ngIf="showChapterEditPage">
+  <router-outlet></router-outlet>
 </div>
 <!-- ========== Add New Pir(MODAL) ========== -->
 <div id="id_add_pir" class="w3-modal" #id_add_pir>
@@ -163,7 +98,7 @@
   </div>
 </div>
 <!-- ========== Retrieve Pir(just what editor added)(MODAL) ========== -->
-<div id="id_retrieve_pir" class="w3-modal" #id_retrieve_pir>
+<!-- <div id="id_retrieve_pir" class="w3-modal" #id_retrieve_pir>
   <div
     class="w3-modal-content w3-card-4 w3-animate-zoom"
     style="max-width: 800px"
@@ -215,4 +150,4 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->

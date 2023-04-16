@@ -12,16 +12,13 @@ import { Roles } from 'src/models/Roles';
 })
 export class PireditComponent implements OnInit {
   pirEditForm: FormGroup;
-  addingChapterForm: FormGroup;
   addNewPirForm: FormGroup;
   retrievePirForm: FormGroup;
-  retrieveChapterForm: FormGroup;
-  chapters: Chapter[];
   pirs: Pir[]
 
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
-
+  showChapterEditPage: boolean;
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService
@@ -29,18 +26,13 @@ export class PireditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.chapters = [
-      { chapterName: 'chapter-1', chapterContent: 'chapter-content1', chapterId: 'chapterId-1', editorId: '', pirId: '', createDate: new Date() },
-      { chapterName: 'chapter-2', chapterContent: 'chapter-content2', chapterId: 'chapterId-2', editorId: '', pirId: '', createDate: new Date() },
-    ]
+    this.showChapterEditPage = false
     this.pirs = [
-      { name: 'pir1', description: 'decription-1', chapters: [this.chapters[0]], editorId: 'mentorId-1', pirId: 'pirId-1' },
-      { name: 'pir2', description: 'decription-2', chapters: [this.chapters[1]], editorId: 'mentorId-2', pirId: 'pirId-2' },]
+      { name: 'pir1', description: 'decription-1', chapters: [], editorId: 'mentorId-1', pirId: 'pirId-1' },
+      { name: 'pir2', description: 'decription-2', chapters: [], editorId: 'mentorId-2', pirId: 'pirId-2' },]
     this.createPirEditForm();
-    this.createNewChapterForm();
     this.createNewPirForm();
     this.createPirRetrieveForm();
-    this.createChapterRetrieveForm();
   }
 
   createPirEditForm() {
@@ -50,19 +42,14 @@ export class PireditComponent implements OnInit {
       bookChapterContents: [this.fb.control([]), Validators.required]
     });
 
-    this.chapters.forEach((chapter, index) => {
-      this.pirEditForm.addControl('chapterName-' + index, new FormControl(chapter.chapterName));
-      this.pirEditForm.addControl('chapterContent-' + index, new FormControl(chapter.chapterContent));
-    });
+    // this.chapters.forEach((chapter, index) => {
+    //   this.pirEditForm.addControl('chapterName-' + index, new FormControl(chapter.chapterName));
+    //   this.pirEditForm.addControl('chapterContent-' + index, new FormControl(chapter.chapterContent));
+    // });
 
   }
 
-  createNewChapterForm() {
-    this.addingChapterForm = this.fb.group({
-      chapterName: ['', Validators.required],
-      chapterContent: ['', Validators.required]
-    });
-  }
+
 
   createNewPirForm() {
     this.addNewPirForm = this.fb.group({
@@ -72,14 +59,7 @@ export class PireditComponent implements OnInit {
     });
   }
 
-  createChapterRetrieveForm() {
-    this.retrieveChapterForm = this.fb.group({
-      chapterName: this.fb.array([]),
-    });
-    this.chapters.forEach((chapter, index) => {
-      this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
-    });
-  }
+
 
   createPirRetrieveForm() {
     this.retrievePirForm = this.fb.group({
@@ -91,15 +71,7 @@ export class PireditComponent implements OnInit {
     });
   }
 
-  addChapter(chapterName: string, chapterContent: string, pirId: any, editorId: any, chapterId: any) {
-    const chapter = new Chapter(chapterName, chapterContent, chapterId, editorId, pirId, new Date())
 
-    this.pireditservice.addChapter(chapter).subscribe({
-      next: (ress) => {
-        console.log(ress)
-      }
-    })
-  }
 
 
   async addNewPir() {
