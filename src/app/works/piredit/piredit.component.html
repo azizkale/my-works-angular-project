@@ -32,11 +32,13 @@
                   type="button"
                   [value]="pir.name"
                   [formControlName]="pir.name"
+                  [routerLink]="['chapter/' + i]"
                 />
               </div>
             </div>
           </form>
-          <form [formGroup]="retrieveChapterForm" novalidate>
+          <router-outlet></router-outlet>
+          <!-- <form [formGroup]="retrieveChapterForm" novalidate>
             <div class="container">
               <label for="chapters">Bölümler:</label>
               <div *ngFor="let chapter of chapters; let i = index">
@@ -48,7 +50,7 @@
                 />
               </div>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
     </div>

@@ -35,6 +35,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
 import { ShbComponent } from './works/shb/shb.component';
 import { PireditComponent } from './works/piredit/piredit.component';
+import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { PireditComponent } from './works/piredit/piredit.component';
     LeftColumnComponent,
     ShbComponent,
     PireditComponent,
+    ChaptereditComponent,
   ],
   imports: [
     BrowserModule,
