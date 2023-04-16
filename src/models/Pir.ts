@@ -5,18 +5,20 @@ export class Pir {
     editorId: any;
     name: string | any;
     description: string;
-    chapter: Chapter
+    chapters: Chapter[]
 
     constructor(
+        pirId: any,
         editorId: any,
         name: string | any,
         description: string,
-        chapter: Chapter
+        chapters: Chapter[]
     ) {
+        this.pirId = pirId
         this.editorId = editorId
         this.name = name
         this.description = description
-        this.chapter = chapter
+        this.chapters = chapters
 
     }
 

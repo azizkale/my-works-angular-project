@@ -10,6 +10,7 @@ import { HatimComponent } from './works/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ShbComponent } from './works/shb/shb.component';
 import { PireditComponent } from './works/piredit/piredit.component';
+import { Chapter } from 'src/models/Chapter';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },

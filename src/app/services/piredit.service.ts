@@ -29,12 +29,10 @@ export class PireditService {
   }
 
   //adds chapters to already exist Pir
-  addChapter(pirId: any, chapter: Chapter) {
+  addChapter(chapter: Chapter) {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
       const body = {
-        pirId: pirId,
-        editorId: localStorage.getItem('uid'),
         chapter: chapter,
         token: localStorage.getItem('token')
       };
