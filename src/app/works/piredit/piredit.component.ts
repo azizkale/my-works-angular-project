@@ -14,7 +14,7 @@ export class PireditComponent implements OnInit {
   pirEditForm: FormGroup;
   addNewPirForm: FormGroup;
   retrievePirForm: FormGroup;
-  pirs: Pir[]
+  pirs: Pir[] = [];
 
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
@@ -26,29 +26,10 @@ export class PireditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pirs = [
-      { name: 'pir1', description: 'decription-1', chapters: [], editorId: 'mentorId-1', pirId: 'pirId-1' },
-      { name: 'pir2', description: 'decription-2', chapters: [], editorId: 'mentorId-2', pirId: 'pirId-2' },]
-    this.createPirEditForm();
+    this.retrievePirs();
     this.createNewPirForm();
     this.createPirRetrieveForm();
   }
-
-  createPirEditForm() {
-    this.pirEditForm = this.fb.group({
-      pirName: ['', Validators.required],
-      bookChapterNames: this.fb.array([]),
-      bookChapterContents: [this.fb.control([]), Validators.required]
-    });
-
-    // this.chapters.forEach((chapter, index) => {
-    //   this.pirEditForm.addControl('chapterName-' + index, new FormControl(chapter.chapterName));
-    //   this.pirEditForm.addControl('chapterContent-' + index, new FormControl(chapter.chapterContent));
-    // });
-
-  }
-
-
 
   createNewPirForm() {
     this.addNewPirForm = this.fb.group({
@@ -60,12 +41,12 @@ export class PireditComponent implements OnInit {
 
 
 
-  createPirRetrieveForm() {
-    this.retrievePirForm = this.fb.group({
+  async createPirRetrieveForm() {
+    this.retrievePirForm = await this.fb.group({
       pirName: this.fb.array([]),
     });
 
-    this.pirs.forEach((pir, index) => {
+    await this.pirs.map((pir, index) => {
       this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
     });
   }
@@ -90,4 +71,12 @@ export class PireditComponent implements OnInit {
     this.createNewPirForm();
   }
 
+  retrievePirs(): any {
+    return this.pireditservice.retrievePirs().subscribe({
+      next: async (ress) => {
+        this.pirs = await Object.values(ress)
+        console.log(this.pirs)
+      }
+    })
+  }
 }

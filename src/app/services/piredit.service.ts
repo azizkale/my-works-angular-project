@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { AuthGuard } from '../Auth.Guard';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Pir } from 'src/models/Pir';
@@ -28,7 +28,7 @@ export class PireditService {
     }
   }
 
-  //adds chapters to already exist Pir
+  //adds chapters to already existed Pir
   addChapter(chapter: Chapter) {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
@@ -42,4 +42,19 @@ export class PireditService {
       return EMPTY;
     }
   }
+
+  retrievePirs(): Observable<any> {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
+
+      return this.http.get(environment.url + `/pir/getpirsbyeditorid`, { headers })
+    }
+    else {
+      // User is not authenticated, navigate to the login page
+
+      return EMPTY;
+    }
+  }
+
 }
