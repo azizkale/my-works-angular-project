@@ -26,9 +26,9 @@ export class PireditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.retrievePirs();
-    this.createNewPirForm();
-    this.createPirRetrieveForm();
+    this.retrievePirs()
+    this.createPirRetrieveForm()
+    this.createNewPirForm()
   }
 
   createNewPirForm() {
@@ -39,20 +39,13 @@ export class PireditComponent implements OnInit {
     });
   }
 
-
-
-  async createPirRetrieveForm() {
-    this.retrievePirForm = await this.fb.group({
+  createPirRetrieveForm() {
+    this.retrievePirForm = this.fb.group({
       pirName: this.fb.array([]),
     });
+    //formname array is fullfilled in the retrievePirs function (below)
 
-    await this.pirs.map((pir, index) => {
-      this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
-    });
   }
-
-
-
 
   async addNewPir() {
     const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date())
@@ -71,11 +64,15 @@ export class PireditComponent implements OnInit {
     this.createNewPirForm();
   }
 
-  retrievePirs(): any {
-    return this.pireditservice.retrievePirs().subscribe({
+  retrievePirs() {
+    this.pireditservice.retrievePirs().subscribe({
       next: async (ress) => {
-        this.pirs = await Object.values(ress)
-        console.log(this.pirs)
+        await Object.values(ress).map((pir: Pir | any) => {
+          this.pirs.push(pir)
+        })
+        this.pirs.forEach((pir, index) => {
+          this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
+        });
       }
     })
   }
