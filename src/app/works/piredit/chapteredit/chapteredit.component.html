@@ -4,15 +4,17 @@
       <div class="col-sm-11 w-75">
         <h2>Bölüm Edit</h2>
       </div>
-      <div class="col-sm-1 w-25">
+      <div class="col-sm-1 w-25 d-inline-block">
         <span
           *ngIf="allowedToAdmin"
           onclick="document.getElementById('id_add_chapter').style.display='block'"
           class="material-symbols-outlined"
         >
-          edit_note
+          add_circle
         </span>
-        <button class="w3-button" routerLink="/me/piredit">Geri</button>
+        <span class="material-symbols-outlined back" routerLink="/me/piredit">
+          arrow_back_ios_new
+        </span>
       </div>
     </div>
     <div class="row justify-content-center">

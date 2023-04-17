@@ -66,6 +66,10 @@ img.avatar {
     margin-left: 10px;
 }
 
+.material-symbols-outlined {
+    font-size: x-large;
+}
+
 
 /* Change styles for span and cancel button on extra small screens */
 
