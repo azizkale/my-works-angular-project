@@ -53,7 +53,9 @@
         >×</span
       >
     </div>
-
+    <div class="text-center">
+      <h2>Yeni Bölüm Ekle</h2>
+    </div>
     <form class="w3-container" [formGroup]="addingChapterForm">
       <div class="w3-section">
         <label><b>Bölüm adı</b></label>
@@ -65,13 +67,16 @@
           formControlName="chapterName"
         />
         <label><b>Bölüm içeriği</b></label>
-        <input
+        <textarea
           #chapterContent
-          class="w3-input w3-border"
+          rows="5"
+          class="w3-input w3-border w3-margin-bottom"
           type="text"
           placeholder="Bölüm içeriği giriniz"
           formControlName="chapterContent"
-        />
+        >
+        </textarea>
+
         <button
           onclick="document.getElementById('id_add_chapter').style.display='none'"
           (click)="

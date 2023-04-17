@@ -1,4 +1,4 @@
-<div class="w3-center mt-3" *ngIf="!showChapterEditPage">
+<div class="w3-center mt-3">
   <div class="container">
     <div class="row">
       <div class="col-sm-11 w-75">
@@ -26,8 +26,7 @@
                   type="button"
                   [value]="pir.name"
                   [formControlName]="pir.name"
-                  [routerLink]="['chapter/' + i]"
-                  (click)="showChapterEditPage = true"
+                  [routerLink]="['/me/chapter/' + pir.pirId]"
                 />
               </div>
             </div>
@@ -37,9 +36,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="showChapterEditPage">
-  <router-outlet></router-outlet>
-</div>
+
 <!-- ========== Add New Pir(MODAL) ========== -->
 <div id="id_add_pir" class="w3-modal" #id_add_pir>
   <div
@@ -55,7 +52,9 @@
         >×</span
       >
     </div>
-
+    <div class="text-center">
+      <h2>Yeni Pırlanta Ekle</h2>
+    </div>
     <form class="w3-container" [formGroup]="addNewPirForm">
       <div class="w3-section">
         <label><b>Pırlanta adı:</b></label>

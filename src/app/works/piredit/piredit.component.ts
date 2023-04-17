@@ -18,7 +18,7 @@ export class PireditComponent implements OnInit {
 
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
-  showChapterEditPage: boolean;
+
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService
@@ -26,7 +26,6 @@ export class PireditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.showChapterEditPage = false
     this.pirs = [
       { name: 'pir1', description: 'decription-1', chapters: [], editorId: 'mentorId-1', pirId: 'pirId-1' },
       { name: 'pir2', description: 'decription-2', chapters: [], editorId: 'mentorId-2', pirId: 'pirId-2' },]

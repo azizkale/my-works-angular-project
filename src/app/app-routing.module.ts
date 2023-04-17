@@ -10,7 +10,6 @@ import { HatimComponent } from './works/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ShbComponent } from './works/shb/shb.component';
 import { PireditComponent } from './works/piredit/piredit.component';
-import { Chapter } from 'src/models/Chapter';
 import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.component';
 
 const routes: Routes = [
@@ -25,11 +24,9 @@ const routes: Routes = [
       { path: 'grouplist', component: GrouplistComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'shb', component: ShbComponent },
-      {
-        path: 'piredit', component: PireditComponent, children: [
-          { path: 'chapter/:id', component: ChaptereditComponent }
-        ]
-      }
+      { path: 'piredit', component: PireditComponent },
+      { path: 'chapter/:id', component: ChaptereditComponent },
+
     ]
   },
 ];
