@@ -47,7 +47,7 @@ export class PireditComponent implements OnInit {
 
   }
 
-  async addNewPir() {
+  async createNewPir() {
     const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date())
     const newPir = new Pir(
       null,
@@ -67,12 +67,16 @@ export class PireditComponent implements OnInit {
   retrievePirs() {
     this.pireditservice.retrievePirs().subscribe({
       next: async (ress) => {
-        await Object.values(ress).map((pir: Pir | any) => {
-          this.pirs.push(pir)
-        })
-        this.pirs.forEach((pir, index) => {
-          this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
-        });
+        if (ress) {
+          await Object.values(ress).map((pir: Pir | any) => {
+            this.pirs.push(pir)
+          })
+          this.pirs.forEach((pir, index) => {
+            this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
+          });
+        }
+
+
       }
     })
   }

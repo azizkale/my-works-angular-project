@@ -80,7 +80,10 @@
 
         <button
           onclick="document.getElementById('id_add_chapter').style.display='none'"
-          (click)="addChapter(chapterName.value, chapterContent.value)"
+          (click)="
+            addChapter(chapterName.value, chapterContent.value);
+            createNewChapterForm()
+          "
           class="w3-button w3-block w3-green w3-section w3-padding"
           type="submit"
           [disabled]="addingChapterForm.pristine || addingChapterForm.invalid"

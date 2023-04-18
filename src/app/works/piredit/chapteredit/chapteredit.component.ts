@@ -27,22 +27,22 @@ export class ChaptereditComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedPirId = this.activeroute.snapshot.paramMap.get('id');
+    this.retrieveChaptersByEditorId();
+    this.createChapterRetrieveForm()
+    // this.chapters = [
+    //   { chapterName: 'chapter-1', chapterContent: 'chapter-content1', chapterId: 'chapterId-1', editorId: '', pirId: '', createDate: new Date() },
+    //   { chapterName: 'chapter-2', chapterContent: 'chapter-content2', chapterId: 'chapterId-2', editorId: '', pirId: '', createDate: new Date() },
+    // ]
 
-    this.chapters = [
-      { chapterName: 'chapter-1', chapterContent: 'chapter-content1', chapterId: 'chapterId-1', editorId: '', pirId: '', createDate: new Date() },
-      { chapterName: 'chapter-2', chapterContent: 'chapter-content2', chapterId: 'chapterId-2', editorId: '', pirId: '', createDate: new Date() },
-    ]
-    this.createChapterRetrieveForm();
     this.createNewChapterForm();
 
   }
+
   createChapterRetrieveForm() {
     this.retrieveChapterForm = this.fb.group({
       chapterName: this.fb.array([]),
     });
-    this.chapters.forEach((chapter, index) => {
-      this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
-    });
+
   }
   createNewChapterForm() {
     this.addingChapterForm = this.fb.group({
@@ -57,6 +57,19 @@ export class ChaptereditComponent implements OnInit {
 
     this.pireditservice.addChapter(chapter).subscribe({
       next: (ress) => {
+        console.log(ress)
+      }
+    })
+  }
+
+  retrieveChaptersByEditorId() {
+    const editorId = localStorage.getItem('uid');
+    this.pireditservice.retrieveChaptersByEditorId(editorId, this.selectedPirId).subscribe({
+      next: (ress) => {
+        this.chapters = ress;
+        this.chapters.forEach((chapter, index) => {
+          this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
+        });
         console.log(ress)
       }
     })

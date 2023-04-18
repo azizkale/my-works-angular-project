@@ -46,7 +46,7 @@ export class PireditService {
       // User is authenticated, return the data
       const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
 
-      return this.http.get(environment.url + `/pir/getpirsbyeditorid`, { headers })
+      return this.http.get(environment.url + `/pir/getpirs`, { headers })
     }
     else {
       // User is not authenticated, navigate to the login page
@@ -55,4 +55,17 @@ export class PireditService {
     }
   }
 
+  retrieveChaptersByEditorId(editorId: any, pirId: any): Observable<any> {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
+
+      return this.http.get(environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`, { headers })
+    }
+    else {
+      // User is not authenticated, navigate to the login page
+
+      return EMPTY;
+    }
+  }
 }
