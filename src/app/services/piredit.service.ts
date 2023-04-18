@@ -27,7 +27,6 @@ export class PireditService {
       return EMPTY;
     }
   }
-
   //adds chapters to already existed Pir
   addChapter(chapter: Chapter) {
     if (this.authGuard.canActivate()) {
@@ -42,7 +41,6 @@ export class PireditService {
       return EMPTY;
     }
   }
-
   retrievePirs(): Observable<any> {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data

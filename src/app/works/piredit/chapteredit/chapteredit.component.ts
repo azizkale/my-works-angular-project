@@ -50,8 +50,10 @@ export class ChaptereditComponent implements OnInit {
       chapterContent: ['', Validators.required]
     });
   }
-  addChapter(chapterName: string, chapterContent: string, pirId: any, editorId: any, chapterId: any) {
-    const chapter = new Chapter(chapterName, chapterContent, chapterId, editorId, pirId, new Date())
+  addChapter(chapterName: string, chapterContent: string) {
+    const editorId = localStorage.getItem('uid');
+    //chapterId will be given in service
+    const chapter = new Chapter(chapterName, chapterContent, null, editorId, this.selectedPirId, new Date())
 
     this.pireditservice.addChapter(chapter).subscribe({
       next: (ress) => {
