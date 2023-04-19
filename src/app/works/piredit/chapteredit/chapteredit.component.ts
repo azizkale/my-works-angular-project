@@ -12,8 +12,9 @@ import { Roles } from 'src/models/Roles';
 })
 export class ChaptereditComponent implements OnInit {
   retrieveChapterForm: FormGroup;
+  createChapterForm: FormGroup;
+  updateChapterForm: FormGroup;
   chapters: Chapter[];
-  addingChapterForm: FormGroup;
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
   selectedPirId: any;
@@ -29,23 +30,31 @@ export class ChaptereditComponent implements OnInit {
     this.selectedPirId = this.activeroute.snapshot.paramMap.get('id');
     this.retrieveChaptersByEditorId();
     this.createChapterRetrieveForm()
-    // this.chapters = [
-    //   { chapterName: 'chapter-1', chapterContent: 'chapter-content1', chapterId: 'chapterId-1', editorId: '', pirId: '', createDate: new Date() },
-    //   { chapterName: 'chapter-2', chapterContent: 'chapter-content2', chapterId: 'chapterId-2', editorId: '', pirId: '', createDate: new Date() },
-    // ]
-
     this.createNewChapterForm();
-
+    this.createUpdateChapterForm();
   }
 
   createChapterRetrieveForm() {
     this.retrieveChapterForm = this.fb.group({
+      chapterId: ['', Validators.required],
+      pirId: ['', Validators.required],
+      editorId: ['', Validators.required],
+      createDate: ['', Validators.required],
+      chapterContent: ['', Validators.required],
       chapterName: this.fb.array([]),
+
     });
 
   }
   createNewChapterForm() {
-    this.addingChapterForm = this.fb.group({
+    this.createChapterForm = this.fb.group({
+      chapterName: ['', Validators.required],
+      chapterContent: ['', Validators.required]
+    });
+  }
+
+  createUpdateChapterForm() {
+    this.updateChapterForm = this.fb.group({
       chapterName: ['', Validators.required],
       chapterContent: ['', Validators.required]
     });
@@ -70,8 +79,24 @@ export class ChaptereditComponent implements OnInit {
         this.chapters.forEach((chapter, index) => {
           this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
         });
-        console.log(ress)
       }
+    })
+  }
+
+  selectChapter(chapter: Chapter) {
+    this.updateChapterForm = this.fb.group({
+      chapterId: [chapter.chapterId],
+      chapterName: [chapter.chapterName, Validators.required],
+      chapterContent: [chapter.chapterContent, Validators.required],
+      pirId: [chapter.pirId, Validators.required],
+      editorId: [chapter.editorId, Validators.required],
+      createDate: [chapter.createDate, Validators.required],
+    });
+  }
+
+  updateChapter() {
+    this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
+      next: (ress) => { this.retrieveChaptersByEditorId() }
     })
   }
 }

@@ -50,7 +50,6 @@ export class PireditService {
     }
     else {
       // User is not authenticated, navigate to the login page
-
       return EMPTY;
     }
   }
@@ -64,7 +63,21 @@ export class PireditService {
     }
     else {
       // User is not authenticated, navigate to the login page
+      this.router.navigate(['signin']);
+      return EMPTY;
+    }
+  }
 
+  updateChapter(chapter: Chapter) {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const body = { chapter: chapter, token: localStorage.getItem('token') };
+
+      return this.http.patch(environment.url + '/pir/updatechapter', body)
+
+    } else {
+      // User is not authenticated, navigate to the login page
+      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
