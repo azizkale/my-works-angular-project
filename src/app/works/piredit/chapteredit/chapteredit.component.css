@@ -3,9 +3,9 @@
 }
 
 span {
-    white-space: nowrap;
+    margin: 0 5px;
 }
 
-.back {
-    margin-left: -60px;
+input {
+    text-align: left;
 }

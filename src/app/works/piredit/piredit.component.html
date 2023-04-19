@@ -18,17 +18,14 @@
       <div class="col">
         <div>
           <form [formGroup]="retrievePirForm" novalidate>
-            <div class="container">
-              <label for="chapters">Pırlantalar:</label>
-              <div *ngFor="let pir of pirs; let i = index">
-                <input
-                  class="w3-button w-100"
-                  type="button"
-                  [value]="pir.name"
-                  [formControlName]="pir.name"
-                  [routerLink]="['/me/chapter/' + pir.pirId]"
-                />
-              </div>
+            <div *ngFor="let pir of pirs; let i = index">
+              <input
+                class="w3-button w-100"
+                type="button"
+                [value]="pir.name"
+                [formControlName]="pir.name"
+                [routerLink]="['/me/chapter/' + pir.pirId]"
+              />
             </div>
           </form>
         </div>

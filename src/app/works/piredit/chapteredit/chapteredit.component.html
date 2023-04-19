@@ -1,38 +1,36 @@
 <div class="w3-center mt-3">
   <div class="container">
     <div class="row">
-      <div class="col-sm-11 w-75">
+      <div class="col-sm-10 w-75">
         <h2>Bölüm Edit</h2>
       </div>
-      <div class="col-sm-1 w-25 d-inline-block">
-        <span
-          onclick="document.getElementById('id_add_chapter').style.display='block'"
-          class="material-symbols-outlined"
-        >
-          add_circle
-        </span>
-        <span class="material-symbols-outlined back" routerLink="/me/piredit">
-          arrow_back_ios_new
-        </span>
+      <div class="col-sm-2 w-25">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <span
+            onclick="document.getElementById('id_add_chapter').style.display='block'"
+            class="material-symbols-outlined"
+          >
+            add_circle
+          </span>
+          <span class="material-symbols-outlined" routerLink="/me/piredit">
+            arrow_back_ios_new
+          </span>
+        </div>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col">
+    <div class="row">
+      <div class="col-sm">
         <div>
           <form [formGroup]="retrieveChapterForm" novalidate>
-            <div class="container">
-              <label for="chapters" class="ml-6">Bölümler:</label>
-              <div *ngFor="let chapter of chapters; let i = index">
-                <input
-                  class="w3-button w-100"
-                  type="button"
-                  [value]="chapter.chapterName"
-                  [formControlName]="chapter.chapterName"
-                />
-              </div>
+            <div *ngFor="let chapter of chapters; let i = index">
+              <input
+                class="w3-button w-100"
+                type="button"
+                [value]="chapter.chapterName"
+                [formControlName]="chapter.chapterName"
+              />
             </div>
           </form>
-          <router-outlet></router-outlet>
         </div>
       </div>
     </div>
