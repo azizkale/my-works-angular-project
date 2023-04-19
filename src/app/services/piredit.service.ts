@@ -38,9 +38,11 @@ export class PireditService {
       return this.http.post(environment.url + '/pir/addchapter', body)
     } else {
       // User is not authenticated, navigate to the login page   
+      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
+
   retrievePirs(): Observable<any> {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
@@ -50,6 +52,7 @@ export class PireditService {
     }
     else {
       // User is not authenticated, navigate to the login page
+      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -81,6 +84,7 @@ export class PireditService {
       return EMPTY;
     }
   }
+
   updatePir(pir: Pir) {
     if (this.authGuard.canActivate()) {
       // User is authenticated, return the data
