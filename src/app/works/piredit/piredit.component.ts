@@ -11,9 +11,9 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./piredit.component.css']
 })
 export class PireditComponent implements OnInit {
-  pirEditForm: FormGroup;
   addNewPirForm: FormGroup;
   retrievePirForm: FormGroup;
+  updatePirForm: FormGroup;
   pirs: Pir[] = [];
 
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
@@ -29,6 +29,7 @@ export class PireditComponent implements OnInit {
     this.retrievePirs()
     this.createPirRetrieveForm()
     this.createNewPirForm()
+    this.createUpdatePirForm();
   }
 
   createNewPirForm() {
@@ -46,7 +47,14 @@ export class PireditComponent implements OnInit {
     //formname array is fullfilled in the retrievePirs function (below)
 
   }
-
+  createUpdatePirForm() {
+    this.updatePirForm = this.fb.group({
+      pirId: ['', Validators.required],
+      editorId: ['', Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
   async createNewPir() {
     const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date())
     const newPir = new Pir(
@@ -65,6 +73,7 @@ export class PireditComponent implements OnInit {
   }
 
   retrievePirs() {
+    this.pirs = []
     this.pireditservice.retrievePirs().subscribe({
       next: async (ress) => {
         if (ress) {
@@ -75,9 +84,22 @@ export class PireditComponent implements OnInit {
             this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
           });
         }
-
-
       }
+    })
+  }
+
+  selectPir(pir: Pir) {
+    this.updatePirForm = this.fb.group({
+      pirId: [pir.pirId, Validators.required],
+      editorId: [pir.editorId, Validators.required],
+      name: [pir.name, Validators.required],
+      description: [pir.description, Validators.required]
+    });
+  }
+
+  updatePir() {
+    this.pireditservice.updatePir(this.updatePirForm.value).subscribe({
+      next: (ress) => { this.retrievePirs() }
     })
   }
 }

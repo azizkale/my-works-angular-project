@@ -81,4 +81,17 @@ export class PireditService {
       return EMPTY;
     }
   }
+  updatePir(pir: Pir) {
+    if (this.authGuard.canActivate()) {
+      // User is authenticated, return the data
+      const body = { pir: pir, token: localStorage.getItem('token') };
+
+      return this.http.patch(environment.url + '/pir/updatepir', body)
+
+    } else {
+      // User is not authenticated, navigate to the login page
+      this.router.navigate(['signin']);
+      return EMPTY;
+    }
+  }
 }
