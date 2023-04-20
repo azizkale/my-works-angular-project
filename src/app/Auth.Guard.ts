@@ -4,7 +4,6 @@ import { CommonService } from './services/common.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    isAuthenticated: boolean;
 
     constructor(
         private router: Router,
@@ -12,18 +11,13 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        this.commonservice.tokenExpiringControl().subscribe({
-            next: async (response) => {
-                if (response.status === 200) {
-                    this.isAuthenticated = true;
-                }
-                else {
-                    this.isAuthenticated = false;
-                    localStorage.clear()
-                    this.router.navigate(['signin']);
-                }
-            }
-        })
-        return this.isAuthenticated;
+        if (this.commonservice.tokenExpiringControl()) {
+            //
+        }
+        else {
+            localStorage.clear()
+            this.router.navigate(['signin']);
+        }
+        return this.commonservice.tokenExpiringControl()
     }
 }

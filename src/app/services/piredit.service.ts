@@ -23,7 +23,6 @@ export class PireditService {
       const body = { pir: pir, token: localStorage.getItem('token') };
       return this.http.post(environment.url + '/pir/create', body)
     } else {
-      // User is not authenticated, navigate to the login page   
       return EMPTY;
     }
   }
@@ -37,8 +36,6 @@ export class PireditService {
       };
       return this.http.post(environment.url + '/pir/addchapter', body)
     } else {
-      // User is not authenticated, navigate to the login page   
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -51,8 +48,6 @@ export class PireditService {
       return this.http.get(environment.url + `/pir/getpirs`, { headers })
     }
     else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -65,8 +60,6 @@ export class PireditService {
       return this.http.get(environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`, { headers })
     }
     else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -79,8 +72,6 @@ export class PireditService {
       return this.http.patch(environment.url + '/pir/updatechapter', body)
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -93,8 +84,6 @@ export class PireditService {
       return this.http.patch(environment.url + '/pir/updatepir', body)
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }

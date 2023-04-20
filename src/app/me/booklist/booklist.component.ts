@@ -75,10 +75,7 @@ export class BooklistComponent implements OnInit {
         this.retrieveBooks();
       },
       error: async (err) => {
-        //unvalid token
-        if (err.status === 401) {
-          this.deleteToken();
-        }
+
       }
     })
   }
@@ -105,9 +102,7 @@ export class BooklistComponent implements OnInit {
         })
       },
       error: (err) => {
-        if (err.status === 401) {
-          this.deleteToken();
-        }
+
       }, complete: () => {
 
       }
@@ -135,7 +130,6 @@ export class BooklistComponent implements OnInit {
     this.bookservice.deleteBook(this.bookManipulateForm.get('bookId')?.value).subscribe({
       next: (response) => { },
       error: (err) => {
-        this.deleteToken();
       },
       complete: () => { this.retrieveBooks(); }
     })
@@ -168,14 +162,8 @@ export class BooklistComponent implements OnInit {
           await this.retrieveBooks();
 
         },
-        error: (err) => { console.log(err.message); this.deleteToken() }
+        error: (err) => { console.log(err.message) }
       })
     }
-  }
-
-  deleteToken() {
-    localStorage.removeItem('token');
-    this.router.navigate(['signin']);
-
   }
 }

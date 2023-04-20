@@ -24,8 +24,6 @@ export class SettingsService {
       return this.http.patch(environment.url + '/settings/updateuser', body)
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -38,8 +36,6 @@ export class SettingsService {
       return this.http.get(environment.url + '/settings/getuserinfo', { headers })
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -52,8 +48,6 @@ export class SettingsService {
       return this.http.patch(environment.url + '/settings/updateuserpassword', body)
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }

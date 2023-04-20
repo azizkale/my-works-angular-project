@@ -24,8 +24,6 @@ export class UserService {
 
     }
     else {
-      // User is not authenticated, navigate to the login page
-
       return EMPTY;
     }
   }

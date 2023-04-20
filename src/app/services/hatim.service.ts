@@ -22,7 +22,6 @@ export class HatimService {
       const body = { token: localStorage.getItem('token') };
       return this.http.post(environment.url + '/hatim/create', body)
     } else {
-      // User is not authenticated, navigate to the login page   
       return EMPTY;
     }
   }
@@ -35,8 +34,6 @@ export class HatimService {
 
     }
     else {
-      // User is not authenticated, navigate to the login page
-
       return EMPTY;
     }
 
@@ -50,8 +47,6 @@ export class HatimService {
       return this.http.patch(environment.url + '/hatim/update', body)
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -65,8 +60,6 @@ export class HatimService {
       return this.http.get(environment.url + `/hatim/retrievesinglecuz?cuznumber=${cuzname}`, { headers })
     }
     else {
-      // User is not authenticated, navigate to the login page
-
       return EMPTY;
     }
   }
@@ -81,8 +74,6 @@ export class HatimService {
 
     }
     else {
-      // User is not authenticated, navigate to the login page
-
       return EMPTY;
     }
   }
@@ -96,8 +87,6 @@ export class HatimService {
 
     }
     else {
-      // User is not authenticated, navigate to the login page
-
       return EMPTY;
     }
   }

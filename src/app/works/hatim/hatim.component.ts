@@ -4,7 +4,6 @@ import { cuz } from 'src/models/cuz';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-hatim',
@@ -47,10 +46,7 @@ export class HatimComponent implements OnInit {
         })
       },
       error: (err) => {
-        if (err.status === 401) {
-          localStorage.removeItem('token');
-          this.router.navigate(['signin']);
-        }
+
       },
       complete: () => {
       }

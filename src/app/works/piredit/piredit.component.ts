@@ -66,7 +66,6 @@ export class PireditComponent implements OnInit {
     )
     this.pireditservice.createPir(newPir).subscribe({
       next: (ress) => {
-        console.log(ress);
       }
     })
     this.createNewPirForm();

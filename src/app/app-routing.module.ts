@@ -19,12 +19,12 @@ const routes: Routes = [
   {
     path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [
       { path: '', redirectTo: 'booktable', pathMatch: 'full' },
-      { path: 'hatim', component: HatimComponent, canActivate: [AuthGuard] },
+      { path: 'hatim', component: HatimComponent },
       { path: 'booktable', component: BooktableComponent },
       { path: 'grouplist', component: GrouplistComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'shb', component: ShbComponent },
-      { path: 'piredit', component: PireditComponent, canActivate: [AuthGuard] },
+      { path: 'piredit', component: PireditComponent },
       { path: 'chapter/:id', component: ChaptereditComponent },
 
     ]

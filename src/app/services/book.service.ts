@@ -23,8 +23,6 @@ export class BookService {
       const body = { book: book, token: localStorage.getItem('token') };
       return this.http.post(environment.url + '/book/create', body)
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
 
@@ -37,7 +35,6 @@ export class BookService {
       return this.http.get(environment.url + '/book/retrieve', { headers })
     } else {
       // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
 
@@ -51,8 +48,6 @@ export class BookService {
       return this.http.delete(environment.url + '/book/delete', { body })
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }
@@ -65,8 +60,6 @@ export class BookService {
       return this.http.patch(environment.url + '/book/update', body)
 
     } else {
-      // User is not authenticated, navigate to the login page
-      this.router.navigate(['signin']);
       return EMPTY;
     }
   }

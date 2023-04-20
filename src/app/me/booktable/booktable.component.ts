@@ -50,9 +50,7 @@ export class BooktableComponent implements OnInit {
 
       },
       error: (err) => {
-        if (err.status === 401) {
-          this.deleteToken();
-        }
+
       }
     })
   }
@@ -61,11 +59,7 @@ export class BooktableComponent implements OnInit {
     return Math.round((book?.readPage / book.totalPage) * 100)
   }
 
-  deleteToken() {
-    localStorage.clear();
-    this.router.navigate(['signin']);
 
-  }
 
   reload() {
     window.location.reload()

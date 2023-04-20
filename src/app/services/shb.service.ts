@@ -23,7 +23,6 @@ export class ShbService {
       const body = { shb: shb, token: localStorage.getItem('token') };
       return this.http.post(environment.url + '/shb/create', body)
     } else {
-      // User is not authenticated, navigate to the login page   
       return EMPTY;
     }
   }
