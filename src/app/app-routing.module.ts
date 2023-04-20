@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'grouplist', component: GrouplistComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'shb', component: ShbComponent },
-      { path: 'piredit', component: PireditComponent },
+      { path: 'piredit', component: PireditComponent, canActivate: [AuthGuard] },
       { path: 'chapter/:id', component: ChaptereditComponent },
 
     ]
