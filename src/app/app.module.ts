@@ -3,9 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { AuthGuard } from './Auth.Guard';
+import { AuthInterceptor } from './auth.interceptor';
 
 // ================Angular material modules
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -71,7 +72,15 @@ import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.co
     MatProgressBarModule,
     MatProgressSpinnerModule
   ],
-  providers: [AuthGuard, DatePipe],
+  providers: [
+    AuthGuard,
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

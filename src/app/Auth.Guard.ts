@@ -11,13 +11,7 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        if (this.commonservice.tokenExpiringControl()) {
-            //
-        }
-        else {
-            localStorage.clear()
-            this.router.navigate(['signin']);
-        }
-        return this.commonservice.tokenExpiringControl()
+
+        return true
     }
 }

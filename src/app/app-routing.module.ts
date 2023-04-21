@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'me', component: MeComponent, canActivate: [AuthGuard], children: [
+    path: 'me', component: MeComponent, children: [
       { path: '', redirectTo: 'booktable', pathMatch: 'full' },
       { path: 'hatim', component: HatimComponent },
       { path: 'booktable', component: BooktableComponent },
