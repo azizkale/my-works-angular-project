@@ -14,11 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         const token = localStorage.getItem('token');
 
-        //to ignore intercep for sign in
-        if (request.url.includes('/signin')) {
-            return next.handle(request);
-        }
-
         if (token) {
             request = request.clone({
                 setHeaders: {
