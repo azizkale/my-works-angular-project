@@ -16,10 +16,12 @@ export class ChaptereditComponent implements OnInit {
   retrieveChapterForm: FormGroup;
   createChapterForm: FormGroup;
   updateChapterForm: FormGroup;
+  editWordForm: FormGroup;
   chapters: Chapter[];
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
   selectedPirId: any;
+  selectedWord: any; // to edit word on chapter update form
 
   constructor(
     public fb: FormBuilder,
@@ -34,6 +36,7 @@ export class ChaptereditComponent implements OnInit {
     this.createChapterRetrieveForm()
     this.createNewChapterForm();
     this.createUpdateChapterForm();
+    this.createWordEditForm();
   }
 
   createChapterRetrieveForm() {
@@ -43,15 +46,19 @@ export class ChaptereditComponent implements OnInit {
       editorId: ['', Validators.required],
       createDate: ['', Validators.required],
       chapterContent: ['', Validators.required],
-      chapterName: this.fb.array([]),
-
+      chapterName: this.fb.array([])
     });
-
   }
   createNewChapterForm() {
     this.createChapterForm = this.fb.group({
       chapterName: ['', Validators.required],
       chapterContent: ['', Validators.required]
+    });
+  }
+
+  createWordEditForm() {
+    this.editWordForm = this.fb.group({
+      wordEdit: ['', Validators.required]
     });
   }
 
@@ -104,8 +111,11 @@ export class ChaptereditComponent implements OnInit {
 
   selectTextToManipulate(event: any) {
     const selection: any = window.getSelection();
-    const selectedText = selection.toString();
-    console.log(selectedText)
+    this.selectedWord = selection.toString();
+    console.log(this.selectedWord)
   }
 
+  saveWordPair(word: string) {
+    console.log(word)
+  }
 }

@@ -142,23 +142,44 @@
         >
           Güncelle
         </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          placement="top"
+          [ngbPopover]="popEditWord"
+          popoverTitle="Düzenle"
+          style="margin-right: 10px"
+          [autoClose]="'outside'"
+        >
+          kaydet
+        </button>
       </div>
     </form>
   </div>
 </div>
-
-<!-- chapter edit popover -->
-<ng-template #popDeleteContent>
+<!-- ===============Popovers-WordEdit================= -->
+<ng-template #popEditWord>
   <div class="text-center">
-    <h4>Are you sure to delete</h4>
+    <h3>{{ selectedWord }}</h3>
+    <form class="w3-container" [formGroup]="editWordForm">
+      <div class="w3-section">
+        <label><b>Kelimenin anlamı:</b></label>
+        <input
+          #wordEdit
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          placeholder="Kelime anlamını giriniz."
+          formControlName="wordEdit"
+        />
+      </div>
+    </form>
     <button
-      onclick="document.getElementById('update_delete_book').style.display='none'"
       type="button"
       class="btn btn-danger"
       style="margin-right: 10px"
+      (click)="saveWordPair(wordEdit.value)"
     >
-      Delete
+      Kaydet
     </button>
-    <button type="button" class="btn btn-info">Cancel</button>
   </div>
 </ng-template>

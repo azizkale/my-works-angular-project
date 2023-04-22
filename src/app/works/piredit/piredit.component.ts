@@ -62,7 +62,8 @@ export class PireditComponent implements OnInit {
       localStorage.getItem('uid'),
       this.addNewPirForm.get('pirName')?.value,
       this.addNewPirForm.get('description')?.value,
-      [chapter]
+      [chapter],
+      []
     )
     this.pireditservice.createPir(newPir).subscribe({
       next: (ress) => {
