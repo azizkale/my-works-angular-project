@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PireditService } from 'src/app/services/piredit.service';
@@ -11,7 +11,6 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./chapteredit.component.css'],
 })
 export class ChaptereditComponent implements OnInit {
-  @ViewChild('chapterContent') chapterContent: ElementRef
 
   retrieveChapterForm: FormGroup;
   createChapterForm: FormGroup;
@@ -112,7 +111,6 @@ export class ChaptereditComponent implements OnInit {
   selectTextToManipulate(event: any) {
     const selection: any = window.getSelection();
     this.selectedWord = selection.toString();
-    console.log(this.selectedWord)
   }
 
   saveWordPair(word: string) {
