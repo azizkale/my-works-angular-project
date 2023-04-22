@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthGuard } from '../Auth.Guard';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,20 +10,9 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private authGuard: AuthGuard,
   ) { }
 
   getUserById(uid: any): Observable<any> {
-    if (this.authGuard.canActivate()) {
-      // User is authenticated, return the data
-      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
-
-      // return this.http.get(environment.url + '/hatim/retrieve', { headers })
-      return this.http.get(environment.url + `/users/getUserById?uid=${uid}`, { headers })
-
-    }
-    else {
-      return EMPTY;
-    }
+    return this.http.get(environment.url + `/users/getUserById?uid=${uid}`)
   }
 }

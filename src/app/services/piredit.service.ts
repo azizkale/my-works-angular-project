@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthGuard } from '../Auth.Guard';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Pir } from 'src/models/Pir';
 import { Chapter } from 'src/models/Chapter';
@@ -13,78 +12,33 @@ export class PireditService {
 
   constructor(
     private http: HttpClient,
-    private authGuard: AuthGuard,
-    private router: Router
   ) { }
 
   createPir(pir: Pir): Observable<any> {
-    if (this.authGuard.canActivate()) {
-      // User is authenticated, return the data
-      const body = { pir: pir, token: localStorage.getItem('token') };
-      return this.http.post(environment.url + '/pir/create', body)
-    } else {
-      return EMPTY;
-    }
+    const body = { pir: pir };
+    return this.http.post(environment.url + '/pir/create', body)
   }
   //adds chapters to already existed Pir
   addChapter(chapter: Chapter) {
-    if (this.authGuard.canActivate()) {
-      // User is authenticated, return the data
-      const body = {
-        chapter: chapter,
-        token: localStorage.getItem('token')
-      };
-      return this.http.post(environment.url + '/pir/addchapter', body)
-    } else {
-      return EMPTY;
-    }
+    const body = { chapter: chapter };
+    return this.http.post(environment.url + '/pir/addchapter', body)
   }
 
   retrievePirs(): Observable<any> {
-    if (this.authGuard.canActivate()) {
-      // User is authenticated, return the data
-      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
-
-      return this.http.get(environment.url + `/pir/getpirs`, { headers })
-    }
-    else {
-      return EMPTY;
-    }
+    return this.http.get(environment.url + `/pir/getpirs`)
   }
 
   retrieveChaptersByEditorId(editorId: any, pirId: any): Observable<any> {
-    if (this.authGuard.canActivate()) {
-      // User is authenticated, return the data
-      const headers = new HttpHeaders().set('authorization', 'Bearer ' + localStorage.getItem('token'));
-
-      return this.http.get(environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`, { headers })
-    }
-    else {
-      return EMPTY;
-    }
+    return this.http.get(environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`)
   }
 
   updateChapter(chapter: Chapter) {
-    if (this.authGuard.canActivate()) {
-      // User is authenticated, return the data
-      const body = { chapter: chapter, token: localStorage.getItem('token') };
-
-      return this.http.patch(environment.url + '/pir/updatechapter', body)
-
-    } else {
-      return EMPTY;
-    }
+    const body = { chapter: chapter };
+    return this.http.patch(environment.url + '/pir/updatechapter', body)
   }
 
   updatePir(pir: Pir) {
-    if (this.authGuard.canActivate()) {
-      // User is authenticated, return the data
-      const body = { pir: pir, token: localStorage.getItem('token') };
-
-      return this.http.patch(environment.url + '/pir/updatepir', body)
-
-    } else {
-      return EMPTY;
-    }
+    const body = { pir: pir };
+    return this.http.patch(environment.url + '/pir/updatepir', body)
   }
 }

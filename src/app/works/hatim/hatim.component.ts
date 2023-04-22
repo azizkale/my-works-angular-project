@@ -4,6 +4,7 @@ import { cuz } from 'src/models/cuz';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
+import { Roles } from 'src/models/Roles';
 
 @Component({
   selector: 'app-hatim',
@@ -18,11 +19,10 @@ export class HatimComponent implements OnInit {
   name: string | any;
   innerWidth = window.innerWidth;
   roles: string[];
-
+  role: string = Roles.mentor.toString()
   constructor(
     private hatimservice: HatimService,
     private _snackBar: MatSnackBar,
-    private router: Router,
     private common: CommonService,
   ) { }
 
