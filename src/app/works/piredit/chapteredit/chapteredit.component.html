@@ -129,6 +129,7 @@
           type="text"
           placeholder="Bölüm içeriği giriniz"
           formControlName="chapterContent"
+          (click)="selectTextToManipulate(chapterContent)"
         >
         </textarea>
 
@@ -145,3 +146,19 @@
     </form>
   </div>
 </div>
+
+<!-- chapter edit popover -->
+<ng-template #popDeleteContent>
+  <div class="text-center">
+    <h4>Are you sure to delete</h4>
+    <button
+      onclick="document.getElementById('update_delete_book').style.display='none'"
+      type="button"
+      class="btn btn-danger"
+      style="margin-right: 10px"
+    >
+      Delete
+    </button>
+    <button type="button" class="btn btn-info">Cancel</button>
+  </div>
+</ng-template>
