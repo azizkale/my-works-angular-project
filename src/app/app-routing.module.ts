@@ -11,6 +11,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ShbComponent } from './works/shb/shb.component';
 import { PireditComponent } from './works/piredit/piredit.component';
 import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.component';
+import { DisplayComponent } from './Display/display.component';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
@@ -29,6 +30,11 @@ const routes: Routes = [
 
     ]
   },
+  {
+    path: 'display', component: DisplayComponent, children: [
+      { path: '', redirectTo: 'display', pathMatch: 'full' },
+    ]
+  }
 ];
 
 @NgModule({
