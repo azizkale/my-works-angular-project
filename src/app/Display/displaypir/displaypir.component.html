@@ -1,0 +1,39 @@
+<div class="w3-center mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-11 w-75">
+        <h2>Kitaplar</h2>
+      </div>
+      <div class="col-sm-1 w-25">
+        <span
+          onclick="document.getElementById('id_add_pir').style.display='block'"
+          class="material-symbols-outlined addpir"
+        >
+          add_circle
+        </span>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div>
+          <form [formGroup]="retrievePirForm" novalidate>
+            <div *ngFor="let pir of pirs; let i = index">
+              <input
+                class="w3-button w-75"
+                type="button"
+                [value]="pir.name"
+                [formControlName]="pir.name"
+                [routerLink]="['/me/chapter/' + pir.pirId]"
+              />
+              <input
+                type="button"
+                value="düzenle"
+                class="btn btn-warning w-25 text-center"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

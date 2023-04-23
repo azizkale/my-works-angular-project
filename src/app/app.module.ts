@@ -38,6 +38,8 @@ import { ShbComponent } from './works/shb/shb.component';
 import { PireditComponent } from './works/piredit/piredit.component';
 import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.component';
 import { DisplayComponent } from './Display/display.component';
+import { DisplaypirComponent } from './Display/displaypir/displaypir.component';
+import { ChaptersComponent } from './Display/displaypir/chapters/chapters.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { DisplayComponent } from './Display/display.component';
     ShbComponent,
     PireditComponent,
     ChaptereditComponent,
-    DisplayComponent
+    DisplayComponent,
+    DisplaypirComponent,
+    ChaptersComponent
   ],
   imports: [
     BrowserModule,
