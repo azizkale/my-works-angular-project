@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PireditService } from 'src/app/services/piredit.service';
 import { Chapter } from 'src/models/Chapter';
 import { Roles } from 'src/models/Roles';
+import { EditedWord } from 'src/models/editedWord';
 
 @Component({
   selector: 'app-chapteredit',
@@ -11,7 +12,7 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./chapteredit.component.css'],
 })
 export class ChaptereditComponent implements OnInit {
-
+  @ViewChild('editWord') editWord: ElementRef
   retrieveChapterForm: FormGroup;
   createChapterForm: FormGroup;
   updateChapterForm: FormGroup;
@@ -21,6 +22,7 @@ export class ChaptereditComponent implements OnInit {
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
+  editedWord: EditedWord
 
   constructor(
     public fb: FormBuilder,
@@ -108,12 +110,17 @@ export class ChaptereditComponent implements OnInit {
     })
   }
 
-  selectTextToManipulate(event: any) {
+  selectTextToManipulate() {
     const selection: any = window.getSelection();
     this.selectedWord = selection.toString();
   }
 
-  saveWordPair(word: string) {
-    console.log(word)
+  saveWordPair(meaning: string) {
+    this.editedWord = new EditedWord(this.selectedWord, meaning)
+    console.log(this.editedWord)
+  }
+
+  showWordEditForm() {
+    this.editWord.nativeElement.style.display = 'block'
   }
 }

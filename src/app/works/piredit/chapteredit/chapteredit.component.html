@@ -111,7 +111,11 @@
         >×</span
       >
     </div>
-    <form class="w3-container" [formGroup]="updateChapterForm">
+    <form
+      class="w3-container"
+      [formGroup]="updateChapterForm"
+      (click)="selectTextToManipulate()"
+    >
       <div class="w3-section">
         <label><b>Bölüm adı</b></label>
         <input
@@ -129,7 +133,6 @@
           type="text"
           placeholder="Bölüm içeriği giriniz"
           formControlName="chapterContent"
-          (click)="selectTextToManipulate(chapterContent)"
         >
         </textarea>
 
@@ -142,44 +145,42 @@
         >
           Güncelle
         </button>
-        <button
-          type="button"
-          class="btn btn-danger"
-          placement="top"
-          [ngbPopover]="popEditWord"
-          popoverTitle="Düzenle"
-          style="margin-right: 10px"
-          [autoClose]="'outside'"
-        >
-          kaydet
-        </button>
+        <button (click)="showWordEditForm()">edit</button>
       </div>
     </form>
   </div>
 </div>
-<!-- ===============Popovers-WordEdit================= -->
-<ng-template #popEditWord>
-  <div class="text-center">
-    <h3>{{ selectedWord }}</h3>
-    <form class="w3-container" [formGroup]="editWordForm">
-      <div class="w3-section">
-        <label><b>Kelimenin anlamı:</b></label>
-        <input
-          #wordEdit
-          class="w3-input w3-border w3-margin-bottom"
-          type="text"
-          placeholder="Kelime anlamını giriniz."
-          formControlName="wordEdit"
-        />
-      </div>
-    </form>
-    <button
-      type="button"
-      class="btn btn-danger"
-      style="margin-right: 10px"
-      (click)="saveWordPair(wordEdit.value)"
-    >
-      Kaydet
-    </button>
+<!-- ===============WordEdit(MODAL)================= -->
+<div id="editWord" class="w3-modal" #editWord>
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+    <div class="w3-center">
+      <br />
+      <span
+        onclick="document.getElementById('editWord').style.display='none'"
+        class="w3-button w3-xlarge w3-transparent w3-display-topright"
+        title="Close Modal"
+        >×</span
+      >
+      <form class="w3-container" [formGroup]="editWordForm">
+        <div class="w3-section">
+          <h3>{{ selectedWord }}:</h3>
+          <input
+            #wordEdit
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            placeholder="Kelime anlamını giriniz."
+            formControlName="wordEdit"
+          />
+        </div>
+        <button
+          type="button"
+          class="btn btn-danger"
+          style="margin-bottom: 2%"
+          (click)="saveWordPair(wordEdit.value)"
+        >
+          Kaydet
+        </button>
+      </form>
+    </div>
   </div>
-</ng-template>
+</div>
