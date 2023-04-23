@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Pir } from 'src/models/Pir';
 import { Chapter } from 'src/models/Chapter';
+import { EditedWord } from 'src/models/editedWord';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +33,7 @@ export class PireditService {
     return this.http.get(environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`)
   }
 
-  updateChapter(chapter: Chapter) {
+  updateChapter(chapter: Chapter): Observable<any> {
     const body = { chapter: chapter };
     return this.http.patch(environment.url + '/pir/updatechapter', body)
   }
@@ -40,5 +41,10 @@ export class PireditService {
   updatePir(pir: Pir) {
     const body = { pir: pir };
     return this.http.patch(environment.url + '/pir/updatepir', body)
+  }
+
+  createEditedWordPair(wordpair: EditedWord): Observable<any> {
+    const body = { wordpair: wordpair };
+    return this.http.post(environment.url + '/pir/createeditedwordpair', body)
   }
 }

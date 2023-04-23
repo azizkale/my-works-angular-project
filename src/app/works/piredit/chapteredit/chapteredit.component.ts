@@ -22,7 +22,6 @@ export class ChaptereditComponent implements OnInit {
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
-  editedWord: EditedWord
 
   constructor(
     public fb: FormBuilder,
@@ -65,10 +64,12 @@ export class ChaptereditComponent implements OnInit {
 
   createUpdateChapterForm() {
     this.updateChapterForm = this.fb.group({
+      chapterId: ['', Validators.required],
       chapterName: ['', Validators.required],
       chapterContent: ['', Validators.required]
     });
   }
+
   addChapter(chapterName: string, chapterContent: string) {
     const editorId = localStorage.getItem('uid');
     //chapterId will be given in service
@@ -115,12 +116,17 @@ export class ChaptereditComponent implements OnInit {
     this.selectedWord = selection.toString();
   }
 
-  saveWordPair(meaning: string) {
-    this.editedWord = new EditedWord(this.selectedWord, meaning)
-    console.log(this.editedWord)
-  }
-
   showWordEditForm() {
     this.editWord.nativeElement.style.display = 'block'
+  }
+
+  saveWordPair(meaning: string) {
+    const editedWord = new EditedWord(this.selectedWord, meaning, this.updateChapterForm.get('chapterId')?.value, this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
+    this.pireditservice.createEditedWordPair(editedWord).subscribe({
+      next: (ress) => {
+        console.log(ress)
+      }
+    })
+    this.createWordEditForm();
   }
 }

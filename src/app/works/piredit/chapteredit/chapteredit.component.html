@@ -117,6 +117,13 @@
       (click)="selectTextToManipulate()"
     >
       <div class="w3-section">
+        <input
+          #chapterId
+          type="hidden"
+          formControlName="chapterId"
+          name="bookId"
+          for="it gets just chapterId"
+        />
         <label><b>Bölüm adı</b></label>
         <input
           #chapterName
@@ -127,6 +134,17 @@
         />
         <label><b>Bölüm içeriği</b></label>
         <textarea
+          #chapterContent
+          rows="5"
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          placeholder="Bölüm içeriği giriniz"
+          formControlName="chapterContent"
+        >
+        </textarea>
+        <label><b>Kelime Düzenleme:</b></label>
+        <textarea
+          readonly
           #chapterContent
           rows="5"
           class="w3-input w3-border w3-margin-bottom"
@@ -177,6 +195,7 @@
           class="btn btn-danger"
           style="margin-bottom: 2%"
           (click)="saveWordPair(wordEdit.value)"
+          onclick="document.getElementById('editWord').style.display='none'"
         >
           Kaydet
         </button>
