@@ -37,6 +37,9 @@ import { LeftColumnComponent } from './left-column/left-column.component';
 import { ShbComponent } from './works/shb/shb.component';
 import { PireditComponent } from './works/piredit/piredit.component';
 import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.component';
+import { DisplayComponent } from './Display/display.component';
+import { DisplaypirComponent } from './Display/displaypir/displaypir.component';
+import { ChaptersComponent } from './Display/displaypir/chapters/chapters.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.co
     ShbComponent,
     PireditComponent,
     ChaptereditComponent,
+    DisplayComponent,
+    DisplaypirComponent,
+    ChaptersComponent
   ],
   imports: [
     BrowserModule,
