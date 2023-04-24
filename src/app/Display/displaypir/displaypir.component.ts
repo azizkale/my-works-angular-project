@@ -11,14 +11,15 @@ import { Pir } from 'src/models/Pir';
 export class DisplaypirComponent implements OnInit {
   retrievePirForm: FormGroup;
   pirs: Pir[] = [];
+
   constructor(
     public fb: FormBuilder,
-    private displaypir: DisplaypirService
+    private displaypirservice: DisplaypirService
   ) { }
 
   ngOnInit(): void {
     this.formPirRetrieve()
-    this.retrievePirs()
+    this.retrievePirsNames()
   }
 
   formPirRetrieve() {
@@ -27,10 +28,11 @@ export class DisplaypirComponent implements OnInit {
     });
     //formname array is fullfilled in the retrievePirs function (below)
   }
-  retrievePirs() {
+  retrievePirsNames() {
     this.pirs = []
-    this.displaypir.retrievePirs().subscribe({
+    this.displaypirservice.retrievePirsNames().subscribe({
       next: async (ress) => {
+        console.log(ress)
         if (ress) {
           await Object.values(ress).map((pir: Pir | any) => {
             this.pirs.push(pir)

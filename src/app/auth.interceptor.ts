@@ -13,6 +13,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         const token = localStorage.getItem('token');
+        if (request.url.includes('/signin') || request.url.includes('/display/retrievepirs')) {
+            return next.handle(request);
+        }
 
         if (token) {
             request = request.clone({
@@ -20,7 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
                     Authorization: `Bearer ${token}`
                 }
             });
-
         }
         return next.handle(request).pipe(
             catchError((error) => {

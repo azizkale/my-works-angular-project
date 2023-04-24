@@ -12,8 +12,10 @@ export class DisplaypirService {
     private http: HttpClient,
   ) { }
 
-  retrievePirs(): Observable<any> {
-    return this.http.get(environment.url + `/pir/getpirs`)
+  retrievePirsNames(): Observable<any> {
+    return this.http.get(environment.url + `/display/retrievepirs`)
   }
+  retrievePirByPirId() {
 
+  }
 }
