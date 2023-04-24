@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DisplaypirService } from 'src/app/services/displaypir.service';
 
 @Component({
   selector: 'app-chapters',
@@ -13,12 +14,14 @@ export class ChaptersComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private activeroute: ActivatedRoute
+    private activeroute: ActivatedRoute,
+    private displaypirservice: DisplaypirService
   ) { }
 
-  ngOnInit(): void {
-    this.selectedPirId = this.activeroute.snapshot.paramMap.get('id');
-    this.formChapterRetrieve()
+  async ngOnInit() {
+    this.selectedPirId = await this.activeroute.snapshot.paramMap.get('id');
+    await this.formChapterRetrieve()
+    await this.retrieveChaptersByPirId();
   }
   formChapterRetrieve() {
     this.retrieveChapterForm = this.fb.group({
@@ -33,7 +36,11 @@ export class ChaptersComponent implements OnInit {
 
   }
 
-  retrievePirByPirId() {
-
+  retrieveChaptersByPirId() {
+    this.displaypirservice.retrieveChaptersByPirId(this.selectedPirId).subscribe({
+      next: (ress) => {
+        console.log(ress)
+      }
+    })
   }
 }

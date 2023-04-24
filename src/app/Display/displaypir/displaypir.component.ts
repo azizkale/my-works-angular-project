@@ -32,7 +32,6 @@ export class DisplaypirComponent implements OnInit {
     this.pirs = []
     this.displaypirservice.retrievePirsNames().subscribe({
       next: async (ress) => {
-        console.log(ress)
         if (ress) {
           await Object.values(ress).map((pir: Pir | any) => {
             this.pirs.push(pir)

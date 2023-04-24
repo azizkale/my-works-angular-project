@@ -13,7 +13,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         const token = localStorage.getItem('token');
-        if (request.url.includes('/signin') || request.url.includes('/display/retrievepirs')) {
+
+        if (
+            request.url.includes('/signin') ||
+            request.url.includes('/display/retrievepirs' ||
+                request.url.includes('/display/retrievechaptersbypirid')
+            )
+        ) {
             return next.handle(request);
         }
 
