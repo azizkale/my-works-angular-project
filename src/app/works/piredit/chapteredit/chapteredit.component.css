@@ -9,3 +9,8 @@ span {
 input {
     text-align: left;
 }
+
+.w3-modal {
+    height: 100%!important;
+    padding-top: 0 !important;
+}

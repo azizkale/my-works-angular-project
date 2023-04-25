@@ -121,10 +121,17 @@ export class ChaptereditComponent implements OnInit {
   }
 
   saveWordPair(meaning: string) {
-    const editedWord = new WordPair(this.selectedWord, meaning, this.updateChapterForm.get('chapterId')?.value, this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
-    this.pireditservice.createEditedWordPair(editedWord).subscribe({
+    const wordPair = new WordPair(this.selectedWord, meaning, this.updateChapterForm.get('chapterId')?.value, this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
+    this.pireditservice.createEditedWordPair(wordPair).subscribe({
       next: (ress) => {
         console.log(ress)
+
+        // console.log(this.updateChapterForm.get('chapterContent')?.value)
+        // const regex = new RegExp(this.selectedWord, 'g');
+        // const newText = this.updateChapterForm.get('chapterContent')?.value.replace(regex, meaning);
+
+        // console.log(newText);
+
       }
     })
     this.createWordEditForm();

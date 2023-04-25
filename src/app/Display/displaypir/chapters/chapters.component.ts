@@ -1,10 +1,10 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 import { DisplaypirService } from 'src/app/services/displaypir.service';
 import { Chapter } from 'src/models/Chapter';
 import { Pir } from 'src/models/Pir';
+import { WordPair } from 'src/models/WordPair';
 
 @Component({
   selector: 'app-chapters',
@@ -12,7 +12,6 @@ import { Pir } from 'src/models/Pir';
   styleUrls: ['./chapters.component.css']
 })
 export class ChaptersComponent implements OnInit {
-  @ViewChild('chapterContentTag') chapterContentTag: ElementRef
   retrieveChapterForm: FormGroup;
   selectedPirId: any;
   pir: Pir
@@ -55,12 +54,28 @@ export class ChaptersComponent implements OnInit {
     this.displaypirservice.retrieveChapterByChapterId(chapterId, this.selectedPirId).subscribe({
       next: async (ress: Chapter) => {
         this.selectedChapter = await ress;
-        console.log(this.selectedChapter)
-        Object.values(this.selectedChapter.wordPairs).map((pair: any) => {
-          console.log(pair)
-        })
-        element.innerHTML = await this.selectedChapter.chapterContent;
+        // if selected chapter has wordpair (edited word)
+        if (this.selectedChapter.wordPairs) {
+          Object.values(this.selectedChapter.wordPairs).map((pair: WordPair) => {
+            //the words that has been edited are changed
+            //the meaning are dsplaying here          
+            const searchWord = pair.word;
+            const replaceWord = `<b (mouseover)="showWordPair()">${pair.word} </b>`;
+
+            const index = this.selectedChapter.chapterContent.indexOf(searchWord);
+            if (index !== -1) {
+              const newText = this.selectedChapter.chapterContent.slice(0, index) + replaceWord + this.selectedChapter.chapterContent.slice(index + searchWord.length);
+              this.selectedChapter.chapterContent = newText
+            } else {
+              console.log('Search word not found.');
+            }
+          })
+        }
+        element.innerHTML = this.selectedChapter.chapterContent
       }
     })
+  }
+  showWordPair() {
+    alert(' yasabr')
   }
 }
