@@ -1,5 +1,8 @@
 <div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item" *ngFor="let chapter of chapters; let i = index">
+  <div
+    class="accordion-item"
+    *ngFor="let chapter of chaptersNames; let i = index"
+  >
     <h2 class="accordion-header" id="flush-headingOne{{ i }}">
       <button
         class="accordion-button collapsed"
@@ -8,6 +11,9 @@
         attr.data-bs-target="#flush-collapseOne{{ i }}"
         aria-expanded="false"
         attr.aria-controls="flush-collapseOne{{ i }}"
+        (click)="
+          retrieveChaptertByChapterId(chapter.chapterId, chapterContentTag)
+        "
       >
         {{ chapter.chapterName }}
       </button>
@@ -18,7 +24,9 @@
       attr.aria-valuenow="flush-headingOne{{ i }}"
       data-bs-parent="#accordionFlushExample"
     >
-      <div class="accordion-body" [innerHTML]="chapter.chapterContent"></div>
+      <div class="accordion-body">
+        <p #chapterContentTag></p>
+      </div>
     </div>
   </div>
 </div>

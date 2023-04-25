@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DisplaypirService } from 'src/app/services/displaypir.service';
@@ -11,10 +11,12 @@ import { Pir } from 'src/models/Pir';
   styleUrls: ['./chapters.component.css']
 })
 export class ChaptersComponent implements OnInit {
+  @ViewChild('chapterContentTag') chapterContentTag: ElementRef
   retrieveChapterForm: FormGroup;
   selectedPirId: any;
   pir: Pir
-  chapters: any[]
+  chaptersNames: any[]
+  selectedChapter: Chapter
 
   constructor(
     public fb: FormBuilder,
@@ -26,7 +28,7 @@ export class ChaptersComponent implements OnInit {
   async ngOnInit() {
     this.selectedPirId = await this.activeroute.snapshot.paramMap.get('id');
     await this.formChapterRetrieve()
-    await this.retrieveChaptersByPirId();
+    await this.retrieveChaptersNamesByPirId();
   }
   formChapterRetrieve() {
     this.retrieveChapterForm = this.fb.group({
@@ -41,18 +43,20 @@ export class ChaptersComponent implements OnInit {
 
   }
 
-  retrieveChaptersByPirId() {
-    this.displaypirservice.retrieveChaptersByPirId(this.selectedPirId).subscribe({
-      next: (pir: Pir) => {
-        console.log(pir)
-        this.chapters = Object.values(pir.chapters)
+  retrieveChaptersNamesByPirId() {
+    this.displaypirservice.retrieveChaptersNamesByPirId(this.selectedPirId).subscribe({
+      next: (data) => {
+        this.chaptersNames = data
       }
     })
   }
 
-  appendContentToTag(htmlElement: HTMLElement, chapter: Chapter) {
-    const p: HTMLParagraphElement = this.renderer.createElement('b');
-    p.innerHTML = chapter.chapterName
-    this.renderer.appendChild(htmlElement, p)
+  retrieveChaptertByChapterId(chapterId: any, element: HTMLElement) {
+    this.displaypirservice.retrieveChapterByChapterId(chapterId, this.selectedPirId).subscribe({
+      next: async (ress: Chapter) => {
+        this.selectedChapter = await ress;
+        element.innerHTML = await this.selectedChapter.chapterContent;
+      }
+    })
   }
 }
