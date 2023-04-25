@@ -56,7 +56,7 @@ export class PireditComponent implements OnInit {
     });
   }
   async createNewPir() {
-    const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date())
+    const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date(), [])
     const newPir = new Pir(
       null,
       localStorage.getItem('uid'),

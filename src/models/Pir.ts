@@ -1,5 +1,5 @@
 import { Chapter } from "./Chapter";
-import { EditedWord } from "./editedWord";
+import { WordPair } from "./WordPair";
 
 export class Pir {
     pirId: any;
@@ -7,7 +7,7 @@ export class Pir {
     name: string | any;
     description: string;
     chapters: Chapter[]
-    wordPairs: EditedWord[]
+    wordPairs: WordPair[]
 
     constructor(
         pirId: any,
@@ -15,7 +15,7 @@ export class Pir {
         name: string | any,
         description: string,
         chapters: Chapter[],
-        wordPairs: EditedWord[]
+        wordPairs: WordPair[]
     ) {
         this.pirId = pirId
         this.editorId = editorId

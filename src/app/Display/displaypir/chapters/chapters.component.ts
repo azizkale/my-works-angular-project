@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 import { DisplaypirService } from 'src/app/services/displaypir.service';
 import { Chapter } from 'src/models/Chapter';
 import { Pir } from 'src/models/Pir';
@@ -22,7 +23,6 @@ export class ChaptersComponent implements OnInit {
     public fb: FormBuilder,
     private activeroute: ActivatedRoute,
     private displaypirservice: DisplaypirService,
-    private renderer: Renderer2
   ) { }
 
   async ngOnInit() {
@@ -55,6 +55,10 @@ export class ChaptersComponent implements OnInit {
     this.displaypirservice.retrieveChapterByChapterId(chapterId, this.selectedPirId).subscribe({
       next: async (ress: Chapter) => {
         this.selectedChapter = await ress;
+        console.log(this.selectedChapter)
+        Object.values(this.selectedChapter.wordPairs).map((pair: any) => {
+          console.log(pair)
+        })
         element.innerHTML = await this.selectedChapter.chapterContent;
       }
     })

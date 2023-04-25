@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PireditService } from 'src/app/services/piredit.service';
 import { Chapter } from 'src/models/Chapter';
 import { Roles } from 'src/models/Roles';
-import { EditedWord } from 'src/models/editedWord';
+import { WordPair } from 'src/models/WordPair';
 
 @Component({
   selector: 'app-chapteredit',
@@ -73,7 +73,7 @@ export class ChaptereditComponent implements OnInit {
   addChapter(chapterName: string, chapterContent: string) {
     const editorId = localStorage.getItem('uid');
     //chapterId will be given in service
-    const chapter = new Chapter(chapterName, chapterContent, null, editorId, this.selectedPirId, new Date())
+    const chapter = new Chapter(chapterName, chapterContent, null, editorId, this.selectedPirId, new Date(), [])
 
     this.pireditservice.addChapter(chapter).subscribe({
       next: (ress) => {
@@ -121,7 +121,7 @@ export class ChaptereditComponent implements OnInit {
   }
 
   saveWordPair(meaning: string) {
-    const editedWord = new EditedWord(this.selectedWord, meaning, this.updateChapterForm.get('chapterId')?.value, this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
+    const editedWord = new WordPair(this.selectedWord, meaning, this.updateChapterForm.get('chapterId')?.value, this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
     this.pireditservice.createEditedWordPair(editedWord).subscribe({
       next: (ress) => {
         console.log(ress)

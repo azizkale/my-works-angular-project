@@ -1,3 +1,5 @@
+import { WordPair } from "./WordPair";
+
 export class Chapter {
     chapterId: any;
     editorId: any;
@@ -5,6 +7,7 @@ export class Chapter {
     createDate: Date;
     chapterName: string;
     chapterContent: string;
+    wordPairs: WordPair[]
 
     constructor(
         chapterName: string,
@@ -12,12 +15,14 @@ export class Chapter {
         chapterId: any,
         editorId: any,
         pirId: any,
-        createDate: Date) {
+        createDate: Date,
+        wordPairs: WordPair[]) {
         this.chapterName = chapterName
         this.chapterContent = chapterContent
         this.chapterId = chapterId
         this.editorId = editorId
         this.pirId = pirId
         this.createDate = createDate
+        this.wordPairs = wordPairs
     }
 }
