@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { from } from 'rxjs';
 import { DisplaypirService } from 'src/app/services/displaypir.service';
 import { Chapter } from 'src/models/Chapter';
 import { Pir } from 'src/models/Pir';
@@ -61,7 +60,7 @@ export class ChaptersComponent implements OnInit {
             //the words that has been edited are changed
             //the meaning are dsplaying here          
             const searchWord = pair.word;
-            const replaceWord = `<b>${pair.word} </b>`;
+            const replaceWord = `<b id='${pair.wordPairId}'>${pair.word} </b>`;
 
             const index = this.selectedChapter.chapterContent.indexOf(searchWord);
             if (index !== -1) {
@@ -70,19 +69,17 @@ export class ChaptersComponent implements OnInit {
             } else {
               console.log('Search word not found.');
             }
+            element.innerHTML = this.selectedChapter.chapterContent;
+            //adding event to <b> - tags
+            Object.values(element.getElementsByTagName('b')).map((el: HTMLElement) => {
+              el.addEventListener('mouseover', () => {
+                const pair: WordPair | any = Object.values(this.selectedChapter.wordPairs).find((p: WordPair) => p.wordPairId = el.id)
+              });
+            })
           })
         }
-        element.innerHTML = this.selectedChapter.chapterContent;
-        Object.values(element.getElementsByTagName('b')).map((el: Element) => {
-          el.addEventListener('mouseover', () => {
-            alert(' yasabr')
-          })
-        })
-
       }
     })
   }
-  showWordPair() {
 
-  }
 }
