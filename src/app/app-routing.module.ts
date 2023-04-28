@@ -14,6 +14,7 @@ import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.co
 import { DisplayComponent } from './Display/display.component';
 import { DisplaypirComponent } from './Display/displaypir/displaypir.component';
 import { ChaptersComponent } from './Display/displaypir/chapters/chapters.component';
+import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-content/chapter-content.component';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'display', pathMatch: 'full' },
       { path: 'displaypir', component: DisplaypirComponent },
       { path: 'chapter/:id', component: ChaptersComponent },
+      { path: 'chapterContent/:contentId/:pirId', component: ChapterContentComponent },
     ]
   }
 ];

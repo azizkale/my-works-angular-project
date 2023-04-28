@@ -40,6 +40,7 @@ import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.co
 import { DisplayComponent } from './Display/display.component';
 import { DisplaypirComponent } from './Display/displaypir/displaypir.component';
 import { ChaptersComponent } from './Display/displaypir/chapters/chapters.component';
+import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-content/chapter-content.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ChaptersComponent } from './Display/displaypir/chapters/chapters.compon
     ChaptereditComponent,
     DisplayComponent,
     DisplaypirComponent,
-    ChaptersComponent
+    ChaptersComponent,
+    ChapterContentComponent
   ],
   imports: [
     BrowserModule,
