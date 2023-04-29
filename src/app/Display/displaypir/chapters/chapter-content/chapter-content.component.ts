@@ -56,6 +56,7 @@ export class ChapterContentComponent implements OnInit {
 
         Object.values(this.chapterContent.nativeElement.getElementsByTagName('b')).map((el: HTMLElement | any) => {
           el.addEventListener('mouseover', () => {
+            console.log('ya sabr')
           });
         })
 

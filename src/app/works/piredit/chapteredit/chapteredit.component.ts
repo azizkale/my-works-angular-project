@@ -106,8 +106,6 @@ export class ChaptereditComponent implements OnInit {
   }
 
   updateChapter() {
-
-    console.log(this.updateChapterForm.value)
     this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
       next: (ress) => { this.retrieveChaptersByEditorId() }
     })
@@ -124,15 +122,28 @@ export class ChaptereditComponent implements OnInit {
 
   saveWordPair(meaning: string) {
     const wordPair = new WordPair(
-      `<b>${this.selectedWord}</b>`,
+      this.selectedWord,
       meaning,
       this.updateChapterForm.get('chapterId')?.value,
       this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
+
+    //making the selected word and
+    this.updateChapterForm.get('chapterContent')?.patchValue(
+      this.makeBold(this.updateChapterForm.get('chapterContent')?.value, this.selectedWord))
+
+    //creating wordpair
     this.pireditservice.createEditedWordPair(wordPair).subscribe({
       next: (ress) => {
         console.log(ress)
+        this.updateChapter(); // to save (as updated) the word that made bold
       }
     })
-    this.createWordEditForm();
+    this.createWordEditForm();// to clear the form
+  }
+
+  makeBold(text: string, changingWord: string): string {
+    const regex = new RegExp(`\\b${this.selectedWord}\\b`, "gi");
+    text = text.replace(changingWord, `<b>${changingWord}</b>`);
+    return text
   }
 }
