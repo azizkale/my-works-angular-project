@@ -50,42 +50,15 @@ export class ChapterContentComponent implements OnInit {
     this.displaypirservice.retrieveChapterByChapterId(this.selectedChapterId, this.selectedPirId).subscribe({
       next: async (chapter: Chapter) => {
         this.selectedChapter = await chapter;
-        console.log(chapter)
-        let text = this.selectedChapter.chapterContent;
+        this.chapterContent.nativeElement.innerHTML = this.selectedChapter.chapterContent;
 
         // if selected chapter has wordpair (edited word)
-        if (this.selectedChapter.wordPairs) {
 
-          Object.values(this.selectedChapter.wordPairs).map((pair: WordPair) => {
-            //the words that has been edited are changed
-            //the meaning are dsplaying here        
+        Object.values(this.chapterContent.nativeElement.getElementsByTagName('b')).map((el: HTMLElement | any) => {
+          el.addEventListener('mouseover', () => {
+          });
+        })
 
-            // const regex = new RegExp(pair.word, 'gi');
-
-            // const updatedText = text.replace(regex, `<b id='${pair.wordPairId}'>${pair.word} </b>`);
-
-            // this.selectedChapter.chapterContent = updatedText;
-
-            const searchWord = pair.word;
-            const replaceWord = `<b id='${pair.wordPairId}'>${pair.word} </b>`;
-
-            const regex = new RegExp(searchWord, 'gi');
-            const updatedText = text.replace(regex, `<b id='${pair.wordPairId}'>${pair.word} </b>`);
-
-            text = updatedText
-
-            this.chapterContent.nativeElement.innerHTML = updatedText
-            //adding event to <b> - tags
-
-            Object.values(this.chapterContent.nativeElement.getElementsByTagName('b')).map((el: HTMLElement | any) => {
-              el.addEventListener('mouseover', () => {
-                const pair: WordPair | any = Object.values(this.selectedChapter.wordPairs).find((p: WordPair) => p.wordPairId = el.id)
-                console.log(pair)
-              });
-            })
-          })
-          console.log(this.selectedChapter.chapterContent)
-        }
       }
     })
   }

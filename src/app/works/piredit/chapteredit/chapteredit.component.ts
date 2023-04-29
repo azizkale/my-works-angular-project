@@ -123,7 +123,11 @@ export class ChaptereditComponent implements OnInit {
   }
 
   saveWordPair(meaning: string) {
-    const wordPair = new WordPair(this.selectedWord, meaning, this.updateChapterForm.get('chapterId')?.value, this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
+    const wordPair = new WordPair(
+      `<b>${this.selectedWord}</b>`,
+      meaning,
+      this.updateChapterForm.get('chapterId')?.value,
+      this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
     this.pireditservice.createEditedWordPair(wordPair).subscribe({
       next: (ress) => {
         console.log(ress)
