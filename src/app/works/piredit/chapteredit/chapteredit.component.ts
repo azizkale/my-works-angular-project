@@ -143,7 +143,7 @@ export class ChaptereditComponent implements OnInit {
 
   makeBold(text: string, changingWord: string): string {
     const regex = new RegExp(`\\b${this.selectedWord}\\b`, "gi");
-    text = text.replace(changingWord, `<b>${changingWord}</b>`);
+    text = text.replace(changingWord.trim(), `<b>${changingWord.trim()}</b>`);
     return text
   }
 }

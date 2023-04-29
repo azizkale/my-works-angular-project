@@ -50,13 +50,15 @@ export class ChapterContentComponent implements OnInit {
     this.displaypirservice.retrieveChapterByChapterId(this.selectedChapterId, this.selectedPirId).subscribe({
       next: async (chapter: Chapter) => {
         this.selectedChapter = await chapter;
+
         this.chapterContent.nativeElement.innerHTML = this.selectedChapter.chapterContent;
 
-        // if selected chapter has wordpair (edited word)
-
+        // adding mouseover event to the <b> tags
         Object.values(this.chapterContent.nativeElement.getElementsByTagName('b')).map((el: HTMLElement | any) => {
-          el.addEventListener('mouseover', () => {
-            console.log('ya sabr')
+          el.addEventListener('mouseover', async () => {
+            // getting meaning from wordPairs
+            const wrd = Object.values(this.selectedChapter.wordPairs).find((pair: WordPair) => pair.word.trim() === el.innerHTML.trim())
+            console.log(wrd)
           });
         })
 
