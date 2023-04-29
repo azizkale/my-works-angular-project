@@ -35,7 +35,7 @@ export class PireditComponent implements OnInit {
   createNewPirForm() {
     this.addNewPirForm = this.fb.group({
       pirName: ['', Validators.required],
-      preface: ['', Validators.required],
+      // preface: ['', Validators.required],
       description: ['', Validators.required]
     });
   }
@@ -62,7 +62,7 @@ export class PireditComponent implements OnInit {
       localStorage.getItem('uid'),
       this.addNewPirForm.get('pirName')?.value,
       this.addNewPirForm.get('description')?.value,
-      [chapter],
+      [],
       []
     )
     this.pireditservice.createPir(newPir).subscribe({

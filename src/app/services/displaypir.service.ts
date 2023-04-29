@@ -16,7 +16,7 @@ export class DisplaypirService {
     return this.http.get(environment.url + `/display/retrievepirs`)
   }
   retrieveChaptersNamesByPirId(pirId: any): Observable<any> {
-    return this.http.get(environment.url + `/display/retrievechaptersbypirid?pirId=${pirId}`)
+    return this.http.get(environment.url + `/display/retrievechaptersnamesbypirid?pirId=${pirId}`)
   }
   retrieveChapterByChapterId(chapterId: any, pirId: any): Observable<any> {
     return this.http.get(environment.url + `/display/retrievechapterbychapterid?chapterId=${chapterId}&pirId=${pirId}`)

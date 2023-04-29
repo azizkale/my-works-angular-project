@@ -29,7 +29,7 @@ export class ChapterContentComponent implements OnInit {
   async ngOnInit() {
     this.selectedChapterId = await this.activeroute.snapshot.paramMap.get('contentId');
     this.selectedPirId = await this.activeroute.snapshot.paramMap.get('pirId');
-    this.retrieveChaptertByChapterId(this.selectedChapterId)
+    this.retrieveChaptertByChapterId()
   }
 
   formChapterRetrieve() {
@@ -46,28 +46,35 @@ export class ChapterContentComponent implements OnInit {
   }
 
 
-  retrieveChaptertByChapterId(chapterId: any) {
-    this.displaypirservice.retrieveChapterByChapterId(chapterId, this.selectedPirId).subscribe({
-      next: async (ress: Chapter) => {
-        this.selectedChapter = await ress;
-        console.log(ress)
+  retrieveChaptertByChapterId() {
+    this.displaypirservice.retrieveChapterByChapterId(this.selectedChapterId, this.selectedPirId).subscribe({
+      next: async (chapter: Chapter) => {
+        this.selectedChapter = await chapter;
+        console.log(chapter)
+        let text = this.selectedChapter.chapterContent;
+
         // if selected chapter has wordpair (edited word)
         if (this.selectedChapter.wordPairs) {
+
           Object.values(this.selectedChapter.wordPairs).map((pair: WordPair) => {
             //the words that has been edited are changed
-            //the meaning are dsplaying here          
+            //the meaning are dsplaying here        
+
+            // const regex = new RegExp(pair.word, 'gi');
+
+            // const updatedText = text.replace(regex, `<b id='${pair.wordPairId}'>${pair.word} </b>`);
+
+            // this.selectedChapter.chapterContent = updatedText;
+
             const searchWord = pair.word;
             const replaceWord = `<b id='${pair.wordPairId}'>${pair.word} </b>`;
-            const index = this.selectedChapter.chapterContent.indexOf(searchWord);
 
-            if (index !== -1) {
-              const newText = this.selectedChapter.chapterContent.slice(0, index) + replaceWord + this.selectedChapter.chapterContent.slice(index + searchWord.length);
-              this.selectedChapter.chapterContent = newText
-            } else {
-              console.log('Search word not found.');
-            }
+            const regex = new RegExp(searchWord, 'gi');
+            const updatedText = text.replace(regex, `<b id='${pair.wordPairId}'>${pair.word} </b>`);
 
-            this.chapterContent.nativeElement.innerHTML = this.selectedChapter.chapterContent;
+            text = updatedText
+
+            this.chapterContent.nativeElement.innerHTML = updatedText
             //adding event to <b> - tags
 
             Object.values(this.chapterContent.nativeElement.getElementsByTagName('b')).map((el: HTMLElement | any) => {
@@ -77,6 +84,7 @@ export class ChapterContentComponent implements OnInit {
               });
             })
           })
+          console.log(this.selectedChapter.chapterContent)
         }
       }
     })

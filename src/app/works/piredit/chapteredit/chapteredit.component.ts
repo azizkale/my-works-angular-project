@@ -106,6 +106,8 @@ export class ChaptereditComponent implements OnInit {
   }
 
   updateChapter() {
+
+    console.log(this.updateChapterForm.value)
     this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
       next: (ress) => { this.retrieveChaptersByEditorId() }
     })
@@ -125,13 +127,6 @@ export class ChaptereditComponent implements OnInit {
     this.pireditservice.createEditedWordPair(wordPair).subscribe({
       next: (ress) => {
         console.log(ress)
-
-        // console.log(this.updateChapterForm.get('chapterContent')?.value)
-        // const regex = new RegExp(this.selectedWord, 'g');
-        // const newText = this.updateChapterForm.get('chapterContent')?.value.replace(regex, meaning);
-
-        // console.log(newText);
-
       }
     })
     this.createWordEditForm();
