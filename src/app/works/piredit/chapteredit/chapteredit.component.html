@@ -142,12 +142,6 @@
           formControlName="chapterContent"
         >
         </textarea>
-
-        <ul *ngFor="let chapter of chapters">
-          <li *ngFor="let wordpair of chapter.wordPairs">
-            {{ wordpair.word }}
-          </li>
-        </ul>
         <button
           onclick="document.getElementById('id_update_chapter').style.display='none'"
           (click)="updateChapter()"

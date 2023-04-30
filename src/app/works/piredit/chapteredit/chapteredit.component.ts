@@ -62,25 +62,12 @@ export class ChaptereditComponent implements OnInit {
     });
   }
 
-  async createUpdateChapterForm() {
-    this.updateChapterForm = await this.fb.group({
+  createUpdateChapterForm() {
+    this.updateChapterForm = this.fb.group({
       chapterId: ['', Validators.required],
       chapterName: ['', Validators.required],
       chapterContent: ['', Validators.required]
     });
-
-    const editorId = localStorage.getItem('uid');
-    this.pireditservice.retrieveChaptersByEditorId(editorId, this.selectedPirId).subscribe({
-      next: (ress) => {
-        this.chapters = ress;
-        this.chapters.forEach((chapter: Chapter) => {
-          Object.values(chapter.wordPairs).map((wp: WordPair) => {
-            this.updateChapterForm.addControl(wp.word, new FormControl(wp.word));
-          })
-        });
-      }
-    })
-
   }
 
   addChapter(chapterName: string, chapterContent: string) {
