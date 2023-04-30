@@ -46,7 +46,6 @@
     </div>
   </div>
 </div>
-
 <!-- ========== Create Chapter(MODAL) ========== -->
 <div id="id_add_chapter" class="w3-modal" #id_add_chapter>
   <div class="w3-modal-content w3-card-4 w3-animate-zoom">
@@ -142,6 +141,7 @@
           formControlName="chapterContent"
         >
         </textarea>
+        <wordpairedit [pirId]="selectedPirId"></wordpairedit>
         <button
           onclick="document.getElementById('id_update_chapter').style.display='none'"
           (click)="updateChapter()"

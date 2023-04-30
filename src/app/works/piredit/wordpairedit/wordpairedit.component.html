@@ -1,0 +1,45 @@
+<div id="idWordPairs" class="w3-modal" #idWordPairs>
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+    <div class="w3-center">
+      <br />
+      <span
+        onclick="document.getElementById('idWordPairs').style.display='none'"
+        class="w3-button w3-xlarge w3-transparent w3-display-topright"
+        title="Close Modal"
+        >×</span
+      >
+      <form class="w3-container" [formGroup]="retrieveWordPairs">
+        <div *ngFor="let wordpair of wordPairs">
+          <div class="w3-section">
+            <input
+              #word
+              class="w3-input w3-border w3-margin-bottom"
+              type="text"
+              readonly
+              value="{{ wordpair.word }}"
+              placeholder="Kelime anlamını giriniz."
+              formControlName="word"
+            />
+            <input
+              #mean
+              class="w3-input w3-border w3-margin-bottom"
+              type="text"
+              placeholder="Kelime anlamını giriniz."
+              value="{{ wordpair.meaning }}"
+              formControlName="mean"
+            />
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          style="margin-bottom: 2%"
+          onclick="document.getElementById('idWordPairs').style.display='none'"
+        >
+          Kaydet
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
