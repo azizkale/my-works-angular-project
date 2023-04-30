@@ -17,6 +17,9 @@ import { MatGridListModule } from '@angular/material/grid-list'
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 //================ng-bootstrap (https://ng-bootstrap.github.io/)
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
@@ -41,6 +44,7 @@ import { DisplayComponent } from './Display/display.component';
 import { DisplaypirComponent } from './Display/displaypir/displaypir.component';
 import { ChaptersComponent } from './Display/displaypir/chapters/chapters.component';
 import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-content/chapter-content.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-c
     DisplayComponent,
     DisplaypirComponent,
     ChaptersComponent,
-    ChapterContentComponent
+    ChapterContentComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,9 @@ import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-c
     NgbPopoverModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatDialogModule,
   ],
   providers: [
     AuthGuard,
