@@ -6,10 +6,6 @@ import { Chapter } from 'src/models/Chapter';
 import { WordPair } from 'src/models/WordPair';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
-import { take } from 'rxjs';
-
-
-
 
 @Component({
   selector: 'app-chapter-content',
@@ -47,7 +43,7 @@ export class ChapterContentComponent implements OnInit {
       editorId: ['', Validators.required],
       createDate: ['', Validators.required],
       chapterContent: ['', Validators.required],
-      chapterName: this.fb.array([]),
+      // chapterName: this.fb.array([]),
 
     });
 
@@ -74,6 +70,7 @@ export class ChapterContentComponent implements OnInit {
       }
     })
   }
+
   openDialog(wordpair: WordPair): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: { name: wordpair.word, age: wordpair.meaning }

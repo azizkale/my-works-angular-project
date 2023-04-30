@@ -42,7 +42,6 @@ export class PireditComponent implements OnInit {
 
   createPirRetrieveForm() {
     this.retrievePirForm = this.fb.group({
-      pirName: this.fb.array([]),
     });
     //formname array is fullfilled in the retrievePirs function (below)
 

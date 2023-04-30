@@ -24,7 +24,7 @@ export class DisplaypirComponent implements OnInit {
 
   formPirRetrieve() {
     this.retrievePirForm = this.fb.group({
-      pirName: this.fb.array([]),
+      // pirName: this.fb.array([]),
     });
     //formname array is fullfilled in the retrievePirs function (below)
   }
