@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,8 @@ import { WordPair } from 'src/models/WordPair';
 @Component({
   selector: 'app-chapter-content',
   templateUrl: './chapter-content.component.html',
-  styleUrls: ['./chapter-content.component.css']
+  styleUrls: ['./chapter-content.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChapterContentComponent implements OnInit {
   @ViewChild('chapterContent') chapterContent: ElementRef
@@ -63,10 +64,11 @@ export class ChapterContentComponent implements OnInit {
             // getting meaning from wordPairs
             const word_: WordPair | any = Object.values(this.selectedChapter.wordPairs).find((pair: WordPair) => pair.word.trim() === el.innerHTML.trim())
 
-            this.snackbar.open(word_.meaning, 'X', {
+            this.snackbar.open(word_.meaning, `x`, {
               duration: 2 * 1000,
               horizontalPosition: 'center',
               verticalPosition: 'top',
+              panelClass: ['snackbar']
             });
           });
         })
