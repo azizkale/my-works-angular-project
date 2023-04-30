@@ -63,9 +63,10 @@ export class ChapterContentComponent implements OnInit {
 
         // adding mouseover event to the <b> tags
         Object.values(this.chapterContent.nativeElement.getElementsByTagName('b')).map((el: HTMLElement | any) => {
-          el.addEventListener('mouseover', async () => {
+          el.addEventListener('click', async () => {
             // getting meaning from wordPairs
             const word_: WordPair | any = Object.values(this.selectedChapter.wordPairs).find((pair: WordPair) => pair.word.trim() === el.innerHTML.trim())
+            //popup
             this.openDialog(word_)
           });
         })
@@ -73,8 +74,6 @@ export class ChapterContentComponent implements OnInit {
       }
     })
   }
-
-
   openDialog(wordpair: WordPair): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: { name: wordpair.word, age: wordpair.meaning }
