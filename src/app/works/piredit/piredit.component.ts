@@ -35,7 +35,6 @@ export class PireditComponent implements OnInit {
   createNewPirForm() {
     this.addNewPirForm = this.fb.group({
       pirName: ['', Validators.required],
-      // preface: ['', Validators.required],
       description: ['', Validators.required]
     });
   }
@@ -54,7 +53,8 @@ export class PireditComponent implements OnInit {
       description: ['', Validators.required]
     });
   }
-  async createNewPir() {
+
+  createNewPir() {
     const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date(), [])
     const newPir = new Pir(
       null,

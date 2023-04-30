@@ -43,8 +43,6 @@ export class ChapterContentComponent implements OnInit {
       editorId: ['', Validators.required],
       createDate: ['', Validators.required],
       chapterContent: ['', Validators.required],
-      // chapterName: this.fb.array([]),
-
     });
 
   }
