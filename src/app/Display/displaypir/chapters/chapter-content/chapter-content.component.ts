@@ -6,6 +6,10 @@ import { Chapter } from 'src/models/Chapter';
 import { WordPair } from 'src/models/WordPair';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { take } from 'rxjs';
+
+
+
 
 @Component({
   selector: 'app-chapter-content',
@@ -24,7 +28,7 @@ export class ChapterContentComponent implements OnInit {
     public fb: FormBuilder,
     private activeroute: ActivatedRoute,
     private displaypirservice: DisplaypirService,
-    private dialog: MatDialog
+    public dialog: MatDialog
   ) {
     this.formChapterRetrieve()
 
@@ -62,7 +66,7 @@ export class ChapterContentComponent implements OnInit {
           el.addEventListener('mouseover', async () => {
             // getting meaning from wordPairs
             const word_: WordPair | any = Object.values(this.selectedChapter.wordPairs).find((pair: WordPair) => pair.word.trim() === el.innerHTML.trim())
-            this.openDialog()
+            this.openDialog(word_)
           });
         })
 
@@ -71,10 +75,9 @@ export class ChapterContentComponent implements OnInit {
   }
 
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+  openDialog(wordpair: WordPair): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { name: wordpair.word, age: wordpair.meaning }
     });
   }
 }
