@@ -169,21 +169,30 @@
       >
       <form class="w3-container" [formGroup]="editWordForm">
         <div class="w3-section">
-          <h3>{{ selectedWord }}:</h3>
           <input
-            #wordEdit
+            #word
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            readonly
+            value="{{ selectedWord }}"
+            placeholder="Kelime anlamını giriniz."
+            formControlName="word"
+          />
+          <input
+            #mean
             class="w3-input w3-border w3-margin-bottom"
             type="text"
             placeholder="Kelime anlamını giriniz."
-            formControlName="wordEdit"
+            formControlName="mean"
           />
         </div>
         <button
           type="button"
           class="btn btn-danger"
           style="margin-bottom: 2%"
-          (click)="saveWordPair(wordEdit.value)"
+          (click)="saveWordPair(word.value)"
           onclick="document.getElementById('editWord').style.display='none'"
+          [disabled]="word.value === '' || mean.value === ''"
         >
           Kaydet
         </button>

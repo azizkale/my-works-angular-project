@@ -57,7 +57,8 @@ export class ChaptereditComponent implements OnInit {
 
   createWordEditForm() {
     this.editWordForm = this.fb.group({
-      wordEdit: ['', Validators.required]
+      word: ['', Validators.required],
+      mean: ['', Validators.required]
     });
   }
 
