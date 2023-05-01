@@ -36,9 +36,11 @@ export class WordpaireditComponent implements OnInit {
     this.pireditservice.retrieveChaptersByEditorId(editorId, this.pirId).subscribe({
       next: (chapters: Chapter[]) => {
         chapters.map((chapter: Chapter) => {
-          Object.values(chapter.wordPairs).map((wordpair: WordPair) => {
-            this.wordPairs.push(wordpair)
-          })
+          if (chapter.wordPairs) {
+            Object.values(chapter.wordPairs).map((wordpair: WordPair) => {
+              this.wordPairs.push(wordpair)
+            })
+          }
         })
       }, complete: () => { console.log(this.wordPairs) }
     })
