@@ -22,24 +22,27 @@ export class AuthInterceptor implements HttpInterceptor {
         ) {
             return next.handle(request);
         }
-
-        if (token) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-        }
-        return next.handle(request).pipe(
-            catchError((error) => {
-                if (error instanceof HttpErrorResponse && error.status === 401) {
-                    // this.authService.signOut()
-                    if (!token) {
-                        this.authService.signOut()
+        else {
+            if (token) {
+                request = request.clone({
+                    setHeaders: {
+                        Authorization: `Bearer ${token}`
                     }
-                }
-                return throwError(error);
-            })
-        );
+                });
+            }
+            return next.handle(request).pipe(
+                catchError((error) => {
+                    if (error instanceof HttpErrorResponse && error.status === 401) {
+                        // this.authService.signOut()
+                        if (!token) {
+                            this.authService.signOut()
+                        }
+                    }
+                    return throwError(error);
+                })
+            );
+        }
+
+
     }
 }
