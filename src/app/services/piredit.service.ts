@@ -18,14 +18,20 @@ export class PireditService {
     const body = { pir: pir };
     return this.http.post(environment.url + '/pir/create', body)
   }
+
+  retrievePirs(): Observable<any> {
+    return this.http.get(environment.url + `/pir/getpirs`)
+  }
+
+  updatePir(pir: Pir) {
+    const body = { pir: pir };
+    return this.http.patch(environment.url + '/pir/updatepir', body)
+  }
+
   //adds chapters to already existed Pir
   addChapter(chapter: Chapter) {
     const body = { chapter: chapter };
     return this.http.post(environment.url + '/pir/addchapter', body)
-  }
-
-  retrievePirs(): Observable<any> {
-    return this.http.get(environment.url + `/pir/getpirs`)
   }
 
   retrieveChaptersByEditorId(editorId: any, pirId: any): Observable<any> {
@@ -37,13 +43,14 @@ export class PireditService {
     return this.http.patch(environment.url + '/pir/updatechapter', body)
   }
 
-  updatePir(pir: Pir) {
-    const body = { pir: pir };
-    return this.http.patch(environment.url + '/pir/updatepir', body)
-  }
 
-  createEditedWordPair(wordpair: WordPair): Observable<any> {
+  createWordPair(wordpair: WordPair): Observable<any> {
     const body = { wordpair: wordpair };
     return this.http.post(environment.url + '/pir/createeditedwordpair', body)
+  }
+
+  updateWordPair(wordPair: WordPair) {
+    const body = { wordPair: wordPair };
+    return this.http.patch(environment.url + '/pir/updatewordpair', body)
   }
 }

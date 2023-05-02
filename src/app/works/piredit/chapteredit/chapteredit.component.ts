@@ -12,11 +12,10 @@ import { WordPair } from 'src/models/WordPair';
   styleUrls: ['./chapteredit.component.css'],
 })
 export class ChaptereditComponent implements OnInit {
-  @ViewChild('editWord') editWord: ElementRef
   retrieveChapterForm: FormGroup;
   createChapterForm: FormGroup;
   updateChapterForm: FormGroup;
-  editWordForm: FormGroup;
+  addWordForm: FormGroup;
   chapters: Chapter[];
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
@@ -36,7 +35,7 @@ export class ChaptereditComponent implements OnInit {
     this.createChapterRetrieveForm()
     this.createNewChapterForm();
     this.createUpdateChapterForm();
-    this.createWordEditForm();
+    this.createAddWordPairForm();
   }
 
   createChapterRetrieveForm() {
@@ -55,8 +54,8 @@ export class ChaptereditComponent implements OnInit {
     });
   }
 
-  createWordEditForm() {
-    this.editWordForm = this.fb.group({
+  createAddWordPairForm() {
+    this.addWordForm = this.fb.group({
       word: ['', Validators.required],
       mean: ['', Validators.required]
     });
@@ -116,10 +115,6 @@ export class ChaptereditComponent implements OnInit {
     this.selectedWord = selection.toString();
   }
 
-  showWordEditForm() {
-    this.editWord.nativeElement.style.display = 'block'
-  }
-
   saveWordPair(meaning: string) {
     const wordPair = new WordPair(
       this.selectedWord,
@@ -132,13 +127,13 @@ export class ChaptereditComponent implements OnInit {
       this.makeBold(this.updateChapterForm.get('chapterContent')?.value, this.selectedWord))
 
     //creating wordpair
-    this.pireditservice.createEditedWordPair(wordPair).subscribe({
+    this.pireditservice.createWordPair(wordPair).subscribe({
       next: (ress) => {
         console.log(ress)
         this.updateChapter(); // to save (as updated) the word that made bold
       }
     })
-    this.createWordEditForm();// to clear the form
+    this.createAddWordPairForm();// to clear the form
   }
 
   makeBold(text: string, changingWord: string): string {
