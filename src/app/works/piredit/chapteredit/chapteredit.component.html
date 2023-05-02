@@ -160,8 +160,8 @@
           <button
             type="button"
             class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#wordpairs"
+            data-bs-toggle="modal"
+            data-bs-target="#displayWordPairs"
             class="w3-button w3-green w3-section w3-padding"
           >
             Kelimeler
@@ -216,40 +216,9 @@
 </div>
 
 <!-- ===============Display All WordPairs(MODAL)================= -->
-<div id="displayAllWordPairs" class="w3-modal" #displayAllWordPairs>
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-    <header class="w3-container w3-teal">
-      <span
-        onclick="document.getElementById('id01').style.display='none'"
-        class="w3-button w3-display-topright"
-        >&times;</span
-      >
-      <h2>Modal Header</h2>
-    </header>
-    <div class="w3-center">
-      <span
-        onclick="document.getElementById('displayAllWordPairs').style.display='none'"
-        class="w3-button w3-xlarge w3-transparent w3-display-topright"
-        title="Close Modal"
-        >×</span
-      >
-    </div>
-  </div>
-</div>
-<!-- Button trigger modal -->
-<button
-  type="button"
-  class="btn btn-primary"
-  data-toggle="modal"
-  data-target="#exampleModal"
->
-  Launch demo modal
-</button>
-
-<!-- Modal -->
 <div
   class="modal fade"
-  id="wordpairs"
+  id="displayWordPairs"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalLabel"
@@ -258,11 +227,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h3 class="modal-title" id="exampleModalLabel">Tüm Kelimeler</h3>
         <button
           type="button"
-          class="close"
-          data-dismiss="modal"
+          class="w3-button w3-xlarge w3-transparent w3-display-topright"
+          data-bs-dismiss="modal"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -272,8 +241,8 @@
         <wordpairedit [pirId]="selectedPirId"></wordpairedit>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Kapat
         </button>
       </div>
     </div>
