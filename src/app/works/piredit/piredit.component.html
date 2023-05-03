@@ -148,7 +148,33 @@
         >
           Kaydet
         </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          placement="top"
+          [ngbPopover]="popDeleteContent"
+          popoverTitle="Sil!"
+          style="margin-right: 10px"
+        >
+          Sil
+        </button>
       </div>
     </form>
   </div>
 </div>
+<!-- ===============Popovers-Delete================= -->
+<ng-template #popDeleteContent>
+  <div class="text-center">
+    <h4>Are you sure to delete {{ updatePirForm.controls["name"].value }}</h4>
+    <button
+      onclick="document.getElementById('id_update_pir').style.display='none'"
+      (click)="deletePir()"
+      type="button"
+      class="btn btn-danger"
+      style="margin-right: 10px"
+    >
+      Sil
+    </button>
+    <button type="button" class="btn btn-info">Vazgeç</button>
+  </div>
+</ng-template>

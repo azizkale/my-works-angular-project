@@ -66,9 +66,10 @@ export class PireditComponent implements OnInit {
     )
     this.pireditservice.createPir(newPir).subscribe({
       next: (ress) => {
+        this.retrievePirs()
+        this.createPirRetrieveForm()
       }
     })
-    this.createNewPirForm();
   }
 
   retrievePirs() {
@@ -99,6 +100,16 @@ export class PireditComponent implements OnInit {
   updatePir() {
     this.pireditservice.updatePir(this.updatePirForm.value).subscribe({
       next: (ress) => { this.retrievePirs() }
+    })
+  }
+
+  deletePir() {
+    this.pireditservice.deletePir(this.updatePirForm.get('pirId')?.value).subscribe({
+      next: (ress) => {
+        this.retrievePirs()
+        this.createPirRetrieveForm()
+        console.log(ress)
+      }
     })
   }
 }

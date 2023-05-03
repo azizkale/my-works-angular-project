@@ -28,6 +28,11 @@ export class PireditService {
     return this.http.patch(environment.url + '/pir/updatepir', body)
   }
 
+  deletePir(pirId: any): Observable<any> {
+    const body = { pirId: pirId };
+    return this.http.delete(environment.url + '/pir/deletepir', { body })
+  }
+
   //adds chapters to already existed Pir
   addChapter(chapter: Chapter) {
     const body = { chapter: chapter };
