@@ -53,4 +53,9 @@ export class PireditService {
     const body = { wordPair: wordPair };
     return this.http.patch(environment.url + '/pir/updatewordpair', body)
   }
+
+  getEditorNameByEditorId(editorId: string): Observable<any> {
+    return this.http.get(environment.url + `/pir/getEditorNameByEditorId?editorId=${editorId}`)
+
+  }
 }

@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
-import { UserService } from 'src/app/services/user.service';
 import { Chapter } from 'src/models/Chapter';
-import { User } from 'src/models/User';
 import { WordPair } from 'src/models/WordPair';
 
 @Component({
@@ -12,16 +10,17 @@ import { WordPair } from 'src/models/WordPair';
   styleUrls: ['./wordpairedit.component.css']
 })
 export class WordpaireditComponent implements OnInit {
+  // this component is displayed by directive --> <wordpairedit></wordpairedit>
+
   @Input() pirId: any
   wordPairs: WordPair[] = []
   retrieveWordPairs: FormGroup
   editWordPairForm: FormGroup;
-  displayName: string
+  selectedWordPairToEdit: WordPair
 
   constructor(
     public fb: FormBuilder,
-    private pireditservice: PireditService,
-    private userservice: UserService
+    private pireditservice: PireditService
   ) { }
 
   ngOnInit(): void {
@@ -33,11 +32,12 @@ export class WordpaireditComponent implements OnInit {
   retrieveWordPairEditForm() {
     this.retrieveWordPairs = this.fb.group({
       word: ['', Validators.required],
-      mean: ['', Validators.required]
+      meaning: ['', Validators.required]
     });
   }
 
   retrieveChaptersByEditorId() {
+    this.wordPairs = []
     const editorId = localStorage.getItem('uid');
     this.pireditservice.retrieveChaptersByEditorId(editorId, this.pirId).subscribe({
       next: (chapters: Chapter[]) => {
@@ -55,30 +55,27 @@ export class WordpaireditComponent implements OnInit {
   createEditWordPairForm() {
     this.editWordPairForm = this.fb.group({
       word: ['', Validators.required],
-      mean: ['', Validators.required]
+      meaning: ['', Validators.required]
     });
   }
 
   getWordPairToEdit(selectedWordPair: WordPair) {
+    this.selectedWordPairToEdit = selectedWordPair
     this.editWordPairForm.patchValue({
       word: selectedWordPair.word,
-      mean: selectedWordPair.meaning
+      meaning: selectedWordPair.meaning
     });
   }
 
   updateWordPair() {
-    this.pireditservice.updateWordPair(this.editWordPairForm.value).subscribe({
-      next: (ress) => { this.retrieveWordPairEditForm() }
+    this.selectedWordPairToEdit.word = this.editWordPairForm.get('word')?.value;
+    this.selectedWordPairToEdit.meaning = this.editWordPairForm.get('meaning')?.value;
+    this.pireditservice.updateWordPair(this.selectedWordPairToEdit).subscribe({
+      next: (ress) => {
+        console.log(ress)
+        this.retrieveChaptersByEditorId()
+      }
     })
-    console.log(this.editWordPairForm.value)
 
-  }
-
-  getEditorByEditorId(editorId: any): string {
-    this.userservice.getUserById(editorId).subscribe((user: User) => {
-      console.log(user)
-      this.displayName = user.userName
-    })
-    return this.displayName
   }
 }

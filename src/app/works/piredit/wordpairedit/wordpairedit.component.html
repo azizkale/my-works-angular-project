@@ -1,15 +1,12 @@
 <div id="idWordPairs" class="container" #idWordPairs>
   <div *ngFor="let wordpair of wordPairs" class="row">
     <button
-      class="btn btn-success col w-75 mb-1"
+      class="btn btn-success col mb-1"
       onclick="document.getElementById('editWord').style.display='block'"
-      (click)="
-        getWordPairToEdit(wordpair); getEditorByEditorId(wordpair.editorId)
-      "
+      (click)="getWordPairToEdit(wordpair)"
     >
       {{ wordpair.word }}
     </button>
-    <p class="col w-25">{{ getEditorByEditorId(wordpair.editorId) }}</p>
   </div>
 </div>
 
@@ -30,14 +27,13 @@
             #word
             class="w3-input w3-border w3-margin-bottom"
             type="text"
-            readonly
             formControlName="word"
           />
           <input
-            #mean
+            #meaning
             class="w3-input w3-border w3-margin-bottom"
             type="text"
-            formControlName="mean"
+            formControlName="meaning"
           />
         </div>
         <button
@@ -46,7 +42,7 @@
           style="margin-bottom: 2%"
           (click)="updateWordPair()"
           onclick="document.getElementById('editWord').style.display='none'"
-          [disabled]="word.value === '' || mean.value === ''"
+          [disabled]="word.value === '' || meaning.value === ''"
         >
           Kaydet
         </button>

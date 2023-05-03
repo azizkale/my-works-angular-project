@@ -13,6 +13,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         const token = localStorage.getItem('token');
+        const modifiedRequest = request.clone({
+            headers: request.headers.set('Authorization', `Bearer ${token}`)
+        });
 
         if (
             request.url.includes('/signin') ||
@@ -23,20 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(request);
         }
         else {
-            if (token) {
-                request = request.clone({
-                    setHeaders: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-            }
-            return next.handle(request).pipe(
+            return next.handle(modifiedRequest).pipe(
                 catchError((error) => {
                     if (error instanceof HttpErrorResponse && error.status === 401) {
-                        // this.authService.signOut()
-                        if (!token) {
-                            this.authService.signOut()
-                        }
+                        this.authService.signOut()
                     }
                     return throwError(error);
                 })
