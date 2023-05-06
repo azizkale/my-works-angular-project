@@ -48,6 +48,10 @@ export class PireditService {
     return this.http.patch(environment.url + '/pir/updatechapter', body)
   }
 
+  deleteChapter(chapterId: any): Observable<any> {
+    const body = { chapterId: chapterId };
+    return this.http.delete(environment.url + '/pir/deletechapter', { body })
+  }
 
   createWordPair(wordpair: WordPair): Observable<any> {
     const body = { wordpair: wordpair };
@@ -62,5 +66,9 @@ export class PireditService {
   getEditorNameByEditorId(editorId: string): Observable<any> {
     return this.http.get(environment.url + `/pir/getEditorNameByEditorId?editorId=${editorId}`)
 
+  }
+
+  retrieveAllWordPairsOfSinglePir(pirId: any): Observable<any> {
+    return this.http.get(environment.url + `/pir/getallwordpairsofsinglepir?pirId=${pirId}`)
   }
 }

@@ -24,7 +24,7 @@ export class WordpaireditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.retrieveChaptersByEditorId()
+    this.retrieveAllWordPairsOfThePir()
     this.retrieveWordPairEditForm()
     this.createEditWordPairForm();
   }
@@ -36,19 +36,13 @@ export class WordpaireditComponent implements OnInit {
     });
   }
 
-  retrieveChaptersByEditorId() {
+  retrieveAllWordPairsOfThePir() {
     this.wordPairs = []
-    const editorId = localStorage.getItem('uid');
-    this.pireditservice.retrieveChaptersByEditorId(editorId, this.pirId).subscribe({
-      next: (chapters: Chapter[]) => {
-        chapters.map((chapter: Chapter) => {
-          if (chapter.wordPairs) {
-            Object.values(chapter.wordPairs).map((wordpair: WordPair) => {
-              this.wordPairs.push(wordpair)
-            })
-          }
-        })
-      }, complete: () => { console.log(this.wordPairs) }
+    this.pireditservice.retrieveAllWordPairsOfSinglePir(this.pirId).subscribe({
+      next: (wordpairs: WordPair[]) => {
+        this.wordPairs = wordpairs
+
+      }, complete: () => { }
     })
   }
 
@@ -73,9 +67,10 @@ export class WordpaireditComponent implements OnInit {
     this.pireditservice.updateWordPair(this.selectedWordPairToEdit).subscribe({
       next: (ress) => {
         console.log(ress)
-        this.retrieveChaptersByEditorId()
+        this.retrieveAllWordPairsOfThePir()
       }
     })
 
   }
+
 }

@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PireditService } from 'src/app/services/piredit.service';
+import { UserService } from 'src/app/services/user.service';
 import { Chapter } from 'src/models/Chapter';
 import { Roles } from 'src/models/Roles';
 import { WordPair } from 'src/models/WordPair';
@@ -21,11 +22,12 @@ export class ChaptereditComponent implements OnInit {
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
-
+  users: any[] = [] // all editors
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
-    private activeroute: ActivatedRoute
+    private activeroute: ActivatedRoute,
+    public userservice: UserService
 
   ) { }
 
@@ -47,11 +49,24 @@ export class ChaptereditComponent implements OnInit {
       chapterContent: ['', Validators.required],
     });
   }
+
   createNewChapterForm() {
     this.createChapterForm = this.fb.group({
       chapterName: ['', Validators.required],
-      chapterContent: ['', Validators.required]
+      chapterContent: ['', Validators.required],
+      selectEditor: ['', Validators.required]
     });
+
+    // fullfilling the select tag on FormGroup
+    this.userservice.getAllUsers().subscribe({
+      next: (ress: any) => {
+        console.log(ress)
+        ress.forEach((user: any) => {
+          this.users.push(user)
+          this.createChapterForm.addControl(ress.uid, new FormControl(user.uid));
+        });
+      }
+    })
   }
 
   createAddWordPairForm() {
@@ -70,12 +85,22 @@ export class ChaptereditComponent implements OnInit {
   }
 
   addChapter(chapterName: string, chapterContent: string) {
-    const editorId = localStorage.getItem('uid');
-    //chapterId will be given in service
+    const editorId = this.createChapterForm.get('selectEditor')?.value;
+    console.log(editorId)
+    //chapterId will be given in server-side
     const chapter = new Chapter(chapterName, chapterContent, null, editorId, this.selectedPirId, new Date(), [])
-
     this.pireditservice.addChapter(chapter).subscribe({
       next: (ress) => {
+        console.log(ress)
+      }
+    })
+  }
+
+  deleteChapter() {
+    this.pireditservice.deletePir(this.updateChapterForm.get('chapterId')?.value).subscribe({
+      next: (ress) => {
+        this.retrieveChaptersByEditorId()
+        this.createChapterRetrieveForm()
         console.log(ress)
       }
     })

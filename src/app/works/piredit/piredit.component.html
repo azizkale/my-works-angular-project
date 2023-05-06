@@ -27,6 +27,7 @@
                 [routerLink]="['/me/chapter/' + pir.pirId]"
               />
               <input
+                *ngIf="allowedToAdmin"
                 type="button"
                 value="düzenle"
                 class="btn btn-warning w-25 text-center"

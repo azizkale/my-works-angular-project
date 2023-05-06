@@ -7,6 +7,7 @@
       <div class="col-sm-2 w-25">
         <div class="btn-group" role="group" aria-label="Basic example">
           <span
+            *ngIf="allowedToAdmin"
             onclick="document.getElementById('id_add_chapter').style.display='block'"
             class="material-symbols-outlined"
           >
@@ -40,6 +41,16 @@
                 "
               />
             </div>
+            <button
+              type="button"
+              class="btn btn-danger"
+              placement="top"
+              [ngbPopover]="popDeleteContent"
+              popoverTitle="Sil!"
+              style="margin-right: 10px"
+            >
+              Sil
+            </button>
           </form>
         </div>
       </div>
@@ -81,7 +92,17 @@
           formControlName="chapterContent"
         >
         </textarea>
-
+        <select
+          class="form-select"
+          name="selectEditor"
+          #selectEditor
+          formControlName="selectEditor"
+        >
+          <option value="">editor seçin</option>
+          <option value="{{ user.uid }}" *ngFor="let user of users">
+            {{ user.displayName }}
+          </option>
+        </select>
         <button
           onclick="document.getElementById('id_add_chapter').style.display='none'"
           (click)="
@@ -166,6 +187,16 @@
           >
             Kelimeler
           </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            placement="top"
+            [ngbPopover]="popDeleteContent"
+            popoverTitle="Sil!"
+            style="margin-right: 10px"
+          >
+            Sil
+          </button>
         </div>
       </div>
     </form>
@@ -248,3 +279,23 @@
     </div>
   </div>
 </div>
+
+<!-- ===============Popovers-Delete================= -->
+<ng-template #popDeleteContent>
+  <div class="text-center">
+    <h4>
+      Are you sure to delete
+      {{ retrieveChapterForm.controls["chapterName"].value }}
+    </h4>
+    <button
+      onclick="document.getElementById('id_update_chapter').style.display='none'"
+      (click)="deleteChapter()"
+      type="button"
+      class="btn btn-danger"
+      style="margin-right: 10px"
+    >
+      Sil
+    </button>
+    <button type="button" class="btn btn-info">Vazgeç</button>
+  </div>
+</ng-template>
