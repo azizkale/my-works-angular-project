@@ -18,4 +18,8 @@ export class UserService {
   getAllUsers(): Observable<any> {
     return this.http.get(environment.url + `/users/retrieveallusers`)
   }
+
+  retrieveEditorbyEditorId(editorId: any): Observable<any> {
+    return this.http.get(environment.url + `/users/retrieveeditorbyid?editorid=${editorId}`)
+  }
 }

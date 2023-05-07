@@ -5,6 +5,7 @@
         <tr *ngFor="let wordpair of wordPairs">
           <td>
             <button
+              [disabled]="wordpair.editorId !== uid"
               class="btn btn-success w-75 mb-1"
               onclick="document.getElementById('editWord').style.display='block'"
               (click)="getWordPairToEdit(wordpair)"
@@ -12,9 +13,9 @@
               {{ wordpair.word }}
             </button>
           </td>
-          <td>
-            {{ wordpair.editorId }}
-          </td>
+          <th class="align-middle text-center">
+            {{ wordpair.editorname }}
+          </th>
         </tr>
       </tbody>
     </table>

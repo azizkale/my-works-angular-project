@@ -60,7 +60,6 @@ export class ChaptereditComponent implements OnInit {
     // fullfilling the select tag on FormGroup
     this.userservice.getAllUsers().subscribe({
       next: (ress: any) => {
-        console.log(ress)
         ress.forEach((user: any) => {
           this.users.push(user)
           this.createChapterForm.addControl(ress.uid, new FormControl(user.uid));
