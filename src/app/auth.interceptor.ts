@@ -28,7 +28,10 @@ export class AuthInterceptor implements HttpInterceptor {
         else {
             return next.handle(modifiedRequest).pipe(
                 catchError((error) => {
-                    if (error instanceof HttpErrorResponse && error.status === 401) {
+                    // if (error instanceof HttpErrorResponse && error.status === 401) {
+                    //     this.authService.signOut()
+                    // }
+                    if (!token) {
                         this.authService.signOut()
                     }
                     return throwError(error);

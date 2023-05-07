@@ -22,7 +22,7 @@ export class ChaptereditComponent implements OnInit {
   allowedToAdmin: boolean = this.roles.includes(Roles[1])
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
-  users: any[] = [] // all editors
+  users: any[] = [] // fullfilling the select tag on FormGroup
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
@@ -58,6 +58,7 @@ export class ChaptereditComponent implements OnInit {
     });
 
     // fullfilling the select tag on FormGroup
+    this.users = []
     this.userservice.getAllUsers().subscribe({
       next: (ress: any) => {
         ress.forEach((user: any) => {
@@ -71,7 +72,7 @@ export class ChaptereditComponent implements OnInit {
   createAddWordPairForm() {
     this.addWordForm = this.fb.group({
       word: ['', Validators.required],
-      mean: ['', Validators.required]
+      meaning: ['', Validators.required]
     });
   }
 
@@ -91,12 +92,15 @@ export class ChaptereditComponent implements OnInit {
     this.pireditservice.addChapter(chapter).subscribe({
       next: (ress) => {
         console.log(ress)
+      },
+      complete: () => {
+        this.retrieveChaptersByEditorId();
       }
     })
   }
 
   deleteChapter() {
-    this.pireditservice.deletePir(this.updateChapterForm.get('chapterId')?.value).subscribe({
+    this.pireditservice.deleteChapter(this.selectedPirId, this.updateChapterForm.get('chapterId')?.value).subscribe({
       next: (ress) => {
         this.retrieveChaptersByEditorId()
         this.createChapterRetrieveForm()

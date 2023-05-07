@@ -41,16 +41,6 @@
                 "
               />
             </div>
-            <button
-              type="button"
-              class="btn btn-danger"
-              placement="top"
-              [ngbPopover]="popDeleteContent"
-              popoverTitle="Sil!"
-              style="margin-right: 10px"
-            >
-              Sil
-            </button>
           </form>
         </div>
       </div>
@@ -188,6 +178,7 @@
             Kelimeler
           </button>
           <button
+            *ngIf="allowedToAdmin"
             type="button"
             class="btn btn-danger"
             placement="top"
@@ -224,7 +215,7 @@
             formControlName="word"
           />
           <input
-            #mean
+            #meaning
             class="w3-input w3-border w3-margin-bottom"
             type="text"
             placeholder="Kelime anlamını giriniz."
@@ -235,9 +226,9 @@
           type="button"
           class="btn btn-danger"
           style="margin-bottom: 2%"
-          (click)="saveWordPair(word.value)"
+          (click)="saveWordPair(meaning.value)"
           onclick="document.getElementById('addWordPair').style.display='none'"
-          [disabled]="word.value === '' || mean.value === ''"
+          [disabled]="word.value === '' || meaning.value === ''"
         >
           Kaydet
         </button>
@@ -285,7 +276,7 @@
   <div class="text-center">
     <h4>
       Are you sure to delete
-      {{ retrieveChapterForm.controls["chapterName"].value }}
+      {{ updateChapterForm.controls["chapterName"].value }}
     </h4>
     <button
       onclick="document.getElementById('id_update_chapter').style.display='none'"

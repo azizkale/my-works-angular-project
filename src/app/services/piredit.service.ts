@@ -48,8 +48,8 @@ export class PireditService {
     return this.http.patch(environment.url + '/pir/updatechapter', body)
   }
 
-  deleteChapter(chapterId: any): Observable<any> {
-    const body = { chapterId: chapterId };
+  deleteChapter(pirId: any, chapterId: any): Observable<any> {
+    const body = { pirId: pirId, chapterId: chapterId };
     return this.http.delete(environment.url + '/pir/deletechapter', { body })
   }
 
