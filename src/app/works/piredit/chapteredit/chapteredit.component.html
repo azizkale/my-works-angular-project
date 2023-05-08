@@ -136,6 +136,7 @@
         />
         <label><b>Bölüm adı</b></label>
         <input
+          [readOnly]="!allowedToAdmin"
           #chapterName
           class="w3-input w3-border w3-margin-bottom"
           type="text"
@@ -144,6 +145,7 @@
         />
         <label><b>Bölüm içeriği</b></label>
         <textarea
+          [readOnly]="!allowedToAdmin"
           #chapterContent
           rows="15"
           class="w3-input w3-border w3-margin-bottom"
@@ -219,7 +221,7 @@
             class="w3-input w3-border w3-margin-bottom"
             type="text"
             placeholder="Kelime anlamını giriniz."
-            formControlName="mean"
+            formControlName="meaning"
           />
         </div>
         <button

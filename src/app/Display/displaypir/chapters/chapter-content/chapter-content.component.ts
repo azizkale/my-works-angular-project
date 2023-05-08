@@ -71,7 +71,7 @@ export class ChapterContentComponent implements OnInit {
 
   openDialog(wordpair: WordPair): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: { name: wordpair.word, age: wordpair.meaning }
+      data: { word: wordpair.word, meaning: wordpair.meaning }
     });
   }
 }

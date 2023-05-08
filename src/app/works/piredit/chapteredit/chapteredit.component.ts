@@ -159,9 +159,12 @@ export class ChaptereditComponent implements OnInit {
       next: (ress) => {
         console.log(ress)
         this.updateChapter(); // to save (as updated) the word that made bold
+      }, complete: () => {
+        this.createAddWordPairForm();// to clear the form
+        this.retrieveChaptersByEditorId();
       }
     })
-    this.createAddWordPairForm();// to clear the form
+
   }
 
   makeBold(text: string, changingWord: string): string {
