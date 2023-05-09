@@ -26,6 +26,7 @@ export class ChaptereditComponent implements OnInit {
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
   users: any[] = [] // fullfilling the select tag on FormGroup
+  users_updateform: any[] = [] // fullfilling the select tag on FormGroup
 
   constructor(
     public fb: FormBuilder,
@@ -84,8 +85,19 @@ export class ChaptereditComponent implements OnInit {
     this.updateChapterForm = this.fb.group({
       chapterId: ['', Validators.required],
       chapterName: ['', Validators.required],
-      chapterContent: ['', Validators.required]
+      chapterContent: ['', Validators.required],
+      selectEditor: ['', Validators.required]
     });
+    // fullfilling the select tag on FormGroup
+    this.users_updateform = []
+    this.userservice.getAllUsers().subscribe({
+      next: (ress: any) => {
+        ress.forEach((user: any) => {
+          this.users_updateform.push(user)
+          this.createChapterForm.addControl(ress.uid, new FormControl(user.uid));
+        });
+      }
+    })
   }
 
   addChapter(chapterName: string, chapterContent: string) {
@@ -134,10 +146,13 @@ export class ChaptereditComponent implements OnInit {
       pirId: [chapter.pirId, Validators.required],
       editorId: [chapter.editorId, Validators.required],
       createDate: [chapter.createDate, Validators.required],
+      selectEditor: [chapter.editorId]
     });
   }
 
   updateChapter() {
+    console.log(this.updateChapterForm.value)
+    this.updateChapterForm.get('editorId')?.setValue(this.updateChapterForm.get('selectEditor')?.value)
     this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
       next: (ress) => { this.retrieveChapters() }
     })

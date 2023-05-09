@@ -153,7 +153,19 @@
           formControlName="chapterContent"
         >
         </textarea>
+        <select
+          *ngIf="allowedToAdmin"
+          class="form-select"
+          formControlName="selectEditor"
+          #selectEditor
+        >
+          <option value="">editor seçin</option>
+          <option value="{{ user.uid }}" *ngFor="let user of users_updateform">
+            {{ user.displayName }}
+          </option>
+        </select>
         <button
+          *ngIf="allowedToAdmin"
           onclick="document.getElementById('id_update_chapter').style.display='none'"
           (click)="updateChapter()"
           class="w3-button w3-block w3-green w3-section w3-padding"
