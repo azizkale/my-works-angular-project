@@ -22,4 +22,9 @@ export class UserService {
   retrieveEditorbyEditorId(editorId: any): Observable<any> {
     return this.http.get(environment.url + `/users/retrieveeditorbyid?editorid=${editorId}`)
   }
+
+  addRoleToUser(uid: any, role: string): Observable<any> {
+    const body = { uid: uid, role: role };
+    return this.http.patch(environment.url + '/users/addroletouser', body)
+  }
 }
