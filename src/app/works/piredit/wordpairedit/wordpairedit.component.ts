@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { PireditService } from 'src/app/services/piredit.service';
+import { RolesService } from 'src/app/services/roles.service';
 import { UserService } from 'src/app/services/user.service';
-import { Chapter } from 'src/models/Chapter';
+import { Roles } from 'src/models/Roles';
 import { WordPair } from 'src/models/WordPair';
 
 @Component({
@@ -12,24 +12,27 @@ import { WordPair } from 'src/models/WordPair';
   styleUrls: ['./wordpairedit.component.css']
 })
 export class WordpaireditComponent implements OnInit {
-  // this component is displayed by directive --> <wordpairedit></wordpairedit>
-
+  // this component is displayed by directive --> <wordpairedit></wordpairedit> 
   @Input() pirId: any
   wordPairs: any[] = []
   retrieveWordPairs: FormGroup
   editWordPairForm: FormGroup;
   selectedWordPairToEdit: WordPair
   uid = localStorage.getItem('uid')
+  allowedToPirEditor: boolean
+
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
-    private userservice: UserService
+    private userservice: UserService,
+    private rolesservice: RolesService
   ) { }
 
   ngOnInit(): void {
     this.retrieveAllWordPairsOfSinglePir()
     this.retrieveWordPairEditForm()
     this.createEditWordPairForm();
+    this.allowedToPirEditor = this.rolesservice.checkRole(Roles[4])
   }
 
   retrieveWordPairEditForm() {
@@ -77,6 +80,12 @@ export class WordpaireditComponent implements OnInit {
       next: (ress) => {
         this.retrieveAllWordPairsOfSinglePir()
       }
+    })
+  }
+
+  deleteWordpair() {
+    this.pireditservice.deleteWordPair(this.selectedWordPairToEdit).subscribe({
+      next: (ress) => { this.retrieveAllWordPairsOfSinglePir() }
     })
   }
 }

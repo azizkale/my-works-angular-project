@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PireditService } from 'src/app/services/piredit.service';
@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Chapter } from 'src/models/Chapter';
 import { Roles } from 'src/models/Roles';
 import { WordPair } from 'src/models/WordPair';
+import { WordpaireditComponent } from '../wordpairedit/wordpairedit.component';
 
 @Component({
   selector: 'app-chapteredit',
@@ -13,6 +14,8 @@ import { WordPair } from 'src/models/WordPair';
   styleUrls: ['./chapteredit.component.css'],
 })
 export class ChaptereditComponent implements OnInit {
+  @ViewChild(WordpaireditComponent)
+  private wordpaireditComponent: WordpaireditComponent;
   retrieveChapterForm: FormGroup;
   createChapterForm: FormGroup;
   updateChapterForm: FormGroup;
@@ -23,6 +26,7 @@ export class ChaptereditComponent implements OnInit {
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
   users: any[] = [] // fullfilling the select tag on FormGroup
+
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
@@ -162,6 +166,7 @@ export class ChaptereditComponent implements OnInit {
       }, complete: () => {
         this.createAddWordPairForm();// to clear the form
         this.retrieveChaptersByEditorId();
+        this.wordpaireditComponent.retrieveAllWordPairsOfSinglePir()
       }
     })
 

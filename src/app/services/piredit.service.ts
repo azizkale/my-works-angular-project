@@ -71,4 +71,9 @@ export class PireditService {
   retrieveAllWordPairsOfSinglePir(pirId: any): Observable<any> {
     return this.http.get(environment.url + `/pir/getallwordpairsofsinglepir?pirId=${pirId}`)
   }
+
+  deleteWordPair(wordPair: WordPair): Observable<any> {
+    const body = { wordPair: wordPair };
+    return this.http.delete(environment.url + '/pir/deletewordpair', { body })
+  }
 }

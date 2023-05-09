@@ -70,7 +70,7 @@ export class ChapterContentComponent implements OnInit {
   }
 
   openDialog(wordpair: WordPair): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    this.dialog.open(DialogComponent, {
       data: { word: wordpair.word, meaning: wordpair.meaning }
     });
   }
