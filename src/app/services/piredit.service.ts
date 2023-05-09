@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Pir } from 'src/models/Pir';
 import { Chapter } from 'src/models/Chapter';
 import { WordPair } from 'src/models/WordPair';
+import { RolesService } from './roles.service';
+import { Roles } from 'src/models/Roles';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +14,7 @@ export class PireditService {
 
   constructor(
     private http: HttpClient,
+    private rolesservice: RolesService
   ) { }
 
   createPir(pir: Pir): Observable<any> {
@@ -39,8 +42,15 @@ export class PireditService {
     return this.http.post(environment.url + '/pir/addchapter', body)
   }
 
-  retrieveChaptersByEditorId(editorId: any, pirId: any): Observable<any> {
-    return this.http.get(environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`)
+  retrieveChapters(editorId: any, pirId: any): Observable<any> {
+    let url = '';
+    if (this.rolesservice.checkRole(Roles[1])) {
+      url = environment.url + `/pir/getallchapters?pirId=${pirId}`
+    }
+    else if (this.rolesservice.checkRole(Roles[4])) {
+      url = environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`
+    }
+    return this.http.get(url)
   }
 
   updateChapter(chapter: Chapter): Observable<any> {

@@ -7,6 +7,7 @@ import { Chapter } from 'src/models/Chapter';
 import { Roles } from 'src/models/Roles';
 import { WordPair } from 'src/models/WordPair';
 import { WordpaireditComponent } from '../wordpairedit/wordpairedit.component';
+import { RolesService } from 'src/app/services/roles.service';
 
 @Component({
   selector: 'app-chapteredit',
@@ -21,8 +22,7 @@ export class ChaptereditComponent implements OnInit {
   updateChapterForm: FormGroup;
   addWordForm: FormGroup;
   chapters: Chapter[];
-  roles = JSON.parse(localStorage.getItem('roles')!.toString())
-  allowedToAdmin: boolean = this.roles.includes(Roles[1])
+  allowedToAdmin: boolean = this.rolesservice.roles.includes(Roles[1])
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
   users: any[] = [] // fullfilling the select tag on FormGroup
@@ -31,13 +31,13 @@ export class ChaptereditComponent implements OnInit {
     public fb: FormBuilder,
     private pireditservice: PireditService,
     private activeroute: ActivatedRoute,
-    public userservice: UserService
-
+    public userservice: UserService,
+    public rolesservice: RolesService
   ) { }
 
   ngOnInit(): void {
     this.selectedPirId = this.activeroute.snapshot.paramMap.get('id');
-    this.retrieveChaptersByEditorId();
+    this.retrieveChapters();
     this.createChapterRetrieveForm()
     this.createNewChapterForm();
     this.createUpdateChapterForm();
@@ -98,7 +98,7 @@ export class ChaptereditComponent implements OnInit {
         console.log(ress)
       },
       complete: () => {
-        this.retrieveChaptersByEditorId();
+        this.retrieveChapters();
       }
     })
   }
@@ -106,18 +106,19 @@ export class ChaptereditComponent implements OnInit {
   deleteChapter() {
     this.pireditservice.deleteChapter(this.selectedPirId, this.updateChapterForm.get('chapterId')?.value).subscribe({
       next: (ress) => {
-        this.retrieveChaptersByEditorId()
+        this.retrieveChapters()
         this.createChapterRetrieveForm()
         console.log(ress)
       }
     })
   }
 
-  retrieveChaptersByEditorId() {
+  retrieveChapters() {
     const editorId = localStorage.getItem('uid');
-    this.pireditservice.retrieveChaptersByEditorId(editorId, this.selectedPirId).subscribe({
+    this.pireditservice.retrieveChapters(editorId, this.selectedPirId).subscribe({
       next: (ress) => {
-        this.chapters = ress;
+        console.log(ress)
+        this.chapters = Object.values(ress);
         this.chapters.forEach((chapter, index) => {
           this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
         });
@@ -138,7 +139,7 @@ export class ChaptereditComponent implements OnInit {
 
   updateChapter() {
     this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
-      next: (ress) => { this.retrieveChaptersByEditorId() }
+      next: (ress) => { this.retrieveChapters() }
     })
   }
 
@@ -165,7 +166,7 @@ export class ChaptereditComponent implements OnInit {
         this.updateChapter(); // to save (as updated) the word that made bold
       }, complete: () => {
         this.createAddWordPairForm();// to clear the form
-        this.retrieveChaptersByEditorId();
+        this.retrieveChapters();
         this.wordpaireditComponent.retrieveAllWordPairsOfSinglePir()
       }
     })

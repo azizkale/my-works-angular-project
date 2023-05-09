@@ -19,7 +19,7 @@ export class WordpaireditComponent implements OnInit {
   editWordPairForm: FormGroup;
   selectedWordPairToEdit: WordPair
   uid = localStorage.getItem('uid')
-  allowedToPirEditor: boolean
+  allowedToPirEditor = this.rolesservice.checkRole(Roles[4])
 
   constructor(
     public fb: FormBuilder,
@@ -32,7 +32,6 @@ export class WordpaireditComponent implements OnInit {
     this.retrieveAllWordPairsOfSinglePir()
     this.retrieveWordPairEditForm()
     this.createEditWordPairForm();
-    this.allowedToPirEditor = this.rolesservice.checkRole(Roles[4])
   }
 
   retrieveWordPairEditForm() {
