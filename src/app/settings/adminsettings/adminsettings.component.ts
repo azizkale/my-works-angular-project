@@ -16,6 +16,7 @@ export class AdminsettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCreateNewGroupForm();
+    this.retrieveGroups()
   }
 
   createCreateNewGroupForm() {
@@ -29,6 +30,14 @@ export class AdminsettingsComponent implements OnInit {
     this.groupservice.createGroup(groupName, mentorId).subscribe({
       next: (result) => {
         console.timeLog(result)
+      }
+    })
+  }
+
+  retrieveGroups() {
+    this.groupservice.retrieveGroups().subscribe({
+      next: (result) => {
+        console.log(result)
       }
     })
   }

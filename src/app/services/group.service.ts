@@ -16,4 +16,8 @@ export class GroupService {
     const body = { groupName: groupName, mentorId: mentorId };
     return this.http.post(environment.url + '/group/creategroup', body)
   }
+
+  retrieveGroups(): Observable<any> {
+    return this.http.get(environment.url + '/group/retrievegroups')
+  }
 }
