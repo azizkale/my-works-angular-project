@@ -56,9 +56,9 @@
           <input
             class="w3-input w3-border w3-margin-bottom"
             type="text"
-            placeholder="Mentor id giriniz"
-            #mentorId
-            formControlName="mentorId"
+            placeholder="Mentor e-mail giriniz"
+            #mentorEmail
+            formControlName="mentorEmail"
           />
         </form>
       </div>
@@ -68,7 +68,7 @@
           class="btn btn-success"
           data-bs-dismiss="modal"
           (click)="
-            createGroup(groupName.value, mentorId.value);
+            createGroup(groupName.value, mentorEmail.value);
             createCreateNewGroupForm()
           "
           [disabled]="createGroupForm.pristine || createGroupForm.invalid"

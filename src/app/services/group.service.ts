@@ -12,8 +12,8 @@ export class GroupService {
     private http: HttpClient
   ) { }
 
-  createGroup(groupName: any, mentorId: any): Observable<any> {
-    const body = { groupName: groupName, mentorId: mentorId };
+  createGroup(groupName: any, mentorEmail: any): Observable<any> {
+    const body = { groupName: groupName, mentorEmail: mentorEmail };
     return this.http.post(environment.url + '/group/creategroup', body)
   }
 

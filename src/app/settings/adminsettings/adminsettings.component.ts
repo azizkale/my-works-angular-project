@@ -22,12 +22,12 @@ export class AdminsettingsComponent implements OnInit {
   createCreateNewGroupForm() {
     this.createGroupForm = this.fb.group({
       groupName: ['', Validators.required],
-      mentorId: ['', Validators.required],
+      mentorEmail: ['', Validators.required],
     });
   }
 
-  createGroup(groupName: any, mentorId: any) {
-    this.groupservice.createGroup(groupName, mentorId).subscribe({
+  createGroup(groupName: any, mentorEmail: any) {
+    this.groupservice.createGroup(groupName, mentorEmail).subscribe({
       next: (result) => {
         console.timeLog(result)
       }
