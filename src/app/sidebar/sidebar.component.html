@@ -23,25 +23,32 @@
   </a>
   <hr />
   <!-- Book list manupulation table -->
-  <a routerLink="booktable" class="w3-bar-item w3-button w3-hover-black"
+  <a routerLink="booktable" class="w3-bar-item w3-button w3-hover-black d-flex"
     >Kitaplarım</a
-  ><br />
-  <a routerLink="/me/grouplist" class="w3-bar-item w3-button w3-hover-black"
+  >
+  <a
+    routerLink="/me/grouplist"
+    class="w3-bar-item w3-button w3-hover-black d-flex"
     >Gruplarım</a
-  ><br />
-  <a routerLink="/me/hatim" class="w3-bar-item w3-button w3-hover-black"
+  >
+  <a routerLink="/me/hatim" class="w3-bar-item w3-button w3-hover-black d-flex"
     >Hatim</a
-  ><br />
-  <a routerLink="shb" class="w3-bar-item w3-button w3-hover-black">Sahabe</a
-  ><br />
-  <a routerLink="/me/piredit" class="w3-bar-item w3-button w3-hover-black"
-    >Pırlanta Edit</a
-  ><br />
+  >
+  <a routerLink="shb" class="w3-bar-item w3-button w3-hover-black d-flex"
+    >Sahabe</a
+  >
+  <input
+    type="button"
+    routerLink="/me/piredit"
+    class="w3-bar-item w3-button w3-hover-black"
+    *ngIf="allowPirEdit"
+    value="Pırlanta Edit"
+  />
   <a
     routerLink="/display/displaypir"
-    class="w3-bar-item w3-button w3-hover-black"
+    class="w3-bar-item w3-button w3-hover-black d-flex"
     >Pırlanta</a
-  ><br />
+  >
   <a routerLink="settings" class="w3-bar-item w3-button w3-hover-black"
     >Ayarlar</a
   >
