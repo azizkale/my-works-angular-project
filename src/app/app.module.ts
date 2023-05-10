@@ -47,6 +47,9 @@ import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-c
 import { DialogComponent } from './dialog/dialog.component';
 import { WordpaireditComponent } from './works/piredit/wordpairedit/wordpairedit.component';
 import { AdminsettingsComponent } from './settings/adminsettings/adminsettings.component';
+import { GroupComponent } from './group/group.component';
+import { GroupsidebarComponent } from './groupsidebar/groupsidebar.component';
+import { GroupinfoComponent } from './group/groupinfo/groupinfo.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { AdminsettingsComponent } from './settings/adminsettings/adminsettings.c
     ChapterContentComponent,
     DialogComponent,
     WordpaireditComponent,
-    AdminsettingsComponent
+    AdminsettingsComponent,
+    GroupComponent,
+    GroupsidebarComponent,
+    GroupinfoComponent
   ],
   imports: [
     BrowserModule,

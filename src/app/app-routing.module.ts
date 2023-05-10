@@ -15,6 +15,8 @@ import { DisplayComponent } from './Display/display.component';
 import { DisplaypirComponent } from './Display/displaypir/displaypir.component';
 import { ChaptersComponent } from './Display/displaypir/chapters/chapters.component';
 import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-content/chapter-content.component';
+import { GroupComponent } from './group/group.component';
+import { GroupinfoComponent } from './group/groupinfo/groupinfo.component';
 
 const routes: Routes = [
   { path: '', component: MeComponent, pathMatch: 'full' },
@@ -23,14 +25,18 @@ const routes: Routes = [
   {
     path: 'me', component: MeComponent, children: [
       { path: '', redirectTo: 'booktable', pathMatch: 'full' },
-      { path: 'hatim', component: HatimComponent },
       { path: 'booktable', component: BooktableComponent },
       { path: 'grouplist', component: GrouplistComponent },
-      { path: 'settings', component: SettingsComponent },
+      { path: 'settings', component: SettingsComponent },]
+  },
+  {
+    path: 'group', component: GroupComponent, children: [
+      { path: '', redirectTo: 'groupinfo', pathMatch: 'full' },
+      { path: 'groupinfo', component: GroupinfoComponent },
+      { path: 'hatim', component: HatimComponent },
       { path: 'shb', component: ShbComponent },
       { path: 'piredit', component: PireditComponent },
       { path: 'chapter/:id', component: ChaptereditComponent },
-
     ]
   },
   {

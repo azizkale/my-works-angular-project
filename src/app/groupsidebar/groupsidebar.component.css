@@ -1,0 +1,35 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Roboto", sans-serif;
+}
+
+.w3-sidebar {
+    z-index: 3;
+    top: 0px;
+    bottom: 0;
+    height: inherit;
+    display: none;
+}
+
+#logo {
+    border-radius: 50%;
+}
+
+.fa {
+    font-size: x-large;
+}
+
+@media (min-width:993px) {
+    .w3-hide-large {
+        display: block
+    }
+    .w3-sidebar {
+        display: none
+    }
+}
