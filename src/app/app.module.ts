@@ -46,6 +46,7 @@ import { ChaptersComponent } from './Display/displaypir/chapters/chapters.compon
 import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-content/chapter-content.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { WordpaireditComponent } from './works/piredit/wordpairedit/wordpairedit.component';
+import { AdminsettingsComponent } from './settings/adminsettings/adminsettings.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { WordpaireditComponent } from './works/piredit/wordpairedit/wordpairedit
     ChaptersComponent,
     ChapterContentComponent,
     DialogComponent,
-    WordpaireditComponent
+    WordpaireditComponent,
+    AdminsettingsComponent
   ],
   imports: [
     BrowserModule,
