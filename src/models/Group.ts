@@ -1,12 +1,13 @@
 import { User } from "./User";
 
 export class Group {
-    adminId: any;
+    mentorId: any;
     participants: [User]
     groupName: any;
     groupId: any;
 
-    constructor(groupName: any) {
-        this.groupName = groupName
+    constructor(groupName: any, mentorId: any) {
+        this.groupName = groupName,
+            this.mentorId = mentorId
     }
 }

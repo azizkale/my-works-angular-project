@@ -1,4 +1,93 @@
-<p>adminsettings works!</p>
+<div class="w3-center mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Admin Console</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#createGroup"
+          class="w3-button w3-green w3-section w3-padding"
+        >
+          Kelimeler
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="w3-responsive w3-card-4"></div>
+
+<!-- ===============Create Group(MODAL)================= -->
+<div
+  class="modal fade"
+  id="createGroup"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Yeni Grup</h3>
+        <button
+          type="button"
+          class="w3-button w3-xlarge w3-transparent w3-display-topright"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createGroupForm" novalidate>
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            placeholder="Grup adını giriniz"
+            #groupName
+            formControlName="groupName"
+          />
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            placeholder="Mentor id giriniz"
+            #mentorId
+            formControlName="mentorId"
+          />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="
+            createGroup(groupName.value, mentorId.value);
+            createCreateNewGroupForm()
+          "
+          [disabled]="createGroupForm.pristine || createGroupForm.invalid"
+        >
+          Kaydet
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="createCreateNewGroupForm()"
+        >
+          Kapat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <a
   routerLink="/group/groupinfo"
   class="w3-bar-item w3-button w3-hover-black d-flex"
