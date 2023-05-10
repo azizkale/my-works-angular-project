@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HatimService } from 'src/app/services/hatim.service';
 import { cuz } from 'src/models/cuz';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { CommonService } from 'src/app/services/common.service';
+import { RolesService } from 'src/app/services/roles.service';
 import { Roles } from 'src/models/Roles';
 
 @Component({
@@ -18,17 +17,16 @@ export class HatimComponent implements OnInit {
   uid: string | any = localStorage.getItem('uid');
   name: string | any;
   innerWidth = window.innerWidth;
-  roles: string[];
-  role: string = Roles.mentor.toString()
+  allowToAdmin: boolean = this.rolesservice.checkRole(Roles[1])
+
   constructor(
     private hatimservice: HatimService,
     private _snackBar: MatSnackBar,
-    private common: CommonService,
+    private rolesservice: RolesService
   ) { }
 
   ngOnInit(): void {
     this.retrieveCuzs();
-    this.roles = this.common.getRoles();
     this.readerName();
   }
   retrieveCuzs() {
