@@ -1,16 +1,12 @@
-import { Book } from "./Book";
+import { User } from "./User";
 
 export class Group {
-    userName: string;
-    email: string;
-    password: string;
-    role: number;
-    books: [Book]
+    adminId: any;
+    participants: [User]
+    groupName: any;
+    groupId: any;
 
-    constructor(username: string, email: string, password: string, role: number) {
-        this.userName = username
-        this.email = email
-        this.password = password
-        this.role = role
+    constructor(groupName: any) {
+        this.groupName = groupName
     }
-};
+}

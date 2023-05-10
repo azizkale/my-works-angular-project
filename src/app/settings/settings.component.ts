@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingsService } from '../services/settings.service';
 import { Router } from '@angular/router';
+import { RolesService } from '../services/roles.service';
+import { Roles } from 'src/models/Roles';
 
 @Component({
   selector: 'app-settings',
@@ -12,11 +14,12 @@ export class SettingsComponent implements OnInit {
   @ViewChild('alertParent', { static: true }) alertParent: ElementRef
 
   settingsForm: FormGroup;
-
+  allowToAdmin: boolean = this.rolesservice.checkRole(Roles[1])
   constructor(
     public fb: FormBuilder,
     private settings: SettingsService,
-    private router: Router
+    private router: Router,
+    private rolesservice: RolesService
   ) {
     this.createForm();
   }
