@@ -1,0 +1,176 @@
+<h3>Grup İşlemleri</h3>
+<!-- new group create -->
+<div class="row">
+  <div class="col-sm-12">
+    <button
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#createGroup"
+      class="w3-button w3-green w3-section w3-padding"
+    >
+      Yeni Grup Oluştur
+    </button>
+  </div>
+</div>
+<!-- list groups -->
+<div class="row">
+  <div class="col-sm-12">
+    <form [formGroup]="retrieveGroupsForm" novalidate>
+      <div *ngFor="let group of groups; let i = index">
+        <input
+          class="w3-button w-100"
+          type="button"
+          [value]="group.groupName"
+          [formControlName]="group.groupName"
+          data-bs-toggle="modal"
+          data-bs-target="#updateGroup"
+          (click)="updateGroupForm.setValue(group)"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===============Create Group(MODAL)================= -->
+<div
+  class="modal fade"
+  id="createGroup"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Yeni Grup</h3>
+        <button
+          type="button"
+          class="w3-button w3-xlarge w3-transparent w3-display-topright"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createGroupForm">
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            placeholder="Grup adını giriniz"
+            #groupName
+            formControlName="groupName"
+          />
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            placeholder="Mentor e-mail giriniz"
+            #mentorEmail
+            formControlName="mentorEmail"
+          />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="createGroup(groupName.value, mentorEmail.value)"
+          [disabled]="mentorEmail.value === '' || groupName.value === ''"
+        >
+          Kaydet
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="createGroupForm.reset()"
+        >
+          Kapat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===============Update Group(MODAL)================= -->
+<div
+  class="modal fade"
+  id="updateGroup"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">
+          {{ updateGroupForm.get("groupName")?.value }} - Güncelle
+        </h3>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateGroupForm">
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            type="hidden"
+            #mentorId
+            formControlName="mentorId"
+          />
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            #groupName
+            formControlName="groupName"
+          />
+          <input
+            class="w3-input w3-border w3-margin-bottom"
+            type="text"
+            #mentorEmail
+            formControlName="mentorEmail"
+          />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          [ngbPopover]="popUpdateGroup"
+          popoverTitle="Güncelle!"
+        >
+          Kaydet
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="updateGroupForm.reset()"
+        >
+          Kapat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<a
+  routerLink="/group/groupinfo"
+  class="w3-bar-item w3-button w3-hover-black d-flex"
+  >go to group</a
+>
+<!-- ===============Popovers-Group-Update================= -->
+<ng-template #popUpdateGroup>
+  <div class="text-center">
+    <button
+      data-bs-dismiss="modal"
+      (click)="updateGroup()"
+      type="button"
+      class="btn btn-danger"
+      style="margin-right: 10px"
+      data-bs-dismiss="modal"
+    >
+      Kaydet
+    </button>
+    <button type="button" class="btn btn-info">Vazgeç</button>
+  </div>
+</ng-template>

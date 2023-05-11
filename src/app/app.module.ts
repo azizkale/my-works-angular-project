@@ -50,6 +50,7 @@ import { AdminsettingsComponent } from './settings/adminsettings/adminsettings.c
 import { GroupComponent } from './group/group.component';
 import { GroupsidebarComponent } from './groupsidebar/groupsidebar.component';
 import { GroupinfoComponent } from './group/groupinfo/groupinfo.component';
+import { GroupsettingsComponent } from './settings/adminsettings/groupsettings/groupsettings.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { GroupinfoComponent } from './group/groupinfo/groupinfo.component';
     AdminsettingsComponent,
     GroupComponent,
     GroupsidebarComponent,
-    GroupinfoComponent
+    GroupinfoComponent,
+    GroupsettingsComponent
   ],
   imports: [
     BrowserModule,
