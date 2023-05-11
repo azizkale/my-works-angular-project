@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/services/group.service';
+import { UserService } from 'src/app/services/user.service';
 import { Group } from 'src/models/Group';
+import { Roles } from 'src/models/Roles';
 
 @Component({
   selector: 'groupsettings',
@@ -17,7 +19,8 @@ export class GroupsettingsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private groupservice: GroupService
+    private groupservice: GroupService,
+    private userservice: UserService
   ) { }
 
   ngOnInit(): void {
@@ -50,11 +53,15 @@ export class GroupsettingsComponent implements OnInit {
     });
   }
 
-  // functions to Groups=================
+  // functions =================
   createGroup(groupName: any, mentorEmail: any) {
     this.groupservice.createGroup(groupName, mentorEmail).subscribe({
       next: (result) => {
-        console.log(result)
+        this.userservice.retrieveUserByEmail(mentorEmail).subscribe({
+          next: (user) => {
+            this.userservice.addRoleToUser(user.uid, Roles[2]).subscribe()
+          }
+        })
         this.retrieveGroups()
       }
     })
@@ -75,10 +82,4 @@ export class GroupsettingsComponent implements OnInit {
   updateGroup() {
     console.log(this.updateGroupForm.value)
   }
-
-  // functions to Users=================
-  retrieveSingleUser() {
-
-  }
-
 }

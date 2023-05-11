@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { } from 'rxjs/internal/testing/TestScheduler';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,8 +12,12 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
-  getUserById(uid: any): Observable<any> {
+  retrieveUserById(uid: any): Observable<any> {
     return this.http.get(environment.url + `/users/getUserById?uid=${uid}`)
+  }
+
+  retrieveUserByEmail(email: any): Observable<any> {
+    return this.http.get(environment.url + `/users/retrieuserbyemail?email=${email}`)
   }
 
   getAllUsers(): Observable<any> {
