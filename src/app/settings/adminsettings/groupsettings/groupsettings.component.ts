@@ -82,4 +82,12 @@ export class GroupsettingsComponent implements OnInit {
   updateGroup() {
     console.log(this.updateGroupForm.value)
   }
+
+  deleteGroup() {
+    this.groupservice.deleteGroup(this.updateGroupForm.get('groupId')?.value).subscribe({
+      next: (result) => {
+        this.retrieveGroups()
+      }
+    })
+  }
 }

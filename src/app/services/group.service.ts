@@ -20,4 +20,9 @@ export class GroupService {
   retrieveGroups(): Observable<any> {
     return this.http.get(environment.url + '/group/retrievegroups')
   }
+
+  deleteGroup(groupId: any): Observable<any> {
+    const body = { groupId: groupId };
+    return this.http.delete(environment.url + '/group/deletegroup', { body })
+  }
 }

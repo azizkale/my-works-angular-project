@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'usersettings',
@@ -10,10 +11,12 @@ export class UsersettingsComponent implements OnInit {
   retrieveSingleUserForm: FormGroup
   usersRoles: []
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userservice: UserService
   ) { }
 
   ngOnInit(): void {
+    this.createReteiveUserForm()
   }
 
   createReteiveUserForm() {
@@ -23,7 +26,12 @@ export class UsersettingsComponent implements OnInit {
     });
 
   }
-  retrieveSingleUser() {
 
+  retrieveSingleUser(email: any) {
+    this.userservice.retrieveUserByEmail(email).subscribe(({
+      next: (user) => {
+        console.log(user)
+      }
+    }))
   }
 }

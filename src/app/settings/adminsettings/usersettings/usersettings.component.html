@@ -1,12 +1,23 @@
-<div class="row">
-  <div class="col-sm-12 text-start">
+<div class="row flex-nowrap">
+  <div class="col-sm-9 text-start">
     <label for="useremail">Kullanıcı email:</label>
     <input
       class="w3-input w3-border w3-margin-bottom mt-1"
       type="text"
       #useremail
     />
+    <div class="col-sm-2">
+      <button
+        type="button"
+        class="w3-button w3-green"
+        (click)="retrieveSingleUser(useremail.value)"
+      >
+        Getir
+      </button>
+    </div>
   </div>
+</div>
+<div class="row">
   <div class="col-sm-12">
     <form [formGroup]="retrieveSingleUserForm" novalidate>
       <div *ngFor="let role of usersRoles; let i = index">

@@ -139,7 +139,15 @@
           [ngbPopover]="popUpdateGroup"
           popoverTitle="Güncelle!"
         >
-          Kaydet
+          Güncelle
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          [ngbPopover]="popDeleteGroup"
+          popoverTitle="Sil!"
+        >
+          Sil
         </button>
         <button
           type="button"
@@ -170,6 +178,23 @@
       data-bs-dismiss="modal"
     >
       Kaydet
+    </button>
+    <button type="button" class="btn btn-info">Vazgeç</button>
+  </div>
+</ng-template>
+
+<!-- ===============Popovers-Group-Delete================= -->
+<ng-template #popDeleteGroup>
+  <div class="text-center">
+    <button
+      data-bs-dismiss="modal"
+      (click)="deleteGroup()"
+      type="button"
+      class="btn btn-danger"
+      style="margin-right: 10px"
+      data-bs-dismiss="modal"
+    >
+      Sil
     </button>
     <button type="button" class="btn btn-info">Vazgeç</button>
   </div>
