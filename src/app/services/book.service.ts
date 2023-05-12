@@ -16,11 +16,15 @@ export class BookService {
   createBook(book: Book): Observable<any> {
     const body = { book: book };
     return this.http.post(environment.url + '/book/create', body)
-
-
   }
+
   retrieveBooks(): Observable<any> {
     return this.http.get(environment.url + '/book/retrieve')
+  }
+
+  updateBook(book: Book): Observable<any> {
+    const body = { book: book };
+    return this.http.patch(environment.url + '/book/update', body)
   }
 
   deleteBook(bookId: string): Observable<any> {
@@ -28,8 +32,5 @@ export class BookService {
     return this.http.delete(environment.url + '/book/delete', { body })
   }
 
-  updateBook(book: Book): Observable<any> {
-    const body = { book: book };
-    return this.http.patch(environment.url + '/book/update', body)
-  }
+
 }

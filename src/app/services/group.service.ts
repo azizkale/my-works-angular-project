@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Group } from 'src/models/Group';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,11 @@ export class GroupService {
 
   retrieveGroups(): Observable<any> {
     return this.http.get(environment.url + '/group/retrievegroups')
+  }
+
+  updateGroup(group: Group): Observable<any> {
+    const body = { group: group };
+    return this.http.patch(environment.url + '/group/updategroup', body)
   }
 
   deleteGroup(groupId: any): Observable<any> {
