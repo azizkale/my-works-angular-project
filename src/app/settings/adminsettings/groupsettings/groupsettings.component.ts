@@ -17,6 +17,7 @@ export class GroupsettingsComponent implements OnInit {
   retrieveGroupsForm: FormGroup
   updateGroupForm: FormGroup
   groups: Group[];
+  usersOfTheGroup: any[];
 
   constructor(
     private fb: FormBuilder,
@@ -51,12 +52,7 @@ export class GroupsettingsComponent implements OnInit {
       mentorId: ['', Validators.required],
       groupName: ['', Validators.required],
       mentorEmail: ['', Validators.required],
-    });
-    this.groups.forEach((group: Group, index) => {
-      group.participants.forEach((user) => {
-        this.updateGroupForm.addControl(user.userName, new FormControl(user.userName));
-      })
-
+      users: [] //fullfilled below at selectGroupToUpdate func.
     });
   }
 
@@ -79,13 +75,25 @@ export class GroupsettingsComponent implements OnInit {
     this.groupservice.retrieveGroups().subscribe({
       next: (result) => {
         this.groups = Object.values(result)
+
         this.groups.forEach((group: Group) => {
           this.retrieveGroupsForm.addControl(group.groupName, new FormControl(group.groupName));
+          this.retrieveGroupsForm.addControl(group.groupId, new FormControl(group.groupId));
         });
       }
     })
   }
 
+  selectGroupToUpdate(group: Group) {
+    this.usersOfTheGroup = []
+    this.updateGroupForm.setValue(group)
+    this.usersOfTheGroup = Object.values(this.updateGroupForm.get('users')?.value);
+
+    this.usersOfTheGroup.forEach((user: any) => {
+      this.retrieveGroupsForm.addControl(user.uid, new FormControl(user.uid));
+
+    });
+  }
   updateGroup() {
     this.groupservice.updateGroup(this.updateGroupForm.value).subscribe({
       next: (result) => {
@@ -106,7 +114,6 @@ export class GroupsettingsComponent implements OnInit {
   async retrieveSingleUser(email: any) {
     await this.userservice.retrieveUserByEmail(email).subscribe(({
       next: (user) => {
-        console.log(user)
         this.participantemail_.nativeElement.innerText = user.email
         this.participantid_.nativeElement.innerText = user.uid
       }
@@ -117,7 +124,6 @@ export class GroupsettingsComponent implements OnInit {
   addUserToGroup(uid: any) {
     this.userservice.addParticipantToGroup(this.updateGroupForm.get('groupId')?.value, uid, Roles[3]).subscribe({
       next: (result) => {
-        console.log(result)
       }
     })
   }

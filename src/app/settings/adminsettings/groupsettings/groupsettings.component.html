@@ -19,12 +19,18 @@
       <div *ngFor="let group of groups; let i = index">
         <input
           class="w3-button w-100"
+          type="hidden"
+          [value]="group.groupId"
+          [formControlName]="group.groupId"
+        />
+        <input
+          class="w3-button w-100"
           type="button"
           [value]="group.groupName"
           [formControlName]="group.groupName"
           data-bs-toggle="modal"
           data-bs-target="#updateGroup"
-          (click)="updateGroupForm.setValue(group)"
+          (click)="selectGroupToUpdate(group)"
         />
       </div>
     </form>
@@ -132,6 +138,10 @@
             #mentorEmail
             formControlName="mentorEmail"
           />
+          <label for="uesrs">Katılımcılar:</label>
+          <ul class="list-group" *ngFor="let user of usersOfTheGroup">
+            <li class="list-group-item">{{ user.uid }}</li>
+          </ul>
         </form>
         <!-- participant adding -->
         <hr />
