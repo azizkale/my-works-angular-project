@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/services/group.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,7 +11,8 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./groupsettings.component.css']
 })
 export class GroupsettingsComponent implements OnInit {
-
+  @ViewChild('participantemail_', { static: false }) participantemail_: ElementRef
+  @ViewChild('participantid_', { static: false }) participantid_: ElementRef
   createGroupForm: FormGroup
   retrieveGroupsForm: FormGroup
   updateGroupForm: FormGroup
@@ -50,6 +51,12 @@ export class GroupsettingsComponent implements OnInit {
       mentorId: ['', Validators.required],
       groupName: ['', Validators.required],
       mentorEmail: ['', Validators.required],
+    });
+    this.groups.forEach((group: Group, index) => {
+      group.participants.forEach((user) => {
+        this.updateGroupForm.addControl(user.userName, new FormControl(user.userName));
+      })
+
     });
   }
 
@@ -92,6 +99,25 @@ export class GroupsettingsComponent implements OnInit {
     this.groupservice.deleteGroup(this.updateGroupForm.get('groupId')?.value).subscribe({
       next: (result) => {
         this.retrieveGroups()
+      }
+    })
+  }
+
+  async retrieveSingleUser(email: any) {
+    await this.userservice.retrieveUserByEmail(email).subscribe(({
+      next: (user) => {
+        console.log(user)
+        this.participantemail_.nativeElement.innerText = user.email
+        this.participantid_.nativeElement.innerText = user.uid
+      }
+    }))
+
+  }
+
+  addUserToGroup(uid: any) {
+    this.userservice.addParticipantToGroup(this.updateGroupForm.get('groupId')?.value, uid, Roles[3]).subscribe({
+      next: (result) => {
+        console.log(result)
       }
     })
   }

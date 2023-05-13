@@ -1,17 +1,17 @@
 <h3>Kullanıcı İşlemleri</h3>
-
-<div class="row flex-nowrap">
-  <div class="col-sm-9 text-start">
-    <label for="useremail">Kullanıcı email:</label>
-    <input
-      class="w3-input w3-border w3-margin-bottom mt-1"
-      type="text"
-      #useremail
-    />
-    <div class="col-sm-2">
+<div class="row align-items-center">
+  <div class="row">
+    <div class="col">
+      <input
+        type="text"
+        #useremail
+        class="form-control"
+        placeholder="Enter Email..."
+      />
+    </div>
+    <div class="col-auto">
       <button
-        type="button"
-        class="w3-button w3-green"
+        class="btn btn-success"
         (click)="retrieveSingleUser(useremail.value)"
       >
         Getir

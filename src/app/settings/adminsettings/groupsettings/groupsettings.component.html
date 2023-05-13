@@ -6,7 +6,7 @@
       type="button"
       data-bs-toggle="modal"
       data-bs-target="#createGroup"
-      class="w3-button w3-green w3-section w3-padding"
+      class="btn btn-success"
     >
       Yeni Grup Oluştur
     </button>
@@ -131,6 +131,45 @@
             formControlName="mentorEmail"
           />
         </form>
+        <!-- participant adding -->
+        <hr />
+        <div class="row align-items-center">
+          <div class="row">
+            <div class="col">
+              <input
+                type="text"
+                #useremail
+                class="form-control"
+                placeholder="Enter Email..."
+              />
+            </div>
+            <div class="col-auto">
+              <button
+                class="btn btn-success"
+                (click)="retrieveSingleUser(useremail.value)"
+              >
+                Getir
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- retrieve the participant-candidate to be added -->
+        <div class="row align-items-center mt-1" *ngIf="useremail.value">
+          <div class="row">
+            <div class="col">
+              <p #participantemail_ class="form-control"></p>
+              <p hidden="true" #participantid_ class="form-control"></p>
+            </div>
+            <div class="col-auto">
+              <button
+                class="btn btn-success"
+                (click)="addUserToGroup(participantid_.innerText)"
+              >
+                Ekle
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button
