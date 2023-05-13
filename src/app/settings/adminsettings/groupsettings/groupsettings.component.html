@@ -106,9 +106,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">
-          {{ updateGroupForm.get("groupName")?.value }} - Güncelle
-        </h3>
+        <h2 class="modal-title">
+          {{ updateGroupForm.get("groupName")?.value }}
+        </h2>
       </div>
       <div class="modal-body">
         <form [formGroup]="updateGroupForm">
@@ -118,12 +118,14 @@
             #mentorId
             formControlName="mentorId"
           />
+          <label for="groupName">Grup Adı:</label>
           <input
             class="w3-input w3-border w3-margin-bottom"
             type="text"
             #groupName
             formControlName="groupName"
           />
+          <label for="mentorEmail">Mentor:</label>
           <input
             class="w3-input w3-border w3-margin-bottom"
             type="text"
@@ -133,6 +135,7 @@
         </form>
         <!-- participant adding -->
         <hr />
+        <label for="adding participant">Katılımcı ekle:</label>
         <div class="row align-items-center">
           <div class="row">
             <div class="col">
