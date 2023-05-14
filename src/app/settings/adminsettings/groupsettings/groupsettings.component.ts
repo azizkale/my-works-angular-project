@@ -87,11 +87,18 @@ export class GroupsettingsComponent implements OnInit {
   selectGroupToUpdate(group: Group) {
     this.usersOfTheGroup = []
     this.updateGroupForm.setValue(group)
+
+    //{uis,role} list
     this.usersOfTheGroup = Object.values(this.updateGroupForm.get('users')?.value);
-
-    this.usersOfTheGroup.forEach((user: any) => {
+    //list of the id of the users
+    this.usersOfTheGroup.forEach((user: any, index: number) => {
+      //list of the email of the users(changed)
+      this.userservice.retrieveUserById(user.uid).subscribe({
+        next: (result) => {
+          this.usersOfTheGroup[index].uid = result.email
+        }
+      })
       this.retrieveGroupsForm.addControl(user.uid, new FormControl(user.uid));
-
     });
   }
   updateGroup() {
