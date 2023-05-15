@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { GroupService } from 'src/app/services/group.service';
 
 @Component({
   selector: 'app-grouplist',
@@ -8,9 +10,46 @@ import { Component, OnInit } from '@angular/core';
 export class GrouplistComponent implements OnInit {
   groups: any[];
   screenSize: number;
-  constructor() { }
+  retrieveGroupsForm: FormGroup
+  groupsInfo: {
+    groupId: any,
+    groupName: string
+  }[];
+  uid = localStorage.getItem('uid')
+  constructor(
+    private fb: FormBuilder,
+    private groupservice: GroupService
+  ) { }
+
 
   ngOnInit(): void {
+    this.createReteiveGroupsForm()
+    this.retrieveAllGroupsNamesOfTheUserByuserId();
   }
 
+  //forms=============
+  createReteiveGroupsForm() {
+    this.retrieveGroupsForm = this.fb.group({
+    });
+  }
+
+  //methods================
+  retrieveAllGroupsNamesOfTheUserByuserId() {
+    this.groupservice.retrieveAllGroupsNamesOfTheUserByuserId(this.uid).subscribe({
+      next: (result) => {
+
+        this.retrieveGroupsForm.patchValue(result)
+        this.groupsInfo = Object.values(result)
+        console.log(this.groupsInfo)
+        this.groupsInfo.forEach((info) => {
+          this.retrieveGroupsForm.addControl(info.groupId, new FormControl(info.groupId));
+          this.retrieveGroupsForm.addControl(info.groupName, new FormControl(info.groupName));
+        });
+      }
+    })
+  }
+
+  selectGroupToUpdate(group: any) {
+
+  }
 }

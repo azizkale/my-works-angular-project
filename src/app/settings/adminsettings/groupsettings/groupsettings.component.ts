@@ -33,13 +33,13 @@ export class GroupsettingsComponent implements OnInit {
   }
 
   // forms=====================
-  createCreateNewGroupForm() {
+  createReteiveGroupsForm() {
     this.retrieveGroupsForm = this.fb.group({
       groupName: ['', Validators.required],
       mentorEmail: ['', Validators.required],
     });
   }
-  createReteiveGroupsForm() {
+  createCreateNewGroupForm() {
     this.createGroupForm = this.fb.group({
       groupId: ['', Validators.required],
       groupName: ['', Validators.required],
@@ -101,6 +101,7 @@ export class GroupsettingsComponent implements OnInit {
       this.retrieveGroupsForm.addControl(user.uid, new FormControl(user.uid));
     });
   }
+
   updateGroup() {
     this.groupservice.updateGroup(this.updateGroupForm.value).subscribe({
       next: (result) => {

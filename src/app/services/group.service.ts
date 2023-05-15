@@ -31,4 +31,8 @@ export class GroupService {
     const body = { groupId: groupId };
     return this.http.delete(environment.url + '/group/deletegroup', { body })
   }
+
+  retrieveAllGroupsNamesOfTheUserByuserId(userId: any) {
+    return this.http.get(environment.url + `/group/retrieveallgroupsnamesoftheuserbyuserid?userId=${userId}`)
+  }
 }

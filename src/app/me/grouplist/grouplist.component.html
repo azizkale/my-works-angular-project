@@ -9,46 +9,23 @@
   </div>
 </div>
 <div class="w3-responsive w3-card-4">
-  <table class="table table-bordered mb-3" style="min-height: 325px">
-    <thead>
-      <tr>
-        <td colspan="2">
-          <div class="row mx-2">
-            <div class="tbl-elem-2 col-sm-10">Group Name</div>
-            <div class="tbl-elem-3 col-sm-2"></div>
-          </div>
-        </td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <div *ngFor="let group of groups; let i = index">
-            <div class="row mx-2">
-              <div style="width: 15%; float: none" class="col-sm-1"></div>
-              <div style="width: 65%; float: none" class="col-sm-9">
-                {{ group.name | slice : 0 : (screenSize < 500 ? 20 : 30) }}
-              </div>
-              <div style="width: 20%; float: none" class="col-sm-2">
-                {{ group.totalPage }}
-              </div>
-            </div>
-            <div class="row mx-2">
-              <div style="width: 5%; float: none" class="col-sm-1">
-                {{ i + 1 }}
-              </div>
-              <div
-                style="width: 90%; float: none"
-                class="col-sm-11 text-center"
-              >
-                <div class="w3-light-grey w3-round"></div>
-                <br />
-              </div>
-            </div>
-            <hr />
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <form [formGroup]="retrieveGroupsForm" novalidate>
+    <div *ngFor="let group of groupsInfo">
+      <input
+        class="w3-button w-100"
+        type="hidden"
+        [value]="group.groupId"
+        [formControlName]="group.groupId"
+      />
+      <input
+        class="w3-button w-100"
+        type="button"
+        [value]="group.groupName"
+        [formControlName]="group.groupName"
+        data-bs-toggle="modal"
+        data-bs-target="#updateGroup"
+        (click)="selectGroupToUpdate(group)"
+      />
+    </div>
+  </form>
 </div>
