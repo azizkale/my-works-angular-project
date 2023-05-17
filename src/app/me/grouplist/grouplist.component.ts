@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GroupService } from 'src/app/services/group.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class GrouplistComponent implements OnInit {
   uid = localStorage.getItem('uid')
   constructor(
     private fb: FormBuilder,
-    private groupservice: GroupService
+    private groupservice: GroupService,
+    private router: Router
   ) { }
 
 
@@ -49,7 +51,7 @@ export class GrouplistComponent implements OnInit {
     })
   }
 
-  selectGroupToUpdate(group: any) {
-
+  redirectToGroupWithId(id: string) {
+    // this.router.navigate(['/group', id]);
   }
 }

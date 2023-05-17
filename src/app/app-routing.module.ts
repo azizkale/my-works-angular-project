@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent },]
   },
   {
-    path: 'group', component: GroupComponent, children: [
+    path: 'group/:id', component: GroupComponent, children: [
       { path: '', redirectTo: 'group', pathMatch: 'full' },
       { path: 'groupinfo', component: GroupinfoComponent },
       { path: 'hatim', component: HatimComponent },

@@ -22,9 +22,8 @@
         type="button"
         [value]="group.groupName"
         [formControlName]="group.groupName"
-        data-bs-toggle="modal"
-        data-bs-target="#updateGroup"
-        (click)="selectGroupToUpdate(group)"
+        (click)="redirectToGroupWithId(group.groupId)"
+        [routerLink]="['/group', group.groupId]"
       />
     </div>
   </form>
