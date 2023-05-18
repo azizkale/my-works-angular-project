@@ -30,9 +30,9 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent },]
   },
   {
-    path: 'group/:id', component: GroupComponent, children: [
-      { path: '', redirectTo: 'group', pathMatch: 'full' },
-      { path: 'groupinfo', component: GroupinfoComponent },
+    path: 'group', component: GroupComponent, children: [
+      { path: '', redirectTo: 'groupinfo/:id', pathMatch: 'full' },
+      { path: 'groupinfo/:id', component: GroupinfoComponent },
       { path: 'hatim', component: HatimComponent },
       { path: 'shb', component: ShbComponent },
       { path: 'piredit', component: PireditComponent },

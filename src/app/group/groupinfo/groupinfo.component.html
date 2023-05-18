@@ -1,1 +1,44 @@
-<p>groupinfo works!</p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="w3-center mt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-11">
+            <h2>{{ retrieveGroupForm.get("groupName")?.value }}</h2>
+          </div>
+          <div class="col-sm-1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="w3-responsive w3-card-4 mb-3">
+      <form [formGroup]="retrieveGroupForm" class="m-2">
+        <input
+          class="w3-input w3-border w3-margin-bottom"
+          type="hidden"
+          #mentorId
+          formControlName="mentorId"
+        />
+        <label for="groupName">Grup Adı:</label>
+        <input
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          #groupName
+          readonly
+          formControlName="groupName"
+        />
+        <label for="mentorEmail">Mentor:</label>
+        <input
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          #mentorEmail
+          readonly
+          formControlName="mentorEmail"
+        />
+        <label for="uesrs">Katılımcılar:</label>
+        <ul class="list-group" *ngFor="let user of usersOfTheGroup">
+          <li class="list-group-item">{{ user.email }}</li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</div>
