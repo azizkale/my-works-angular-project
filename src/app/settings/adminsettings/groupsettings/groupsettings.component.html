@@ -140,7 +140,7 @@
           />
           <label for="uesrs">Katılımcılar:</label>
           <ul class="list-group" *ngFor="let user of usersOfTheGroup">
-            <li class="list-group-item">{{ user.uid }}</li>
+            <li class="list-group-item">{{ user.email }}</li>
           </ul>
         </form>
         <!-- participant adding -->
@@ -176,7 +176,7 @@
             <div class="col-auto">
               <button
                 class="btn btn-success"
-                (click)="addUserToGroup(participantid_.innerText)"
+                (click)="addUserToGroup(participantemail_.innerText)"
               >
                 Ekle
               </button>

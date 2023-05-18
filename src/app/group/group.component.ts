@@ -46,7 +46,7 @@ export class GroupComponent implements OnInit {
         this.usersOfTheGroup = []
         this.retrieveGroupForm.setValue(group)
 
-        //{uis,role} list
+        //{email,role} list
         this.usersOfTheGroup = Object.values(this.retrieveGroupForm.get('users')?.value);
         //list of the id of the users       
         for (const user of this.usersOfTheGroup) {

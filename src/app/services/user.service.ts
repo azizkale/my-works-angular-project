@@ -36,8 +36,8 @@ export class UserService {
     return this.http.patch(environment.url + '/users/addroletouser', body)
   }
 
-  addParticipantToGroup(groupId: any, uid: any, role: string): Observable<any> {
-    const body = { groupId: groupId, uid: uid, role: role }
+  addParticipantToGroup(groupId: any, email: any, role: string): Observable<any> {
+    const body = { groupId: groupId, email: email, role: role }
     return this.http.patch(environment.url + `/users/addparticipant`, body)
   }
 

@@ -91,15 +91,18 @@ export class GroupsettingsComponent implements OnInit {
     //{uis,role} list
     this.usersOfTheGroup = Object.values(this.updateGroupForm.get('users')?.value);
     //list of the id of the users
-    this.usersOfTheGroup.forEach((user: any, index: number) => {
-      //list of the email of the users(changed)
+    //{uis,role} list
+    this.usersOfTheGroup = Object.values(this.updateGroupForm.get('users')?.value);
+    //list of the email of the users       
+    for (const user of this.usersOfTheGroup) {
       this.userservice.retrieveUserById(user.uid).subscribe({
         next: (result) => {
-          this.usersOfTheGroup[index].uid = result.email
+          user.email = result.email
+          this.updateGroupForm.addControl(user.uid, new FormControl(user.uid));
+          this.updateGroupForm.addControl(user.email, new FormControl(user.email));
         }
       })
-      this.retrieveGroupsForm.addControl(user.uid, new FormControl(user.uid));
-    });
+    }
   }
 
   updateGroup() {
@@ -123,14 +126,13 @@ export class GroupsettingsComponent implements OnInit {
     await this.userservice.retrieveUserByEmail(email).subscribe(({
       next: (user) => {
         this.participantemail_.nativeElement.innerText = user.email
-        this.participantid_.nativeElement.innerText = user.uid
       }
     }))
 
   }
 
-  addUserToGroup(uid: any) {
-    this.userservice.addParticipantToGroup(this.updateGroupForm.get('groupId')?.value, uid, Roles[3]).subscribe({
+  addUserToGroup(email: any) {
+    this.userservice.addParticipantToGroup(this.updateGroupForm.get('groupId')?.value, email, Roles[3]).subscribe({
       next: (result) => {
       }
     })
