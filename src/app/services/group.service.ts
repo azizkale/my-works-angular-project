@@ -35,4 +35,8 @@ export class GroupService {
   retrieveAllGroupsNamesOfTheUserByuserId(userId: any) {
     return this.http.get(environment.url + `/group/retrieveallgroupsnamesoftheuserbyuserid?userId=${userId}`)
   }
+
+  retrieveSingleGroupOfUserByGroupId(groupId: any) {
+    return this.http.get(environment.url + `/group/retrievesinglegroupofuserbygroupid?groupId=${groupId}`)
+  }
 }
