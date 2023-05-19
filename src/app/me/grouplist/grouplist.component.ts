@@ -50,8 +50,4 @@ export class GrouplistComponent implements OnInit {
       }
     })
   }
-
-  redirectToGroupWithId(id: string) {
-    // this.router.navigate(['/group', id]);
-  }
 }

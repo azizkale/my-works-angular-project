@@ -16,6 +16,7 @@ export class HatimComponent implements OnInit {
   hatimCount: number;
   uid: string | any = localStorage.getItem('uid');
   name: string | any;
+  groupId: any = localStorage.getItem('groupId')
   innerWidth = window.innerWidth;
   allowToAdmin: boolean = this.rolesservice.checkRole(Roles[1])
 
@@ -31,7 +32,7 @@ export class HatimComponent implements OnInit {
   }
   retrieveCuzs() {
     this.cuzs = []
-    this.hatimservice.retrieveHatim().subscribe({
+    this.hatimservice.retrieveHatim(this.groupId).subscribe({
       next: (response) => {
         //data comes from db with a null object (cuzs[0] = null)
         Object.values(response['cuzs']).map((cuz: cuz | any) => {
@@ -39,9 +40,7 @@ export class HatimComponent implements OnInit {
             this.cuzs.push(cuz)
           }
         })
-        Object.values(response['totalhatim']).map((count: number | any) => {
-          this.hatimCount = count
-        })
+        this.hatimCount = response['totalHatim'].totalHatim
       },
       error: (err) => {
 
@@ -70,14 +69,16 @@ export class HatimComponent implements OnInit {
   }
 
   getCuz(cuz: cuz) {
-    this.hatimservice.getSingleCuz(cuz.cuzname).subscribe({
+    this.hatimservice.getSingleCuz(cuz.cuzname, this.groupId).subscribe({
       next: async (response: any) => {
+        console.log(response)
         let cuz_fromDB = response['cuz'];
         if (cuz_fromDB.reader === '' && cuz_fromDB.beingRead === false && cuz_fromDB.complete === false) {
           cuz.reader = this.uid;
           cuz.beingRead = true
-          this.hatimservice.updateHatim(cuz, cuz.cuzname).subscribe({
+          this.hatimservice.updateHatim(cuz, cuz.cuzname, this.groupId).subscribe({
             next: (response: cuz) => {
+              console.log(response)
             }
           })
         }
@@ -93,7 +94,7 @@ export class HatimComponent implements OnInit {
       cuz.beingRead = false;
       cuz.complete = false;
       cuz.reader = '';
-      this.hatimservice.updateHatim(cuz, index + 1).subscribe({
+      this.hatimservice.updateHatim(cuz, index + 1, this.groupId).subscribe({
         next: (data) => { }
       })
     }
@@ -104,7 +105,7 @@ export class HatimComponent implements OnInit {
   completeCuz(cuz: cuz, index: number) {
     cuz.beingRead = true;
     cuz.complete = true;
-    this.hatimservice.updateHatim(cuz, index + 1).subscribe({
+    this.hatimservice.updateHatim(cuz, index + 1, this.groupId).subscribe({
       next: (data) => { }
     })
   }
@@ -135,7 +136,7 @@ export class HatimComponent implements OnInit {
   }
 
   resetHatim() {
-    this.hatimservice.createHatim().subscribe({ next: (res) => { } })
+    this.hatimservice.createHatim(this.groupId).subscribe({ next: (res) => { } })
     this.retrieveCuzs();
   }
 }

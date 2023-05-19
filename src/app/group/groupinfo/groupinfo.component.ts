@@ -24,6 +24,8 @@ export class GroupinfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedGroupId = this.activeroute.snapshot.paramMap.get('id');
+    //to create works for group(localStorage)
+    localStorage.setItem('groupId', this.selectedGroupId);
     console.log(this.selectedGroupId)
     this.retrieveSingleGroupByGroupId();
     this.createRetrieveGroupForm()
@@ -36,6 +38,7 @@ export class GroupinfoComponent implements OnInit {
       mentorId: ['', Validators.required],
       groupName: ['', Validators.required],
       mentorEmail: ['', Validators.required],
+      works: [], //it is null for now
       users: [] //fullfilled below at retrieveSingleGroupByGroupId func.
     });
   }

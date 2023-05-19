@@ -34,7 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BooklistComponent } from './me/booklist/booklist.component';
 import { GrouplistComponent } from './me/grouplist/grouplist.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { HatimComponent } from './works/hatim/hatim.component';
+import { HatimComponent } from './group/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
 import { ShbComponent } from './works/shb/shb.component';

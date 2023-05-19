@@ -6,7 +6,7 @@ import { MeComponent } from './me/me.component';
 import { AuthGuard } from './Auth.Guard';
 import { GrouplistComponent } from './me/grouplist/grouplist.component';
 import { BooktableComponent } from './me/booktable/booktable.component';
-import { HatimComponent } from './works/hatim/hatim.component';
+import { HatimComponent } from './group/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ShbComponent } from './works/shb/shb.component';
 import { PireditComponent } from './works/piredit/piredit.component';

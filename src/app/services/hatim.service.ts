@@ -12,25 +12,26 @@ export class HatimService {
     private http: HttpClient
   ) { }
 
-  createHatim(): Observable<any> {
-    return this.http.post(environment.url + '/hatim/create', {})
+  createHatim(groupId: any): Observable<any> {
+    const body = { groupId: groupId };
+    return this.http.post(environment.url + '/hatim/create', body)
 
   }
-  retrieveHatim(): Observable<any> {
-    return this.http.get(environment.url + '/hatim/retrieve')
+  retrieveHatim(groupId: any): Observable<any> {
+    return this.http.get(environment.url + `/hatim/retrieve?groupId=${groupId}`)
   }
 
-  updateHatim(cuz: any, cuznumber: number): Observable<any> {
-    const body = { cuz: cuz, cuznumber: cuznumber };
+  updateHatim(cuz: any, cuznumber: number, groupId: any): Observable<any> {
+    const body = { cuz: cuz, cuznumber: cuznumber, groupId: groupId };
     return this.http.patch(environment.url + '/hatim/update', body)
   }
 
-  getSingleCuz(cuzname: number) {
-    return this.http.get(environment.url + `/hatim/retrievesinglecuz?cuznumber=${cuzname}`)
+  getSingleCuz(cuzname: number, groupId: any) {
+    return this.http.get(environment.url + `/hatim/retrievesinglecuz?cuzname=${cuzname}&groupId=${groupId}`)
   }
 
   getReaderName(): Observable<any> {
-    return this.http.get(environment.url + '/hatim/getReaderName')
+    return this.http.get(environment.url + `/hatim/getReaderName`)
   }
 
   getNameOfAntoherUsers(uid: any): Observable<any> {

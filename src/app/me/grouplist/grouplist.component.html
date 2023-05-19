@@ -22,7 +22,6 @@
         type="button"
         [value]="group.groupName"
         [formControlName]="group.groupName"
-        (click)="redirectToGroupWithId(group.groupId)"
         [routerLink]="['/group/groupinfo', group.groupId]"
       />
     </div>
