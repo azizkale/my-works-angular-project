@@ -38,14 +38,15 @@ import { HatimComponent } from './group/hatim/hatim.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LeftColumnComponent } from './left-column/left-column.component';
 import { ShbComponent } from './works/shb/shb.component';
-import { PireditComponent } from './works/piredit/piredit.component';
-import { ChaptereditComponent } from './works/piredit/chapteredit/chapteredit.component';
+
+import { PireditComponent } from './group/piredit/piredit.component';
+import { ChaptereditComponent } from './group/piredit/chapteredit/chapteredit.component';
+import { WordpaireditComponent } from './group/piredit/wordpairedit/wordpairedit.component';
 import { DisplayComponent } from './Display/display.component';
 import { DisplaypirComponent } from './Display/displaypir/displaypir.component';
 import { ChaptersComponent } from './Display/displaypir/chapters/chapters.component';
 import { ChapterContentComponent } from './Display/displaypir/chapters/chapter-content/chapter-content.component';
 import { DialogComponent } from './dialog/dialog.component';
-import { WordpaireditComponent } from './works/piredit/wordpairedit/wordpairedit.component';
 import { AdminsettingsComponent } from './settings/adminsettings/adminsettings.component';
 import { GroupComponent } from './group/group.component';
 import { GroupsidebarComponent } from './groupsidebar/groupsidebar.component';

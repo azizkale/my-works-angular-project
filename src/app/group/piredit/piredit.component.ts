@@ -18,8 +18,6 @@ export class PireditComponent implements OnInit {
   pirs: Pir[] = [];
   userId = localStorage.getItem('uid') // to determine user is allowed to edit pir
 
-  // roles = JSON.parse(localStorage.getItem('roles')!.toString())
-  // allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
   allowedToAdminAndPirEditor: boolean;
   constructor(
     public fb: FormBuilder,

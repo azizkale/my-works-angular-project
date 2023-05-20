@@ -8,4 +8,5 @@ export enum Roles {
 }
 
 //mentor -> it means group admin(abi)
+    // mentor can create a group, create new pir and chapter
 //participant -> member of a group

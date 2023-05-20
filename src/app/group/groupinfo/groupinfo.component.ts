@@ -38,7 +38,7 @@ export class GroupinfoComponent implements OnInit {
       mentorId: ['', Validators.required],
       groupName: ['', Validators.required],
       mentorEmail: ['', Validators.required],
-      works: [], //it is null for now
+      works: [], //it is null for now 
       users: [] //fullfilled below at retrieveSingleGroupByGroupId func.
     });
   }

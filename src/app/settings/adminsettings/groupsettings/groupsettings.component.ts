@@ -121,7 +121,7 @@ export class GroupsettingsComponent implements OnInit {
 
   deleteGroup() {
     this.groupservice.deleteGroup(this.updateGroupForm.get('groupId')?.value).subscribe({
-      next: (result) => {
+      next: (resulty: any) => {
         this.retrieveGroups()
       }
     })
