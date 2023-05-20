@@ -15,10 +15,11 @@ export class PireditComponent implements OnInit {
   retrievePirForm: FormGroup;
   updatePirForm: FormGroup;
   pirs: Pir[] = [];
+  userId = localStorage.getItem('uid') // to determine user is allowed to edit pir
 
   roles = JSON.parse(localStorage.getItem('roles')!.toString())
-  allowedToAdmin: boolean = this.roles.includes(Roles[1])
-
+  allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
+    || this.roles.includes(Roles[4])
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService
@@ -45,6 +46,7 @@ export class PireditComponent implements OnInit {
     //formname array is fullfilled in the retrievePirs function (below)
 
   }
+
   createUpdatePirForm() {
     this.updatePirForm = this.fb.group({
       pirId: ['', Validators.required],

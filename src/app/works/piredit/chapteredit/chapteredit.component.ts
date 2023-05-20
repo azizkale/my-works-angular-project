@@ -22,7 +22,11 @@ export class ChaptereditComponent implements OnInit {
   updateChapterForm: FormGroup;
   addWordForm: FormGroup;
   chapters: Chapter[];
-  allowedToAdmin: boolean = this.rolesservice.roles.includes(Roles[1])
+
+  roles = JSON.parse(localStorage.getItem('roles')!.toString())
+  allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
+    || this.roles.includes(Roles[4])
+
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
   users: any[] = [] // fullfilling the select tag on FormGroup

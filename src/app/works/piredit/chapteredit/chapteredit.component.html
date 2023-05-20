@@ -5,15 +5,15 @@
         <h2>Bölüm Edit</h2>
       </div>
       <div class="col-sm-2 w-25">
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="btn-group btn" role="group" aria-label="Basic example">
           <span
-            *ngIf="allowedToAdmin"
+            *ngIf="allowedToAdminAndPirEditor"
             onclick="document.getElementById('id_add_chapter').style.display='block'"
             class="material-symbols-outlined"
           >
             add_circle
           </span>
-          <span class="material-symbols-outlined" routerLink="/me/piredit">
+          <span class="material-symbols-outlined" routerLink="/group/piredit">
             arrow_back_ios_new
           </span>
         </div>
@@ -135,7 +135,7 @@
         />
         <label><b>Bölüm adı</b></label>
         <input
-          [readOnly]="!allowedToAdmin"
+          [readOnly]="!allowedToAdminAndPirEditor"
           #chapterName
           class="w3-input w3-border w3-margin-bottom"
           type="text"
@@ -144,7 +144,7 @@
         />
         <label><b>Bölüm içeriği</b></label>
         <textarea
-          [readOnly]="!allowedToAdmin"
+          [readOnly]="!allowedToAdminAndPirEditor"
           #chapterContent
           rows="15"
           class="w3-input w3-border w3-margin-bottom"
@@ -154,7 +154,7 @@
         >
         </textarea>
         <select
-          *ngIf="allowedToAdmin"
+          *ngIf="allowedToAdminAndPirEditor"
           class="form-select"
           formControlName="selectEditor"
           #selectEditor
@@ -165,7 +165,7 @@
           </option>
         </select>
         <button
-          *ngIf="allowedToAdmin"
+          *ngIf="allowedToAdminAndPirEditor"
           onclick="document.getElementById('id_update_chapter').style.display='none'"
           (click)="updateChapter()"
           class="w3-button w3-block w3-green w3-section w3-padding"
@@ -191,7 +191,7 @@
             Kelimeler
           </button>
           <button
-            *ngIf="allowedToAdmin"
+            *ngIf="allowedToAdminAndPirEditor"
             type="button"
             class="btn btn-danger"
             placement="top"

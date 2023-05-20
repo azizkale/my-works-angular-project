@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-1 w-25">
         <span
-          *ngIf="allowedToAdmin"
+          *ngIf="allowedToAdminAndPirEditor"
           onclick="document.getElementById('id_add_pir').style.display='block'"
           class="material-symbols-outlined addpir"
         >
@@ -14,30 +14,24 @@
         </span>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col">
-        <div>
-          <form [formGroup]="retrievePirForm" novalidate>
-            <div *ngFor="let pir of pirs; let i = index">
-              <input
-                class="w3-button w-75"
-                type="button"
-                [value]="pir.name"
-                [formControlName]="pir.name"
-                [routerLink]="['/group/chapter/' + pir.pirId]"
-              />
-              <input
-                *ngIf="allowedToAdmin"
-                type="button"
-                value="düzenle"
-                class="btn btn-warning w-25 text-center"
-                (click)="selectPir(pir); id_update_pir.style.display = 'block'"
-              />
-            </div>
-          </form>
-        </div>
+    <form [formGroup]="retrievePirForm" novalidate>
+      <div *ngFor="let pir of pirs; let i = index" class="form-group row">
+        <input
+          class="col-sm-10 w3-button w-75"
+          type="button"
+          [value]="pir.name"
+          [formControlName]="pir.name"
+          [routerLink]="['/group/chapter/' + pir.pirId]"
+        />
+        <input
+          *ngIf="pir.editorId === userId"
+          type="button"
+          value="düzenle"
+          class="col-sm-2 btn btn-warning text-center"
+          (click)="selectPir(pir); id_update_pir.style.display = 'block'"
+        />
       </div>
-    </div>
+    </form>
   </div>
 </div>
 
@@ -150,7 +144,7 @@
           Kaydet
         </button>
         <button
-          *ngIf="allowedToAdmin"
+          *ngIf="allowedToAdminAndPirEditor"
           type="button"
           class="btn btn-danger"
           placement="top"

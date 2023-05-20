@@ -48,7 +48,7 @@ export class GroupinfoComponent implements OnInit {
     this.groupservice.retrieveSingleGroupOfUserByGroupId(this.selectedGroupId).subscribe({
       next: (group) => {
         this.usersOfTheGroup = []
-        this.retrieveGroupForm.setValue(group)
+        this.retrieveGroupForm.patchValue(group)
 
         //{email,role} list
         this.usersOfTheGroup = Object.values(this.retrieveGroupForm.get('users')?.value);
