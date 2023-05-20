@@ -52,7 +52,8 @@ export class GroupsettingsComponent implements OnInit {
       mentorId: ['', Validators.required],
       groupName: ['', Validators.required],
       mentorEmail: ['', Validators.required],
-      users: [] //fullfilled below at selectGroupToUpdate func.
+      users: [], //fullfilled below at selectGroupToUpdate func.
+      works: [], //it is null for now
     });
   }
 

@@ -34,7 +34,7 @@ export class HatimService {
     return this.http.get(environment.url + `/hatim/getReaderName`)
   }
 
-  getNameOfAntoherUsers(uid: any): Observable<any> {
-    return this.http.get(environment.url + `/hatim/getAnotherReadersName?uid=${uid}`)
-  }
+  // getNameOfAntoherUsers(uid: any): Observable<any> {
+  //   return this.http.get(environment.url + `/hatim/getAnotherReadersName?uid=${uid}`)
+  // }
 }

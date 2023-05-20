@@ -124,16 +124,16 @@ export class HatimComponent implements OnInit {
   }
 
   //to show reader of cuz which another users got
-  getReaderName(uid: any): string | any {
-    let readerName = ''
-    this.hatimservice.getNameOfAntoherUsers(uid).subscribe({
-      next: (ress) => {
-        readerName = ress.readername
-      }
-    }
-    )
-    return readerName
-  }
+  // getReaderName(uid: any): string | any {
+  //   let readerName = ''
+  //   this.hatimservice.getNameOfAntoherUsers(uid).subscribe({
+  //     next: (ress) => {
+  //       readerName = ress.readername
+  //     }
+  //   }
+  //   )
+  //   return readerName
+  // }
 
   resetHatim() {
     this.hatimservice.createHatim(this.groupId).subscribe({ next: (res) => { } })
