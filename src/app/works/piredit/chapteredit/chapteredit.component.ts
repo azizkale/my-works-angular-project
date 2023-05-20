@@ -22,10 +22,8 @@ export class ChaptereditComponent implements OnInit {
   updateChapterForm: FormGroup;
   addWordForm: FormGroup;
   chapters: Chapter[];
+  allowedToAdminAndMentor: boolean;
 
-  roles = JSON.parse(localStorage.getItem('roles')!.toString())
-  allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
-    || this.roles.includes(Roles[4])
 
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
@@ -37,8 +35,15 @@ export class ChaptereditComponent implements OnInit {
     private pireditservice: PireditService,
     private activeroute: ActivatedRoute,
     public userservice: UserService,
-    public rolesservice: RolesService
-  ) { }
+    public roleservice: RolesService
+  ) {
+    this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
+      next: (roles) => {
+        console.log(roles)
+        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.selectedPirId = this.activeroute.snapshot.paramMap.get('id');
@@ -107,7 +112,7 @@ export class ChaptereditComponent implements OnInit {
 
   addChapter(chapterName: string, chapterContent: string) {
     const editorId = this.createChapterForm.get('selectEditor')?.value;
-    console.log(editorId)
+
     //chapterId will be given in server-side
     const chapter = new Chapter(chapterName, chapterContent, null, editorId, this.selectedPirId, new Date(), [])
     this.pireditservice.addChapter(chapter).subscribe({

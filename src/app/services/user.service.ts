@@ -27,6 +27,10 @@ export class UserService {
     return this.http.get(environment.url + `/users/retrieveallusers`)
   }
 
+  retrieveAllParticipantsOfTheGroupByGroupId(groupId: any): Observable<any> {
+    return this.http.get(environment.url + `/group/retrieveallparticipantsofthegroupbygroupid?groupId=${groupId}`)
+  }
+
   retrieveEditorbyEditorId(editorId: any): Observable<any> {
     return this.http.get(environment.url + `/users/retrieveeditorbyid?editorid=${editorId}`)
   }

@@ -75,19 +75,23 @@ export class GroupsettingsComponent implements OnInit {
     this.groups = []
     this.groupservice.retrieveGroups().subscribe({
       next: (result) => {
-        this.groups = Object.values(result)
+        if (result) {
+          this.groups = Object.values(result)
 
-        this.groups.forEach((group: Group) => {
-          this.retrieveGroupsForm.addControl(group.groupName, new FormControl(group.groupName));
-          this.retrieveGroupsForm.addControl(group.groupId, new FormControl(group.groupId));
-        });
+          this.groups.forEach((group: Group) => {
+            this.retrieveGroupsForm.addControl(group.groupName, new FormControl(group.groupName));
+            this.retrieveGroupsForm.addControl(group.groupId, new FormControl(group.groupId));
+          });
+        }
+      }, error: (error) => {
+        console.log(error)
       }
     })
   }
 
   selectGroupToUpdate(group: Group) {
     this.usersOfTheGroup = []
-    this.updateGroupForm.setValue(group)
+    this.updateGroupForm.patchValue(group)
 
     //{uis,role} list
     this.usersOfTheGroup = Object.values(this.updateGroupForm.get('users')?.value);

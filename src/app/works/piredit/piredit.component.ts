@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
+import { RolesService } from 'src/app/services/roles.service';
 import { Chapter } from 'src/models/Chapter';
 import { Pir } from 'src/models/Pir';
 import { Roles } from 'src/models/Roles';
@@ -17,14 +18,22 @@ export class PireditComponent implements OnInit {
   pirs: Pir[] = [];
   userId = localStorage.getItem('uid') // to determine user is allowed to edit pir
 
-  roles = JSON.parse(localStorage.getItem('roles')!.toString())
-  allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
-    || this.roles.includes(Roles[4])
+  // roles = JSON.parse(localStorage.getItem('roles')!.toString())
+  // allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
+  allowedToAdminAndPirEditor: boolean;
   constructor(
     public fb: FormBuilder,
-    private pireditservice: PireditService
+    private pireditservice: PireditService,
+    private roleservice: RolesService
 
-  ) { }
+  ) {
+    this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
+      next: (roles) => {
+        console.log(roles)
+        this.allowedToAdminAndPirEditor = roles.includes(Roles[1]) || roles.includes(Roles[4])
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.retrievePirs()

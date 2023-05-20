@@ -23,7 +23,7 @@ export class GroupinfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.selectedGroupId = this.activeroute.snapshot.paramMap.get('id');
+    this.selectedGroupId = this.activeroute.snapshot.paramMap.get('groupid');
     //to create works for group(localStorage)
     localStorage.setItem('groupId', this.selectedGroupId);
     console.log(this.selectedGroupId)

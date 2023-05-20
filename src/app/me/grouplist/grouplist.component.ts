@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { GroupService } from 'src/app/services/group.service';
 
 @Component({
@@ -20,8 +19,9 @@ export class GrouplistComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private groupservice: GroupService,
-    private router: Router
-  ) { }
+  ) {
+
+  }
 
 
   ngOnInit(): void {
@@ -39,14 +39,15 @@ export class GrouplistComponent implements OnInit {
   retrieveAllGroupsNamesOfTheUserByuserId() {
     this.groupservice.retrieveAllGroupsNamesOfTheUserByuserId(this.uid).subscribe({
       next: (result) => {
-
         this.retrieveGroupsForm.patchValue(result)
         this.groupsInfo = Object.values(result)
-        console.log(this.groupsInfo)
+
         this.groupsInfo.forEach((info) => {
           this.retrieveGroupsForm.addControl(info.groupId, new FormControl(info.groupId));
           this.retrieveGroupsForm.addControl(info.groupName, new FormControl(info.groupName));
         });
+      }, error: (error) => {
+        console.log(error.message)
       }
     })
   }

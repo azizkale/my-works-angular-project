@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { RolesService } from '../services/roles.service';
-import { Roles } from 'src/models/Roles';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +7,8 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  allowPirEdit: boolean = this.rolesservice.checkRole(Roles[4]) || this.rolesservice.checkRole(Roles[1])
   constructor(
     private authService: AuthenticationService,
-    private rolesservice: RolesService
   ) {
   }
   ngOnInit(): void {

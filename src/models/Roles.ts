@@ -7,4 +7,5 @@ export enum Roles {
 
 }
 
-//mentor -> it means group admin
+//mentor -> it means group admin(abi)
+//participant -> member of a group

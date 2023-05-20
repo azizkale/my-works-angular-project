@@ -63,10 +63,15 @@ export class AdminsettingsComponent implements OnInit {
     this.groups = []
     this.groupservice.retrieveGroups().subscribe({
       next: (result) => {
-        this.groups = Object.values(result)
-        this.groups.forEach((group: Group) => {
-          this.retrieveGroupsForm.addControl(group.groupName, new FormControl(group.groupName));
-        });
+        if (result) {
+          this.groups = Object.values(result)
+          this.groups.forEach((group: Group) => {
+            this.retrieveGroupsForm.addControl(group.groupName, new FormControl(group.groupName));
+          });
+        }
+
+      }, error: (error) => {
+        console.log(error)
       }
     })
   }

@@ -31,8 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'group', component: GroupComponent, children: [
-      { path: '', redirectTo: 'groupinfo/:id', pathMatch: 'full' },
-      { path: 'groupinfo/:id', component: GroupinfoComponent },
+      { path: '', redirectTo: 'groupinfo/:groupid', pathMatch: 'full' },
+      { path: 'groupinfo/:groupid', component: GroupinfoComponent },
       { path: 'hatim', component: HatimComponent },
       { path: 'shb', component: ShbComponent },
       { path: 'piredit', component: PireditComponent },

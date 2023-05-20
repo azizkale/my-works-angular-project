@@ -9,14 +9,19 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./groupsidebar.component.css']
 })
 export class GroupsidebarComponent implements OnInit {
-  roles = JSON.parse(localStorage.getItem('roles')!.toString())
-  allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
-    || this.roles.includes(Roles[4])
+  uid = localStorage.getItem('uid')
+  allowedToAdminAndPirEditor: boolean;
 
   constructor(
     private authService: AuthenticationService,
-    private rolesservice: RolesService
-  ) { }
+    private roleservice: RolesService
+  ) {
+    this.roleservice.getUserRoles(this.uid).subscribe({
+      next: (roles) => {
+        this.allowedToAdminAndPirEditor = roles.includes(Roles[1] || roles.includes(Roles[4]))
+      }
+    })
+  }
 
   ngOnInit(): void {
   }
