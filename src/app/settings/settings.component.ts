@@ -12,9 +12,11 @@ import { Roles } from 'src/models/Roles';
 })
 export class SettingsComponent implements OnInit {
   @ViewChild('alertParent', { static: true }) alertParent: ElementRef
-
   settingsForm: FormGroup;
-  allowToAdmin: boolean = this.rolesservice.checkRole(Roles[1])
+
+  roles = JSON.parse(localStorage.getItem('roles')!.toString())
+  allowedToAdmin: boolean = this.roles.includes(Roles[1])
+
   constructor(
     public fb: FormBuilder,
     private settings: SettingsService,

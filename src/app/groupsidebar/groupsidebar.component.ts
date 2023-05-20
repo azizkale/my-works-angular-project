@@ -9,7 +9,10 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./groupsidebar.component.css']
 })
 export class GroupsidebarComponent implements OnInit {
-  allowPirEdit: boolean = this.rolesservice.checkRole(Roles[4]) || this.rolesservice.checkRole(Roles[1])
+  roles = JSON.parse(localStorage.getItem('roles')!.toString())
+  allowedToAdminAndPirEditor: boolean = this.roles.includes(Roles[1])
+    || this.roles.includes(Roles[4])
+
   constructor(
     private authService: AuthenticationService,
     private rolesservice: RolesService

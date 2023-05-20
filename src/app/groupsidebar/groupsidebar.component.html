@@ -27,15 +27,13 @@
     class="w3-bar-item w3-button w3-hover-black d-flex"
     >Hatim</a
   >
-  <!-- <a routerLink="/group/shb" class="w3-bar-item w3-button w3-hover-black d-flex"
-    >Sahabe</a
-  > -->
   <a
     routerLink="/me/grouplist"
     class="w3-bar-item w3-button w3-hover-black d-flex"
     >Gruplarım</a
   >
   <a
+    *ngIf="allowedToAdminAndPirEditor"
     routerLink="/group/piredit"
     class="w3-bar-item w3-button w3-hover-black d-flex"
     >Pırlanta Edit</a
