@@ -86,4 +86,8 @@ export class PireditService {
     const body = { wordPair: wordPair };
     return this.http.delete(environment.url + '/pir/deletewordpair', { body })
   }
+
+  retrievePirListToEditNewPir() {
+    return this.http.get(environment.url + `/pir/retrievepirlist`)
+  }
 }

@@ -110,6 +110,17 @@ export class ChaptereditComponent implements OnInit {
     })
   }
 
+  retrieveChapters() {
+    const editorId = localStorage.getItem('uid');
+    this.pireditservice.retrieveChapters(editorId, this.selectedPirId).subscribe({
+      next: (ress) => {
+        this.chapters = Object.values(ress);
+        this.chapters.forEach((chapter, index) => {
+          this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
+        });
+      }
+    })
+  }
   addChapter(chapterName: string, chapterContent: string) {
     const editorId = this.createChapterForm.get('selectEditor')?.value;
 
@@ -135,18 +146,7 @@ export class ChaptereditComponent implements OnInit {
     })
   }
 
-  retrieveChapters() {
-    const editorId = localStorage.getItem('uid');
-    this.pireditservice.retrieveChapters(editorId, this.selectedPirId).subscribe({
-      next: (ress) => {
-        console.log(ress)
-        this.chapters = Object.values(ress);
-        this.chapters.forEach((chapter, index) => {
-          this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
-        });
-      }
-    })
-  }
+
 
   selectChapter(chapter: Chapter) {
     this.updateChapterForm = this.fb.group({

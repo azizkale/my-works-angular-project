@@ -8,10 +8,12 @@ export class Pir {
     description: string;
     chapters: Chapter[]
     wordPairs: WordPair[]
+    groupId: any // which group edits the pir
 
     constructor(
         pirId: any,
         editorId: any,
+        groupId: any,
         name: string | any,
         description: string,
         chapters: Chapter[],
@@ -19,6 +21,7 @@ export class Pir {
     ) {
         this.pirId = pirId
         this.editorId = editorId
+        this.groupId = groupId
         this.name = name
         this.description = description
         this.chapters = chapters

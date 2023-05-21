@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
 import { RolesService } from 'src/app/services/roles.service';
-import { Chapter } from 'src/models/Chapter';
 import { Pir } from 'src/models/Pir';
 import { Roles } from 'src/models/Roles';
 
@@ -38,6 +37,7 @@ export class PireditComponent implements OnInit {
     this.createPirRetrieveForm()
     this.createNewPirForm()
     this.createUpdatePirForm();
+    this.retrievePirList();
   }
 
   createNewPirForm() {
@@ -64,10 +64,28 @@ export class PireditComponent implements OnInit {
   }
 
   createNewPir() {
-    const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date(), [])
+    // const chapter = new Chapter('önsöz', this.addNewPirForm.get('preface')?.value, null, localStorage.getItem('uid'), null, new Date(), [])
+    // const newPir = new Pir(
+    //   null,
+    //   localStorage.getItem('uid'),
+    //   this.addNewPirForm.get('pirName')?.value,
+    //   this.addNewPirForm.get('description')?.value,
+    //   [],
+    //   []
+    // )
+    // this.pireditservice.createPir(newPir).subscribe({
+    //   next: (ress) => {
+    //     this.retrievePirs()
+    //     this.createPirRetrieveForm()
+    //   }
+    // })
+  }
+
+  asignPirToMentorToEdit() {
     const newPir = new Pir(
-      null,
+      this.addNewPirForm.get('pirId')?.value,
       localStorage.getItem('uid'),
+      '',
       this.addNewPirForm.get('pirName')?.value,
       this.addNewPirForm.get('description')?.value,
       [],
@@ -83,7 +101,7 @@ export class PireditComponent implements OnInit {
 
   retrievePirs() {
     this.pirs = []
-    this.pireditservice.retrievePirs().subscribe({
+    this.pireditservice.retrievePirListToEditNewPir().subscribe({
       next: async (ress) => {
         if (ress) {
           await Object.values(ress).map((pir: Pir | any) => {
@@ -93,6 +111,30 @@ export class PireditComponent implements OnInit {
             this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
           });
         }
+      }, complete: () => {
+
+      }
+    })
+    // this.pireditservice.retrievePirs().subscribe({
+    //   next: async (ress) => {
+    //     if (ress) {
+    //       await Object.values(ress).map((pir: Pir | any) => {
+    //         this.pirs.push(pir)
+    //       })
+    //       this.pirs.forEach((pir, index) => {
+    //         this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
+    //       });
+    //     }
+    //   }, complete: () => {
+
+    //   }
+    // })
+  }
+
+  retrievePirList() {
+    this.pireditservice.retrievePirListToEditNewPir().subscribe({
+      next: (pirlist) => {
+        console.log(pirlist)
       }
     })
   }
