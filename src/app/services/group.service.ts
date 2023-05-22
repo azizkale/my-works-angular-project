@@ -39,4 +39,8 @@ export class GroupService {
   retrieveSingleGroupOfUserByGroupId(groupId: any) {
     return this.http.get(environment.url + `/group/retrievesinglegroupofuserbygroupid?groupId=${groupId}`)
   }
+
+  retrieveAllGroupsOfTheMentor(mentorId: any): Observable<any> {
+    return this.http.get(environment.url + `/group/retrieveallgroupsofthementor?mentorId=${mentorId}`)
+  }
 }

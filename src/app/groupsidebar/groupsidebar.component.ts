@@ -10,7 +10,7 @@ import { Roles } from 'src/models/Roles';
 })
 export class GroupsidebarComponent implements OnInit {
   uid = localStorage.getItem('uid')
-  allowedToAdminAndPirEditor: boolean;
+  allowedToAdminAndMentorAndPirEditor: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -18,7 +18,10 @@ export class GroupsidebarComponent implements OnInit {
   ) {
     this.roleservice.getUserRoles(this.uid).subscribe({
       next: (roles) => {
-        this.allowedToAdminAndPirEditor = roles.includes(Roles[1] || roles.includes(Roles[4]))
+        this.allowedToAdminAndMentorAndPirEditor =
+          roles.includes(Roles[1]) ||
+          roles.includes(Roles[4]) ||
+          roles.includes(Roles[2])
       }
     })
   }

@@ -16,19 +16,25 @@
     </div>
     <form [formGroup]="retrievePirForm" novalidate>
       <div *ngFor="let pir of pirs; let i = index" class="form-group row my-1">
-        <input
-          class="col-sm-10 w3-button w-75"
-          type="button"
-          [value]="pir.name"
-          [formControlName]="pir.name"
-          [routerLink]="['/group/chapter/' + pir.pirId]"
-        />
-        <input
-          type="button"
-          value="düzenle"
-          class="col-sm-2 btn btn-warning text-center"
-          (click)="selectPir(pir); id_update_pir.style.display = 'block'"
-        />
+        <div class="col align-items-center">
+          <span class="col-sm-1 text-start">{{ i + 1 }}-</span>
+          <input
+            class="col-sm-9 w3-button text-start text-sm-center"
+            type="button"
+            [value]="pir.name"
+            [formControlName]="pir.name"
+            [routerLink]="['/group/chapter/' + pir.pirId]"
+          />
+          <input
+            type="button text-end text-sm-center"
+            value="seç"
+            class="col-sm-2 btn btn-warning"
+            (click)="
+              selectPirToAssing(pir); id_assign_pir.style.display = 'block'
+            "
+          />
+          <hr />
+        </div>
       </div>
     </form>
   </div>
@@ -84,6 +90,7 @@
     </form>
   </div>
 </div>
+
 <!-- ========== Update Pir(MODAL) ========== -->
 <div id="id_update_pir" class="w3-modal" #id_update_pir>
   <div
@@ -148,6 +155,75 @@
     </form>
   </div>
 </div>
+
+<!-- ========== Assign Pir(MODAL) ========== -->
+<div id="id_assign_pir" class="w3-modal" #id_assign_pir>
+  <div
+    class="w3-modal-content w3-card-4 w3-animate-zoom"
+    style="max-width: 800px"
+  >
+    <div class="w3-center">
+      <br />
+      <span
+        onclick="document.getElementById('id_assign_pir').style.display='none'"
+        class="w3-button w3-xlarge w3-transparent w3-display-topright"
+        title="Close Modal"
+        >×</span
+      >
+    </div>
+    <form class="w3-container" [formGroup]="assignPirToMentorToEdit" novalidate>
+      <div class="w3-section">
+        <label><b>Pırlanta adı:</b></label>
+        <input
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          placeholder="Pırlanta adını giriniz"
+          #pirName
+          formControlName="pirName"
+        />
+        <label><b>Açıklama:</b></label>
+        <textarea
+          rows="5"
+          class="w3-input w3-border w3-margin-bottom"
+          type="text"
+          placeholder="aciklama giriniz"
+          #description
+          formControlName="description"
+        >
+        </textarea>
+        <input type="hidden" formControlName="pirId" for="it gets just pirId" />
+        <select
+          class="form-select"
+          name="selectEditor"
+          #groupId
+          formControlName="groupId"
+        >
+          <option value="">Grup Seçin</option>
+          <option
+            value="{{ group.groupId }}"
+            *ngFor="let group of mentorsMetoringGroups"
+          >
+            {{ group.groupName }}
+          </option>
+        </select>
+        <button
+          onclick="document.getElementById('id_assign_pir').style.display='none'"
+          (click)="assignPir(assignPirToMentorToEdit.value)"
+          class="w3-button w3-block w3-green w3-section w3-padding"
+          type="submit"
+          [disabled]="
+            pirName.value === '' ||
+            groupId.value === '' ||
+            description.value === ''
+          "
+        >
+          Kaydet
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- ===============Popovers-Delete================= -->
 <ng-template #popDeleteContent>
   <div class="text-center">
