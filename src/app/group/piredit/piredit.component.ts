@@ -37,7 +37,7 @@ export class PireditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.retrievePirs()
+    this.retrievePirsList()
     this.createPirRetrieveForm()
     this.createNewPirForm()
     this.createUpdatePirForm();
@@ -92,13 +92,13 @@ export class PireditComponent implements OnInit {
     )
     this.pireditservice.createPir(newPir).subscribe({
       next: (ress) => {
-        this.retrievePirs()
+        this.retrievePirsList()
         this.createPirRetrieveForm()
       }
     })
   }
 
-  retrievePirs() {
+  retrievePirsList() {
     this.pirs = []
     this.pireditservice.retrievePirListToEditNewPir().subscribe({
       next: async (ress) => {
@@ -114,6 +114,7 @@ export class PireditComponent implements OnInit {
           });
         }
       }, complete: () => {
+        console.log(this.pirs)
       }
     })
     // this.pireditservice.retrievePirs().subscribe({
@@ -132,8 +133,6 @@ export class PireditComponent implements OnInit {
     // })
   }
 
-
-
   selectPirToUpdate(pir: Pir) {
     this.updatePirForm = this.fb.group({
       pirId: [pir.pirId, Validators.required],
@@ -145,7 +144,7 @@ export class PireditComponent implements OnInit {
 
   updatePir() {
     this.pireditservice.updatePir(this.updatePirForm.value).subscribe({
-      next: (ress) => { this.retrievePirs() }
+      next: (ress) => { this.retrievePirsList() }
     })
 
   }
@@ -173,18 +172,16 @@ export class PireditComponent implements OnInit {
     )
     this.pireditservice.assingPirToGroup(newPir).subscribe({
       next: (ress) => {
-        this.retrievePirs()
+        this.retrievePirsList()
         this.createPirRetrieveForm()
       }
     })
   }
 
-
-
   deletePir() {
     this.pireditservice.deletePir(this.updatePirForm.get('pirId')?.value).subscribe({
       next: (ress) => {
-        this.retrievePirs()
+        this.retrievePirsList()
         this.createPirRetrieveForm()
         console.log(ress)
       }

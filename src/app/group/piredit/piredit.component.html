@@ -26,6 +26,7 @@
             [routerLink]="['/group/chapter/' + pir.pirId]"
           />
           <input
+            *ngIf="!pir.assigned"
             type="button"
             value="seç"
             class="col-sm-2 btn btn-warning text-end text-sm-center"

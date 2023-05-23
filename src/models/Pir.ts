@@ -6,8 +6,9 @@ export class Pir {
     editorId: any;
     name: string | any;
     description: string;
-    chapters: Chapter[]
-    wordPairs: WordPair[]
+    assigned: boolean;
+    chapters: Chapter[];
+    wordPairs: WordPair[];
     groupId: any // which group edits the pir
 
     constructor(
