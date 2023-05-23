@@ -22,6 +22,11 @@ export class PireditService {
     return this.http.post(environment.url + '/pir/create', body)
   }
 
+  assingPirToGroup(pir: Pir): Observable<any> {
+    const body = { pir: pir };
+    return this.http.post(environment.url + `/pir/assignpirtogroup`, body)
+  }
+
   retrievePirs(): Observable<any> {
     return this.http.get(environment.url + `/pir/getpirs`)
   }

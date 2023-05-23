@@ -79,10 +79,12 @@ export class PireditComponent implements OnInit {
     });
   }
 
+  //adds newpir to 'pirs' node in db
   createNewPir() {
     const newPir = new Pir(
       null,
-      localStorage.getItem('uid'), null,
+      localStorage.getItem('uid'),
+      null,
       this.addNewPirForm.get('pirName')?.value,
       this.addNewPirForm.get('description')?.value,
       [],
@@ -158,7 +160,7 @@ export class PireditComponent implements OnInit {
     });
   }
 
-  assignPir(assignPirToMentorToEdit: any) {
+  assignPirToGroup(assignPirToMentorToEdit: any) {
 
     const newPir = new Pir(
       assignPirToMentorToEdit.pirId,
@@ -169,7 +171,7 @@ export class PireditComponent implements OnInit {
       [],
       []
     )
-    this.pireditservice.createPir(newPir).subscribe({
+    this.pireditservice.assingPirToGroup(newPir).subscribe({
       next: (ress) => {
         this.retrievePirs()
         this.createPirRetrieveForm()

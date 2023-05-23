@@ -47,6 +47,7 @@ export class ChaptereditComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedPirId = this.activeroute.snapshot.paramMap.get('id');
+
     this.retrieveChapters();
     this.createChapterRetrieveForm()
     this.createNewChapterForm();
