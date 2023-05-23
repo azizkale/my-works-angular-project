@@ -95,4 +95,8 @@ export class PireditService {
   retrievePirListToEditNewPir() {
     return this.http.get(environment.url + `/pir/retrievepirlist`)
   }
+
+  retrievePirByPirId(pirId: any): Observable<any> {
+    return this.http.get(environment.url + `/pir/retrievepirbypirid?pirId=${pirId}`)
+  }
 }

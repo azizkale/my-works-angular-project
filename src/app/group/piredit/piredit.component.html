@@ -23,7 +23,13 @@
             type="button"
             [value]="pir.name"
             [formControlName]="pir.name"
-            [routerLink]="['/group/chapter/' + pir.pirId]"
+          />
+          <input
+            type="text"
+            readonly
+            *ngIf="pir.assigned"
+            [value]="pir.groupId"
+            class="col-sm-2"
           />
           <input
             *ngIf="!pir.assigned"

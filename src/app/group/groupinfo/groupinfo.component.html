@@ -42,3 +42,44 @@
     </div>
   </div>
 </div>
+<!-- ========================== -->
+<div class="w3-center mt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Etkinlikler</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 text-start">
+        <h2>Pırlanta</h2>
+      </div>
+      <div class="w3-responsive w3-card-4 col-sm-12">
+        <form [formGroup]="retrievePirForm" novalidate>
+          <div
+            *ngFor="let pir of pirs; let i = index"
+            class="form-group row my-1"
+          >
+            <div class="col align-items-center">
+              <span class="col-sm-1 text-start">{{ i + 1 }}-</span>
+              <input
+                class="col-sm-9 w3-button text-start text-sm-center"
+                type="button"
+                [value]="pir.name"
+                [formControlName]="pir.name"
+                [routerLink]="['/group/chapter/' + pir.pirId]"
+              />
+              <input
+                *ngIf="!pir.assigned"
+                type="button"
+                value="seç"
+                class="col-sm-2 btn btn-warning text-end text-sm-center"
+              />
+              <hr />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

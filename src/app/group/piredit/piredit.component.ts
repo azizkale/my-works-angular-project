@@ -66,7 +66,7 @@ export class PireditComponent implements OnInit {
   createPirRetrieveForm() {
     this.retrievePirForm = this.fb.group({
     });
-    //formname array is fullfilled in the retrievePirs function (below)
+    //formname array is fullfilled in the retrievePirsList function (below)
 
   }
 
@@ -186,5 +186,17 @@ export class PireditComponent implements OnInit {
         console.log(ress)
       }
     })
+  }
+
+  retrieveGroupNameByGroupId(isAssigned: boolean, groupId: any): string | any {
+    // this.groupservice.retrieveSingleGroupOfUserByGroupId(groupId).subscribe({
+    //   next: (ress: any) => {
+    //     if (!isAssigned) {
+    //       console.log(ress)
+    //       return ress.groupName
+    //     }
+
+    //   }
+    // })
   }
 }
