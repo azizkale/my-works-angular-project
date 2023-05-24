@@ -94,69 +94,6 @@
   </div>
 </div>
 
-<!-- ========== Update Pir(MODAL) ========== -->
-<div id="id_update_pir" class="w3-modal" #id_update_pir>
-  <div
-    class="w3-modal-content w3-card-4 w3-animate-zoom"
-    style="max-width: 800px"
-  >
-    <div class="w3-center">
-      <br />
-      <span
-        onclick="document.getElementById('id_update_pir').style.display='none'"
-        class="w3-button w3-xlarge w3-transparent w3-display-topright"
-        title="Close Modal"
-        >×</span
-      >
-    </div>
-    <form class="w3-container" [formGroup]="updatePirForm">
-      <div class="w3-section">
-        <label><b>Pırlanta adı:</b></label>
-        <input
-          class="w3-input w3-border w3-margin-bottom"
-          type="text"
-          formControlName="name"
-        />
-        <label><b>Açıklama:</b></label>
-        <textarea
-          rows="5"
-          class="w3-input w3-border w3-margin-bottom"
-          type="text"
-          formControlName="description"
-        >
-        </textarea>
-        <input type="hidden" formControlName="pirId" for="it gets just pirId" />
-        <input
-          type="hidden"
-          formControlName="editorId"
-          for="it gets just editorId"
-        />
-        <button
-          onclick="document.getElementById('id_update_pir').style.display='none'"
-          (click)="updatePir()"
-          class="w3-button w3-block w3-green w3-section w3-padding"
-          type="submit"
-          [disabled]="updatePirForm.pristine || updatePirForm.invalid"
-        >
-          Kaydet
-        </button>
-        <!-- delete button is canceled now -->
-        <!-- <button
-          *ngIf="allowedToAdminAndPirEditor"
-          type="button"
-          class="btn btn-danger"
-          placement="top"
-          [ngbPopover]="popDeleteContent"
-          popoverTitle="Sil!"
-          style="margin-right: 10px"
-        >
-          Sil
-        </button> -->
-      </div>
-    </form>
-  </div>
-</div>
-
 <!-- ========== Assign Pir(MODAL) ========== -->
 <div id="id_assign_pir" class="w3-modal" #id_assign_pir>
   <div
@@ -193,12 +130,7 @@
         >
         </textarea>
         <input type="hidden" formControlName="pirId" for="it gets just pirId" />
-        <select
-          class="form-select"
-          name="selectEditor"
-          #groupId
-          formControlName="groupId"
-        >
+        <select class="form-select" #groupId formControlName="groupId">
           <option value="">Grup Seçin</option>
           <option
             value="{{ group.groupId }}"
@@ -224,20 +156,3 @@
     </form>
   </div>
 </div>
-
-<!-- ===============Popovers-Delete================= -->
-<ng-template #popDeleteContent>
-  <div class="text-center">
-    <h4>Are you sure to delete {{ updatePirForm.controls["name"].value }}</h4>
-    <button
-      onclick="document.getElementById('id_update_pir').style.display='none'"
-      (click)="deletePir()"
-      type="button"
-      class="btn btn-danger"
-      style="margin-right: 10px"
-    >
-      Sil
-    </button>
-    <button type="button" class="btn btn-info">Vazgeç</button>
-  </div>
-</ng-template>

@@ -3,9 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { GroupService } from 'src/app/services/group.service';
 import { PireditService } from 'src/app/services/piredit.service';
+import { RolesService } from 'src/app/services/roles.service';
 import { UserService } from 'src/app/services/user.service';
 import { Group } from 'src/models/Group';
 import { Pir } from 'src/models/Pir';
+import { Roles } from 'src/models/Roles';
 
 @Component({
   selector: 'app-groupinfo',
@@ -17,6 +19,9 @@ export class GroupinfoComponent implements OnInit {
   retrievePirForm: FormGroup
   selectedGroupId: any
   usersOfTheGroup: any[];
+  updatePirForm: FormGroup;
+  mentorsMetoringGroups: any[] //to display in template
+  allowedToAdminAndMentor: boolean;
   pirs: Pir[];
 
   constructor(
@@ -24,17 +29,27 @@ export class GroupinfoComponent implements OnInit {
     private groupservice: GroupService,
     private fb: FormBuilder,
     private userservice: UserService,
-    private pirservice: PireditService
-  ) { }
+    private pirservice: PireditService,
+    private pireditservice: PireditService,
+    private roleservice: RolesService
+  ) {
+    this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
+      next: (roles) => {
+        console.log(roles)
+        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.selectedGroupId = this.activeroute.snapshot.paramMap.get('groupid');
-    //to create works for group(localStorage)
-    localStorage.setItem('groupId', this.selectedGroupId);
-    console.log(this.selectedGroupId)
+    //to create works for the group(localStorage)
+    // localStorage.setItem('groupId', this.selectedGroupId);
     this.retrieveSingleGroupByGroupId();
     this.createRetrieveGroupForm()
-    this.createPirRetrieveForm()
+    this.createPirRetrieveForm();
+    this.createUpdatePirForm();
+
   }
 
   // forms==================
@@ -48,12 +63,27 @@ export class GroupinfoComponent implements OnInit {
       users: [] //fullfilled below at retrieveSingleGroupByGroupId func.
     });
   }
+
   createPirRetrieveForm() {
     this.retrievePirForm = this.fb.group({
     });
     //formname array is fullfilled in the retrievePirsList function (below)
 
   }
+
+  createUpdatePirForm() {
+    this.updatePirForm = this.fb.group({
+      pirId: ['', Validators.required],
+      editorId: ['', Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      groupName: ['dsada', Validators.required]
+    });
+    this.groupservice.retrieveAllGroupsOfTheMentor(localStorage.getItem('uid')).subscribe(({
+      next: (groups) => { this.mentorsMetoringGroups = groups }
+    }))
+  }
+
   //methods ========================
   retrieveSingleGroupByGroupId() {
     this.groupservice.retrieveSingleGroupOfUserByGroupId(this.selectedGroupId).subscribe({
@@ -97,5 +127,31 @@ export class GroupinfoComponent implements OnInit {
 
       }
     })
+  }
+
+  selectPirToUpdate(pir: Pir) {
+    this.updatePirForm = this.fb.group({
+      pirId: [pir.pirId, Validators.required],
+      editorId: [pir.editorId, Validators.required],
+      name: [pir.name, Validators.required],
+      description: [pir.description, Validators.required],
+      groupName: [null, Validators.required] // Set initial value as null or any default value you want
+    });
+
+    this.groupservice.retrieveSingleGroupOfUserByGroupId(pir.groupId).subscribe({
+      next: (group: Group | any) => {
+
+        this.updatePirForm.patchValue({
+          groupName: group.groupName // Set the value for groupName FormControl
+        });
+      }
+    })
+  }
+
+  updatePir() {
+    this.pireditservice.updatePir(this.updatePirForm.value).subscribe({
+      next: (ress) => { this.retrieveSingleGroupByGroupId() }
+    })
+
   }
 }

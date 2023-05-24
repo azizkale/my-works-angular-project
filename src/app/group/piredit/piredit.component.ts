@@ -15,9 +15,8 @@ export class PireditComponent implements OnInit {
   addNewPirForm: FormGroup; // to add a pit to pirlist in db
   assignPirToMentorToEdit: FormGroup; // to assign apir from pirlist
   retrievePirForm: FormGroup;
-  updatePirForm: FormGroup;
   pirs: Pir[] | any[] = [];
-  mentorsMetoringGroups: any[]
+  mentorsMetoringGroups: any[] //to display in template
   userId = localStorage.getItem('uid') // to determine user is allowed to edit pir
 
   allowedToAdminAndPirEditor: boolean;
@@ -40,7 +39,6 @@ export class PireditComponent implements OnInit {
     this.retrievePirsList()
     this.createPirRetrieveForm()
     this.createNewPirForm()
-    this.createUpdatePirForm();
     this.createAssingPirForm();
   }
 
@@ -59,7 +57,7 @@ export class PireditComponent implements OnInit {
       groupId: ['', Validators.required]
     });
     this.groupservice.retrieveAllGroupsOfTheMentor(localStorage.getItem('uid')).subscribe(({
-      next: (groups) => { console.log(groups); this.mentorsMetoringGroups = groups }
+      next: (groups) => { this.mentorsMetoringGroups = groups }
     }))
   }
 
@@ -70,14 +68,6 @@ export class PireditComponent implements OnInit {
 
   }
 
-  createUpdatePirForm() {
-    this.updatePirForm = this.fb.group({
-      pirId: ['', Validators.required],
-      editorId: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-  }
 
   //adds newpir to 'pirs' node in db
   createNewPir() {
@@ -133,21 +123,6 @@ export class PireditComponent implements OnInit {
     // })
   }
 
-  selectPirToUpdate(pir: Pir) {
-    this.updatePirForm = this.fb.group({
-      pirId: [pir.pirId, Validators.required],
-      editorId: [pir.editorId, Validators.required],
-      name: [pir.name, Validators.required],
-      description: [pir.description, Validators.required]
-    });
-  }
-
-  updatePir() {
-    this.pireditservice.updatePir(this.updatePirForm.value).subscribe({
-      next: (ress) => { this.retrievePirsList() }
-    })
-
-  }
 
   selectPirToAssing(pir: Pir | any) {
     this.assignPirToMentorToEdit = this.fb.group({
@@ -178,13 +153,5 @@ export class PireditComponent implements OnInit {
     })
   }
 
-  deletePir() {
-    this.pireditservice.deletePir(this.updatePirForm.get('pirId')?.value).subscribe({
-      next: (ress) => {
-        this.retrievePirsList()
-        this.createPirRetrieveForm()
-        console.log(ress)
-      }
-    })
-  }
+
 }
