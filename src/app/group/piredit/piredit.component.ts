@@ -16,7 +16,7 @@ export class PireditComponent implements OnInit {
   assignPirToMentorToEdit: FormGroup; // to assign apir from pirlist
   retrievePirForm: FormGroup;
   updatePirForm: FormGroup;
-  pirs: Pir[] = [];
+  pirs: Pir[] | any[] = [];
   mentorsMetoringGroups: any[]
   userId = localStorage.getItem('uid') // to determine user is allowed to edit pir
 
@@ -149,7 +149,7 @@ export class PireditComponent implements OnInit {
 
   }
 
-  selectPirToAssing(pir: Pir) {
+  selectPirToAssing(pir: Pir | any) {
     this.assignPirToMentorToEdit = this.fb.group({
       pirName: [pir.name, Validators.required],
       pirId: [pir.pirId, Validators.required],
@@ -186,17 +186,5 @@ export class PireditComponent implements OnInit {
         console.log(ress)
       }
     })
-  }
-
-  retrieveGroupNameByGroupId(isAssigned: boolean, groupId: any): string | any {
-    // this.groupservice.retrieveSingleGroupOfUserByGroupId(groupId).subscribe({
-    //   next: (ress: any) => {
-    //     if (!isAssigned) {
-    //       console.log(ress)
-    //       return ress.groupName
-    //     }
-
-    //   }
-    // })
   }
 }
