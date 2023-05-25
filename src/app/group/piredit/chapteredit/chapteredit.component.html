@@ -20,29 +20,27 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm">
-        <div>
-          <form [formGroup]="retrieveChapterForm" novalidate>
-            <div *ngFor="let chapter of chapters; let i = index">
-              <input
-                type="hidden"
-                formControlName="chapterId"
-                name="chapterId"
-                for="it gets just chapterId"
-              />
-              <input
-                class="w3-button w-100"
-                type="button"
-                [value]="chapter.chapterName"
-                [formControlName]="chapter.chapterName"
-                (click)="
-                  selectChapter(chapter);
-                  id_update_chapter.style.display = 'block'
-                "
-              />
-            </div>
-          </form>
-        </div>
+      <div class="col-sm-12">
+        <form [formGroup]="retrieveChapterForm" novalidate>
+          <div *ngFor="let chapter of chapters; let i = index">
+            <input
+              type="hidden"
+              formControlName="chapterId"
+              name="chapterId"
+              for="it gets just chapterId"
+            />
+            <input
+              class="w3-button w-100"
+              type="button"
+              [value]="chapter.chapterName"
+              [formControlName]="chapter.chapterName"
+              (click)="
+                selectChapter(chapter);
+                id_update_chapter.style.display = 'block'
+              "
+            />
+          </div>
+        </form>
       </div>
     </div>
   </div>

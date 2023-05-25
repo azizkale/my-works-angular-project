@@ -74,10 +74,10 @@ export class GroupinfoComponent implements OnInit {
   createUpdatePirForm() {
     this.updatePirForm = this.fb.group({
       pirId: ['', Validators.required],
-      editorId: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      groupName: ['dsada', Validators.required]
+      groupId: ['', Validators.required],
+      groupName: ['', Validators.required]
     });
     this.groupservice.retrieveAllGroupsOfTheMentor(localStorage.getItem('uid')).subscribe(({
       next: (groups) => { this.mentorsMetoringGroups = groups }
@@ -129,29 +129,21 @@ export class GroupinfoComponent implements OnInit {
     })
   }
 
-  selectPirToUpdate(pir: Pir) {
-    this.updatePirForm = this.fb.group({
-      pirId: [pir.pirId, Validators.required],
-      editorId: [pir.editorId, Validators.required],
+  async selectPirToUpdate(pir: Pir) {
+    this.updatePirForm = await this.fb.group({
       name: [pir.name, Validators.required],
       description: [pir.description, Validators.required],
+      groupId: [pir.groupId, Validators.required],
+      pirId: [pir.pirId, Validators.required],
       groupName: [null, Validators.required] // Set initial value as null or any default value you want
     });
 
-    this.groupservice.retrieveSingleGroupOfUserByGroupId(pir.groupId).subscribe({
+    await this.groupservice.retrieveSingleGroupOfUserByGroupId(pir.groupId).subscribe({
       next: (group: Group | any) => {
-
         this.updatePirForm.patchValue({
           groupName: group.groupName // Set the value for groupName FormControl
         });
       }
     })
-  }
-
-  updatePir() {
-    this.pireditservice.updatePir(this.updatePirForm.value).subscribe({
-      next: (ress) => { this.retrieveSingleGroupByGroupId() }
-    })
-
   }
 }

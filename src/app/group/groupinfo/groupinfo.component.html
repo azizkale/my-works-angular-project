@@ -55,7 +55,7 @@
         <h2>Pırlanta</h2>
       </div>
       <div class="w3-responsive w3-card-4 col-sm-12">
-        <form [formGroup]="retrievePirForm" novalidate>
+        <form [formGroup]="retrievePirForm" novalidate class="mt-4">
           <div
             *ngFor="let pir of pirs; let i = index"
             class="form-group row my-1"
@@ -72,7 +72,7 @@
               <input
                 *ngIf="allowedToAdminAndMentor"
                 type="button"
-                value="Seç"
+                value="Güncelle"
                 class="col-sm-2 text-end text-sm-center btn btn-warning"
                 (click)="
                   selectPirToUpdate(pir); id_update_pir.style.display = 'block'
@@ -108,6 +108,8 @@
         <input
           class="w3-input w3-border w3-margin-bottom"
           type="text"
+          #name
+          readonly
           formControlName="name"
         />
         <label><b>Açıklama:</b></label>
@@ -115,17 +117,13 @@
           rows="5"
           class="w3-input w3-border w3-margin-bottom"
           type="text"
+          #description
+          readonly
           formControlName="description"
         >
         </textarea>
-        <input type="hidden" formControlName="pirId" for="it gets just pirId" />
-        <input
-          type="hidden"
-          formControlName="editorId"
-          for="it gets just editorId"
-        />
-        <input type="hidden" formControlName="pirId" for="it gets just pirId" />
-        <select class="form-select" formControlName="groupName">
+
+        <select class="form-select" #groupName formControlName="groupName">
           <option
             *ngFor="let group of mentorsMetoringGroups"
             [value]="group.groupId"
@@ -138,29 +136,17 @@
         </select>
         <button
           onclick="document.getElementById('id_update_pir').style.display='none'"
-          (click)="updatePir()"
           class="w3-button w3-block w3-green w3-section w3-padding"
           type="submit"
-          [disabled]="updatePirForm.pristine || updatePirForm.invalid"
+          [disabled]="
+            name.value === '' ||
+            description.value === '' ||
+            groupName.value === ''
+          "
         >
-          Kaydet
+          Güncelle
         </button>
       </div>
     </form>
   </div>
 </div>
-<!-- ===============Popovers-Delete================= -->
-<ng-template #popDeleteContent>
-  <div class="text-center">
-    <h4>Are you sure to delete {{ updatePirForm.controls["name"].value }}</h4>
-    <button
-      onclick="document.getElementById('id_update_pir').style.display='none'"
-      type="button"
-      class="btn btn-danger"
-      style="margin-right: 10px"
-    >
-      Sil
-    </button>
-    <button type="button" class="btn btn-info">Vazgeç</button>
-  </div>
-</ng-template>
