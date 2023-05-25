@@ -19,7 +19,6 @@ export class GroupinfoComponent implements OnInit {
   retrievePirForm: FormGroup
   selectedGroupId: any
   usersOfTheGroup: any[];
-  updatePirForm: FormGroup;
   mentorsMetoringGroups: any[] //to display in template
   allowedToAdminAndMentor: boolean;
   pirs: Pir[];
@@ -30,7 +29,6 @@ export class GroupinfoComponent implements OnInit {
     private fb: FormBuilder,
     private userservice: UserService,
     private pirservice: PireditService,
-    private pireditservice: PireditService,
     private roleservice: RolesService
   ) {
     this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
@@ -48,7 +46,6 @@ export class GroupinfoComponent implements OnInit {
     this.retrieveSingleGroupByGroupId();
     this.createRetrieveGroupForm()
     this.createPirRetrieveForm();
-    this.createUpdatePirForm();
 
   }
 
@@ -69,19 +66,6 @@ export class GroupinfoComponent implements OnInit {
     });
     //formname array is fullfilled in the retrievePirsList function (below)
 
-  }
-
-  createUpdatePirForm() {
-    this.updatePirForm = this.fb.group({
-      pirId: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      groupId: ['', Validators.required],
-      groupName: ['', Validators.required]
-    });
-    this.groupservice.retrieveAllGroupsOfTheMentor(localStorage.getItem('uid')).subscribe(({
-      next: (groups) => { this.mentorsMetoringGroups = groups }
-    }))
   }
 
   //methods ========================
@@ -129,21 +113,5 @@ export class GroupinfoComponent implements OnInit {
     })
   }
 
-  async selectPirToUpdate(pir: Pir) {
-    this.updatePirForm = await this.fb.group({
-      name: [pir.name, Validators.required],
-      description: [pir.description, Validators.required],
-      groupId: [pir.groupId, Validators.required],
-      pirId: [pir.pirId, Validators.required],
-      groupName: [null, Validators.required] // Set initial value as null or any default value you want
-    });
 
-    await this.groupservice.retrieveSingleGroupOfUserByGroupId(pir.groupId).subscribe({
-      next: (group: Group | any) => {
-        this.updatePirForm.patchValue({
-          groupName: group.groupName // Set the value for groupName FormControl
-        });
-      }
-    })
-  }
 }
