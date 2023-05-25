@@ -39,7 +39,6 @@ export class ChaptereditComponent implements OnInit {
   ) {
     this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
       next: (roles) => {
-        console.log(roles)
         this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
       }
     })
@@ -114,10 +113,13 @@ export class ChaptereditComponent implements OnInit {
     const editorId = localStorage.getItem('uid');
     this.pireditservice.retrieveChapters(editorId, this.selectedPirId).subscribe({
       next: (ress) => {
-        this.chapters = Object.values(ress);
-        this.chapters.forEach((chapter, index) => {
-          this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
-        });
+        if (ress !== undefined && ress !== null) {
+          this.chapters = Object.values(ress);
+          this.chapters.forEach((chapter, index) => {
+            this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
+          });
+        }
+
       }
     })
   }
