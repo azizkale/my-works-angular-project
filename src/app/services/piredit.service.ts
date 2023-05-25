@@ -99,4 +99,9 @@ export class PireditService {
   retrievePirByPirId(pirId: any): Observable<any> {
     return this.http.get(environment.url + `/pir/retrievepirbypirid?pirId=${pirId}`)
   }
+
+  leaveThePirFromTheGroup(pir: Pir): Observable<any> {
+    const body = { pir: pir }
+    return this.http.patch(environment.url + `/pir/leavepirfromgroup`, body)
+  }
 }

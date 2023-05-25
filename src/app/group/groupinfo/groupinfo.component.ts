@@ -63,6 +63,7 @@ export class GroupinfoComponent implements OnInit {
 
   createPirRetrieveForm() {
     this.retrievePirForm = this.fb.group({
+      pirName: ['', Validators.required]
     });
     //formname array is fullfilled in the retrievePirsList function (below)
 
@@ -114,4 +115,14 @@ export class GroupinfoComponent implements OnInit {
   }
 
 
+  leavePirFromGroup(pir: Pir) {
+    //leaves pir to edit
+    //removes pir from groups-> works-> pirs node
+    //removes groupId and assigned features of the pir from pir object from pirs node
+    this.pirservice.leaveThePirFromTheGroup(pir).subscribe({
+      next: (ress) => {
+        this.retrieveSingleGroupByGroupId()
+      }
+    })
+  }
 }

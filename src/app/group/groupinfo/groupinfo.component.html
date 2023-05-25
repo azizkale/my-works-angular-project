@@ -63,13 +63,36 @@
             <div class="col align-items-center">
               <span class="col-sm-1 text-start">{{ i + 1 }}-</span>
               <input
-                class="col-sm-11 w3-button text-start text-sm-center"
+                class="col-sm-9 w3-button text-sm-center"
                 type="button"
                 [value]="pir.name"
                 [formControlName]="pir.name"
                 [routerLink]="['/group/chapter/' + pir.pirId]"
               />
+              <input
+                *ngIf="allowedToAdminAndMentor"
+                class="col-sm-2 btn btn-warning text-center"
+                type="button"
+                value="Bırak"
+                [ngbPopover]="popDeleteContent"
+                popoverTitle="Sil!"
+              />
               <hr />
+              <!-- ===============Popovers-Leave-Pir================= -->
+              <ng-template #popDeleteContent>
+                <div class="text-center">
+                  <h4>{{ pir.name }} etkinliğini kaldırmak üzeresiniz!</h4>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    style="margin-right: 10px"
+                    (click)="leavePirFromGroup(pir)"
+                  >
+                    Delete
+                  </button>
+                  <button type="button" class="btn btn-info">Cancel</button>
+                </div>
+              </ng-template>
             </div>
           </div>
         </form>
