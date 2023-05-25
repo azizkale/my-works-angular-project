@@ -21,7 +21,7 @@ export class GroupinfoComponent implements OnInit {
   usersOfTheGroup: any[];
   mentorsMetoringGroups: any[] //to display in template
   allowedToAdminAndMentor: boolean;
-  pirs: Pir[];
+  pirsInfo: any[] = [] //{pirName,pirId}
 
   constructor(
     private activeroute: ActivatedRoute,
@@ -33,7 +33,6 @@ export class GroupinfoComponent implements OnInit {
   ) {
     this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
       next: (roles) => {
-        console.log(roles)
         this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
       }
     })
@@ -63,7 +62,6 @@ export class GroupinfoComponent implements OnInit {
 
   createPirRetrieveForm() {
     this.retrievePirForm = this.fb.group({
-      pirName: ['', Validators.required]
     });
     //formname array is fullfilled in the retrievePirsList function (below)
 
@@ -73,6 +71,7 @@ export class GroupinfoComponent implements OnInit {
   retrieveSingleGroupByGroupId() {
     this.groupservice.retrieveSingleGroupOfUserByGroupId(this.selectedGroupId).subscribe({
       next: async (group: Group | any) => {
+
         this.usersOfTheGroup = []
         this.retrieveGroupForm.patchValue(group)
 
@@ -91,25 +90,29 @@ export class GroupinfoComponent implements OnInit {
         }
 
         //list of pirs of the group
-        this.pirs = []
-        await Object.values(group.works.pirs).map(async (info: any | any) => {
-          await this.pirservice.retrievePirByPirId(info.pirId).subscribe({
-            next: async (pirr: Pir) => {
-              await this.pirs.push(pirr)
-              // Sort the pirs array in ascending order based on name
-              await this.pirs.sort((a, b) => a.name.localeCompare(b.name));
+        this.pirsInfo = []
+        if (group.works.pirs !== undefined && group.works.pirs !== null) {
+          // Get the keys and values as arrays
+          const arrPirId = Object.keys(group.works.pirs);
+          const arrPirName: any[] = Object.values(group.works.pirs);
 
-              //create fotmcontrol
-              // await this.pirs.forEach((pir, index) => {
-              this.retrievePirForm.addControl(pirr.name, new FormControl(pirr.name));
-              // });
-            }
-          })
-        })
+          // Create an object array         
+          this.pirsInfo = await arrPirId.map((id, index) => ({
+            pirId: id,
+            pirName: arrPirName[index].pirName,
+          }));
+
+          // Sort the pirs array in ascending order based on name
+          await this.pirsInfo.sort((a, b) => a.pirName.localeCompare(b.pirName));
+          //create fotmcontrol
+          await this.pirsInfo.forEach((info, index) => {
+            this.retrievePirForm.addControl(info.pirName, new FormControl(info.pirName));
+          });
+        }
+
 
 
       }, complete: async () => {
-
       }
     })
   }

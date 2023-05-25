@@ -29,7 +29,6 @@ export class PireditComponent implements OnInit {
   ) {
     this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
       next: (roles) => {
-        console.log(roles)
         this.allowedToAdminAndPirEditor = roles.includes(Roles[1]) || roles.includes(Roles[4])
       }
     })
@@ -104,23 +103,8 @@ export class PireditComponent implements OnInit {
           });
         }
       }, complete: () => {
-        console.log(this.pirs)
       }
     })
-    // this.pireditservice.retrievePirs().subscribe({
-    //   next: async (ress) => {
-    //     if (ress) {
-    //       await Object.values(ress).map((pir: Pir | any) => {
-    //         this.pirs.push(pir)
-    //       })
-    //       this.pirs.forEach((pir, index) => {
-    //         this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
-    //       });
-    //     }
-    //   }, complete: () => {
-
-    //   }
-    // })
   }
 
 

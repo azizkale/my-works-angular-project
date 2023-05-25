@@ -43,21 +43,21 @@
   </div>
 </div>
 <!-- ==========Etkinlikler================ -->
-<div class="w3-center mt-3">
+<div class="w3-center mt-3" *ngIf="pirsInfo.length > 0">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
         <h2>Etkinlikler</h2>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="pirsInfo.length > 0">
       <div class="col-sm-12 text-start">
         <h2>Pırlanta</h2>
       </div>
       <div class="w3-responsive w3-card-4 col-sm-12">
         <form [formGroup]="retrievePirForm" novalidate class="mt-4">
           <div
-            *ngFor="let pir of pirs; let i = index"
+            *ngFor="let pir of pirsInfo; let i = index"
             class="form-group row my-1"
           >
             <div class="col align-items-center">
@@ -65,8 +65,8 @@
               <input
                 class="col-sm-9 w3-button text-sm-center"
                 type="button"
-                [value]="pir.name"
-                [formControlName]="pir.name"
+                [value]="pir.pirName"
+                [formControlName]="pir.pirName"
                 [routerLink]="['/group/chapter/' + pir.pirId]"
               />
               <input
@@ -81,7 +81,7 @@
               <!-- ===============Popovers-Leave-Pir================= -->
               <ng-template #popDeleteContent>
                 <div class="text-center">
-                  <h4>{{ pir.name }} etkinliğini kaldırmak üzeresiniz!</h4>
+                  <h4>{{ pir.pirName }} adlı kıtabı kaldırmak üzeresiniz!</h4>
                   <button
                     type="button"
                     class="btn btn-danger"
