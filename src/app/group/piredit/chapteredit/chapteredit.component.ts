@@ -164,17 +164,17 @@ export class ChaptereditComponent implements OnInit {
 
   updateChapter() {
     console.log(this.updateChapterForm.value)
-    // this.updateChapterForm.get('editorId')?.setValue(this.updateChapterForm.get('selectEditor')?.value)
-    // this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
-    //   next: (ress) => {
-    //     this.userservice.addRoleToUser(this.updateChapterForm.get('selectEditor')?.value, Roles[4]).subscribe({
-    //       next: (resss) => {
-    //         console.log(resss)
-    //       }
-    //     })
-    //     this.retrieveChapters()
-    //   }
-    // })
+    this.updateChapterForm.get('editorId')?.setValue(this.updateChapterForm.get('selectEditor')?.value)
+    this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
+      next: (ress) => {
+        this.userservice.addRoleToUser(this.updateChapterForm.get('selectEditor')?.value, Roles[2]).subscribe({
+          next: (resss) => {
+            console.log(resss)
+          }
+        })
+        this.retrieveChapters()
+      }
+    })
   }
 
   selectTextToManipulate() {
