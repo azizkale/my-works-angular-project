@@ -148,8 +148,6 @@ export class ChaptereditComponent implements OnInit {
     })
   }
 
-
-
   selectChapter(chapter: Chapter) {
     this.updateChapterForm = this.fb.group({
       chapterId: [chapter.chapterId],

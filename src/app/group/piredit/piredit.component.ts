@@ -17,7 +17,7 @@ export class PireditComponent implements OnInit {
   retrievePirForm: FormGroup;
   pirs: Pir[] | any[] = [];
   mentorsMetoringGroups: any[] //to display in template
-  userId = localStorage.getItem('uid') // to determine user is allowed to edit pir
+  userId = localStorage.getItem('uid') // to determine user is allowed to edit pir 
 
   allowedToAdminAndPirEditor: boolean;
   constructor(
