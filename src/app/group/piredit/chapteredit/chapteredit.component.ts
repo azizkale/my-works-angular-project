@@ -123,6 +123,7 @@ export class ChaptereditComponent implements OnInit {
       }
     })
   }
+
   addChapter(chapterName: string, chapterContent: string) {
     const editorId = this.createChapterForm.get('selectEditor')?.value;
 

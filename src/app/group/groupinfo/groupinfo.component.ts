@@ -122,10 +122,15 @@ export class GroupinfoComponent implements OnInit {
     //leaves pir to edit
     //removes pir from groups-> works-> pirs node
     //removes groupId and assigned features of the pir from pir object from pirs node
-    this.pirservice.leaveThePirFromTheGroup(pir).subscribe({
-      next: (ress) => {
-        this.retrieveSingleGroupByGroupId()
+    this.pirservice.retrievePirByPirId(pir.pirId).subscribe({
+      next: (pirr) => {
+        this.pirservice.leaveThePirFromTheGroup(pirr).subscribe({
+          next: (ress) => {
+            this.retrieveSingleGroupByGroupId()
+          }
+        })
       }
     })
+
   }
 }

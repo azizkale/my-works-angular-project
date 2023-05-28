@@ -31,22 +31,24 @@ export class BooktableComponent implements OnInit {
     this.books = [];
     this.bookservice.retrieveBooks().subscribe({
       next: async (response) => {
-        response.map((book: Book) => {
-          if (book.totalPage !== book.readPage) {
-            let obj: Book | any = {
-              'bookId': book.bookId,
-              'name': book.name,
-              'startDate': this.datePipe.transform(book.startDate, 'yyyy-MM-dd'),
-              'endDate': this.datePipe.transform(book.endDate, 'yyyy-MM-dd'),
-              'totalPage': book.totalPage,
-              'author': book.author,
-              'bookType': book.bookType,
-              'readPage': book.readPage
+        if (response !== undefined && response !== null) {
+          response.map((book: Book) => {
+            if (book.totalPage !== book.readPage) {
+              let obj: Book | any = {
+                'bookId': book.bookId,
+                'name': book.name,
+                'startDate': this.datePipe.transform(book.startDate, 'yyyy-MM-dd'),
+                'endDate': this.datePipe.transform(book.endDate, 'yyyy-MM-dd'),
+                'totalPage': book.totalPage,
+                'author': book.author,
+                'bookType': book.bookType,
+                'readPage': book.readPage
 
+              }
+              this.books.push(obj);
             }
-            this.books.push(obj);
-          }
-        })
+          })
+        }
 
       },
       error: (err) => {
