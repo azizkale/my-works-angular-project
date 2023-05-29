@@ -36,7 +36,7 @@ const routes: Routes = [
       { path: 'hatim', component: HatimComponent },
       { path: 'shb', component: ShbComponent },
       { path: 'piredit', component: PireditComponent },
-      { path: 'chapter/:id', component: ChaptereditComponent },
+      { path: 'chapter/:pirid/:groupid', component: ChaptereditComponent },
     ]
   },
   {

@@ -22,7 +22,7 @@
           type="button"
           [value]="pir.name"
           [formControlName]="pir.name"
-          [routerLink]="['/group/chapter/' + pir.pirId]"
+          [routerLink]="['/group/chapter/', pir.pirId]"
         />
         <span class="col-sm-2 text-end text-sm-center" *ngIf="pir.assigned"
           ><h4>{{ pir.groupName }}</h4></span

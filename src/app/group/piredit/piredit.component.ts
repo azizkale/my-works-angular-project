@@ -96,13 +96,14 @@ export class PireditComponent implements OnInit {
             this.pirs.push(pir)
           })
           // Sort the pirs array in ascending order based on name
-          this.pirs.sort((a, b) => a.name.localeCompare(b.name));
+          await this.pirs.sort((a, b) => a.name.localeCompare(b.name));
 
-          this.pirs.forEach((pir, index) => {
+          await this.pirs.forEach((pir, index) => {
             this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
           });
         }
       }, complete: () => {
+
       }
     })
   }

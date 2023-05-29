@@ -67,7 +67,7 @@
                 type="button"
                 [value]="pir.pirName"
                 [formControlName]="pir.pirName"
-                [routerLink]="['/group/chapter/' + pir.pirId]"
+                [routerLink]="['/group/chapter/', pir.pirId, selectedGroupId]"
               />
               <input
                 *ngIf="allowedToAdminAndMentor"

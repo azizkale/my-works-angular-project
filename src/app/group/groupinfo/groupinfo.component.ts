@@ -40,8 +40,8 @@ export class GroupinfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedGroupId = this.activeroute.snapshot.paramMap.get('groupid');
-    //to create works for the group(localStorage)
-    // localStorage.setItem('groupId', this.selectedGroupId);
+    //to create works for the group and to send to chapterComponent
+
     this.retrieveSingleGroupByGroupId();
     this.createRetrieveGroupForm()
     this.createPirRetrieveForm();
@@ -104,6 +104,7 @@ export class GroupinfoComponent implements OnInit {
 
           // Sort the pirs array in ascending order based on name
           await this.pirsInfo.sort((a, b) => a.pirName.localeCompare(b.pirName));
+          await console.log(this.pirsInfo)
           //create fotmcontrol
           await this.pirsInfo.forEach((info, index) => {
             this.retrievePirForm.addControl(info.pirName, new FormControl(info.pirName));
