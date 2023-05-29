@@ -21,4 +21,8 @@ export class RolesService {
   getUserRoles(uid: any): Observable<any> {
     return this.http.get(environment.url + `/users/getuserroles?uid=${uid}`)
   }
+
+  getUserRolesOfTheGroup(groupId: any): Observable<any> {
+    return this.http.get(environment.url + `/users/getuserrolesofthrgroup?groupId=${groupId}`)
+  }
 }

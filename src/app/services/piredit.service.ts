@@ -49,12 +49,12 @@ export class PireditService {
 
   retrieveChapters(editorId: any, pirId: any): Observable<any> {
     let url = '';
-    // if (this.rolesservice.checkRole(Roles[1])) {
-    url = environment.url + `/pir/getallchapters?pirId=${pirId}`
-    // }
-    // else if (this.rolesservice.checkRole(Roles[4])) {
-    //   url = environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`
-    // }
+    if (this.rolesservice.checkRole(Roles[1])) {
+      url = environment.url + `/pir/getallchapters?pirId=${pirId}`
+    }
+    else if (this.rolesservice.checkRole(Roles[4])) {
+      url = environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`
+    }
     return this.http.get(url)
   }
 

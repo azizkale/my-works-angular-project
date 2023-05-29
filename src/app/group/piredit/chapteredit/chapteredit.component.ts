@@ -121,7 +121,6 @@ export class ChaptereditComponent implements OnInit {
             this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
           });
         }
-
       }
     })
   }
