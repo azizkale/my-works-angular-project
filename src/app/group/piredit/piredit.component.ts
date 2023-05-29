@@ -118,23 +118,20 @@ export class PireditComponent implements OnInit {
     });
   }
 
-  assignPirToGroup(assignPirToMentorToEdit: any) {
+  assignPirToGroup(assignPirToMentorToEditForm: any) {
 
-    const newPir = new Pir(
-      assignPirToMentorToEdit.pirId,
-      localStorage.getItem('uid'),
-      assignPirToMentorToEdit.groupId,
-      assignPirToMentorToEdit.pirName,
-      assignPirToMentorToEdit.description,
-      [],
-      []
-    )
-    this.pireditservice.assingPirToGroup(newPir).subscribe({
-      next: (ress) => {
-        this.retrievePirsList()
-        this.createPirRetrieveForm()
+
+    this.pireditservice.retrievePirByPirId(assignPirToMentorToEditForm.pirId).subscribe({
+      next: (pir: Pir) => {
+        this.pireditservice.assingPirToGroup(pir).subscribe({
+          next: (ress) => {
+            this.retrievePirsList()
+            this.createPirRetrieveForm()
+          }
+        })
       }
     })
+
   }
 
 
