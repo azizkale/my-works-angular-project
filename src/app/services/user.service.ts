@@ -23,8 +23,12 @@ export class UserService {
       return EMPTY
   }
 
-  getAllUsers(): Observable<any> {
+  retrieveAllUsers(): Observable<any> {
     return this.http.get(environment.url + `/users/retrieveallusers`)
+  }
+
+  retrieveAllUsersOfTheGroup(groupId: any): Observable<any> {
+    return this.http.get(environment.url + `/users/retrieveallusersofthegroup?groupId=${groupId}`)
   }
 
   retrieveAllParticipantsOfTheGroupByGroupId(groupId: any): Observable<any> {

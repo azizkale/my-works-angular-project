@@ -40,13 +40,19 @@ export class WordpaireditComponent implements OnInit {
       meaning: ['', Validators.required]
     });
   }
+  createEditWordPairForm() {
+    this.editWordPairForm = this.fb.group({
+      word: ['', Validators.required],
+      meaning: ['', Validators.required]
+    });
+  }
 
   retrieveAllWordPairsOfSinglePir() {
     this.wordPairs = []
     this.pireditservice.retrieveAllWordPairsOfSinglePir(this.pirId).subscribe({
       next: (wordpairs: WordPair[]) => {
         this.wordPairs = wordpairs
-
+        console.log(wordpairs); // Array of wordPairs
       }, complete: async () => {
         this.wordPairs.map(async (wp: any) => {
           this.userservice.retrieveEditorbyEditorId(wp.editorId).subscribe({
@@ -55,13 +61,6 @@ export class WordpaireditComponent implements OnInit {
         })
       }
     })
-  }
-
-  createEditWordPairForm() {
-    this.editWordPairForm = this.fb.group({
-      word: ['', Validators.required],
-      meaning: ['', Validators.required]
-    });
   }
 
   getWordPairToEdit(selectedWordPair: WordPair) {

@@ -119,11 +119,9 @@ export class PireditComponent implements OnInit {
   }
 
   assignPirToGroup(assignPirToMentorToEditForm: any) {
-
-
     this.pireditservice.retrievePirByPirId(assignPirToMentorToEditForm.pirId).subscribe({
-      next: (pir: Pir) => {
-        this.pireditservice.assingPirToGroup(pir).subscribe({
+      next: async (pir: any) => {
+        await this.pireditservice.assingPirToGroup(pir, assignPirToMentorToEditForm.groupId).subscribe({
           next: (ress) => {
             this.retrievePirsList()
             this.createPirRetrieveForm()

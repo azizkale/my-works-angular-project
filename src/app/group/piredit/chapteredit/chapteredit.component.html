@@ -87,7 +87,10 @@
           formControlName="selectEditor"
         >
           <option value="">editor seçin</option>
-          <option value="{{ user.uid }}" *ngFor="let user of users">
+          <option
+            value="{{ user.uid }}"
+            *ngFor="let user of users_createchapter"
+          >
             {{ user.displayName }}
           </option>
         </select>

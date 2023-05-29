@@ -27,7 +27,7 @@ export class ChaptereditComponent implements OnInit {
 
   selectedPirId: any;
   selectedWord: any; // to edit word on chapter update form
-  users: any[] = [] // fullfilling the select tag on FormGroup
+  users_createchapter: any[] = [] // fullfilling the select tag on FormGroup
   users_updateform: any[] = [] // fullfilling the select tag on FormGroup
 
   constructor(
@@ -46,7 +46,6 @@ export class ChaptereditComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedPirId = this.activeroute.snapshot.paramMap.get('id');
-
     this.retrieveChapters();
     this.createChapterRetrieveForm()
     this.createNewChapterForm();
@@ -72,11 +71,11 @@ export class ChaptereditComponent implements OnInit {
     });
 
     // fullfilling the select tag on FormGroup
-    this.users = []
-    this.userservice.getAllUsers().subscribe({
+    this.users_createchapter = []
+    this.userservice.retrieveAllUsersOfTheGroup('').subscribe({
       next: (ress: any) => {
         ress.forEach((user: any) => {
-          this.users.push(user)
+          this.users_createchapter.push(user)
           this.createChapterForm.addControl(ress.uid, new FormControl(user.uid));
         });
       }
@@ -99,7 +98,7 @@ export class ChaptereditComponent implements OnInit {
     });
     // fullfilling the select tag on FormGroup
     this.users_updateform = []
-    this.userservice.getAllUsers().subscribe({
+    this.userservice.retrieveAllUsersOfTheGroup('').subscribe({
       next: (ress: any) => {
         ress.forEach((user: any) => {
           this.users_updateform.push(user)
@@ -144,7 +143,6 @@ export class ChaptereditComponent implements OnInit {
       next: (ress) => {
         this.retrieveChapters()
         this.createChapterRetrieveForm()
-        console.log(ress)
       }
     })
   }

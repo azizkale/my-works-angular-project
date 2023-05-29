@@ -22,8 +22,8 @@ export class PireditService {
     return this.http.post(environment.url + '/pir/create', body)
   }
 
-  assingPirToGroup(pir: Pir): Observable<any> {
-    const body = { pir: pir };
+  assingPirToGroup(pirinfo: any, groupId: any): Observable<any> {
+    const body = { pirinfo: pirinfo, groupId: groupId };
     return this.http.post(environment.url + `/pir/assignpirtogroup`, body)
   }
 
@@ -31,10 +31,10 @@ export class PireditService {
     return this.http.get(environment.url + `/pir/getpirs`)
   }
 
-  updatePir(pir: Pir) {
-    const body = { pir: pir };
-    return this.http.patch(environment.url + '/pir/updatepir', body)
-  }
+  // updatePir(pir: Pir) {
+  //   const body = { pir: pir };
+  //   return this.http.patch(environment.url + '/pir/updatepir', body)
+  // }
 
   deletePir(pirId: any): Observable<any> {
     const body = { pirId: pirId };
