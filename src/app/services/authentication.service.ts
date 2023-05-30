@@ -14,7 +14,6 @@ export class AuthenticationService {
   ) { }
 
   signin(email: string, password: any): Observable<any> {
-    console.log(environment.url)
     const body = { email: email, password: password };
     return this.http.post(environment.url + '/signin', body)
   }

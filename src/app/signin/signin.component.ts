@@ -36,7 +36,6 @@ export class SigninComponent implements OnInit {
     this.authservice.signin(email, password)
       .subscribe({
         next: async (response) => {
-          console.log(email)
           if (response.status === 200) {
             // If the response status is 200 OK, extract the token from the response
             await localStorage.setItem('token', response.token);
