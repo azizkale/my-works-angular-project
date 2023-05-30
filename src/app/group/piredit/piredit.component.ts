@@ -89,12 +89,13 @@ export class PireditComponent implements OnInit {
 
   retrievePirsList() {
     this.pirs = []
-    this.pireditservice.retrievePirListToEditNewPir().subscribe({
+    this.pireditservice.retrievePirList().subscribe({
       next: async (ress) => {
         if (ress) {
           await Object.values(ress).map((pir: Pir | any) => {
             this.pirs.push(pir)
           })
+          await console.log(this.pirs)
           // Sort the pirs array in ascending order based on name
           await this.pirs.sort((a, b) => a.name.localeCompare(b.name));
 

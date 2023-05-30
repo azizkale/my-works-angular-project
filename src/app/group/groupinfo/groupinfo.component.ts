@@ -91,7 +91,7 @@ export class GroupinfoComponent implements OnInit {
 
         //list of pirs of the group
         this.pirsInfo = []
-        if (group.works.pirs !== undefined || group.works.pirs !== null) {
+        if (group.works?.pirs) {
           // Get the keys and values as arrays
           const arrPirId = Object.keys(group.works.pirs);
           const arrPirName: any[] = Object.values(group.works.pirs);

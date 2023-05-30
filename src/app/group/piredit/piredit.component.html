@@ -16,13 +16,12 @@
     </div>
     <form [formGroup]="retrievePirForm" novalidate>
       <div *ngFor="let pir of pirs; let i = index" class="form-group row my-1">
-        <span class="col-sm-1 text-start">{{ i + 1 }}-</span>
+        <span class="col-sm-1 text-start">{{ i + 1 }}.</span>
         <input
           class="col-sm-9 w3-button text-start text-sm-start"
           type="button"
           [value]="pir.name"
           [formControlName]="pir.name"
-          [routerLink]="['/group/chapter/', pir.pirId]"
         />
         <span class="col-sm-2 text-end text-sm-center" *ngIf="pir.assigned"
           ><h4>{{ pir.groupName }}</h4></span
@@ -37,7 +36,6 @@
             selectPirToAssing(pir); id_assign_pir.style.display = 'block'
           "
         />
-        <hr />
       </div>
     </form>
   </div>

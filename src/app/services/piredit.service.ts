@@ -92,7 +92,7 @@ export class PireditService {
     return this.http.delete(environment.url + '/pir/deletewordpair', { body })
   }
 
-  retrievePirListToEditNewPir() {
+  retrievePirList() {
     return this.http.get(environment.url + `/pir/retrievepirlist`)
   }
 
