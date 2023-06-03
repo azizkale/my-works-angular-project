@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GroupService } from 'src/app/services/group.service';
@@ -15,6 +15,9 @@ import { Roles } from 'src/models/Roles';
   styleUrls: ['./groupinfo.component.css']
 })
 export class GroupinfoComponent implements OnInit {
+  @ViewChild('participantemail_', { static: false }) participantemail_: ElementRef
+  @ViewChild('participantid_', { static: false }) participantid_: ElementRef
+
   retrieveGroupForm: FormGroup
   retrievePirForm: FormGroup
   selectedGroupId: any
@@ -135,5 +138,21 @@ export class GroupinfoComponent implements OnInit {
       }
     })
 
+  }
+
+  async retrieveSingleUser(email: any) {
+    await this.userservice.retrieveUserByEmail(email).subscribe(({
+      next: (user) => {
+        this.participantemail_.nativeElement.innerText = user.email
+      }
+    }))
+
+  }
+
+  addUserToGroup(email: any) {
+    this.userservice.addParticipantToGroup(this.selectedGroupId, email, Roles[3]).subscribe({
+      next: (result) => {
+      }
+    })
   }
 }

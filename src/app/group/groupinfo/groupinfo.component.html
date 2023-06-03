@@ -39,6 +39,42 @@
           <li class="list-group-item">{{ user.email }}</li>
         </ul>
       </form>
+      <div class="container">
+        <label for="adding participant">Katılımcı ekle:</label>
+        <div class="row align-items-center mb-1">
+          <div class="col-sm-10">
+            <input
+              type="text"
+              #useremail
+              class="form-control"
+              placeholder="Enter Email..."
+            />
+          </div>
+          <div class="col-sm-2">
+            <button
+              class="btn btn-success w-100"
+              (click)="retrieveSingleUser(useremail.value)"
+            >
+              Getir
+            </button>
+          </div>
+        </div>
+        <!-- retrieve the participant-candidate to be added -->
+        <div class="row align-items-center mt-1" *ngIf="useremail.value">
+          <div class="col-sm-10">
+            <p #participantemail_ class="form-control"></p>
+            <p hidden="true" #participantid_ class="form-control"></p>
+          </div>
+          <div class="col-sm-2">
+            <button
+              class="btn btn-success w-100"
+              (click)="addUserToGroup(participantemail_.innerText)"
+            >
+              Ekle
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

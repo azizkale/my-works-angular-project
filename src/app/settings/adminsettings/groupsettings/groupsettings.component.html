@@ -145,10 +145,10 @@
         </form>
         <!-- participant adding -->
         <hr />
-        <label for="adding participant">Katılımcı ekle:</label>
-        <div class="row align-items-center">
-          <div class="row">
-            <div class="col">
+        <div class="container">
+          <label for="adding participant">Katılımcı ekle:</label>
+          <div class="row align-items-center mb-1">
+            <div class="col-sm-10">
               <input
                 type="text"
                 #useremail
@@ -156,26 +156,24 @@
                 placeholder="Enter Email..."
               />
             </div>
-            <div class="col-auto">
+            <div class="col-sm-2">
               <button
-                class="btn btn-success"
+                class="btn btn-success w-100"
                 (click)="retrieveSingleUser(useremail.value)"
               >
                 Getir
               </button>
             </div>
           </div>
-        </div>
-        <!-- retrieve the participant-candidate to be added -->
-        <div class="row align-items-center mt-1" *ngIf="useremail.value">
-          <div class="row">
-            <div class="col">
+          <!-- retrieve the participant-candidate to be added -->
+          <div class="row align-items-center mt-1" *ngIf="useremail.value">
+            <div class="col-sm-10">
               <p #participantemail_ class="form-control"></p>
               <p hidden="true" #participantid_ class="form-control"></p>
             </div>
-            <div class="col-auto">
+            <div class="col-sm-2">
               <button
-                class="btn btn-success"
+                class="btn btn-success w-100"
                 (click)="addUserToGroup(participantemail_.innerText)"
               >
                 Ekle
