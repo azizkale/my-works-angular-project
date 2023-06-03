@@ -22,7 +22,7 @@ export class RolesService {
     return this.http.get(environment.url + `/users/getuserroles?uid=${uid}`)
   }
 
-  getUserRolesInTheGroup(groupId: any, email: any): Observable<any> {
-    return this.http.get(environment.url + `/users/getuserrolesofthrgroup?groupId=${groupId}&email=${email}`)
+  getUserRolesInTheGroup(groupId: any, userId: any): Observable<any> {
+    return this.http.get(environment.url + `/users/getuserrolesofthegroup?groupId=${groupId}&userId=${userId}`)
   }
 }

@@ -38,11 +38,7 @@ export class ChaptereditComponent implements OnInit {
     public userservice: UserService,
     public roleservice: RolesService,
   ) {
-    this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
-      next: (roles) => {
-        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
-      }
-    })
+
   }
 
   ngOnInit(): void {
@@ -53,6 +49,12 @@ export class ChaptereditComponent implements OnInit {
     this.createNewChapterForm();
     this.createUpdateChapterForm();
     this.createAddWordPairForm();
+
+    this.roleservice.getUserRolesInTheGroup(this.selectedGroupId, localStorage.getItem('uid')).subscribe({
+      next: (roles) => {
+        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
+      }
+    })
   }
 
   createChapterRetrieveForm() {

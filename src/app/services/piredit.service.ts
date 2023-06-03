@@ -49,7 +49,7 @@ export class PireditService {
 
   retrieveChapters(editorId: any, pirId: any): Observable<any> {
     let url = '';
-    if (this.rolesservice.checkRole(Roles[1])) {
+    if (this.rolesservice.checkRole(Roles[2])) {
       url = environment.url + `/pir/getallchapters?pirId=${pirId}`
     }
     else if (this.rolesservice.checkRole(Roles[4])) {
