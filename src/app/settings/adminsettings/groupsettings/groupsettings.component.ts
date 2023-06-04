@@ -120,8 +120,8 @@ export class GroupsettingsComponent implements OnInit {
   }
 
   deleteGroup() {
-    console.log(this.updateGroupForm.get('groupId')?.value)
-
+    //grup silmede sorun var, pir eklenmesi lazim muhtemelen,
+    //grup kurmada ve gruba participant veya editor eklemede role atama test edilmesi lazim
     this.groupservice.deleteGroup(this.updateGroupForm.get('groupId')?.value).subscribe({
       next: (resulty: any) => {
 
