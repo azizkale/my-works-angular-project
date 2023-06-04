@@ -120,8 +120,6 @@ export class GroupsettingsComponent implements OnInit {
   }
 
   deleteGroup() {
-    console.log(this.updateGroupForm.get('groupId')?.value)
-
     this.groupservice.deleteGroup(this.updateGroupForm.get('groupId')?.value).subscribe({
       next: (resulty: any) => {
 

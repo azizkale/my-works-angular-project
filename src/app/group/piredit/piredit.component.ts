@@ -56,7 +56,10 @@ export class PireditComponent implements OnInit {
       groupId: ['', Validators.required]
     });
     this.groupservice.retrieveAllGroupsOfTheMentor(localStorage.getItem('uid')).subscribe(({
-      next: (groups) => { this.mentorsMetoringGroups = groups }
+      next: (groups) => {
+        console.log(groups)
+        this.mentorsMetoringGroups = groups
+      }
     }))
   }
 
@@ -95,7 +98,6 @@ export class PireditComponent implements OnInit {
           await Object.values(ress).map((pir: Pir | any) => {
             this.pirs.push(pir)
           })
-          await console.log(this.pirs)
           // Sort the pirs array in ascending order based on name
           await this.pirs.sort((a, b) => a.name.localeCompare(b.name));
 
