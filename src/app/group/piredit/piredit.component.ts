@@ -19,7 +19,7 @@ export class PireditComponent implements OnInit {
   mentorsMetoringGroups: any[] //to display in template
   userId = localStorage.getItem('uid') // to determine user is allowed to edit pir 
 
-  allowedToAdminAndPirEditor: boolean;
+  allowedToAdmin: boolean;
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
@@ -27,11 +27,7 @@ export class PireditComponent implements OnInit {
     private groupservice: GroupService
 
   ) {
-    this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
-      next: (roles) => {
-        this.allowedToAdminAndPirEditor = roles.includes(Roles[1]) || roles.includes(Roles[4])
-      }
-    })
+
   }
 
   ngOnInit(): void {
@@ -135,6 +131,4 @@ export class PireditComponent implements OnInit {
     })
 
   }
-
-
 }
