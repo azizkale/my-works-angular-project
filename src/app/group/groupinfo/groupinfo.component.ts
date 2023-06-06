@@ -34,20 +34,13 @@ export class GroupinfoComponent implements OnInit {
     private pirservice: PireditService,
     private roleservice: RolesService
   ) {
-    this.roleservice.getUserRoles(localStorage.getItem('uid')).subscribe({
-      next: (roles) => {
-        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
-      }
-    })
+
   }
 
   ngOnInit(): void {
-    this.selectedGroupId = this.activeroute.snapshot.paramMap.get('groupid');
     //to create works for the group and to send to chapterComponent
-    this.roleservice.getUserRolesInTheGroup(this.selectedGroupId, localStorage.getItem('uid')).subscribe({
-      next: (data => { console.log(data) })
-    })
-
+    this.selectedGroupId = this.activeroute.snapshot.paramMap.get('groupid');
+    this.roleControl(this.selectedGroupId);
     this.retrieveSingleGroupByGroupId();
     this.createRetrieveGroupForm()
     this.createPirRetrieveForm();
@@ -153,6 +146,15 @@ export class GroupinfoComponent implements OnInit {
     this.userservice.addParticipantToGroup(this.selectedGroupId, email, Roles[3]).subscribe({
       next: (result) => {
       }
+    })
+  }
+
+  roleControl(groupId: any) {
+    this.roleservice.getUserRolesInTheGroup(groupId, localStorage.getItem('uid')).subscribe({
+      next: (roles => {
+        console.log(roles)
+        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
+      })
     })
   }
 }
