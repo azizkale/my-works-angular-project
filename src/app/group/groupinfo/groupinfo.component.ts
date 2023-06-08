@@ -70,7 +70,7 @@ export class GroupinfoComponent implements OnInit {
   retrieveSingleGroupByGroupId() {
     this.groupservice.retrieveSingleGroupOfUserByGroupId(this.selectedGroupId).subscribe({
       next: async (group: Group | any) => {
-
+        console.log(group)
         this.usersOfTheGroup = []
         this.retrieveGroupForm.patchValue(group)
 
@@ -108,10 +108,6 @@ export class GroupinfoComponent implements OnInit {
             this.retrievePirForm.addControl(info.pirName, new FormControl(info.pirName));
           });
         }
-
-
-
-      }, complete: async () => {
       }
     })
   }
@@ -145,6 +141,7 @@ export class GroupinfoComponent implements OnInit {
   addUserToGroup(email: any) {
     this.userservice.addParticipantToGroup(this.selectedGroupId, email, Roles[3]).subscribe({
       next: (result) => {
+        this.retrieveSingleGroupByGroupId()
       }
     })
   }

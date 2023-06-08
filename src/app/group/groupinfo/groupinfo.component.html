@@ -36,7 +36,12 @@
         />
         <label for="uesrs">Katılımcılar:</label>
         <ul class="list-group" *ngFor="let user of usersOfTheGroup">
-          <li class="list-group-item">{{ user.email }}</li>
+          <li
+            class="list-group-item"
+            *ngIf="user?.roles?.includes('participant')"
+          >
+            {{ user.email }}
+          </li>
         </ul>
       </form>
       <div class="container" *ngIf="allowedToAdminAndMentor">
