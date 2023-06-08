@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/services/group.service';
 import { PireditService } from 'src/app/services/piredit.service';
-import { RolesService } from 'src/app/services/roles.service';
 import { Pir } from 'src/models/Pir';
-import { Roles } from 'src/models/Roles';
 
 @Component({
   selector: 'app-piredit',
@@ -19,11 +17,9 @@ export class PireditComponent implements OnInit {
   mentorsMetoringGroups: any[] //to display in template
   userId = localStorage.getItem('uid') // to determine user is allowed to edit pir 
 
-  allowedToAdmin: boolean;
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
-    private roleservice: RolesService,
     private groupservice: GroupService
 
   ) {

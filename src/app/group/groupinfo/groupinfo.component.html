@@ -39,7 +39,7 @@
           <li class="list-group-item">{{ user.email }}</li>
         </ul>
       </form>
-      <div class="container">
+      <div class="container" *ngIf="allowedToAdminAndMentor">
         <label for="adding participant">Katılımcı ekle:</label>
         <div class="row align-items-center mb-1">
           <div class="col-sm-10">
