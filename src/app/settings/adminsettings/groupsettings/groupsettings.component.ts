@@ -63,7 +63,8 @@ export class GroupsettingsComponent implements OnInit {
       next: (result) => {
         this.userservice.retrieveUserByEmail(mentorEmail).subscribe({
           next: (user) => {
-            this.userservice.addRoleToUser(user.uid, Roles[2]).subscribe()
+            //groupId is given in the server
+            this.userservice.addRoleToUser(user.uid, Roles[2], null).subscribe()
           }
         })
         this.retrieveGroups()
@@ -121,8 +122,7 @@ export class GroupsettingsComponent implements OnInit {
 
   deleteGroup() {
     this.groupservice.deleteGroup(this.updateGroupForm.get('groupId')?.value).subscribe({
-      next: (resulty: any) => {
-
+      next: (result: any) => {
         this.retrieveGroups()
       }
     })
