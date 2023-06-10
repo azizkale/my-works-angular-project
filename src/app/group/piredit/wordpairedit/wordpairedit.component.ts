@@ -1,9 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PireditService } from 'src/app/services/piredit.service';
-import { RolesService } from 'src/app/services/roles.service';
 import { UserService } from 'src/app/services/user.service';
-import { Roles } from 'src/models/Roles';
 import { WordPair } from 'src/models/WordPair';
 
 @Component({
@@ -19,19 +17,18 @@ export class WordpaireditComponent implements OnInit {
   editWordPairForm: FormGroup;
   selectedWordPairToEdit: WordPair
   uid = localStorage.getItem('uid')
-  allowedToPirEditor = this.rolesservice.checkRole(Roles[4])
 
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
     private userservice: UserService,
-    private rolesservice: RolesService
   ) { }
 
   ngOnInit(): void {
     this.retrieveAllWordPairsOfSinglePir()
     this.retrieveWordPairEditForm()
     this.createEditWordPairForm();
+
   }
 
   retrieveWordPairEditForm() {
@@ -51,8 +48,7 @@ export class WordpaireditComponent implements OnInit {
     this.wordPairs = []
     this.pireditservice.retrieveAllWordPairsOfSinglePir(this.pirId).subscribe({
       next: (wordpairs: WordPair[]) => {
-        this.wordPairs = wordpairs
-        console.log(wordpairs); // Array of wordPairs
+        this.wordPairs = wordpairs// Array of wordPairs
       }, complete: async () => {
         this.wordPairs.map(async (wp: any) => {
           this.userservice.retrieveEditorbyEditorId(wp.editorId).subscribe({

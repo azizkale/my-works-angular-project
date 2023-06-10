@@ -78,7 +78,6 @@ export class ChaptereditComponent implements OnInit {
     this.users_createchapter = []
     this.userservice.retrieveAllUsersOfTheGroup(this.selectedGroupId).subscribe({
       next: (ress: any) => {
-        console.log(ress)
         ress.forEach((user: any) => {
           this.users_createchapter.push(user)
           this.createChapterForm.addControl(ress.uid, new FormControl(user.uid));

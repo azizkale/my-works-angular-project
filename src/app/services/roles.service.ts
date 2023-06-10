@@ -7,19 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RolesService {
-  roles = JSON.parse(localStorage.getItem('roles')!.toString())
   constructor(
     private http: HttpClient
   ) {
-  }
-
-  checkRole(role: string): boolean {
-    return this.roles.includes(role)
-  }
-
-  //to show or hide some links in sidebars
-  getUserRoles(uid: any): Observable<any> {
-    return this.http.get(environment.url + `/users/getuserroles?uid=${uid}`)
   }
 
   getUserRolesInTheGroup(groupId: any, userId: any): Observable<any> {

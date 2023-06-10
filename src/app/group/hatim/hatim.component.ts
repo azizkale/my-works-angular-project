@@ -18,7 +18,6 @@ export class HatimComponent implements OnInit {
   name: string | any;
   groupId: any = localStorage.getItem('groupId')
   innerWidth = window.innerWidth;
-  allowToAdmin: boolean = this.rolesservice.checkRole(Roles[1])
 
   constructor(
     private hatimservice: HatimService,
