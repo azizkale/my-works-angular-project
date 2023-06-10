@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { RolesService } from '../services/roles.service';
 import { Roles } from 'src/models/Roles';
+import { GroupService } from '../services/group.service';
 
 @Component({
   selector: 'groupsidebar',
@@ -10,23 +11,19 @@ import { Roles } from 'src/models/Roles';
 })
 export class GroupsidebarComponent implements OnInit {
   uid = localStorage.getItem('uid')
+  selectedGroupId: any
   allowedToAdminAndMentorAndPirEditor: boolean;
 
   constructor(
     private authService: AuthenticationService,
-    private roleservice: RolesService
-  ) {
-    this.roleservice.getUserRoles(this.uid).subscribe({
-      next: (roles) => {
-        this.allowedToAdminAndMentorAndPirEditor =
-          roles.includes(Roles[1]) ||
-          roles.includes(Roles[4]) ||
-          roles.includes(Roles[2])
-      }
-    })
-  }
+    private roleservice: RolesService,
+    private groupservice: GroupService
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.selectedGroupId = await this.groupservice.getSelectedGroupId();
+    await this.roleControll(this.selectedGroupId, this.uid);
+
   }
 
   w3_open(mySidebar: any, myOverlay: any) {
@@ -49,4 +46,12 @@ export class GroupsidebarComponent implements OnInit {
 
   }
 
+  roleControll(groupId: any, uid: any) {
+    this.roleservice.getUserRolesInTheGroup(groupId, uid).subscribe({
+      next: (roles) => {
+        this.allowedToAdminAndMentorAndPirEditor =
+          roles?.includes(Roles[1]) || roles?.includes(Roles[2])
+      }
+    })
+  }
 }

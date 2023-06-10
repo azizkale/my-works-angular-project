@@ -8,10 +8,20 @@ import { Group } from 'src/models/Group';
   providedIn: 'root'
 })
 export class GroupService {
+  selectedGroupId: any;
 
   constructor(
     private http: HttpClient
   ) { }
+
+  setSelectedGroupId(groupId: any) {
+    this.selectedGroupId = groupId
+  }
+
+  getSelectedGroupId(): any {
+    return this.selectedGroupId
+  }
+
 
   createGroup(groupName: any, mentorEmail: any): Observable<any> {
     const body = { groupName: groupName, mentorEmail: mentorEmail };

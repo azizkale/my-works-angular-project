@@ -53,6 +53,7 @@ import { GroupsidebarComponent } from './groupsidebar/groupsidebar.component';
 import { GroupinfoComponent } from './group/groupinfo/groupinfo.component';
 import { GroupsettingsComponent } from './settings/adminsettings/groupsettings/groupsettings.component';
 import { UsersettingsComponent } from './settings/adminsettings/usersettings/usersettings.component';
+import { GroupService } from './services/group.service';
 
 @NgModule({
   declarations: [

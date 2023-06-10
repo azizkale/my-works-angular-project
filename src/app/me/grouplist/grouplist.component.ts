@@ -15,6 +15,7 @@ export class GrouplistComponent implements OnInit {
     groupId: any,
     groupName: string
   }[];
+
   uid = localStorage.getItem('uid')
   constructor(
     private fb: FormBuilder,
