@@ -64,7 +64,7 @@ export class GroupsettingsComponent implements OnInit {
         this.userservice.retrieveUserByEmail(mentorEmail).subscribe({
           next: (user) => {
             //groupId is given in the server
-            this.userservice.addRoleToUser(user.uid, Roles[2], null).subscribe()
+            // this.userservice.addRoleToUser(user.uid, Roles[2], null).subscribe()
           }
         })
         this.retrieveGroups()

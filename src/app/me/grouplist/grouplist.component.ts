@@ -40,6 +40,7 @@ export class GrouplistComponent implements OnInit {
   retrieveAllGroupsNamesOfTheUserByuserId() {
     this.groupservice.retrieveAllGroupsNamesOfTheUserByuserId(this.uid).subscribe({
       next: (result) => {
+        console.log(result)
         this.retrieveGroupsForm.patchValue(result)
         this.groupsInfo = Object.values(result)
 
