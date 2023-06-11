@@ -47,15 +47,12 @@ export class PireditService {
     return this.http.post(environment.url + '/pir/addchapter', body)
   }
 
-  retrieveChapters(editorId: any, pirId: any): Observable<any> {
-    let url = '';
-    // if (this.rolesservice.checkRole(Roles[2])) {
-    url = environment.url + `/pir/getallchapters?pirId=${pirId}`
-    // }
-    // else if (this.rolesservice.checkRole(Roles[4])) {
-    //   url = environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`
-    // }
-    return this.http.get(url)
+  retrieveAllChapters(pirId: any): Observable<any> {
+    return this.http.get(environment.url + `/pir/getallchapters?pirId=${pirId}`)
+  }
+
+  retrieveChaptersByEditorId(editorId: any, pirId: any): Observable<any> {
+    return this.http.get(environment.url + `/pir/getchaptersbyeditorid?editorId=${editorId}&pirId=${pirId}`)
   }
 
   updateChapter(chapter: Chapter): Observable<any> {

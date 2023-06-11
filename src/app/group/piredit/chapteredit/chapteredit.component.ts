@@ -78,6 +78,7 @@ export class ChaptereditComponent implements OnInit {
           this.users_createchapter.push(user)
           this.createChapterForm.addControl(ress.uid, new FormControl(user.uid));
         });
+        console.log(this.users_createchapter)
       }
     })
   }
@@ -110,16 +111,38 @@ export class ChaptereditComponent implements OnInit {
 
   retrieveChapters() {
     const editorId = localStorage.getItem('uid');
-    this.pireditservice.retrieveChapters(editorId, this.selectedPirId).subscribe({
-      next: (ress) => {
-        if (ress !== undefined && ress !== null) {
-          this.chapters = Object.values(ress);
-          this.chapters.forEach((chapter, index) => {
-            this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
-          });
+
+    this.roleservice.getUserRolesInTheGroup(this.selectedGroupId, editorId).subscribe({
+      next: (roles) => {
+        //if the user the editor, all chapter comes
+        if (roles?.includes(Roles[2])) {
+          this.pireditservice.retrieveAllChapters(this.selectedPirId).subscribe({
+            next: (ress) => {
+              if (ress !== undefined && ress !== null) {
+                this.chapters = Object.values(ress);
+                this.chapters.forEach((chapter, index) => {
+                  this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
+                });
+              }
+            }
+          })
+        }
+        else {
+          this.pireditservice.retrieveChaptersByEditorId(localStorage.getItem('uid'), this.selectedPirId).subscribe({
+            next: (ress) => {
+              if (ress !== undefined && ress !== null) {
+                this.chapters = Object.values(ress);
+                this.chapters.forEach((chapter, index) => {
+                  this.retrieveChapterForm.addControl(chapter.chapterName, new FormControl(chapter.chapterName));
+                });
+              }
+            }
+          })
         }
       }
     })
+
+
   }
 
   addChapter(chapterName: string, chapterContent: string) {
@@ -160,16 +183,21 @@ export class ChaptereditComponent implements OnInit {
 
   updateChapter() {
     this.updateChapterForm.get('editorId')?.setValue(this.updateChapterForm.get('selectEditor')?.value)
-    this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
-      next: (ress) => {
-        this.userservice.addRoleToUser(this.updateChapterForm.get('selectEditor')?.value, Roles[4], this.selectedGroupId).subscribe({
-          next: (resss) => {
-            console.log(resss)
-          }
-        })
-        this.retrieveChapters()
-      }
-    })
+
+    if (this.updateChapterForm.get('editorId')?.value !== '') {
+      console.log(this.updateChapterForm.get('editorId')?.value)
+      this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
+        next: (ress) => {
+          this.userservice.addRoleToUser(this.updateChapterForm.get('selectEditor')?.value, Roles[4], this.selectedGroupId).subscribe({
+            next: (resss) => {
+              console.log(resss)
+            }
+          })
+          this.retrieveChapters()
+        }
+      })
+    } else console.log('null editor id')
+
   }
 
   selectTextToManipulate() {

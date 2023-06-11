@@ -62,7 +62,6 @@ export class PireditComponent implements OnInit {
 
   }
 
-
   //adds newpir to 'pirs' node in db
   createNewPir() {
     const newPir = new Pir(
@@ -102,7 +101,6 @@ export class PireditComponent implements OnInit {
       }
     })
   }
-
 
   selectPirToAssing(pir: Pir | any) {
     this.assignPirToMentorToEdit = this.fb.group({
