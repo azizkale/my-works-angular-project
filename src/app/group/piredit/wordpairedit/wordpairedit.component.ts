@@ -37,6 +37,7 @@ export class WordpaireditComponent implements OnInit {
       meaning: ['', Validators.required]
     });
   }
+
   createEditWordPairForm() {
     this.editWordPairForm = this.fb.group({
       word: ['', Validators.required],

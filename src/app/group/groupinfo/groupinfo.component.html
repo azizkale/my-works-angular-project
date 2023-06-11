@@ -42,6 +42,7 @@
           >
             <span>{{ user.email }}</span>
             <button
+              *ngIf="allowedToAdminAndMentor"
               class="btn btn-danger"
               placement="left"
               [ngbPopover]="popDeleteParticipant"
@@ -157,7 +158,7 @@
   <div class="text-center">
     <h4>{{ ngbPopoverUserName }} adlı kullanıcıyı silmek üzeresiniz!</h4>
     <button
-      onclick="document.getElementById('id_update_chapter').style.display='none'"
+      onclick="document.getElementById('id_update_chapter')?.style.display='none'"
       (click)="deleteParticipantFromGroup()"
       type="button"
       class="btn btn-danger"

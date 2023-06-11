@@ -50,11 +50,7 @@ export class ChaptereditComponent implements OnInit {
     this.createUpdateChapterForm();
     this.createAddWordPairForm();
 
-    this.roleservice.getUserRolesInTheGroup(this.selectedGroupId, localStorage.getItem('uid')).subscribe({
-      next: (roles) => {
-        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
-      }
-    })
+    this.roleControll(this.selectedGroupId, localStorage.getItem('uid'))
   }
 
   createChapterRetrieveForm() {
@@ -186,7 +182,8 @@ export class ChaptereditComponent implements OnInit {
       this.selectedWord,
       meaning,
       this.updateChapterForm.get('chapterId')?.value,
-      this.updateChapterForm.get('pirId')?.value, localStorage.getItem('uid'))
+      this.updateChapterForm.get('pirId')?.value,
+      localStorage.getItem('uid'))
 
     //making the selected word and
     this.updateChapterForm.get('chapterContent')?.patchValue(
@@ -210,5 +207,13 @@ export class ChaptereditComponent implements OnInit {
     const regex = new RegExp(`\\b${this.selectedWord}\\b`, "gi");
     text = text.replace(changingWord.trim(), `<b>${changingWord.trim()}</b>`);
     return text
+  }
+
+  roleControll(groupId: any, userId: any) {
+    this.roleservice.getUserRolesInTheGroup(groupId, userId).subscribe({
+      next: (roles) => {
+        this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
+      }
+    })
   }
 }
