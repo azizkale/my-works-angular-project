@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GroupService } from 'src/app/services/group.service';
 import { PireditService } from 'src/app/services/piredit.service';
+import { RolesService } from 'src/app/services/roles.service';
 import { UserService } from 'src/app/services/user.service';
+import { Roles } from 'src/models/Roles';
 import { WordPair } from 'src/models/WordPair';
 
 @Component({
@@ -17,17 +20,22 @@ export class WordpaireditComponent implements OnInit {
   editWordPairForm: FormGroup;
   selectedWordPairToEdit: WordPair
   uid = localStorage.getItem('uid')
-
+  allowAllWordPairsToMentor: boolean;
+  selectedGroupId: any;
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
     private userservice: UserService,
+    private roleservice: RolesService,
+    private groupservice: GroupService
   ) { }
 
   ngOnInit(): void {
     this.retrieveAllWordPairsOfSinglePir()
     this.retrieveWordPairEditForm()
     this.createEditWordPairForm();
+    this.selectedGroupId = this.groupservice.getSelectedGroupId();
+    this.roleControll(this.selectedGroupId, this.uid)
 
   }
 
@@ -41,7 +49,8 @@ export class WordpaireditComponent implements OnInit {
   createEditWordPairForm() {
     this.editWordPairForm = this.fb.group({
       word: ['', Validators.required],
-      meaning: ['', Validators.required]
+      meaning: ['', Validators.required],
+      editorId: ['', Validators.required]
     });
   }
 
@@ -61,10 +70,11 @@ export class WordpaireditComponent implements OnInit {
   }
 
   getWordPairToEdit(selectedWordPair: WordPair) {
-    this.selectedWordPairToEdit = selectedWordPair
+    this.selectedWordPairToEdit = selectedWordPair;
     this.editWordPairForm.patchValue({
       word: selectedWordPair.word,
-      meaning: selectedWordPair.meaning
+      meaning: selectedWordPair.meaning,
+      editorId: selectedWordPair.editorId
     });
   }
 
@@ -81,6 +91,14 @@ export class WordpaireditComponent implements OnInit {
   deleteWordpair() {
     this.pireditservice.deleteWordPair(this.selectedWordPairToEdit).subscribe({
       next: (ress) => { this.retrieveAllWordPairsOfSinglePir() }
+    })
+  }
+
+  roleControll(groupId: any, userId: any) {
+    this.roleservice.getUserRolesInTheGroup(groupId, userId).subscribe({
+      next: (roles) => {
+        this.allowAllWordPairsToMentor = roles.includes(Roles[2])
+      }
     })
   }
 }

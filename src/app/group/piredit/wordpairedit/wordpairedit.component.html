@@ -8,7 +8,6 @@
               <div class="row mx-2">
                 <div style="width: 65%; float: none" class="col-sm-10">
                   <button
-                    [disabled]="wordpair.editorId !== uid"
                     class="btn btn-success w-75 mb-1"
                     onclick="document.getElementById('editWord').style.display='block'"
                     (click)="getWordPairToEdit(wordpair)"
@@ -43,6 +42,12 @@
       <form class="w3-container" [formGroup]="editWordPairForm">
         <div class="w3-section">
           <input
+            #editorId
+            type="hidden"
+            formControlName="editorId"
+            for="it gets just editorId"
+          />
+          <input
             #word
             class="w3-input w3-border w3-margin-bottom"
             type="text"
@@ -55,7 +60,10 @@
             formControlName="meaning"
           />
         </div>
-        <div class="row justify-content-center">
+        <div
+          class="row justify-content-center"
+          *ngIf="allowAllWordPairsToMentor || editorId.value === uid"
+        >
           <button
             class="btn btn-info col-sm-2 mx-1"
             style="margin-bottom: 2%"

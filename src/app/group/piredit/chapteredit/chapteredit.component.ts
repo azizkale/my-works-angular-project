@@ -185,12 +185,10 @@ export class ChaptereditComponent implements OnInit {
     this.updateChapterForm.get('editorId')?.setValue(this.updateChapterForm.get('selectEditor')?.value)
 
     if (this.updateChapterForm.get('editorId')?.value !== '') {
-      console.log(this.updateChapterForm.get('editorId')?.value)
       this.pireditservice.updateChapter(this.updateChapterForm.value).subscribe({
         next: (ress) => {
           this.userservice.addRoleToUser(this.updateChapterForm.get('selectEditor')?.value, Roles[4], this.selectedGroupId).subscribe({
             next: (resss) => {
-              console.log(resss)
             }
           })
           this.retrieveChapters()
@@ -220,7 +218,6 @@ export class ChaptereditComponent implements OnInit {
     //creating wordpair
     this.pireditservice.createWordPair(wordPair).subscribe({
       next: (ress) => {
-        console.log(ress)
         this.updateChapter(); // to save (as updated) the word that made bold
       }, complete: () => {
         this.createAddWordPairForm();// to clear the form
