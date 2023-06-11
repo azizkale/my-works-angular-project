@@ -53,4 +53,9 @@ export class GroupService {
   retrieveAllGroupsOfTheMentor(mentorId: any): Observable<any> {
     return this.http.get(environment.url + `/group/retrieveallgroupsofthementor?mentorId=${mentorId}`)
   }
+
+  deleteParticipantFromGroup(groupId: any, email: string): Observable<any> {
+    const body = { groupId: groupId, email: email };
+    return this.http.delete(environment.url + '/group/deleteparticipantfromgroup', { body })
+  }
 }

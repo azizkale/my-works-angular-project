@@ -26,6 +26,8 @@ export class GroupinfoComponent implements OnInit {
   allowedToAdminAndMentor: boolean;
   pirsInfo: any[] = [] //{pirName,pirId}
 
+  ngbPopoverUserName: string;//to display the user"s name on delete-popover
+
   constructor(
     private activeroute: ActivatedRoute,
     private groupservice: GroupService,
@@ -130,8 +132,8 @@ export class GroupinfoComponent implements OnInit {
 
   }
 
-  async retrieveSingleUser(email: any) {
-    await this.userservice.retrieveUserByEmail(email).subscribe(({
+  retrieveSingleUser(email: any) {
+    this.userservice.retrieveUserByEmail(email).subscribe(({
       next: (user) => {
         this.participantemail_.nativeElement.innerText = user.email
       }
@@ -152,6 +154,14 @@ export class GroupinfoComponent implements OnInit {
       next: (roles => {
         this.allowedToAdminAndMentor = roles.includes(Roles[1]) || roles.includes(Roles[2])
       })
+    })
+  }
+
+  deleteParticipantFromGroup() {
+    this.groupservice.deleteParticipantFromGroup(this.selectedGroupId, this.ngbPopoverUserName).subscribe({
+      next: (result) => {
+        console.log(result)
+      }
     })
   }
 }

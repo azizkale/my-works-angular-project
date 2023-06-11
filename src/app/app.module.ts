@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 //================ng-bootstrap (https://ng-bootstrap.github.io/)
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //================Components=========
 import { AppComponent } from './app.component';
@@ -102,6 +103,7 @@ import { GroupService } from './services/group.service';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatDialogModule,
+    NgbModule
   ],
   providers: [
     AuthGuard,

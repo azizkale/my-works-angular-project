@@ -37,10 +37,20 @@
         <label for="uesrs">Katılımcılar:</label>
         <ul class="list-group" *ngFor="let user of usersOfTheGroup">
           <li
-            class="list-group-item"
+            class="list-group-item d-flex justify-content-between align-items-center"
             *ngIf="user?.roles?.includes('participant')"
           >
-            {{ user.email }}
+            <span>{{ user.email }}</span>
+            <button
+              class="btn btn-danger"
+              placement="left"
+              [ngbPopover]="popDeleteParticipant"
+              popoverTitle="Sil!"
+              style="margin-right: 10px"
+              (click)="ngbPopoverUserName = user.email"
+            >
+              Sil
+            </button>
           </li>
         </ul>
       </form>
@@ -141,3 +151,20 @@
     </div>
   </div>
 </div>
+
+<!-- ==========Delete popup================ -->
+<ng-template #popDeleteParticipant>
+  <div class="text-center">
+    <h4>{{ ngbPopoverUserName }} adlı kullanıcıyı silmek üzeresiniz!</h4>
+    <button
+      onclick="document.getElementById('id_update_chapter').style.display='none'"
+      (click)="deleteParticipantFromGroup()"
+      type="button"
+      class="btn btn-danger"
+      style="margin-right: 10px"
+    >
+      Sil
+    </button>
+    <button type="button" class="btn btn-info">Vazgeç</button>
+  </div>
+</ng-template>
