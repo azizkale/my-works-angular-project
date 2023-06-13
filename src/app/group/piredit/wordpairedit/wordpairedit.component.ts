@@ -57,14 +57,25 @@ export class WordpaireditComponent implements OnInit {
   retrieveAllWordPairsOfSinglePir() {
     this.wordPairs = []
     this.pireditservice.retrieveAllWordPairsOfSinglePir(this.pirId).subscribe({
-      next: (wordpairs: WordPair[]) => {
-        this.wordPairs = wordpairs// Array of wordPairs
-      }, complete: async () => {
-        this.wordPairs.map(async (wp: any) => {
-          this.userservice.retrieveEditorbyEditorId(wp.editorId).subscribe({
-            next: (val: any) => { wp.editorname = val.displayName }
-          })
+      next: async (wordpairs: WordPair[]) => {
+        //role controle
+        await this.roleservice.getUserRolesInTheGroup(this.selectedGroupId, this.uid).subscribe({
+          next: async (roles) => {
+            //if the user is not the mentor, he can see just his wordpairs
+            if (!roles.includes(Roles[2])) {
+              this.wordPairs = wordpairs.filter((wp: WordPair) => wp.editorId === this.uid)// Array of wordPairs
+            }
+            else {  //if he is mentor, he can see all wordpairs
+              this.wordPairs = wordpairs;
+            }
+            await this.wordPairs.map(async (wp: any) => {
+              this.userservice.retrieveEditorbyEditorId(wp.editorId).subscribe({
+                next: (val: any) => { wp.editorname = val.displayName }
+              })
+            })
+          }
         })
+
       }
     })
   }
