@@ -23,7 +23,7 @@ export class ChaptereditComponent implements OnInit {
   addWordForm: FormGroup;
   chapters: Chapter[];
   allowedToAdminAndMentor: boolean;
-
+  uid = localStorage.getItem('uid');
 
   selectedPirId: any;
   selectedGroupId: any // to get users of this group
@@ -50,7 +50,7 @@ export class ChaptereditComponent implements OnInit {
     this.createUpdateChapterForm();
     this.createAddWordPairForm();
 
-    this.roleControll(this.selectedGroupId, localStorage.getItem('uid'))
+    this.roleControll(this.selectedGroupId, this.uid)
   }
 
   createChapterRetrieveForm() {
@@ -110,7 +110,7 @@ export class ChaptereditComponent implements OnInit {
   }
 
   retrieveChapters() {
-    const editorId = localStorage.getItem('uid');
+    const editorId = this.uid;
 
     this.roleservice.getUserRolesInTheGroup(this.selectedGroupId, editorId).subscribe({
       next: (roles) => {
@@ -128,7 +128,7 @@ export class ChaptereditComponent implements OnInit {
           })
         }
         else {
-          this.pireditservice.retrieveChaptersByEditorId(localStorage.getItem('uid'), this.selectedPirId).subscribe({
+          this.pireditservice.retrieveChaptersByEditorId(this.uid, this.selectedPirId).subscribe({
             next: (ress) => {
               if (ress !== undefined && ress !== null) {
                 this.chapters = Object.values(ress);
@@ -209,7 +209,7 @@ export class ChaptereditComponent implements OnInit {
       meaning,
       this.updateChapterForm.get('chapterId')?.value,
       this.updateChapterForm.get('pirId')?.value,
-      localStorage.getItem('uid'))
+      this.uid)
 
     //making the selected word and
     this.updateChapterForm.get('chapterContent')?.patchValue(
@@ -218,7 +218,7 @@ export class ChaptereditComponent implements OnInit {
     //creating wordpair
     this.pireditservice.createWordPair(wordPair).subscribe({
       next: (ress) => {
-        this.updateChapter(); // to save (as updated) the word that made bold
+        this.updateChapter(); // to save (as updated) the word that be made bold
       }, complete: () => {
         this.createAddWordPairForm();// to clear the form
         this.retrieveChapters();
@@ -229,7 +229,6 @@ export class ChaptereditComponent implements OnInit {
   }
 
   makeBold(text: string, changingWord: string): string {
-    const regex = new RegExp(`\\b${this.selectedWord}\\b`, "gi");
     text = text.replace(changingWord.trim(), `<b>${changingWord.trim()}</b>`);
     return text
   }
