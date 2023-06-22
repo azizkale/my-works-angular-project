@@ -111,7 +111,6 @@ export class ChaptereditComponent implements OnInit {
 
   retrieveChapters() {
     const editorId = this.uid;
-
     this.roleservice.getUserRolesInTheGroup(this.selectedGroupId, editorId).subscribe({
       next: (roles) => {
         //if the user the editor, all chapter comes
@@ -141,8 +140,6 @@ export class ChaptereditComponent implements OnInit {
         }
       }
     })
-
-
   }
 
   addChapter(chapterName: string, chapterContent: string) {
@@ -204,16 +201,18 @@ export class ChaptereditComponent implements OnInit {
   }
 
   saveWordPair(meaning: string) {
+    const wordPairId = Date.now().toString();// just to generate id
     const wordPair = new WordPair(
+      wordPairId,
       this.selectedWord,
       meaning,
       this.updateChapterForm.get('chapterId')?.value,
       this.updateChapterForm.get('pirId')?.value,
       this.uid)
 
-    //making the selected word and
+    //making the selected word and   
     this.updateChapterForm.get('chapterContent')?.patchValue(
-      this.makeBold(this.updateChapterForm.get('chapterContent')?.value, this.selectedWord))
+      this.makeBold(this.updateChapterForm.get('chapterContent')?.value, this.selectedWord, wordPairId))
 
     //creating wordpair
     this.pireditservice.createWordPair(wordPair).subscribe({
@@ -228,8 +227,9 @@ export class ChaptereditComponent implements OnInit {
 
   }
 
-  makeBold(text: string, changingWord: string): string {
-    text = text.replace(changingWord.trim(), `<b>${changingWord.trim()}</b>`);
+  //this id to be able to delete when it is needed and to save in db
+  makeBold(text: string, changingWord: string, wordPairId: any): string {
+    text = text.replace(changingWord.trim(), `<b id='${wordPairId}'>${changingWord.trim()}</b>`);
     return text
   }
 

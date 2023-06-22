@@ -6,7 +6,8 @@ export class WordPair {
     pirId: any;
     editorId: any
 
-    constructor(word: string, meaning: string, chapterId: any, pirId: any, editorId: any) {
+    constructor(wordPairId: any, word: string, meaning: string, chapterId: any, pirId: any, editorId: any) {
+        this.wordPairId = wordPairId;
         this.word = word;
         this.meaning = meaning
         this.chapterId = chapterId

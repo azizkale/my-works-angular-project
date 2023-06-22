@@ -4,7 +4,6 @@ import { GroupService } from 'src/app/services/group.service';
 import { PireditService } from 'src/app/services/piredit.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { UserService } from 'src/app/services/user.service';
-import { Chapter } from 'src/models/Chapter';
 import { Roles } from 'src/models/Roles';
 import { WordPair } from 'src/models/WordPair';
 
@@ -13,6 +12,7 @@ import { WordPair } from 'src/models/WordPair';
   templateUrl: './wordpairedit.component.html',
   styleUrls: ['./wordpairedit.component.css']
 })
+
 export class WordpaireditComponent implements OnInit {
   // this component is displayed by directive --> <wordpairedit></wordpairedit> 
   @Input() pirId: any
@@ -23,12 +23,13 @@ export class WordpaireditComponent implements OnInit {
   uid = localStorage.getItem('uid')
   allowAllWordPairsToMentor: boolean;
   selectedGroupId: any;
+
   constructor(
     public fb: FormBuilder,
     private pireditservice: PireditService,
     private userservice: UserService,
     private roleservice: RolesService,
-    private groupservice: GroupService
+    private groupservice: GroupService,
   ) { }
 
   ngOnInit(): void {
@@ -101,41 +102,10 @@ export class WordpaireditComponent implements OnInit {
   }
 
   async deleteWordpair() {
-    //deleting word from db
+    //deleting word from db   
     this.pireditservice.deleteWordPair(this.selectedWordPairToEdit).subscribe({
       next: (ress) => {
-        //changing word in db from <b>the word>/> to the word
-        this.pireditservice.retrieveChaptersByEditorId(this.uid, this.pirId).subscribe({
-          next: (chapter: Chapter | any) => {
-            if (chapter[0]?.chapterContent !== undefined && chapter[0]?.chapterContent !== null) {
-              const text = chapter[0]?.chapterContent;
-              const originalWord = `<b>${this.selectedWordPairToEdit.word.trim()}</b>`;
-              const newWord = this.selectedWordPairToEdit.word;
-              const modifiedText = text.replace(originalWord, newWord);
-
-
-            }
-          }
-        })
-        this.retrieveChapter(this.uid, this.pirId);
         this.retrieveAllWordPairsOfSinglePir()
-      }
-    })
-  }
-
-  //it removes the tag <b> from deleted word in chapterContext
-  trimBoldTagsfromWordPair(text: string, changingWord: string): string {
-    text = text.replace(changingWord, changingWord.trim());
-    return text
-  }
-
-  //to trim the tag <b> from deleted wordpair in chapter-text
-  retrieveChapter(uid: any, pirId: any) {
-    this.pireditservice.retrieveChaptersByEditorId(uid, pirId).subscribe({
-      next: (chapter: Chapter) => {
-        if (chapter !== undefined && chapter !== null) {
-          this.trimBoldTagsfromWordPair(chapter.chapterContent, this.selectedWordPairToEdit.word)
-        }
       }
     })
   }
