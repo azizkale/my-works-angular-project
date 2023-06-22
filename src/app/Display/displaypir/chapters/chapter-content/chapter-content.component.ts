@@ -6,6 +6,7 @@ import { Chapter } from 'src/models/Chapter';
 import { WordPair } from 'src/models/WordPair';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { from, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-chapter-content',
@@ -53,7 +54,12 @@ export class ChapterContentComponent implements OnInit {
       next: async (chapter: Chapter) => {
         this.selectedChapter = await chapter;
 
-        this.chapterContent.nativeElement.innerHTML = this.selectedChapter.chapterContent;
+
+        //modifies the chapter content adding <b> tag to wordpairs
+        for (const wordpair of Object.values(this.selectedChapter.wordPairs)) {
+          this.selectedChapter.chapterContent = this.selectedChapter.chapterContent.replace(wordpair.word.trim(), `<b>${wordpair.word.trim()}</b>`);
+          this.chapterContent.nativeElement.innerHTML = this.selectedChapter.chapterContent
+        }
 
         // adding mouseover event to the <b> tags
         Object.values(this.chapterContent.nativeElement.getElementsByTagName('b')).map((el: HTMLElement | any) => {

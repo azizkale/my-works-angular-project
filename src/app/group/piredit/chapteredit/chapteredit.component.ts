@@ -210,10 +210,6 @@ export class ChaptereditComponent implements OnInit {
       this.updateChapterForm.get('pirId')?.value,
       this.uid)
 
-    //making the selected word and   
-    this.updateChapterForm.get('chapterContent')?.patchValue(
-      this.makeBold(this.updateChapterForm.get('chapterContent')?.value, this.selectedWord, wordPairId))
-
     //creating wordpair
     this.pireditservice.createWordPair(wordPair).subscribe({
       next: (ress) => {
@@ -225,12 +221,6 @@ export class ChaptereditComponent implements OnInit {
       }
     })
 
-  }
-
-  //this id to be able to delete when it is needed and to save in db
-  makeBold(text: string, changingWord: string, wordPairId: any): string {
-    text = text.replace(changingWord.trim(), `<b id='${wordPairId}'>${changingWord.trim()}</b>`);
-    return text
   }
 
   roleControll(groupId: any, userId: any) {
