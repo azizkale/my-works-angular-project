@@ -13,3 +13,7 @@ You can make it by yourself or you can make your team, you can distribute the ta
 ![Image Description](./src/assets/readmepics/2.png)
 ##
 ![Image Description](./src/assets/readmepics/3.png)
+##
+![Image Description](./src/assets/readmepics/4.png)
+##
+![Image Description](./src/assets/readmepics/5.png)
