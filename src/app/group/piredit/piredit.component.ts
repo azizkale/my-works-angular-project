@@ -86,18 +86,18 @@ export class PireditComponent implements OnInit {
     this.pireditservice.retrievePirList().subscribe({
       next: async (ress) => {
         if (ress) {
-          await Object.values(ress).map((pir: Pir | any) => {
-            this.pirs.push(pir)
-          })
-          // Sort the pirs array in ascending order based on name
-          await this.pirs.sort((a, b) => a.name.localeCompare(b.name));
 
-          await this.pirs.forEach((pir, index) => {
-            this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
+          await Object.values(ress).forEach(async (pir, index) => {
+            await this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
+            await this.pirs.push(pir)
           });
+
+          // Sort the pirs array in ascending order based on name
+          await this.pirs.sort((a, b) => a.name?.localeCompare(b.name));
+
         }
       }, complete: () => {
-
+        console.log(this.pirs)
       }
     })
   }

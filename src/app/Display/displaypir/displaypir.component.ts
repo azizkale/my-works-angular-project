@@ -36,6 +36,8 @@ export class DisplaypirComponent implements OnInit {
           await Object.values(ress).map((pir: Pir | any) => {
             this.pirs.push(pir)
           })
+          await this.pirs.sort((a, b) => a.name?.localeCompare(b.name));
+
           this.pirs.forEach((pir, index) => {
             this.retrievePirForm.addControl(pir.name, new FormControl(pir.name));
           });

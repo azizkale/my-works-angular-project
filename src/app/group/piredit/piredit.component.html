@@ -6,13 +6,12 @@
       </div>
       <div class="col-sm-1 w-25">
         <!-- the code below is allowed just admin to add new pir in DB at the node "pirs" -->
-        <!-- <span
-          *ngIf="allowedToAdminAndPirEditor"
+        <span
           onclick="document.getElementById('id_add_pir').style.display='block'"
           class="material-symbols-outlined addpir"
         >
           add_circle
-        </span> -->
+        </span>
       </div>
     </div>
     <form [formGroup]="retrievePirForm" novalidate>

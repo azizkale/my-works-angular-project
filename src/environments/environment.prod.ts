@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  url: "https://lonely-erin-moccasins.cyclic.app"
+  url: "https://angry-turtleneck-shirt-bee.cyclic.app/"
 
 };
