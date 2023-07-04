@@ -27,7 +27,7 @@ You can make it by yourself or you can make your team, you can distribute the ta
 ![Image Description](./src/assets/readmepics/5.png)
 
 ### the words which was added its meaning display bold
-![Image Description](./src/assets/readmepics/6.png)
+![Image Description](./src/assets/readmepics/6.png){:height="20px" width="20px"}
 
 ### and just click to learn it
 ![Image Description](./src/assets/readmepics/7.png)
