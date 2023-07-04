@@ -1,27 +1,11 @@
-# MyWorks
+# Easy Read
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+Easy Read is an e-book project. You can make it easier to read a book in foreign language for your customers or every people.
 
-## Development server
+All you have to do is upload the chapters of the book to Easy Read and add the meanings of some words by using Easy Read.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+You can make it by yourself or you can make your team, you can distribute the task among your team.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[https://mywebsite-3f527.firebaseapp.com/display/displaypir](https://mywebsite-3f527.firebaseapp.com/display/displaypir)
+ 
+![Image Description](./src/assets/readmepics/1.png)
