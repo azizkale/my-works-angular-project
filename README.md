@@ -25,3 +25,9 @@ You can make it by yourself or you can make your team, you can distribute the ta
 
 ### just select a word to add its meaning
 ![Image Description](./src/assets/readmepics/5.png)
+
+### the words which was added its meaning display bold
+![Image Description](./src/assets/readmepics/6.png)
+
+### and just click to learn it
+![Image Description](./src/assets/readmepics/7.png)
