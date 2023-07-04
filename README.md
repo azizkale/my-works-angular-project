@@ -7,11 +7,11 @@ All you have to do is upload the chapters of the book to Easy Read and add the m
 You can make it by yourself or you can make your team, you can distribute the task among your team.
 ##
 [https://mywebsite-3f527.firebaseapp.com/display/displaypir](https://mywebsite-3f527.firebaseapp.com/display/displaypir)
- ##
+ 
  ## create your editor-team
  ##
 ![Image Description](./src/assets/readmepics/1.png)
-##
+
 
 ## add or remove member how you wish
 ##
