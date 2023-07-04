@@ -8,14 +8,20 @@ You can make it by yourself or you can make your team, you can distribute the ta
 #
 [https://mywebsite-3f527.firebaseapp.com/display/displaypir](https://mywebsite-3f527.firebaseapp.com/display/displaypir)
  #
+ 
   create your editor-team 
 ![Image Description](./src/assets/readmepics/1.png)
+
 #
+
 add or remove member how you wish
 ![Image Description](./src/assets/readmepics/2.png)
+
 #
+
 select the chapter of the book to edit
 ![Image Description](./src/assets/readmepics/3.png)
+
 #
 manipulate the content of chapter and assign an editor to edit this chapter
 ![Image Description](./src/assets/readmepics/4.png)
