@@ -10,7 +10,7 @@ You can make it by yourself or you can make your team, you can distribute the ta
  
  ### create your editor-team 
 
-![Image Description](./src/assets/readmepics/1.png){:height="auto" width="250px"}
+![Image Description](./src/assets/readmepics/1.png){:height="250px" width="250px"}
 
 ### add or remove member how you wish
 
