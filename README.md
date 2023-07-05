@@ -9,25 +9,22 @@ You can make it by yourself or you can make your team, you can distribute the ta
 [https://mywebsite-3f527.firebaseapp.com/display/displaypir](https://mywebsite-3f527.firebaseapp.com/display/displaypir)
  
  ### create your editor-team 
-
-![Image Description](./src/assets/readmepics/1.png)
+<img src="./src/assets/readmepics/1.png" width="600">
 
 ### add or remove member how you wish
-
-![Image Description](./src/assets/readmepics/2.png)
+<img src="./src/assets/readmepics/2.png" width="600">
 
 ### select the chapter of the book to edit
-
-![Image Description](./src/assets/readmepics/3.png)
+<img src="./src/assets/readmepics/3.png" width="600">
 
 ### manipulate the content of chapter and assign an editor to edit this chapter
-![Image Description](./src/assets/readmepics/4.png)
+<img src="./src/assets/readmepics/4.png" width="600">
 
 ### just select a word to add its meaning
-![Image Description](./src/assets/readmepics/5.png)
+<img src="./src/assets/readmepics/5.png" width="600">
 
 ### the words which was added its meaning display bold
 <img src="./src/assets/readmepics/6.png" width="600">
 
 ### and just click to learn it
-![Image Description](./src/assets/readmepics/7.png)
+<img src="./src/assets/readmepics/7.png" width="600">
