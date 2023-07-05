@@ -28,6 +28,6 @@ You can make it by yourself or you can make your team, you can distribute the ta
 
 ### the words which was added its meaning display bold
 ![Image Description](./src/assets/readmepics/6.png){:height="20px" width="20px"}
-
+<img src="./src/assets/readmepics/6.png" width="100" height="100">
 ### and just click to learn it
 ![Image Description](./src/assets/readmepics/7.png)
